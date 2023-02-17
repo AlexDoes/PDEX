@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-    <div> This is the App page </div>
+    {/* <div> This is the App page </div> */}
     <Component {...pageProps} />
     </>
   )
