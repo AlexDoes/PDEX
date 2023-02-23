@@ -14,9 +14,10 @@ function plantdex() {
 
     useEffect( () => {
         async function fetchData(){
-        const res = await fetch(`data/page${page}.json`)
-        const json = await res.json();
-        setPlantsIndex(json.data);
+            const res = await fetch(`data/page${page}.json`)
+            const json = await res.json();
+            setPlantsIndex(json.data);
+            console.log(json)
         }
         fetchData();
     },[page]);
@@ -37,7 +38,12 @@ function plantdex() {
     return (
     <div>
         <ul>
-        {plantsIndex.map((plant) => (<li key={plant.id}> {plant.id} {plant.scientific_name} {plant.common_name} </li>))}
+        {plantsIndex.map((plant) => (<li key={plant.id}> 
+            {plant.id} 
+            {plant.scientific_name} 
+            {plant.common_name}
+            {plant.default_image && <img src={plant.default_image.thumbnail} alt={plant.common_name} /> }
+        </li>))}
         </ul>
         {pageNumbers.map((pageNumber) => (
         <button style={divStyle} key={pageNumber} onClick={handleClick}>
