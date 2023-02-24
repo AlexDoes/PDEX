@@ -35,14 +35,25 @@ function plantdex() {
     backgroundColor: 'lightgreen',
     };
 
+    const divStyle2 = {
+        padding : '10px',
+        margin: '0 auto',
+        width: '50%',
+        font : '20px',
+        backgroundColor: 'lightblue',
+        fontSize : '30px',
+        color: 'coral',
+    }   
+
     return (
-    <div>
+    <div style={divStyle2}>
         <ul>
         {plantsIndex.map((plant) => (<li key={plant.id}> 
-            {plant.id} 
-            {plant.scientific_name} 
-            {plant.common_name}
-            {plant.default_image && <img src={plant.default_image.thumbnail} alt={plant.common_name} /> }
+            Plant ID: {plant.id} <br></br>
+            Scientific name: {plant.scientific_name} <br></br>
+            Common names: {plant.common_name} <br></br>
+            {plant.other_name && <p>Other name :{plant.other_name.map(names => {return names})}</p>}     
+            {plant.default_image && <img width='300px' height='50px' src={plant.default_image.thumbnail} alt={plant.common_name} /> } <br></br>
         </li>))}
         </ul>
         {pageNumbers.map((pageNumber) => (
