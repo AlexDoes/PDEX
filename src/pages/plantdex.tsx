@@ -1,5 +1,19 @@
 import { useEffect,useState } from "react"
-type Plant = {   id: number,   common_name: string }
+// type Plant = {   id: number,   common_name: string }
+interface Plant {
+    id: number,
+    common_name: string,
+    scientific_name: string,
+    other_name?: string[],
+    default_image: {
+        thumbnail: string,
+        small: string,
+        medium: string,
+        large: string,
+        full: string,
+    }
+}
+
 type PlantsIndex = {   id: number,   common_name: string }[]
 type Page = number
 
@@ -51,7 +65,7 @@ function plantdex() {
         {plantsIndex.map((plant) => (<li key={plant.id}> 
             Plant ID: {plant.id} <br></br>
             Scientific name: {plant.scientific_name} <br></br>
-            Common names: {plant.common_name} <br></br>
+            Common names: {plant['common_name']} <br></br>
             {plant.other_name && <p>Other name :{plant.other_name.map(names => {return names})}</p>}     
             {plant.default_image && <img width='300px' height='50px' src={plant.default_image.thumbnail} alt={plant.common_name} /> } <br></br>
         </li>))}
