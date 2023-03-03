@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "devStart": "nodemon script.ts"
   },
   "dependencies": {
     "@next/font": "13.1.6",
+    "@prisma/client": "^4.11.0",
     "@types/node": "18.13.0",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
@@ -19,6 +21,7 @@
     "fs": "^0.0.1-security",
     "next": "13.1.6",
     "node-fetch": "^3.3.0",
+    "nodemon": "^2.0.21",
     "postcss": "^8.4.21",
     "promises": "^0.2.5",
     "react": "18.2.0",
@@ -27,5 +30,8 @@
     "tailwindcss": "^3.2.7",
     "ts-node": "^10.9.1",
     "typescript": "4.9.5"
+  },
+  "devDependencies": {
+    "prisma": "^4.11.0"
   }
 }
