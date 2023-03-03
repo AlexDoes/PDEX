@@ -11,17 +11,19 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  email       String   @unique
-  name        String
-  collections String[]
-  plants      String[]
-  isAdmin     Boolean  @default(false)
+  id             String        @id @default(uuid())
+  email          String        @unique
+  name           String
+  collections    String[]
+  plants         String[]
+  role           Role          @default(USER)
+  uniquePlants   UniquePlant[] @relation("UserPlant")
+  favoritePlants UniquePlant[] @relation("FavoritePlant")
 }
 
 model Plant {
-  id          Int     @id @default(autoincrement())
-  name        String
+  id          String  @id @default(uuid())
+  name        String // to be removed
   description String
   image       String
   species     String?
@@ -31,7 +33,7 @@ model Plant {
 }
 
 model UniquePlant {
-  id          Int     @id @default(autoincrement())
+  id          String  @id @default(uuid())
   name        String
   description String
   image       String
@@ -39,5 +41,14 @@ model UniquePlant {
   water       String?
   light       String?
   humidity    String?
-  owner       Int    @relation(fields: [ownerId], references: [id])
+  owner       User    @relation("UserPlant", fields: [ownerId], references: [id])
+  ownerId     String
+  favoritedBy User?   @relation("FavoritePlant", fields: [userId], references: [id])
+  userId      String?
+}
+
+enum Role {
+  USER
+  EDITOR
+  ADMIN
 }
