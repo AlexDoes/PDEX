@@ -53,7 +53,59 @@ async function main() {
       : console.log("Plant species is not real");
   }
   await fetchAndCreatePlant();
-  await prisma.user.update({
+  // await prisma.user.update({
+  //   where: {
+  //     id: newUser.id,
+  //   },
+  //   data: {
+  //     uniquePlants: {
+  //       where: {
+  //         ownerId: newUser.id,
+  //       },
+  //     },
+  //   },
+  // });
+
+  const allUsers = await prisma.user.findMany();
+  const allPlants = await prisma.plant.findMany();
+  const allUniquePlants = await prisma.uniquePlant.findMany();
+  // console.log(allUsers, allPlants, allUniquePlants);
+  // console.log(allUsers);
+
+  const uniquePlantsOwnedByUser = await prisma.user.findMany({
+    where: {
+      id: newUser.id,
+    },
+  });
+
+  // await prisma.user.update({
+  //   where: {
+  //     id: newUser.id,
+  //   },
+  //   data: {
+  //     uniquePlants: {
+  //       connect: {
+  //         owner_id: newUser.id,
+  //       },
+  //     },
+  //   },
+  // });
+  // update user with unique plant
+  // const updatedUser = await prisma.user.update({
+  //   where: {
+  //     id: newUser.id,
+  //   },
+  //   data: {
+  //     uniquePlants: {
+  //       connect: {
+  //         id: newUser.id,
+  //       },
+  //     },
+  //   },
+  // });
+  // updatedUser;
+
+  const addUniquePlantToUser = await prisma.user.update({
     where: {
       id: newUser.id,
     },
@@ -65,11 +117,16 @@ async function main() {
       },
     },
   });
+  addUniquePlantToUser;
 
-  const allUsers = await prisma.user.findMany();
-  const allPlants = await prisma.plant.findMany();
-  const allUniquePlants = await prisma.uniquePlant.findMany();
-  console.log(allUsers, allPlants, allUniquePlants);
+  const findUniquePlant = await prisma.uniquePlant.findMany({
+    where: {
+      ownerId: newUser.id,
+    },
+  });
+  console.log(findUniquePlant);
+
+  console.log(uniquePlantsOwnedByUser);
 }
 
 main()
