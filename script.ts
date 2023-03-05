@@ -57,7 +57,6 @@ async function main() {
       console.log(`${colors.red}error ${colors.reset}`);
     }
   }
-  newplant();
 
   async function fetchAndCreatePlant() {
     const plantData = await prisma.plant.findFirst({
@@ -88,7 +87,6 @@ async function main() {
           )
       : console.log(`${colors.red}Plant species is not real ${colors.reset}`);
   }
-  fetchAndCreatePlant();
 
   const allUsers = await prisma.user.findMany();
   const allPlants = await prisma.plant.findMany();
@@ -130,7 +128,6 @@ async function main() {
           `${colors.red}No unique plant found while using connectUniquePlantToCollection ${colors.reset} `
         );
   }
-  connectUniquePlantToCollection();
 
   const uniquePlantsOwnedByUser = await prisma.user.findMany({
     where: {
@@ -150,9 +147,16 @@ async function main() {
         ownerId: newUser.id,
       },
     });
-    console.log(promise);
+    console.log(promise[0]);
   }
-  findCollection();
+
+  async function run() {
+    await newplant();
+    await fetchAndCreatePlant();
+    await connectUniquePlantToCollection();
+    await findCollection();
+  }
+  run();
 }
 
 main()
