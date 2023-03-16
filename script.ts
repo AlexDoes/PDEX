@@ -1,4 +1,3 @@
-import collection from "@/pages/collections";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const colors = {
@@ -54,6 +53,8 @@ const colors = {
 
 async function main() {
   try {
+    await prisma.usersToUniquePlants.deleteMany();
+    await prisma.uniquePlantsToCollections.deleteMany();
     await prisma.plantCollection.deleteMany();
     console.log(`${colors.cyan}Resetting plant collection`);
     await prisma.uniquePlant.deleteMany();
@@ -84,6 +85,21 @@ async function main() {
     },
   });
 
+  const newUsers = await prisma.user.createMany({
+    data: [
+      {
+        id: "3",
+        name: "EmilySama",
+        email: "EmilySama@pdex.org",
+      },
+      {
+        id: "4",
+        name: "DavidSama",
+        email: "DavidSama@pdex.org",
+      },
+    ],
+  });
+
   newUser
     ? console.log(
         `${colors.pink}${newUser.name} is now created ${colors.reset}`
@@ -97,49 +113,54 @@ async function main() {
     : "no user created";
 
   async function findAllUsers() {
-    const allUsers = await prisma.user.findMany({
-      where: {
-        role: "USER",
-      },
-    });
-    console.log(allUsers);
+    const users: string[] = [];
+    const allUsers = await prisma.user
+      .findMany({
+        where: {
+          role: "USER",
+        },
+      })
+      .then((people) => people.forEach((person) => users.push(person.name)));
+    console.log(`${colors.lightBlue}Users:[ ${users} ] ${colors.reset}`);
   }
 
   async function newplant() {
     try {
-      await prisma.plant.create({
-        data: {
-          description:
-            "Bonsai is a Japanese art form using cultivation techniques to produce small trees in containers that mimic the shape and scale of full size trees.",
-          image:
-            "https://www.bonsaiempire.com/wp-content/uploads/2019/01/How-to-Prune-Bonsai-Tree-1.jpg",
-          water: "once a week",
-          light: "direct sunlight",
-          humidity: "high",
-          species: "Bonsai",
-          name: "Bonsai",
-        },
+      await prisma.plant.createMany({
+        data: [
+          {
+            description:
+              "Bonsai is a Japanese art form using cultivation techniques to produce small trees in containers that mimic the shape and scale of full size trees.",
+            image:
+              "https://www.bonsaiempire.com/wp-content/uploads/2019/01/How-to-Prune-Bonsai-Tree-1.jpg",
+            water: "once a week",
+            light: "direct sunlight",
+            species: "Bonsai",
+            name: "Bonsai",
+          },
+          {
+            description:
+              "Aloe vera is a succulent plant species of the genus Aloe. An evergreen perennial, it originates from the Arabian Peninsula, but grows wild in tropical, semi-tropical, and arid climates around the world.",
+            image:
+              "https://www.gardeningknowhow.com/wp-content/uploads/2019/04/aloe-vera-plant.jpg",
+            water: "once a week",
+            light: "direct sunlight",
+            species: "Aloe Vera",
+            name: "Aloe Vera",
+          },
+          {
+            description:
+              "The snake plant, also known as mother-in-law's tongue or Saint George's sword, is a flowering plant species in the family Asparagaceae, native to tropical West Africa.",
+            image:
+              "https://www.gardeningknowhow.com/wp-content/uploads/2019/04/snake-plant.jpg",
+            water: "once a week",
+            light: "direct sunlight",
+            species: "Snake Plant",
+            name: "Snake Plant",
+          },
+        ],
       });
-      console.log(`${colors.green}New plant created ${colors.reset}`);
-    } catch (error) {
-      console.log(`${colors.red}error ${colors.reset}`);
-    }
-
-    try {
-      await prisma.plant.create({
-        data: {
-          description:
-            "Aloe vera is a succulent plant species of the genus Aloe. An evergreen perennial, it originates from the Arabian Peninsula, but grows wild in tropical, semi-tropical, and arid climates around the world.",
-          image:
-            "https://www.gardeningknowhow.com/wp-content/uploads/2019/04/aloe-vera-plant.jpg",
-          water: "once a week",
-          light: "direct sunlight",
-          humidity: "high",
-          species: "Aloe Vera",
-          name: "Aloe Vera",
-        },
-      });
-      console.log(`${colors.green}New plant2 created ${colors.reset}`);
+      console.log(`${colors.yellow}New plants created ${colors.reset}`);
     } catch (error) {
       console.log(`${colors.red}error ${colors.reset}`);
     }
@@ -157,6 +178,12 @@ async function main() {
       },
     });
 
+    const plantData3 = await prisma.plant.findFirst({
+      where: {
+        name: "Snake Plant",
+      },
+    });
+
     async function createUniquePlant(plantEntry: any) {
       let owner;
       try {
@@ -170,16 +197,18 @@ async function main() {
               light: plantEntry.light,
               humidity: plantEntry.humidity,
               species: plantEntry.species,
-              owner: {
+              ownedBy: {
                 connect: {
-                  id: newUser.id,
+                  id:
+                    plantEntry.name === "Snake Plant"
+                      ? newUser2.id
+                      : newUser.id,
                 },
               },
             },
           })
           .then((data) => {
-            owner = newUser.name;
-            // console.log({ madeData: data });
+            owner = data.ownerId;
           });
         console.log(
           `${colors.green}New unique ${plantEntry.name} created by ${owner}${colors.reset}`
@@ -190,80 +219,11 @@ async function main() {
     }
     await createUniquePlant(plantData);
     await createUniquePlant(plantData2);
+    await createUniquePlant(plantData3);
   }
 
-  // async function fetchAndCreatePlant() {
-
-  //   const plantData = await prisma.plant.findFirst({
-  //     where: {
-  //       name: "Bonsai",
-  //     },
-  //   });
-  //   const plantData2 = await prisma.plant.findFirst({
-  //     where: {
-  //       name: "Aloe Vera",
-  //     },
-  //   });
-
-  //   const createUniquePlant = (plantEntry:any) => {
-  //     try {
-  //       prisma.uniquePlant.create({
-  //         data: {
-  //           name: plantEntry.name,
-  //           description: plantEntry.description,
-  //           image: plantEntry.image,
-  //           water: plantEntry.water,
-  //           light: plantEntry.light,
-  //           humidity: plantEntry.humidity,
-  //           species: plantEntry.species,
-  //           owner: {
-  //             connect: {
-  //               id: newUser.id,
-  //             },
-  //           },
-  //         },
-  //       });
-  //       console.log(`${colors.olive}Unique plant created ${colors.reset}`);
-  //     } catch {
-  //       console.log(`${colors.red}Plant species is not real ${colors.reset}`);
-  //     }
-  //   };
-  //   createUniquePlant(plantData);
-  //   createUniquePlant(plantData2);
-  // }
-
-  // plantData
-  //   ? await prisma.uniquePlant
-  //       .create({
-  //         data: {
-  //           name: plantData.name,
-  //           description: plantData.description,
-  //           image: plantData.image,
-  //           water: plantData.water,
-  //           light: plantData.light,
-  //           humidity: plantData.humidity,
-  //           species: plantData.species,
-  //           owner: {
-  //             connect: {
-  //               id: newUser.id,
-  //             },
-  //           },
-  //         },
-  //       })
-  //       .then((data) =>
-  //         console.log(`${colors.olive}Unique plant created ${colors.reset}`)
-  //       )
-  //   : console.log(`${colors.red}Plant species is not real ${colors.reset}`);
-  // }
-
   async function connectUniquePlantToCollection() {
-    let result;
-
-    const uniquePlants = await prisma.uniquePlant.findMany({
-      where: {
-        ownerId: newUser.id,
-      },
-    });
+    const uniquePlants = await prisma.uniquePlant.findMany({});
 
     const userCollection = await prisma.plantCollection.create({
       data: {
@@ -272,75 +232,35 @@ async function main() {
       },
     });
 
-    // console.log({ unique: uniquePlants });
+    const userCollection2 = await prisma.plantCollection.create({
+      data: {
+        name: `${newUser2.name}'s Collection`,
+        ownerId: newUser2.id,
+      },
+    });
+
+    console.log([userCollection.id, userCollection2.id]);
 
     for (let plant of uniquePlants) {
       try {
-        result = await prisma.plantCollection.update({
-          where: {
-            id: userCollection.id,
-          },
+        const info = await prisma.uniquePlantsToCollections.create({
           data: {
-            plants: {
-              connect: {
-                id: plant.id,
-              },
-            },
+            uniquePlantId: plant.id,
+            plantCollectionId:
+              plant.ownerId === newUser.id
+                ? userCollection.id
+                : userCollection2.id,
           },
         });
         console.log(
-          `${colors.green}${plant.name} connected to collection '${colors.salmon}${userCollection.name}' ${colors.reset}`
+          `${colors.green}${plant.name} connected to collection '${colors.salmon}${info.plantCollectionId}' ${colors.reset}`
         );
       } catch (error) {
         console.log(`${colors.red}error ${colors.reset}`);
       }
     }
-
-    // const newBonsai = await prisma.uniquePlant.findFirst({
-    //   where: {
-    //     ownerId: newUser.id,
-    //   },
-    // });
-
-    // const newAloe = await prisma.uniquePlant.findFirst({
-    //   where: {
-    //     name: "Aloe Vera",
-    //     ownerId: newUser.id,
-    //   },
-    // });
-    // console.log(newAloe?.species);
-
-    // newBonsai && newBonsai.id
-    //   ? console.log(
-    //       `${colors.orange}Unique Plant data found while searching for bonsai ${colors.reset}`
-    //     )
-    //   : console.log(
-    //       `${colors.red}No unique plant data found while searching for bonsai ${colors.reset}`
-    //     );
-
-    // newBonsai && newBonsai.id
-    //   ? (await prisma.plantCollection
-    //       .create({
-    //         data: {
-    //           name: "Bonsai Collection",
-    //           ownerId: newUser.id,
-    //           plants: {
-    //             connect: {
-    //               id: newBonsai.id,
-    //             },
-    //           },
-    //         },
-    //       })
-    //       .then((data) => (result = data.name))) &&
-    //     console.log(
-    //       `${colors.cyan}Unique plant connected to collection, ${result} ${colors.reset}`
-    //     )
-    //   : console.log(
-    //       `${colors.red}No unique plant found while using connectUniquePlantToCollection ${colors.reset} `
-    //     );
+    // console.log(await prisma.uniquePlantsToCollections.findMany());
   }
-
-  // const uniquePlantsOwnedByUser = await prisma.user.findMany({
   //   where: {
   //     id: newUser.id,
   //   },
@@ -358,12 +278,20 @@ async function main() {
         ownerId: newUser.id,
       },
     });
+
+    // query for all uniquePlants with promise[0].id as a collectionId
+
     const collectionContents = await prisma.uniquePlant.findMany({
       where: {
-        collectionId: promise[0].id,
+        CollectionsPartOf: {
+          some: {
+            plantCollectionId: promise[0].id,
+          },
+        },
       },
     });
-    console.log(
+
+    await console.log(
       "\x1b[35m%s\x1b[0m",
       "PLANT COLLECTION CONTENTS:",
       collectionContents.length
@@ -371,25 +299,60 @@ async function main() {
   }
 
   async function addPlantToUsersFavorites() {
-    const userFavoriting = await prisma.user.findFirst({
+    const userFavoriting = (await prisma.user.findFirst({
       where: {
         name: "MarcoSama",
       },
-    });
+    })) || { id: "2" };
 
-    const plantToFavorite = await prisma.uniquePlant.findFirst({
+    const plantToFavorite = await prisma.uniquePlant.findMany({
       where: {
-        name: "Bonsai",
+        NOT: {
+          ownerId: userFavoriting.id,
+        },
       },
     });
+
+    const favoritePlant = await prisma.usersToUniquePlants.createMany({
+      data: [
+        {
+          userId: userFavoriting.id,
+          uniquePlantId: plantToFavorite[0].id,
+        },
+        {
+          userId: userFavoriting.id,
+          uniquePlantId: plantToFavorite[1].id,
+        },
+      ],
+    });
+    const res: string[] = [];
+    const fetchFavoritedBy = await prisma.uniquePlant
+      .findMany({
+        where: {
+          FavoritedBy: {
+            some: {
+              userId: userFavoriting.id,
+            },
+          },
+        },
+      })
+      .then((data) => {
+        data.forEach((plant) => {
+          res.push(plant.name);
+        });
+      });
+
+    console.log(res);
   }
 
   async function run() {
     // await findAllUsers(); // THIS WORKS FOR NOW
+    await findAllUsers();
     await newplant();
     await fetchAndCreatePlant();
     await connectUniquePlantToCollection();
     await findCollection();
+    await addPlantToUsersFavorites();
   }
   run();
 }

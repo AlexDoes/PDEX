@@ -1,1 +1,552 @@
-{"X-RateLimit-Limit":300,"X-RateLimit-Remaining":0,"Retry-After":75713,"X-RateLimit-Reset":1677100585,"X-Response":"Surpassed API Rate Limit. Upgrade To Increase Rate"}
+{
+  "data": [
+    {
+      "id": 3301,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis intermedia 'Primavera'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/og/49255769768_df55596553_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/medium/49255769768_df55596553_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/small/49255769768_df55596553_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/thumbnail/49255769768_df55596553_b.jpg"
+      }
+    },
+    {
+      "id": 3302,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis intermedia 'Robert'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 451,
+        "license_name": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "original_url": "https://perenual.com/storage/species_image/3302_hamamelis_intermedia_robert/og/g762a1a3809c8d5f02e02fe31fd88ce1de046a9ff03cc5fd80322dab2f00b16ec3b9c59d9723df3cca1f99c0be1878b50c7b922fa85ca12101a6ae4727b74986c_1280.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3302_hamamelis_intermedia_robert/regular/g762a1a3809c8d5f02e02fe31fd88ce1de046a9ff03cc5fd80322dab2f00b16ec3b9c59d9723df3cca1f99c0be1878b50c7b922fa85ca12101a6ae4727b74986c_1280.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3302_hamamelis_intermedia_robert/medium/g762a1a3809c8d5f02e02fe31fd88ce1de046a9ff03cc5fd80322dab2f00b16ec3b9c59d9723df3cca1f99c0be1878b50c7b922fa85ca12101a6ae4727b74986c_1280.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3302_hamamelis_intermedia_robert/small/g762a1a3809c8d5f02e02fe31fd88ce1de046a9ff03cc5fd80322dab2f00b16ec3b9c59d9723df3cca1f99c0be1878b50c7b922fa85ca12101a6ae4727b74986c_1280.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3302_hamamelis_intermedia_robert/thumbnail/g762a1a3809c8d5f02e02fe31fd88ce1de046a9ff03cc5fd80322dab2f00b16ec3b9c59d9723df3cca1f99c0be1878b50c7b922fa85ca12101a6ae4727b74986c_1280.jpg"
+      }
+    },
+    {
+      "id": 3303,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis intermedia 'Rubin'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/og/49255769768_df55596553_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/medium/49255769768_df55596553_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/small/49255769768_df55596553_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/thumbnail/49255769768_df55596553_b.jpg"
+      }
+    },
+    {
+      "id": 3304,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis intermedia 'Sarah'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 6,
+        "license_name": "Attribution-NoDerivs License",
+        "license_url": "https://creativecommons.org/licenses/by-nd/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3304_hamamelis_intermedia_sarah/og/51962277348_4b8333d82b_b.jpg"
+      }
+    },
+    {
+      "id": 3305,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis intermedia 'Savill Starlight'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3305_hamamelis_intermedia_savill_starlight/og/30462100526_187f88ee94_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3305_hamamelis_intermedia_savill_starlight/regular/30462100526_187f88ee94_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3305_hamamelis_intermedia_savill_starlight/medium/30462100526_187f88ee94_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3305_hamamelis_intermedia_savill_starlight/small/30462100526_187f88ee94_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3305_hamamelis_intermedia_savill_starlight/thumbnail/30462100526_187f88ee94_b.jpg"
+      }
+    },
+    {
+      "id": 3306,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis intermedia 'Spanish Spider'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 4,
+        "license_name": "Attribution License",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3306_hamamelis_intermedia_spanish_spider/og/51902749533_3e22aeb5ef_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3306_hamamelis_intermedia_spanish_spider/regular/51902749533_3e22aeb5ef_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3306_hamamelis_intermedia_spanish_spider/medium/51902749533_3e22aeb5ef_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3306_hamamelis_intermedia_spanish_spider/small/51902749533_3e22aeb5ef_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3306_hamamelis_intermedia_spanish_spider/thumbnail/51902749533_3e22aeb5ef_b.jpg"
+      }
+    },
+    {
+      "id": 3307,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis intermedia 'Strawberries and Cream'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 1,
+        "license_name": null,
+        "license_url": null,
+        "original_url": "https://perenual.com/storage/species_image/3307_hamamelis_intermedia_strawberries_and_cream/og/52509323282_ce4d64a301_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3307_hamamelis_intermedia_strawberries_and_cream/regular/52509323282_ce4d64a301_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3307_hamamelis_intermedia_strawberries_and_cream/medium/52509323282_ce4d64a301_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3307_hamamelis_intermedia_strawberries_and_cream/small/52509323282_ce4d64a301_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3307_hamamelis_intermedia_strawberries_and_cream/thumbnail/52509323282_ce4d64a301_b.jpg"
+      }
+    },
+    {
+      "id": 3308,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis intermedia 'Sunburst'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 6,
+        "license_name": "Attribution-NoDerivs License",
+        "license_url": "https://creativecommons.org/licenses/by-nd/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3308_hamamelis_intermedia_sunburst/og/52443845404_2c3848afa5_b.jpg"
+      }
+    },
+    {
+      "id": 3309,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis intermedia 'Vesna'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 6,
+        "license_name": "Attribution-NoDerivs License",
+        "license_url": "https://creativecommons.org/licenses/by-nd/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3307_hamamelis_intermedia_strawberries_and_cream/og/52490942775_73bf37c469_b.jpg"
+      }
+    },
+    {
+      "id": 3310,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis intermedia 'Westerstede'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/og/49255769768_df55596553_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/medium/49255769768_df55596553_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/small/49255769768_df55596553_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/thumbnail/49255769768_df55596553_b.jpg"
+      }
+    },
+    {
+      "id": 3311,
+      "common_name": "Japanese witch hazel",
+      "scientific_name": ["Hamamelis japonica"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3311_hamamelis_japonica/og/33482061971_8eb4794934_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3311_hamamelis_japonica/regular/33482061971_8eb4794934_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3311_hamamelis_japonica/medium/33482061971_8eb4794934_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3311_hamamelis_japonica/small/33482061971_8eb4794934_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3311_hamamelis_japonica/thumbnail/33482061971_8eb4794934_b.jpg"
+      }
+    },
+    {
+      "id": 3312,
+      "common_name": "Japanese witch hazel",
+      "scientific_name": ["Hamamelis japonica 'Arborea'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 4,
+        "license_name": "Attribution License",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3312_hamamelis_japonica_arborea/og/40461422353_3bb2fe3033_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3312_hamamelis_japonica_arborea/regular/40461422353_3bb2fe3033_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3312_hamamelis_japonica_arborea/medium/40461422353_3bb2fe3033_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3312_hamamelis_japonica_arborea/small/40461422353_3bb2fe3033_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3312_hamamelis_japonica_arborea/thumbnail/40461422353_3bb2fe3033_b.jpg"
+      }
+    },
+    {
+      "id": 3313,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis japonica 'Canary Yellow'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 6,
+        "license_name": "Attribution-NoDerivs License",
+        "license_url": "https://creativecommons.org/licenses/by-nd/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3307_hamamelis_intermedia_strawberries_and_cream/og/52490942775_73bf37c469_b.jpg"
+      }
+    },
+    {
+      "id": 3314,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis japonica 'Pendula'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3314_hamamelis_japonica_pendula/og/50083179577_48653222eb_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3314_hamamelis_japonica_pendula/regular/50083179577_48653222eb_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3314_hamamelis_japonica_pendula/medium/50083179577_48653222eb_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3314_hamamelis_japonica_pendula/small/50083179577_48653222eb_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3314_hamamelis_japonica_pendula/thumbnail/50083179577_48653222eb_b.jpg"
+      }
+    },
+    {
+      "id": 3315,
+      "common_name": "Japanese witch hazel",
+      "scientific_name": ["Hamamelis japonica var. obtusata"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/og/49255769768_df55596553_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/medium/49255769768_df55596553_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/small/49255769768_df55596553_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/thumbnail/49255769768_df55596553_b.jpg"
+      }
+    },
+    {
+      "id": 3316,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis 'KLM NN' GRAPE FIZZ"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 2,
+        "license_name": null,
+        "license_url": null,
+        "original_url": "https://perenual.com/storage/species_image/3316_hamamelis_klm_nn_grape_fizz/og/51918973797_bde639570d_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3316_hamamelis_klm_nn_grape_fizz/regular/51918973797_bde639570d_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3316_hamamelis_klm_nn_grape_fizz/medium/51918973797_bde639570d_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3316_hamamelis_klm_nn_grape_fizz/small/51918973797_bde639570d_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3316_hamamelis_klm_nn_grape_fizz/thumbnail/51918973797_bde639570d_b.jpg"
+      }
+    },
+    {
+      "id": 3317,
+      "common_name": "Chinese witch hazel",
+      "scientific_name": ["Hamamelis mollis"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3317_hamamelis_mollis/og/37535344784_b4f0fcd9fb_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3317_hamamelis_mollis/regular/37535344784_b4f0fcd9fb_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3317_hamamelis_mollis/medium/37535344784_b4f0fcd9fb_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3317_hamamelis_mollis/small/37535344784_b4f0fcd9fb_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3317_hamamelis_mollis/thumbnail/37535344784_b4f0fcd9fb_b.jpg"
+      }
+    },
+    {
+      "id": 3318,
+      "common_name": "Chinese witch hazel",
+      "scientific_name": ["Hamamelis mollis 'Bonny Brook'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 6,
+        "license_name": "Attribution-NoDerivs License",
+        "license_url": "https://creativecommons.org/licenses/by-nd/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3318_hamamelis_mollis_bonny_brook/og/49522177302_056d4f53bf_b.jpg"
+      }
+    },
+    {
+      "id": 3328,
+      "common_name": "Ozark witch hazel",
+      "scientific_name": ["Hamamelis vernalis"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/og/49255769768_df55596553_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/medium/49255769768_df55596553_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/small/49255769768_df55596553_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/thumbnail/49255769768_df55596553_b.jpg"
+      }
+    },
+    {
+      "id": 3329,
+      "common_name": "Ozark witch hazel",
+      "scientific_name": ["Hamamelis vernalis 'Autumn Embers'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 4,
+        "license_name": "Attribution License",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3333_hamamelis_vernalis_lombarts_weeping/og/51821100194_ebfc0608d1_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3333_hamamelis_vernalis_lombarts_weeping/regular/51821100194_ebfc0608d1_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3333_hamamelis_vernalis_lombarts_weeping/medium/51821100194_ebfc0608d1_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3333_hamamelis_vernalis_lombarts_weeping/small/51821100194_ebfc0608d1_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3333_hamamelis_vernalis_lombarts_weeping/thumbnail/51821100194_ebfc0608d1_b.jpg"
+      }
+    },
+    {
+      "id": 3330,
+      "common_name": "Ozark witch hazel",
+      "scientific_name": ["Hamamelis vernalis 'Carnea'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3330_hamamelis_vernalis_carnea/og/24718201783_11fa3074e4_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3330_hamamelis_vernalis_carnea/regular/24718201783_11fa3074e4_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3330_hamamelis_vernalis_carnea/medium/24718201783_11fa3074e4_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3330_hamamelis_vernalis_carnea/small/24718201783_11fa3074e4_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3330_hamamelis_vernalis_carnea/thumbnail/24718201783_11fa3074e4_b.jpg"
+      }
+    },
+    {
+      "id": 3319,
+      "common_name": "Chinese witch hazel",
+      "scientific_name": ["Hamamelis mollis 'Fred Chittenden'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 4,
+        "license_name": "Attribution License",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/og/46046658565_28a18ce80a_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/regular/46046658565_28a18ce80a_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/medium/46046658565_28a18ce80a_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/small/46046658565_28a18ce80a_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/thumbnail/46046658565_28a18ce80a_b.jpg"
+      }
+    },
+    {
+      "id": 3320,
+      "common_name": "Chinese witch hazel",
+      "scientific_name": ["Hamamelis mollis 'Gold Edge'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 4,
+        "license_name": "Attribution License",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/og/46046658565_28a18ce80a_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/regular/46046658565_28a18ce80a_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/medium/46046658565_28a18ce80a_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/small/46046658565_28a18ce80a_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/thumbnail/46046658565_28a18ce80a_b.jpg"
+      }
+    },
+    {
+      "id": 3321,
+      "common_name": "Chinese witch hazel",
+      "scientific_name": ["Hamamelis mollis 'Goldcrest'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3321_hamamelis_mollis_goldcrest/og/35747095195_b6733ba06f_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3321_hamamelis_mollis_goldcrest/regular/35747095195_b6733ba06f_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3321_hamamelis_mollis_goldcrest/medium/35747095195_b6733ba06f_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3321_hamamelis_mollis_goldcrest/small/35747095195_b6733ba06f_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3321_hamamelis_mollis_goldcrest/thumbnail/35747095195_b6733ba06f_b.jpg"
+      }
+    },
+    {
+      "id": 3322,
+      "common_name": "Chinese witch hazel",
+      "scientific_name": ["Hamamelis mollis 'Imperialis'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 6,
+        "license_name": "Attribution-NoDerivs License",
+        "license_url": "https://creativecommons.org/licenses/by-nd/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3318_hamamelis_mollis_bonny_brook/og/49522177302_056d4f53bf_b.jpg"
+      }
+    },
+    {
+      "id": 3323,
+      "common_name": "Chinese witch hazel",
+      "scientific_name": ["Hamamelis mollis 'Jermyns Gold'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 6,
+        "license_name": "Attribution-NoDerivs License",
+        "license_url": "https://creativecommons.org/licenses/by-nd/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3318_hamamelis_mollis_bonny_brook/og/49522177302_056d4f53bf_b.jpg"
+      }
+    },
+    {
+      "id": 3324,
+      "common_name": "Chinese witch hazel",
+      "scientific_name": ["Hamamelis mollis 'Princeton Gold'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3324_hamamelis_mollis_princeton_gold/og/24236381033_6ce540f6a6_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3324_hamamelis_mollis_princeton_gold/regular/24236381033_6ce540f6a6_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3324_hamamelis_mollis_princeton_gold/medium/24236381033_6ce540f6a6_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3324_hamamelis_mollis_princeton_gold/small/24236381033_6ce540f6a6_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3324_hamamelis_mollis_princeton_gold/thumbnail/24236381033_6ce540f6a6_b.jpg"
+      }
+    },
+    {
+      "id": 3325,
+      "common_name": "Chinese witch hazel",
+      "scientific_name": ["Hamamelis mollis 'Sweet Sunshine'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 4,
+        "license_name": "Attribution License",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/og/46046658565_28a18ce80a_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/regular/46046658565_28a18ce80a_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/medium/46046658565_28a18ce80a_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/small/46046658565_28a18ce80a_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/3325_hamamelis_mollis_sweet_sunshine/thumbnail/46046658565_28a18ce80a_b.jpg"
+      }
+    },
+    {
+      "id": 3326,
+      "common_name": "Chinese witch hazel",
+      "scientific_name": ["Hamamelis mollis 'Wisley Supreme'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/og/49255769768_df55596553_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/medium/49255769768_df55596553_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/small/49255769768_df55596553_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/thumbnail/49255769768_df55596553_b.jpg"
+      }
+    },
+    {
+      "id": 3327,
+      "common_name": "witch hazel",
+      "scientific_name": ["Hamamelis 'Rochester'"],
+      "other_name": null,
+      "cycle": "Perennial",
+      "watering": "Average",
+      "sunlight": ["Full sun", "part shade"],
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/og/49255769768_df55596553_b.jpg",
+        "regular_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",
+        "medium_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/medium/49255769768_df55596553_b.jpg",
+        "small_url": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/small/49255769768_df55596553_b.jpg",
+        "thumbnail": "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/thumbnail/49255769768_df55596553_b.jpg"
+      }
+    }
+  ],
+  "to": 3330,
+  "per_page": 30,
+  "current_page": 111,
+  "from": 3301,
+  "last_page": 200,
+  "total": 6000
+}
