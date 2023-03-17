@@ -69,7 +69,7 @@ interface PlantEntry {
   alternative_names?: string[];
   id: number[];
   scientific_name: string[];
-  distinct_name: boolean;
+  distinct_name: any;
 }
 
 interface PlantMap {
@@ -227,12 +227,25 @@ async function upsertData(): Promise<void> {
       //   }
     }
   }
-  console.log(entryMap);
+
+  const sortedMap = Object.keys(entryMap).sort((a, b) => {
+    if (entryMap[a].distinct_name == entryMap[b].distinct_name) {
+      return a.localeCompare(b);
+    } else {
+      return entryMap[b].distinct_name - entryMap[a].distinct_name;
+    }
+  });
+
+  const sortedObj: PlantMap = {};
+  sortedMap.forEach((key) => {
+    sortedObj[key] = entryMap[key];
+  });
+
   fs.writeFileSync(speciesList, [...set].join("\n"), "utf-8");
-  fs.writeFileSync(speciesJSON, JSON.stringify(entryMap), "utf-8");
+  fs.writeFileSync(speciesJSON, JSON.stringify(sortedObj), "utf-8");
   const speciesCount = await prisma.plant.count();
-  console.log(colors.green, speciesCount);
-  console.log(colors.red, set.size);
+  console.log(colors.green, "Unique species", speciesCount);
+  console.log(colors.red, "Unique names", set.size);
 }
 
 upsertData()
