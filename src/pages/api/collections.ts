@@ -102,7 +102,7 @@ type Object = {
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { owner_id } = req.query;
-  const filtered = sampleData.filter((p) => p.owner_id == owner_id);
+  const filtered = sampleData.filter((p: any) => p.owner_id == owner_id);
   if (filtered.length > 0) {
     res.status(200).json(filtered);
   } else {

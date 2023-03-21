@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import SearchBar from "../components/searchBar";
-// type Plant = {   id: number,   common_name: string }
 interface Plant {
   id: number;
   common_name: string;
@@ -15,12 +14,47 @@ interface Plant {
   };
 }
 
-type PlantsIndex = { id: number; common_name: string }[];
-type Page = number;
+const divStyle = {
+  justifyContent: "space-between",
+  width: "50px",
+  height: "50px",
+  backgroundColor: "lightgreen",
+};
+
+const divStyle2 = {
+  padding: "10px",
+  margin: "0 auto",
+  width: "80%",
+  font: "20px",
+  backgroundColor: "lightblue",
+  fontSize: "30px",
+  color: "coral",
+};
+
+const divstyle3 = {
+  margin: "0 auto",
+  width: "50%",
+  display: "flex",
+  justifyContent: "center",
+  gap: "5px",
+};
+
+function toTitleCase(str: string) {
+  const res = str
+    .toLowerCase()
+    .split(" ")
+    .map(function (word) {
+      const target = word[0] == "'" ? word[1] : word[0];
+      return word.replace(target, target.toUpperCase());
+    })
+    .join(" ");
+  return res;
+}
 
 function plantdex() {
-  let [plantsIndex, setPlantsIndex] = useState([]);
-  let [page, setPage] = useState(1);
+  let [plantsIndex, setPlantsIndex] = useState<any>([]);
+  let [page, setPage] = useState<number>(1);
+  let [search, setSearch] = useState<any>([]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const button = event.target as HTMLButtonElement;
@@ -32,19 +66,24 @@ function plantdex() {
       const res = await fetch(`data/page${page}.json`);
       const json = await res.json();
       setPlantsIndex(json.data);
-      console.log(json);
     }
+    async function fetchSearch() {
+      const res = await fetch(`data/species.json`);
+      const json = await res.json();
+      setSearch(json);
+    }
+    fetchSearch();
     fetchData();
   }, [page]);
 
-  //   useEffect(() => {
-  //     async function fetchData() {
-  //       const res = await fetch(`data/species.json`);
-  //       const json = await res.json();
-  //       console.log(json);
-  //     }
-  //     fetchData();
-  //   }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const res = await fetch(`data/species.json`);
+  //     const json = await res.json();
+  //     setSearch(json);
+  //   }
+  //   fetchData();
+  // }, []);
 
   const pageNumbers: number[] = [];
   for (let i = page - 3; i <= page + 3; i++) {
@@ -53,39 +92,9 @@ function plantdex() {
     }
   }
 
-  const divStyle = {
-    justifyContent: "space-between",
-    width: "50px",
-    height: "50px",
-    backgroundColor: "lightgreen",
-    // display: "flex",
-    // flexdirection: "row",
-  };
-
-  const divStyle2 = {
-    padding: "10px",
-    margin: "0 auto",
-    width: "80%",
-    font: "20px",
-    backgroundColor: "lightblue",
-    fontSize: "30px",
-    color: "coral",
-  };
-
-  // center divstyle3
-  const divstyle3 = {
-    // center div
-    margin: "0 auto",
-    width: "50%",
-    // border: "1px solid black",
-    display: "flex",
-    justifyContent: "center",
-    gap: "5px",
-  };
-
   return (
     <div style={divStyle2}>
-      <SearchBar />
+      <SearchBar props={search} />
       <div style={divstyle3}>
         <button style={divStyle} onClick={() => setPage(1)}>
           {" "}
@@ -102,17 +111,19 @@ function plantdex() {
         </button>
       </div>
       <ul>
-        {plantsIndex.map((plant) => (
+        {plantsIndex.map((plant: any) => (
           <li key={plant.id}>
             Plant ID: {plant.id} <br></br>
             Scientific name: {plant.scientific_name} <br></br>
             Common names: {plant["common_name"]} <br></br>
             {plant.other_name && (
               <p>
-                Other name :
-                {plant.other_name.map((names) => {
-                  return names;
-                })}
+                {"Other names: "}
+                {plant.other_name
+                  .map((names: string) => {
+                    return toTitleCase(names);
+                  })
+                  .join(", ")}
               </p>
             )}
             {plant.default_image && (
