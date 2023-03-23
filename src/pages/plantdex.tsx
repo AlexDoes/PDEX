@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SearchBar from "../components/searchBar";
+import { FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/fa";
 interface Plant {
   id: number;
   common_name: string;
@@ -18,7 +19,7 @@ const divStyle = {
   justifyContent: "space-between",
   width: "50px",
   height: "50px",
-  backgroundColor: "lightgreen",
+  // backgroundColor: "lightgreen",
 };
 
 const divStyle2 = {
@@ -98,16 +99,25 @@ function plantdex() {
       <div style={divstyle3}>
         <button style={divStyle} onClick={() => setPage(1)}>
           {" "}
-          {"<<"}{" "}
+          {<FaAngleDoubleLeft />}{" "}
         </button>
         {pageNumbers.map((pageNumber) => (
-          <button style={divStyle} key={pageNumber} onClick={handleClick}>
+          <button
+            className={` ${
+              pageNumber === page
+                ? "bg-[rgb(84,80,80)] pointer-events-none"
+                : "bg-[rgb(74,233,154)]"
+            }`}
+            style={divStyle}
+            key={pageNumber}
+            onClick={handleClick}
+          >
             {pageNumber}
           </button>
         ))}
         <button style={divStyle} onClick={() => setPage(200)}>
           {" "}
-          {">>"}{" "}
+          {<FaAngleDoubleRight />}{" "}
         </button>
       </div>
       <ul>

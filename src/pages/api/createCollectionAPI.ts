@@ -11,10 +11,16 @@ export default async function handler(
     return res.status(405).json({ message: "Method not allowed" });
   }
 
+  const usersCollection = await prisma.plantCollection.findMany({
+    where: {
+      ownerId: req.body.ownerId,
+    },
+  });
+
   const plantCollectionData = JSON.parse(req.body);
   const savedPlantCollection = await prisma.plantCollection.create({
     data: plantCollectionData,
   });
-  //   res.json(savedPlantCollection);
+  //   res.status(200).json(usersCollection);
   res.status(200).json(savedPlantCollection);
 }
