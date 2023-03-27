@@ -34,7 +34,7 @@ const divStyle2 = {
 
 const divstyle3 = {
   margin: "0 auto",
-  width: "50%",
+  // width: "50%",
   display: "flex",
   justifyContent: "center",
   gap: "5px",
@@ -97,27 +97,30 @@ function plantdex() {
     <div style={divStyle2}>
       <SearchBar props={search} />
       <div style={divstyle3}>
-        <button style={divStyle} onClick={() => setPage(1)}>
-          {" "}
-          {<FaAngleDoubleLeft />}{" "}
+        <button
+          className="h-12 w-12 bg-[rgb(74,233,154)] flex justify-center items-center"
+          onClick={() => setPage(1)}
+        >
+          {<FaAngleDoubleLeft />}
         </button>
         {pageNumbers.map((pageNumber) => (
           <button
             className={` ${
               pageNumber === page
-                ? "bg-[rgb(84,80,80)] pointer-events-none"
-                : "bg-[rgb(74,233,154)]"
+                ? "h-12 w-12 bg-[rgb(84,80,80)] pointer-events-none flex justify-center items-center"
+                : "h-12 w-12 bg-[rgb(74,233,154)] flex justify-center items-center"
             }`}
-            style={divStyle}
             key={pageNumber}
             onClick={handleClick}
           >
             {pageNumber}
           </button>
         ))}
-        <button style={divStyle} onClick={() => setPage(200)}>
-          {" "}
-          {<FaAngleDoubleRight />}{" "}
+        <button
+          className="h-12 w-12 bg-[rgb(74,233,154)] flex justify-center items-center"
+          onClick={() => setPage(200)}
+        >
+          {<FaAngleDoubleRight />}
         </button>
       </div>
       <ul>
