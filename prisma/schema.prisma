@@ -12,10 +12,11 @@ model User {
   id              String                @id @default(cuid())
   email           String                @unique
   name            String
-  password        String
+  password        String                @default("abc123")
   ownedPlants     UniquePlant[]         @relation("UniquePlants")
   FavoritePlants  usersToUniquePlants[]
   plantCollection plantCollection[]
+  nickname        String?               @default("Plant Lover")
 
   @@index([email], name: "email")
 }

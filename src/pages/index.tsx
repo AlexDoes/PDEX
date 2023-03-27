@@ -1,11 +1,9 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-import PlantCollection from '@/components/plantCollection'
-import FlipCard from '@/components/flipCard'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import styles from "@/styles/Home.module.css";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
@@ -17,17 +15,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-      {/* <h1 className="text-3xl font-bold italic text-green-500">
+        {/* <h1 className="text-3xl font-bold italic text-green-500">
         Hello world!
       </h1> */}
-      {/* <PlantCollection/> */}
-        <FlipCard
-          frontContent={<div className="p-4"><img className='center' src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png'></img></div>}
-          backContent={<div className="p-4">Back content</div>}
-          width="400px"
-          height="300px"
-       />
       </main>
     </>
-  )
+  );
 }

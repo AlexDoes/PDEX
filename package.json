@@ -10,6 +10,7 @@
     "devStart": "nodemon script.ts"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^2.4.0",
     "@next/font": "13.1.6",
     "@prisma/client": "^4.11.0",
     "@types/node": "18.13.0",
