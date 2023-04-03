@@ -13,8 +13,6 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
-    "@auth0/auth0-react": "^2.0.1",
-    "@auth0/nextjs-auth0": "^2.4.0",
     "@mui/material": "^5.11.15",
     "@mui/system": "^5.11.15",
     "@mui/x-data-grid": "^6.0.4",
