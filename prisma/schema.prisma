@@ -11,7 +11,7 @@ model User {
   role            Role                  @default(USER)
   id              String                @id @default(cuid())
   email           String                @unique
-  name            String
+  name            String                @default("Plant Lover")
   password        String                @default("abc123")
   ownedPlants     UniquePlant[]         @relation("UniquePlants")
   FavoritePlants  usersToUniquePlants[]
