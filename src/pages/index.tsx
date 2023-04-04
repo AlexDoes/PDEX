@@ -3,11 +3,20 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { data: session, status } = useSession();
+  let dynamicContent = <h1>Not signed in</h1>;
+  if (status === "authenticated") {
+    dynamicContent = (
+      <h1>
+        Signed in as {session.user.email} <br />
+      </h1>
+    );
+  }
   return (
     <>
       <Head>
@@ -17,6 +26,9 @@ export default function Home() {
         <link rel="icon" href="/logo.png" />
       </Head>
       <div>
+        <div className="text-3xl font-bold text-green-400">
+          {dynamicContent}
+        </div>
         <img
           src="https://media.licdn.com/dms/image/C5603AQEaHa6F7FUg2A/profile-displayphoto-shrink_800_800/0/1655998047341?e=1685577600&v=beta&t=w20-CXm52ae2U8Q8hOkjdZAO705qv2BXHGKV1lwbIS8"
           // alt="Next.js logo"
