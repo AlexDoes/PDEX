@@ -27,7 +27,7 @@ export default function Home() {
       </Head>
       <div>
         <div className="text-3xl font-bold text-green-400">
-          {dynamicContent}
+          {/* {dynamicContent} */}
         </div>
         <img
           src="https://media.licdn.com/dms/image/C5603AQEaHa6F7FUg2A/profile-displayphoto-shrink_800_800/0/1655998047341?e=1685577600&v=beta&t=w20-CXm52ae2U8Q8hOkjdZAO705qv2BXHGKV1lwbIS8"

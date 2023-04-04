@@ -80,7 +80,6 @@ const SignInPage = () => {
         >
           Sign in with Google
         </button>
-        <button onClick={handleSignupClick}> Sign up instead</button>
       </form>
     </div>
   );
