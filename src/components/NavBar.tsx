@@ -22,7 +22,7 @@ export default function NavBar() {
             </div>
           </div>
         </Link>
-        <div className="flex w-[10%] items-center justify-center border-2">
+        <div className="flex w-[10%] items-center justify-center h-[100%]">
           <AuthButtonComponent />
         </div>
       </div>

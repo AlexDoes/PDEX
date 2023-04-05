@@ -3,16 +3,19 @@ import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import AuthButtonComponent from "@/components/LoginButton";
 import NavBar from "@/components/NavBar";
-
-const DOMAIN = process.env.AUTH0_ISSUER_BASE_URL;
-const CLIENT_ID = process.env.AUTH0_CLIENT_ID;
+import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <title>PlantDex</title>
+        <meta name="description" content="PlantDex" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/logo.png" />
+      </Head>
       <SessionProvider session={pageProps.session}>
         <NavBar />
-        {/* <AuthButtonComponent /> */}
         <Component {...pageProps} className="border border-green-900" />
       </SessionProvider>
     </>
