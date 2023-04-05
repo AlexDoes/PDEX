@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getProviders, signIn, getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Redirect } from "next";
+import Image from "next/image";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
@@ -40,47 +41,48 @@ const SignInPage = () => {
   };
 
   return (
-    <div className=" bg-black text-[rgb(232,74,74)] flex flex-col justify-center items-center">
-      <form
-        onSubmit={handleSubmit}
-        className="border-2 border-red-500 flex flex-col w-[50%] justify-center items-center"
-      >
-        <div className="gap">
-          <label className="flex flex-row border-yellow-200 border-2 justify-evenly">
-            Email
-            <input
-              className="border-2"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
-          <label className="flex flex-row border-orange-200 border-2 justify-evenly">
-            Password
-            <input
-              className="border-2"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
+    <div className="overflow-hidden">
+      <div className=" fixed h-full w-full -z-20">
+        <Image
+          src="/loginPageBg.avif"
+          alt="Next.js logo"
+          fill
+          objectFit="cover"
+        />
+      </div>
+      <div id="loginForm" className="border border-green-500 ">
+        <div id="logo">
+          <Image src="/logotransparent.png" alt="Next.js logo" width={200} height={200} />
         </div>
-        <button
-          className="border-2 border-gray-700 bg-cyan-500 w-[50%]"
-          type="submit"
-        >
-          Sign in with credentials
-        </button>
-        <button
-          className="border-2 border-gray-500 bg-green-300 justify-center items-center"
-          type="button"
-          onClick={handleGoogleSignIn}
-        >
-          Sign in with Google
-        </button>
-      </form>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>
+                Email
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                Password
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
+            <button type="submit">Sign in with credentials</button>
+            <button type="button" onClick={handleGoogleSignIn}>
+              Sign in with Google
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

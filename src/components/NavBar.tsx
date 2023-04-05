@@ -2,7 +2,7 @@ import { toTitleCase } from "generalFunctions";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
-import AuthButtonComponent from "@/components/LoginButton";
+import AuthButtonComponent from "@/components/LogInButton";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 export default function NavBar() {
