@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 interface Collection {
   id: string;
@@ -22,17 +23,32 @@ async function findMyCollections(userId: string) {
 }
 
 export default function myCollection() {
-  const [user, setUser] = useState<string>("1024");
+  const { data: session, status } = useSession();
+  const [user, setUser] = useState<string>("");
   const [collections, setCollections] = useState<String[]>([]);
+  const userId = session?.user.id;
+  const demoId = "clg1tydpd0000mukbypq2ib2s";
+
+  useEffect(() => {
+    if (session) {
+      setUser(userId);
+    }
+  }, [session]);
+  console.log(user);
+
   useEffect(() => {
     try {
+      if (session) {
+        setUser(userId);
+      }
       findMyCollections(user).then((data) => {
         setCollections(data);
       });
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [session, user]);
+
   console.log(collections);
   return (
     <div>

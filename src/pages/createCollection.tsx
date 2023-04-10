@@ -20,8 +20,6 @@ export default function CreateCollectiondDisplay() {
 
   const [user, setUser] = useState("");
 
-  // console.log(id);
-
   useEffect(() => {
     if (session) {
       setUser(id);
