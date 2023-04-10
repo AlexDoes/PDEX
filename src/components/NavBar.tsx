@@ -2,7 +2,7 @@ import { toTitleCase } from "generalFunctions";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
-import AuthButtonComponent from "@/components/LogInButton";
+import AuthButtonComponent from "@/components/LoginButton";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useRouter } from "next/router";
 
@@ -17,7 +17,7 @@ export default function NavBar() {
   return (
     <>
       {show && (
-        <div className="fixed flex w-full gap-2 h-16 bg-purple-400 max-h-16 overflow-hidden justify-between ">
+        <div className="flex w-full gap-2 h-16 bg-purple-400 max-h-16 overflow-hidden justify-between ">
           <Link href={"/"} className="inherit">
             <div className="flex flex-row h-full items-center">
               <img
@@ -30,6 +30,7 @@ export default function NavBar() {
               </div>
             </div>
           </Link>
+          {/* <button onClick={() => signOut()}>Sign out</button> */}
           <div className="flex w-[10%] items-center justify-center h-[100%]">
             <AuthButtonComponent />
           </div>

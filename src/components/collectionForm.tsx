@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import prisma from "lib/prisma";
 const colors = {
   //ansi color codes for console.log
   black: "\u001b[38;5;0m",
@@ -52,7 +53,7 @@ const colors = {
 };
 
 async function createCollection(collectionData: any) {
-  const response = await fetch("/api/createCollectionAPI", {
+  const response = await fetch("/api/collections/createCollectionAPI", {
     method: "POST",
     body: JSON.stringify(collectionData),
   });
@@ -65,8 +66,14 @@ async function createCollection(collectionData: any) {
 }
 
 export default function CreateCollectionForm(data: any) {
-  const [user, setUser] = useState<string>("1024");
+  const [user, setUser] = useState<string>(data.user);
   const [collectionName, setCollectionName] = useState<string>("");
+
+  useEffect(() => {
+    if (data.user) {
+      setUser(data.user);
+    }
+  }, [data.user]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -75,7 +82,7 @@ export default function CreateCollectionForm(data: any) {
         ownerId: user,
         name: collectionName,
       });
-      console.log(newCollection);
+      console.log(`new collection created: ${newCollection}`);
       alert("Collection created!");
     } catch (error) {
       console.log(error);

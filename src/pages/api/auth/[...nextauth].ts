@@ -1,11 +1,10 @@
 import NextAuth from "next-auth";
-import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
 import { compare } from "bcrypt";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+
 const prisma = new PrismaClient();
 
 export default NextAuth({
@@ -65,7 +64,7 @@ export default NextAuth({
   callbacks: {
     async session({ session, token, user }) {
       // session.accessToken = token.accessToken; //errror here
-      console.log("Session callback", { session, token, user });
+      // console.log("Session callback", { session, token, user });
       // The return type will match the one returned in `useSession()`
       return {
         ...session,
@@ -87,7 +86,7 @@ export default NextAuth({
           randomKey: u.randomKey,
         };
       }
-      console.log("JWT callback", { token, user });
+      // console.log("JWT callback", { token, user });
       return token;
     },
   },
