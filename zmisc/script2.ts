@@ -193,38 +193,38 @@ async function upsertData(): Promise<void> {
         }
       });
 
-      //   try {
-      //     await prisma.plant
-      //       .upsert({
-      //         where: {
-      //           name: entry.common_name,
-      //         },
-      //         update: {
-      //           species: entry.scientific_name[0],
-      //           light: entry.sunlight[0],
-      //         },
-      //         create: {
-      //           name: entry.common_name,
-      //           common_name: entry.common_name,
-      //           scientific_name: entry.scientific_name || [],
-      //           other_names: entry.other_name || [],
-      //           light: entry.sunlight[0],
-      //           water: entry.watering,
-      //           default_image: entry.default_image
-      //             ? entry.default_image.medium_url
-      //             : "",
-      //         },
-      //       })
-      //       .then((res) => {
-      //         const logMessage = `Inserted ${
-      //           res.name
-      //         } into the database : ${(num += 1)} \n`;
-      //         fs.appendFileSync(`public/logger.txt`, logMessage, "utf-8");
-      //         console.log(colors.green, res);
-      //       });
-      //   } catch (e) {
-      //     console.log(e);
-      //   }
+      try {
+        await prisma.plant
+          .upsert({
+            where: {
+              name: entry.common_name,
+            },
+            update: {
+              species: entry.scientific_name[0],
+              light: entry.sunlight[0],
+            },
+            create: {
+              name: entry.common_name,
+              common_name: entry.common_name,
+              scientific_name: entry.scientific_name || [],
+              other_names: entry.other_name || [],
+              light: entry.sunlight[0],
+              water: entry.watering,
+              default_image: entry.default_image
+                ? entry.default_image.medium_url
+                : "",
+            },
+          })
+          .then((res) => {
+            const logMessage = `Inserted ${
+              res.name
+            } into the database : ${(num += 1)} \n`;
+            fs.appendFileSync(`public/logger.txt`, logMessage, "utf-8");
+            console.log(colors.green, res);
+          });
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 
