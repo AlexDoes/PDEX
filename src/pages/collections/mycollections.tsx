@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import prisma from "lib/prisma";
+import CreateCollectionForm from "@/components/collectionForm";
+import DeleteCollectionButton from "@/components/DeleteCollectionButton";
 
 interface Collection {
   id: string;
@@ -31,12 +33,24 @@ interface Items {
 
 interface CollectionProps {
   items: Collection[];
+  userId: string;
 }
 
-export default function MyCollections({ items }: CollectionProps) {
+export default function MyCollections({ items, userId }: CollectionProps) {
   const router = useRouter();
+  const [showForm, setShowForm] = useState(false);
+  const [state, setState] = useState(items);
   const handleClick = (id: string) => {
     router.push(`/collections/${id}`);
+  };
+  const handleAddCollectionClick = () => {
+    setShowForm(true);
+    console.log(showForm ? "true" : "false");
+  };
+
+  const handleSubmitCollectionForm = async () => {
+    await router.push(router.asPath);
+    setShowForm(false);
   };
 
   return (
@@ -55,12 +69,41 @@ export default function MyCollections({ items }: CollectionProps) {
                 Name: {collection.name}
               </Link>
               <p>Collection ID: {collection.id}</p>
-              <p>Owner ID: {collection.ownerId}</p>
-              <p> {collection.plantContents} </p>
+              <p>Owner ID: {collection.ownerId}</p>{" "}
+              {collection.plantContents.map((plantItemData: any) => {
+                return (
+                  <p
+                    key={plantItemData.uniquePlant.name}
+                    className="text-orange-600"
+                  >
+                    <Link href={`/myplants/${plantItemData.uniquePlant.id}`}>
+                      {plantItemData.uniquePlant.name}
+                    </Link>
+                  </p>
+                );
+              })}{" "}
+              <DeleteCollectionButton
+                user={userId}
+                collectionId={collection.id}
+                onConfirm={handleSubmitCollectionForm}
+              />
             </div>
           </li>
         ))}
       </ul>
+      {!showForm ? (
+        <button
+          onClick={handleAddCollectionClick}
+          className="border-2 border-red-500 bg-slate-700 text-red-500"
+        >
+          'Create a new collection +'
+        </button>
+      ) : (
+        <CreateCollectionForm
+          user={userId}
+          onSubmit={handleSubmitCollectionForm}
+        />
+      )}
     </div>
   );
 }
@@ -83,6 +126,13 @@ export async function getServerSideProps(context: any) {
   const items = await prisma.plantCollection.findMany({
     where: {
       ownerId: String(userId),
+    },
+    include: {
+      plantContents: {
+        include: {
+          uniquePlant: true,
+        },
+      },
     },
   });
 

@@ -68,6 +68,7 @@ async function createCollection(collectionData: any) {
 export default function CreateCollectionForm(data: any) {
   const [user, setUser] = useState<string>(data.user);
   const [collectionName, setCollectionName] = useState<string>("");
+  const handleSubmissionFromParent = data.onSubmit;
 
   useEffect(() => {
     if (data.user) {
@@ -83,7 +84,8 @@ export default function CreateCollectionForm(data: any) {
         name: collectionName,
       });
       console.log(`new collection created: ${newCollection}`);
-      alert("Collection created!");
+      // alert("Collection created!");
+      handleSubmissionFromParent();
     } catch (error) {
       console.log(error);
     }
