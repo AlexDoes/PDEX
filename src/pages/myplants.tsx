@@ -15,7 +15,7 @@ interface User {
 export default function MyCollections({ items }: any) {
   const router = useRouter();
   const handleClick = (id: string) => {
-    // router.push(`/collections/${id}`);
+    router.push(`/myplants/${id}`);
   };
   console.log(items);
 
@@ -26,7 +26,14 @@ export default function MyCollections({ items }: any) {
         {items.map((item: any) => (
           <li key={item.id} className="bg-red-300 border-sky-500 border-2">
             <div>
-              <p>Name: {item.name}</p>
+              <p>
+                <Link
+                  onClick={() => handleClick(item.id)}
+                  href={`/myplants/${item.id}`}
+                >
+                  Name: {item.name}
+                </Link>
+              </p>
               <p>Collection ID: {item.id}</p>
               <p>Owner ID: {item.ownedBy.name}</p>
               <img src={item.image} className="h-[200px] w-[200px]"></img>

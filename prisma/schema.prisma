@@ -37,7 +37,6 @@ model Plant {
   species         String?
   water           String?
   light           String?
-  // humidity        String?
 }
 
 model UniquePlant {
@@ -48,7 +47,6 @@ model UniquePlant {
   species           String?
   water             String?
   light             String?
-  humidity          String?
   ownedBy           User                        @relation("UniquePlants", references: [id], fields: [ownerId])
   ownerId           String
   // ownerName         String

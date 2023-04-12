@@ -46,7 +46,7 @@ export default function AuthButtonComponent() {
                 </Link>{" "}
               </div>
               <div>
-                <Link className="w-full border-2" href={"/"}>
+                <Link className="w-full border-2" href={"/myplants"}>
                   Personal Plants
                 </Link>{" "}
               </div>

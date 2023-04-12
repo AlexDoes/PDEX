@@ -18,14 +18,18 @@ interface Plant {
 interface PlantsProps {
   plants: Plant[];
   plantContentsData: any;
+  userId: string;
 }
 
 export default function ThisCollection({
   plants,
   plantContentsData,
+  userId,
 }: PlantsProps) {
   console.log(plantContentsData);
   // console.log(plantContentsData.owner.name);
+  console.log(plants);
+  console.log(userId);
 
   return (
     <div>
@@ -70,7 +74,6 @@ export default function ThisCollection({
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
-
   if (!session) {
     return {
       redirect: {
@@ -108,7 +111,13 @@ export async function getServerSideProps(context: any) {
           uniquePlant: true,
         },
       },
-      owner: true,
+      owner: {
+        select: {
+          name: true,
+          email: true,
+          id: true,
+        },
+      },
     },
   });
 
