@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import prisma from "lib/prisma";
 
 interface Collection {
   id: string;
@@ -9,8 +10,27 @@ interface Collection {
   ownerId: string;
 }
 
+interface User {
+  id: string;
+  name?: string | null | undefined;
+  email?: string | null | undefined;
+  image?: string | null | undefined;
+  address: string;
+}
+
+interface Item {
+  id: string;
+  name: string;
+  ownerId: string;
+  plantContents: string;
+}
+
+interface Items {
+  items: Item[];
+}
+
 interface CollectionProps {
-  collections: Collection[];
+  items: Collection[];
 }
 
 export default function MyCollections({ items }: CollectionProps) {
@@ -57,20 +77,14 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  const userId: string = session.user.id;
+  const userId: string = (session.user as User).id;
   const apiUrl: string = `/api/collections/findMyCollections?userId=${userId}`;
-  // console.log(apiUrl);
-  
-  const res = await fetch(
-    `http://localhost:3000/api/collections/[userId]findMyCollectionAPI?userId=${userId}`,
-    {
-      method: "GET",
-    }
-  );
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
-  const items = await res.json();
+
+  const items = await prisma.plantCollection.findMany({
+    where: {
+      ownerId: String(userId),
+    },
+  });
 
   return {
     props: {

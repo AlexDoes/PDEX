@@ -50,6 +50,7 @@ const colors = {
   olive: "\u001b[38;5;58m",
   reset: "\u001b[0m",
 };
+import { hash } from "bcrypt";
 
 async function main() {
   try {
@@ -69,11 +70,14 @@ async function main() {
     console.log(error);
   }
 
+  const password = await hash("tashisamatashisama", 12);
+
   const newUser = await prisma.user.create({
     data: {
       id: "1",
       name: "TashiSama",
-      email: "TashiSama@pdex.org",
+      email: "tashisama@pdex.org",
+      password: password,
     },
   });
 
@@ -82,6 +86,7 @@ async function main() {
       id: "2",
       name: "MarcoSama",
       email: "MarcoSama@pdex.org",
+      password: password,
     },
   });
 
@@ -132,7 +137,8 @@ async function main() {
             description:
               "Bonsai is a Japanese art form using cultivation techniques to produce small trees in containers that mimic the shape and scale of full size trees.",
             image:
-              "https://www.bonsaiempire.com/wp-content/uploads/2019/01/How-to-Prune-Bonsai-Tree-1.jpg",
+              "https://images.unsplash.com/photo-1599598177991-ec67b5c37318?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1325&q=80",
+
             water: "once a week",
             light: "direct sunlight",
             species: "Bonsai",
@@ -142,7 +148,7 @@ async function main() {
             description:
               "Aloe vera is a succulent plant species of the genus Aloe. An evergreen perennial, it originates from the Arabian Peninsula, but grows wild in tropical, semi-tropical, and arid climates around the world.",
             image:
-              "https://www.gardeningknowhow.com/wp-content/uploads/2019/04/aloe-vera-plant.jpg",
+              "https://images.unsplash.com/photo-1629426956597-1f94bac22333?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
             water: "once a week",
             light: "direct sunlight",
             species: "Aloe Vera",
@@ -152,7 +158,7 @@ async function main() {
             description:
               "The snake plant, also known as mother-in-law's tongue or Saint George's sword, is a flowering plant species in the family Asparagaceae, native to tropical West Africa.",
             image:
-              "https://www.gardeningknowhow.com/wp-content/uploads/2019/04/snake-plant.jpg",
+              "https://plus.unsplash.com/premium_photo-1673969608395-9281e5e4395f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=708&q=80",
             water: "once a week",
             light: "direct sunlight",
             species: "Snake Plant",
