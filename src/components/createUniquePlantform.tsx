@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 
 export default function PlantForm(tempdata: any) {
   const [user, setUser] = useState<string>("4");
-  //   const [suggestions, setSuggestions] = useState<string[]>([]);
-  //   const data = Object.keys(tempdata.props);
-  //   console.log(data);
 
   return (
     <div>

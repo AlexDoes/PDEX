@@ -104,3 +104,17 @@
     }
   }
 ]
+,
+{uniquePlantData: {
+  plantName: 'Plant Name',
+  plantDescription: 'Testing purposes only',
+  plantImage: 'https://plus.unsplash.com/premium_photo-1665653066799-acafe686fba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
+  user: '1'
+  plantSpecies: 'Plant Species',
+  plantSubspecies: 'Plant Subspecies',
+  plantHeight: '18',
+  unit: 'inches',
+  plantWidth: '18',
+  unit2: 'inches',
+}
+}

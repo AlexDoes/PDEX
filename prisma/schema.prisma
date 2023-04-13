@@ -49,9 +49,13 @@ model UniquePlant {
   light             String?
   ownedBy           User                        @relation("UniquePlants", references: [id], fields: [ownerId])
   ownerId           String
-  // ownerName         String
+  species2          String?
   FavoritedBy       usersToUniquePlants[]
   CollectionsPartOf UniquePlantsToCollections[]
+  plantHeight       String?
+  plantWidth        String?
+  plantDepth        String?
+  plantWeight       String?
 }
 
 model plantCollection {

@@ -2,7 +2,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
 import prisma from "lib/prisma";
-import { it } from "node:test";
+import CreateUniquePlant from "@/components/CreateUniquePlantFormComponent";
+import { useState } from "react";
 
 interface User {
   id: string;
@@ -12,12 +13,17 @@ interface User {
   address: string;
 }
 
-export default function MyCollections({ items }: any) {
+export default function MyCollections({ items, userId }: any) {
   const router = useRouter();
   const handleClick = (id: string) => {
     router.push(`/myplants/${id}`);
   };
-  console.log(items);
+  const [showForm, setShowForm] = useState(false);
+
+  const onSubmitFromParent = () => {
+    setShowForm(false);
+    router.push(router.asPath);
+  };
 
   return (
     <div>
@@ -34,13 +40,19 @@ export default function MyCollections({ items }: any) {
                   Name: {item.name}
                 </Link>
               </p>
-              <p>Collection ID: {item.id}</p>
+              <p>Collection ID: {item.id.toUpperCase()}</p>
               <p>Owner ID: {item.ownedBy.name}</p>
               <img src={item.image} className="h-[200px] w-[200px]"></img>
             </div>
           </li>
         ))}
       </ul>
+      {!showForm && (
+        <button onClick={() => setShowForm(true)}>Add a plant</button>
+      )}
+      {showForm && (
+        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
+      )}
     </div>
   );
 }
@@ -58,7 +70,6 @@ export async function getServerSideProps(context: any) {
   }
 
   const userId: string = (session.user as User).id;
-  //   const apiUrl: string = `/api/collections/findMyCollections?userId=${userId}`;
 
   const items = await prisma.uniquePlant.findMany({
     where: {
