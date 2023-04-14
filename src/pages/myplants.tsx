@@ -18,7 +18,8 @@ export default function MyCollections({ items, userId }: any) {
   const handleClick = (id: string) => {
     router.push(`/myplants/${id}`);
   };
-  const [showForm, setShowForm] = useState(false);
+  // const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(true); // change when deployed
 
   const onSubmitFromParent = () => {
     setShowForm(false);
@@ -28,6 +29,12 @@ export default function MyCollections({ items, userId }: any) {
   return (
     <div>
       <h1>My plants {} </h1>
+      {!showForm && (
+        <button onClick={() => setShowForm(true)}>Add a plant</button>
+      )}
+      {showForm && (
+        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
+      )}
       <ul>
         {items.map((item: any) => (
           <li key={item.id} className="bg-red-300 border-sky-500 border-2">
@@ -47,12 +54,6 @@ export default function MyCollections({ items, userId }: any) {
           </li>
         ))}
       </ul>
-      {!showForm && (
-        <button onClick={() => setShowForm(true)}>Add a plant</button>
-      )}
-      {showForm && (
-        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
-      )}
     </div>
   );
 }

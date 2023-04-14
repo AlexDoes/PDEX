@@ -14,8 +14,16 @@ interface User {
   address: string;
 }
 
+interface Fields {
+  height: boolean;
+  width: boolean;
+  depth: boolean;
+  subspecies: boolean;
+}
+
 interface FormInputs {
   singleErrorInput: string;
+  ename: string;
 }
 
 type Inputs = {
@@ -39,6 +47,17 @@ export default function CreateUniquePlant(props: any) {
   const userId = props.userId;
   const onSubmitFunction = props.onSubmit;
 
+  const [fields, setFields] = useState<Fields>({
+    height: false,
+    width: false,
+    depth: false,
+    subspecies: false,
+  });
+
+  const handleAddFieldClick = (fieldName: keyof Fields) => {
+    setFields({ ...fields, [fieldName]: true });
+  };
+
   const {
     register,
     handleSubmit,
@@ -53,74 +72,116 @@ export default function CreateUniquePlant(props: any) {
     });
   };
 
+  const renderButton = (field: string) => {
+    return (
+      <button
+        className="border-2 border-red-500 w-40"
+        onClick={() => handleAddFieldClick(field as keyof Fields)}
+      >
+        Add {field}
+      </button>
+    );
+  };
+
   return (
     <>
-      <ErrorMessage errors={errors} name="singleErrorInput" />
-
-      <ErrorMessage
-        errors={errors}
-        name="singleErrorInput"
-        render={({ message }) => <p>{message}</p>}
-      />
       <form
         onSubmit={handleSubmit((values, e) => {
           onSubmit(values);
         })}
-        className="flex flex-col"
+        className="flex flex-col w-[600px] 
+        border-2 border-sky-500
+        gap-1
+        "
       >
         <input
-          placeholder="Plant Name"
+          className="outline-dotted outline-2 outline-blue-500"
+          placeholder="Plant Name (required)"
           {...register("plantName", {
             required: true,
-            maxLength: 32,
-            minLength: 2,
+            maxLength: {
+              value: 128,
+              message: "Name must be less than 128 characters long",
+            },
+            minLength: {
+              value: 4,
+              message: "Name must be at least 4 characters long",
+            },
           })}
-          defaultValue={"Plant Name"}
+          //   defaultValue={"plant @" + String(new Date())}
         />
+
+        {errors && <p className="text-red-500">{errors.plantName?.message}</p>}
+
         <input
-          placeholder="Plant Image"
+          placeholder="Plant Image (URL required)"
           {...register("plantImage")}
           defaultValue={
             "https://plus.unsplash.com/premium_photo-1665653066799-acafe686fba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
           }
         />
+
         <input
           placeholder="Plant Species"
-          {...register("plantSpecies")}
-          defaultValue={"Plant Species"}
+          {...register("plantSpecies", {
+            required: true,
+          })}
+
+          //   defaultValue={"Plant Species"}
         />
-        <input
-          placeholder="Plant Subspecies"
-          {...register("plantSubspecies")}
-          defaultValue={"Plant Subspecies"}
-        />
-        <div>
+
+        {fields.subspecies && (
           <input
-            placeholder="Plant Height"
-            {...register("plantHeight")}
-            defaultValue={"18"}
+            placeholder="Plant Subspecies"
+            {...register("plantSubspecies")}
           />
-          <select id="unit" className="border-2" {...register("unit")}>
-            <option value="inches">in</option>
-            <option value="cm">cm</option>
-          </select>
-        </div>
-        <div>
-          <input
-            placeholder="Plant Width"
-            {...register("plantWidth")}
-            defaultValue={"18"}
-          />
-          <select id="unit" className="border-2" {...register("unit2")}>
-            <option value="inches">in</option>
-            <option value="cm">cm</option>
-          </select>
-        </div>
+        )}
+
+        {fields.height && (
+          <div>
+            <input
+              type="number"
+              placeholder="Plant Height"
+              {...register("plantHeight", {
+                //   required: true,
+                min: { value: 0, message: "Height must be at least 0" },
+              })}
+              // defaultValue={Number(18)}
+            />
+            <select id="unit" className="border-2" {...register("unit")}>
+              <option value="cm">cm</option>
+              <option value="inches">in</option>
+            </select>
+            {errors && (
+              <p className="text-red-500">{errors.plantHeight?.message}</p>
+            )}
+          </div>
+        )}
+        {!fields.height && renderButton("height")}
+        {!fields.subspecies && renderButton("subspecies")}
+        {!fields.width && renderButton("width")}
+        {fields.width && (
+          <div>
+            <input
+              placeholder="Plant Width"
+              {...register("plantWidth", {
+                //   required: true,
+                min: { value: 0, message: "Height must be at least 0" },
+              })}
+              // defaultValue={18}
+            />
+            <select id="unit" className="border-2" {...register("unit2")}>
+              <option value="cm">cm</option>
+              <option value="inches">in</option>
+            </select>
+          </div>
+        )}
+
         <textarea
           placeholder="Plant Description"
           {...register("plantDescription")}
           className="border-2"
-          defaultValue={"Testing purposes only"}
+          //   defaultValue={"Testing purposes only"}
         />
         <button type="submit">Submit</button>
       </form>
@@ -157,5 +218,6 @@ async function createTheUniquePlant(uniquePlantData: any) {
     throw new Error(response.statusText);
   }
 
+  alert("Plant Created!");
   return await response.json();
 }
