@@ -30,6 +30,4 @@ export default async function handle(
     });
     res.status(200).json({ message: "Plant collection deleted" });
   }
-
-  res.json(plantCollection);
 }

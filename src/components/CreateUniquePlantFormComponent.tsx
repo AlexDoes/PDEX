@@ -43,6 +43,25 @@ type Inputs = {
   user: string;
 };
 
+const errorsMap = {
+  plantName: {
+    maxLength: "Plant name is too long",
+    minLength: "Plant name is too short",
+    required: "Plant name is required",
+    pattern: "Plant name is invalid, alphanumeric characters only",
+  },
+  plantImage: {
+    required: "Plant image is required",
+  },
+  plantSpecies: {
+    required: "Plant species is required",
+  },
+  plantSubspecies: {},
+  plantHeight: {},
+  plantWidth: {},
+  plantDescription: {},
+};
+
 export default function CreateUniquePlant(props: any) {
   const userId = props.userId;
   const onSubmitFunction = props.onSubmit;
@@ -99,19 +118,15 @@ export default function CreateUniquePlant(props: any) {
           placeholder="Plant Name (required)"
           {...register("plantName", {
             required: true,
-            maxLength: {
-              value: 128,
-              message: "Name must be less than 128 characters long",
-            },
-            minLength: {
-              value: 4,
-              message: "Name must be at least 4 characters long",
-            },
+            pattern: /^[A-Za-z0-9]+$/,
+            maxLength: 32,
+            minLength: 2,
           })}
-          //   defaultValue={"plant @" + String(new Date())}
         />
-
-        {errors && <p className="text-red-500">{errors.plantName?.message}</p>}
+        <p className="text-red-500">
+          {errors.plantName?.type &&
+            ({ ...errorsMap.plantName } as any)[errors.plantName.type]}
+        </p>
 
         <input
           placeholder="Plant Image (URL required)"
@@ -126,7 +141,6 @@ export default function CreateUniquePlant(props: any) {
           {...register("plantSpecies", {
             required: true,
           })}
-
           //   defaultValue={"Plant Species"}
         />
 

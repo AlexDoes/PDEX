@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import prisma from "lib/prisma";
 
-async function deleteCollection(collectionanduserdata: any) {
-  const response = await fetch("/api/collections/deleteCollectionAPI", {
+async function deleteUniquePlant(uniqueplantanduserdata: any) {
+  const response = await fetch("/api/uniqueplants/deleteUniquePlantAPI", {
     method: "DELETE",
-    body: JSON.stringify(collectionanduserdata),
+    body: JSON.stringify(uniqueplantanduserdata),
   });
   if (!response.ok) {
     throw new Error(response.statusText);
@@ -14,9 +14,11 @@ async function deleteCollection(collectionanduserdata: any) {
   return data;
 }
 
-export default function DeleteCollectionButton(props: any) {
+export default function DeleteUniquePlantButton(props: any) {
   const [user, setUser] = useState<string>(props.user);
-  const [collectionId, setCollectionId] = useState<string>(props.collectionId);
+  const [uniquePlantId, setUniquePlantId] = useState<string>(
+    props.uniquePlantId
+  );
   const handleSubmissionFromParent = props.onConfirm;
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export default function DeleteCollectionButton(props: any) {
   }, [props.user]);
 
   const handleOnClick = (event: any) => {
-    if (window.confirm("Are you sure you want to delete this collection?")) {
+    if (window.confirm("Are you sure you want to delete this plant?")) {
       handleDelete(event);
     }
   };
@@ -34,11 +36,11 @@ export default function DeleteCollectionButton(props: any) {
   async function handleDelete(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      const deletedCollection = await deleteCollection({
-        collectionId: collectionId,
+      const deletedUniquePlant = await deleteUniquePlant({
+        uniquePlantId: uniquePlantId,
         userId: user,
       });
-      console.log(`deleted collection: ${deletedCollection}`);
+      console.log(`deleted unique plant: ${deletedUniquePlant}`);
       handleSubmissionFromParent();
     } catch (error) {
       console.log(error);
@@ -53,7 +55,7 @@ export default function DeleteCollectionButton(props: any) {
           onClick={handleOnClick}
           className="underline border-4 border-black bg-red-400"
         >
-          Delete Collection
+          Delete Unique Plant
         </button>
       </form>
     </div>

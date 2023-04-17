@@ -3,28 +3,57 @@ import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
 import prisma from "lib/prisma";
 import CreateUniquePlant from "@/components/CreateUniquePlantFormComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import DeleteUniquePlantButton from "@/components/DeleteUniquePlantButton";
 
 interface User {
   id: string;
-  name?: string | null | undefined;
+  name: string;
   email?: string | null | undefined;
   image?: string | null | undefined;
   address: string;
 }
 
-export default function MyCollections({ items, userId }: any) {
+export default function MyCollections({
+  items,
+  userId,
+  username,
+  session,
+}: any) {
   const router = useRouter();
+  console.log(username);
   const handleClick = (id: string) => {
     router.push(`/myplants/${id}`);
   };
   // const [showForm, setShowForm] = useState(false);
-  const [showForm, setShowForm] = useState(true); // change when deployed
+  const [showForm, setShowForm] = useState(false); // change when deployed
 
   const onSubmitFromParent = () => {
     setShowForm(false);
     router.push(router.asPath);
   };
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      // Save the current scroll position when the user navigates away from the page
+      setScrollPosition(window.scrollY);
+    };
+
+    const handleRouteChangeComplete = () => {
+      // Restore the saved scroll position when the user navigates back to the page
+      window.scrollTo(0, scrollPosition);
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+    router.events.on("routeChangeComplete", handleRouteChangeComplete);
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+      router.events.off("routeChangeComplete", handleRouteChangeComplete);
+    };
+  }, [router.events, scrollPosition]);
 
   return (
     <div>
@@ -51,6 +80,11 @@ export default function MyCollections({ items, userId }: any) {
               <p>Owner ID: {item.ownedBy.name}</p>
               <img src={item.image} className="h-[200px] w-[200px]"></img>
             </div>
+            <DeleteUniquePlantButton
+              user={userId}
+              uniquePlantId={item.id}
+              onConfirm={onSubmitFromParent}
+            />
           </li>
         ))}
       </ul>
@@ -71,6 +105,7 @@ export async function getServerSideProps(context: any) {
   }
 
   const userId: string = (session.user as User).id;
+  const username: string = (session.user as User).name;
 
   const items = await prisma.uniquePlant.findMany({
     where: {
@@ -90,6 +125,7 @@ export async function getServerSideProps(context: any) {
       session,
       userId,
       items,
+      username,
     },
   };
 }
