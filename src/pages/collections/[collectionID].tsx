@@ -1,5 +1,7 @@
 import { getSession } from "next-auth/react";
 import prisma from "lib/prisma";
+import { useState, useEffect } from "react";
+import AddUniquePlantToCollection from "@/components/AddUniquePlantToCollection";
 
 interface User {
   id: string;
@@ -15,44 +17,53 @@ interface Plant {
   ownerId: string;
 }
 
+interface usersUniquePlants {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+  species: string;
+  subspecies: string;
+  height: string;
+  width: string;
+  depth: string;
+  weight: string;
+  unit: string;
+}
+
 interface PlantsProps {
   plants: Plant[];
   plantContentsData: any;
   userId: string;
+  usersUniquePlants: usersUniquePlants[];
 }
 
 export default function ThisCollection({
   plants,
   plantContentsData,
   userId,
+  usersUniquePlants,
 }: PlantsProps) {
-  console.log(plantContentsData);
-  // console.log(plantContentsData.owner.name);
-  console.log(plants);
-  console.log(userId);
+  const [showAddPlant, setShowAddPlant] = useState(false);
+
+  const handleAddPlantClick = (e: any) => {
+    e.preventDefault();
+    setShowAddPlant(true);
+  };
+
+  const showAddPlantForm = !showAddPlant ? (
+    <div>
+      <button onClick={handleAddPlantClick}>Add Plant</button>
+    </div>
+  ) : (
+    <AddUniquePlantToCollection usersPlants={usersUniquePlants} />
+  );
 
   return (
     <div>
       <h1 className="text-cyan-500 underline text-lg">
         {plants[0].name}'s content
       </h1>
-
-      {/* <ul>
-        {plants.map((plant: any) =>
-          plant.plantContents.map((plantContent: any) => (
-            <li key={plantContent.id}>
-              <p>Plant ID: {plantContent.id.toUpperCase()}</p>
-              <p>Plant Name: {plantContent.uniquePlant.name}</p>
-              <p>Plant Owner ID: {plant.owner.name}</p>
-              <img
-                className="w-[200px] h-[200px]"
-                src={plantContent.uniquePlant.image}
-                alt={plantContent.uniquePlant.name}
-              />
-            </li>
-          ))
-        )}
-      </ul> */}
 
       <ul>
         {plantContentsData.plantContents.map((plantContent: any) => (
@@ -68,6 +79,7 @@ export default function ThisCollection({
           </li>
         ))}
       </ul>
+      {showAddPlantForm}
     </div>
   );
 }
@@ -121,11 +133,18 @@ export async function getServerSideProps(context: any) {
     },
   });
 
+  const usersUniquePlants = await prisma.uniquePlant.findMany({
+    where: {
+      ownerId: userId,
+    },
+  });
+
   return {
     props: {
       plants,
       userId,
       plantContentsData,
+      usersUniquePlants,
     },
   };
 }

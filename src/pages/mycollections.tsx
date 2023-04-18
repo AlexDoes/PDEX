@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import prisma from "lib/prisma";
-import CreateCollectionForm from "@/components/collectionForm";
+import CreateCollectionForm from "@/components/CreateCollectionForm";
 import DeleteCollectionButton from "@/components/DeleteCollectionButton";
 
 interface Collection {

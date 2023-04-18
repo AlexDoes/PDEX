@@ -5,6 +5,7 @@ import prisma from "lib/prisma";
 import CreateUniquePlant from "@/components/CreateUniquePlantFormComponent";
 import { useState, useEffect } from "react";
 import DeleteUniquePlantButton from "@/components/DeleteUniquePlantButton";
+import { usePreviousScrollPosition } from "@/components/PreviousScrollPosition";
 
 interface User {
   id: string;
@@ -21,39 +22,20 @@ export default function MyCollections({
   session,
 }: any) {
   const router = useRouter();
-  console.log(username);
+
   const handleClick = (id: string) => {
     router.push(`/myplants/${id}`);
   };
-  // const [showForm, setShowForm] = useState(false);
+
   const [showForm, setShowForm] = useState(false); // change when deployed
+
+  usePreviousScrollPosition();
 
   const onSubmitFromParent = () => {
     setShowForm(false);
     router.push(router.asPath);
   };
 
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  useEffect(() => {
-    const handleRouteChange = () => {
-      // Save the current scroll position when the user navigates away from the page
-      setScrollPosition(window.scrollY);
-    };
-
-    const handleRouteChangeComplete = () => {
-      // Restore the saved scroll position when the user navigates back to the page
-      window.scrollTo(0, scrollPosition);
-    };
-
-    router.events.on("routeChangeStart", handleRouteChange);
-    router.events.on("routeChangeComplete", handleRouteChangeComplete);
-
-    return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
-      router.events.off("routeChangeComplete", handleRouteChangeComplete);
-    };
-  }, [router.events, scrollPosition]);
 
   return (
     <div>
