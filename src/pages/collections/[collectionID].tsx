@@ -59,6 +59,8 @@ export default function ThisCollection({
     <AddUniquePlantToCollection usersPlants={usersUniquePlants} />
   );
 
+  console.log(plantContentsData);
+
   return (
     <div>
       <h1 className="text-cyan-500 underline text-lg">
@@ -69,12 +71,12 @@ export default function ThisCollection({
         {plantContentsData.plantContents.map((plantContent: any) => (
           <li key={plantContent.id}>
             <p>Plant ID: {plantContent.id.toUpperCase()}</p>
-            <p>Plant Name: {plantContent.uniquePlant.name}</p>
+            <p>Plant Name: {plantContent.name}</p>
             <p>Plant Owner ID: {plantContentsData.owner.name}</p>
             <img
               className="w-[200px] h-[200px]"
-              src={plantContent.uniquePlant.image}
-              alt={plantContent.uniquePlant.name}
+              src={plantContent.image}
+              alt={plantContent.name}
             />
           </li>
         ))}
@@ -114,9 +116,7 @@ export async function getServerSideProps(context: any) {
       id: String(collectionID),
     },
     include: {
-      plantContents: {
-        include: {},
-      },
+      plantContents: {},
       owner: {
         select: {
           name: true,
