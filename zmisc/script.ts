@@ -201,7 +201,6 @@ async function main() {
               image: plantEntry.image,
               water: plantEntry.water,
               light: plantEntry.light,
-              humidity: plantEntry.humidity,
               species: plantEntry.species,
               ownedBy: {
                 connect: {

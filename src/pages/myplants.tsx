@@ -36,16 +36,9 @@ export default function MyCollections({
     router.push(router.asPath);
   };
 
-
   return (
     <div>
       <h1>My plants {} </h1>
-      {!showForm && (
-        <button onClick={() => setShowForm(true)}>Add a plant</button>
-      )}
-      {showForm && (
-        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
-      )}
       <ul>
         {items.map((item: any) => (
           <li key={item.id} className="bg-red-300 border-sky-500 border-2">
@@ -62,14 +55,22 @@ export default function MyCollections({
               <p>Owner ID: {item.ownedBy.name}</p>
               <img src={item.image} className="h-[200px] w-[200px]"></img>
             </div>
-            <DeleteUniquePlantButton
-              user={userId}
-              uniquePlantId={item.id}
-              onConfirm={onSubmitFromParent}
-            />
+            <div className="flex justify-end">
+              <DeleteUniquePlantButton
+                user={userId}
+                uniquePlantId={item.id}
+                onConfirm={onSubmitFromParent}
+              />
+            </div>
           </li>
         ))}
       </ul>
+      {!showForm && (
+        <button onClick={() => setShowForm(true)}>Add a plant</button>
+      )}
+      {showForm && (
+        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
+      )}
     </div>
   );
 }

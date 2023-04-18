@@ -37,6 +37,7 @@ interface CollectionProps {
 }
 
 export default function MyCollections({ items, userId }: CollectionProps) {
+  console.log(items);
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);
   const [state, setState] = useState(items);
@@ -72,12 +73,9 @@ export default function MyCollections({ items, userId }: CollectionProps) {
               <p>Owner ID: {collection.ownerId}</p>{" "}
               {collection.plantContents.map((plantItemData: any) => {
                 return (
-                  <p
-                    key={plantItemData.uniquePlant.name}
-                    className="text-orange-600"
-                  >
-                    <Link href={`/myplants/${plantItemData.uniquePlant.id}`}>
-                      {plantItemData.uniquePlant.name}
+                  <p key={plantItemData.name} className="text-orange-600">
+                    <Link href={`/myplants/${plantItemData.id}`}>
+                      {plantItemData.name}
                     </Link>
                   </p>
                 );
@@ -122,17 +120,13 @@ export async function getServerSideProps(context: any) {
 
   const userId: string = (session.user as User).id;
   const apiUrl: string = `/api/collections/findMyCollections?userId=${userId}`;
-
+  console.log(userId);
   const items = await prisma.plantCollection.findMany({
     where: {
       ownerId: String(userId),
     },
     include: {
-      plantContents: {
-        include: {
-          uniquePlant: true,
-        },
-      },
+      plantContents: {},
     },
   });
 

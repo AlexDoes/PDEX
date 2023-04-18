@@ -104,11 +104,7 @@ export async function getServerSideProps(context: any) {
       id: String(collectionID),
     },
     include: {
-      plantContents: {
-        include: {
-          uniquePlant: true,
-        },
-      },
+      plantContents: {},
       owner: true,
     },
   });
@@ -119,9 +115,7 @@ export async function getServerSideProps(context: any) {
     },
     include: {
       plantContents: {
-        include: {
-          uniquePlant: true,
-        },
+        include: {},
       },
       owner: {
         select: {
