@@ -13,6 +13,8 @@ const SignInPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [toggleSignUpAndSignIn, setToggleSignUpAndSignIn] = useState(false);
 
   useEffect(() => {
     if (session) {
@@ -44,9 +46,18 @@ const SignInPage = () => {
     setShowPassword(!showPassword);
   };
 
+  const ShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   const handleGoogleSignIn = () => {
     signIn("google", { callbackUrl: "/", redirect: false });
   };
+
+  const handleSignUpandSignInToggle = () => {
+    setToggleSignUpAndSignIn(!toggleSignUpAndSignIn);
+  };
+
   const style = "flex flex-col h-full  ";
   return (
     <div className={`flex flex-col h-[100vh] items-center border  `}>
@@ -55,7 +66,8 @@ const SignInPage = () => {
           src="/loginPageBg.avif"
           alt="Next.js logo"
           fill
-          objectFit="cover"
+          style={{ objectFit: "cover" }}
+          priority={true} // this is for image optimization, it will load the image first before the page loads
         />
       </div>
       <div
@@ -73,15 +85,24 @@ const SignInPage = () => {
                 alt="Next.js logo"
                 width={52}
                 height={52}
-                objectFit="cover"
+                style={{ objectFit: "cover" }}
+                priority={true}
               />
             </div>
             <h1 className="text-[1.5rem] w-full min-h-[36px] flex justify-center items-center mt-[24px] mb-[16px]">
               Welcome
             </h1>
-            <p className="text-[14px]">
-              Log in to Pdex to continue to All Applications.
-            </p>
+
+            {!toggleSignUpAndSignIn && (
+              <p className="text-[14px]">
+                Sign Up to Pdex to continue to All Applications.
+              </p>
+            )}
+            {toggleSignUpAndSignIn && (
+              <p className="text-[14px]">
+                Log In to Pdex to continue to All Applications.
+              </p>
+            )}
           </div>
         </div>
         <div className="flex flex-col  h-full justify-center items-center w-[80%] min-h-[480px]">
@@ -91,12 +112,12 @@ const SignInPage = () => {
           >
             <div className="flex flex-col w-full gap-[14px]  ">
               <input
-                className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] mb-2 min-h-[52px] text-black"
+                className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace]  min-h-[52px] text-black"
                 type="email"
                 placeholder="Username or email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required
+                // required
               />
 
               <div className="relative">
@@ -106,7 +127,7 @@ const SignInPage = () => {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
+                  // required
                 />
                 <div
                   onClick={handleShowPassword}
@@ -116,20 +137,63 @@ const SignInPage = () => {
                   {showPassword && <BsEyeSlash size={20} color={"#020203"} />}
                 </div>
               </div>
+
+              {!toggleSignUpAndSignIn && (
+                <div className="relative">
+                  <input
+                    className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] min-h-[52px] text-black"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Confirm Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    // required
+                  />
+                  <div
+                    onClick={ShowConfirmPassword}
+                    className="pl-[4px] min-h-[50px] min-w-[43px] absolute right-0 top-0 flex justify-center items-center hover:bg-[#c9cace]  "
+                  >
+                    {!showConfirmPassword && (
+                      <BsEye size={20} color={"#020203"} />
+                    )}
+                    {showConfirmPassword && (
+                      <BsEyeSlash size={20} color={"#020203"} />
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
             <div className="w-full flex flex-col gap-4 mt-5">
-              <span className="text-[#635dff] font-semibold">
-                Forgot password?
-              </span>
+              {toggleSignUpAndSignIn && (
+                <span className="text-[#635dff] font-semibold">
+                  Forgot password?
+                </span>
+              )}
 
               <button
-                className="bg-[#635dff] min-h-[52px] w-full text-white rounded-sm "
+                className="bg-[#635dff] min-h-[52px] w-full text-white rounded-sm shadow-md "
                 type="submit"
               >
                 Continue
               </button>
 
-              <span>Don't have an account? Sign up</span>
+              <span>
+                Don't have an account?
+                {toggleSignUpAndSignIn ? (
+                  <span
+                    className="text-blue-500 font-semibold underline cursor-pointer ml-1"
+                    onClick={handleSignUpandSignInToggle}
+                  >
+                    Sign Up
+                  </span>
+                ) : (
+                  <span
+                    className="text-blue-500 font-semibold underline cursor-pointer ml-1"
+                    onClick={handleSignUpandSignInToggle}
+                  >
+                    Sign In
+                  </span>
+                )}
+              </span>
             </div>
 
             <div className="flex items-center ">
@@ -140,26 +204,27 @@ const SignInPage = () => {
               <div className="flex-grow h-[.5px] w-[280px] bg-gray-400"></div>
             </div>
             <div className="w-full flex flex-col gap-1 mt-2">
-              <div className="flex">
+              <div className="flex shadow-md">
                 <button
                   className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] min-h-[52px] text-black rounded-sm flex  items-center gap-2"
-                  type="submit"
+                  // type="submit"
+                  onClick={handleGoogleSignIn}
                 >
                   <div>
                     <FcGoogle size={25} />
                   </div>
-                  Continue with Google
+                  {toggleSignUpAndSignIn ? "Continue" : "Sign Up"} with Google
                 </button>
               </div>
-              <div className="flex">
+              <div className="flex pb-10">
                 <button
-                  className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] min-h-[52px] text-black rounded-sm flex  items-center gap-2"
-                  type="submit"
+                  className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] min-h-[52px] text-black rounded-sm flex  items-center gap-2 shadow-md"
+                  // type="submit"
                 >
-                  <div>
+                  <div className=" ">
                     <AiOutlineGithub size={25} />
                   </div>
-                  Continue with Github
+                  {toggleSignUpAndSignIn ? "Continue" : "Sign Up"} with Github
                 </button>
               </div>
             </div>
