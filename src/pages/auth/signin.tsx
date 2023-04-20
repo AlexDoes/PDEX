@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { Redirect } from "next";
 import Image from "next/image";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { FcGoogle } from "react-icons/fc";
+import { AiOutlineGithub } from "react-icons/ai";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
@@ -45,11 +47,9 @@ const SignInPage = () => {
   const handleGoogleSignIn = () => {
     signIn("google", { callbackUrl: "/", redirect: false });
   };
-  const style = "flex flex-col h-full outline-dashed outline-8  outline-black";
+  const style = "flex flex-col h-full  ";
   return (
-    <div
-      className={`flex flex-col h-[100vh] outline-dashed outline-8 justify-center items-center `}
-    >
+    <div className={`flex flex-col h-[100vh] items-center border  `}>
       <div className=" fixed h-[100vh] w-full -z-20">
         <Image
           src="/loginPageBg.avif"
@@ -60,14 +60,14 @@ const SignInPage = () => {
       </div>
       <div
         id="loginForm"
-        className=" flex flex-col  bg-[rgb(255,255,255)] min-w-[400px]  min-h-[693px] rounded-3xl justify-center items-center   "
+        className=" flex flex-col  bg-[rgb(255,255,255)] min-w-[400px]  min-h-[693px] rounded-3xl justify-center items-center mt-[20vh] mb-[20vh] "
       >
         <div
           id="logo"
           className="flex justify-center flex-col items-center min-h-[213px]"
         >
           <div className="min-h-[149px] flex justify-center flex-col items-center min-w-[400px] w-[80%]">
-            <div className="w-[52px] h-[52px] flex justify-center items-center rounded-md outline outline-slate-200  ">
+            <div className="w-[52px] h-[52px] flex justify-center items-center rounded-md   ">
               <Image
                 src="/logotransparent.png"
                 alt="Next.js logo"
@@ -84,7 +84,7 @@ const SignInPage = () => {
             </p>
           </div>
         </div>
-        <div className="flex flex-col border  h-full justify-center items-center w-[80%] min-h-[480px]">
+        <div className="flex flex-col  h-full justify-center items-center w-[80%] min-h-[480px]">
           <form
             className="flex flex-col jusitfy-center items-center w-full h-full  "
             onSubmit={handleSubmit}
@@ -117,11 +117,52 @@ const SignInPage = () => {
                 </div>
               </div>
             </div>
-            
-            <button type="submit">Sign in with credentials</button>
-            <button type="button" onClick={handleGoogleSignIn}>
-              Sign in with Google
-            </button>
+            <div className="w-full flex flex-col gap-4 mt-5">
+              <span className="text-[#635dff] font-semibold">
+                Forgot password?
+              </span>
+
+              <button
+                className="bg-[#635dff] min-h-[52px] w-full text-white rounded-sm "
+                type="submit"
+              >
+                Continue
+              </button>
+
+              <span>Don't have an account? Sign up</span>
+            </div>
+
+            <div className="flex items-center ">
+              <div className="flex-grow h-[.5px] w-full bg-gray-400"></div>
+
+              <span className="flex-shrink  text-gray-500 p-2">OR</span>
+
+              <div className="flex-grow h-[.5px] w-[280px] bg-gray-400"></div>
+            </div>
+            <div className="w-full flex flex-col gap-1 mt-2">
+              <div className="flex">
+                <button
+                  className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] min-h-[52px] text-black rounded-sm flex  items-center gap-2"
+                  type="submit"
+                >
+                  <div>
+                    <FcGoogle size={25} />
+                  </div>
+                  Continue with Google
+                </button>
+              </div>
+              <div className="flex">
+                <button
+                  className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] min-h-[52px] text-black rounded-sm flex  items-center gap-2"
+                  type="submit"
+                >
+                  <div>
+                    <AiOutlineGithub size={25} />
+                  </div>
+                  Continue with Github
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
