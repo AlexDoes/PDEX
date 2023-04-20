@@ -2,6 +2,7 @@ import { getSession } from "next-auth/react";
 import prisma from "lib/prisma";
 import { useState, useEffect } from "react";
 import AddUniquePlantToCollection from "@/components/AddUniquePlantToCollection";
+import RemoveUniquePlantFromCollectionButton from "@/components/RemoveUniquePlantFromCollectionButton";
 
 interface User {
   id: string;
@@ -36,6 +37,7 @@ interface PlantsProps {
   plantContentsData: any;
   userId: string;
   usersUniquePlants: usersUniquePlants[];
+  collectionID: string;
 }
 
 export default function ThisCollection({
@@ -43,6 +45,7 @@ export default function ThisCollection({
   plantContentsData,
   userId,
   usersUniquePlants,
+  collectionID,
 }: PlantsProps) {
   const [showAddPlant, setShowAddPlant] = useState(false);
 
@@ -56,13 +59,16 @@ export default function ThisCollection({
       <button onClick={handleAddPlantClick}>Add Plant</button>
     </div>
   ) : (
-    <AddUniquePlantToCollection usersPlants={usersUniquePlants} />
+    <AddUniquePlantToCollection
+      usersPlants={usersUniquePlants}
+      collectionId={collectionID}
+      userId={userId}
+    />
   );
-
-  console.log(plantContentsData);
 
   return (
     <div>
+      {showAddPlantForm}
       <h1 className="text-cyan-500 underline text-lg">
         {plants[0].name}'s content
       </h1>
@@ -78,10 +84,16 @@ export default function ThisCollection({
               src={plantContent.image}
               alt={plantContent.name}
             />
+            <div>
+              <RemoveUniquePlantFromCollectionButton
+                uniquePlantId={plantContent.id}
+                collectionId={collectionID}
+                userId={userId}
+              />
+            </div>
           </li>
         ))}
       </ul>
-      {showAddPlantForm}
     </div>
   );
 }
@@ -139,6 +151,7 @@ export async function getServerSideProps(context: any) {
       userId,
       plantContentsData,
       usersUniquePlants,
+      collectionID,
     },
   };
 }

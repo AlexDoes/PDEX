@@ -51,7 +51,7 @@ export default function MyCollections({
                   Name: {item.name}
                 </Link>
               </p>
-              <p>Collection ID: {item.id.toUpperCase()}</p>
+              <p>Plant ID: {item.id.toUpperCase()}</p>
               <p>Owner ID: {item.ownedBy.name}</p>
               <img src={item.image} className="h-[200px] w-[200px]"></img>
             </div>
