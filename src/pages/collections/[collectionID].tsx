@@ -3,6 +3,8 @@ import prisma from "lib/prisma";
 import { useState, useEffect } from "react";
 import AddUniquePlantToCollection from "@/components/AddUniquePlantToCollection";
 import RemoveUniquePlantFromCollectionButton from "@/components/RemoveUniquePlantFromCollectionButton";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface User {
   id: string;
@@ -49,9 +51,22 @@ export default function ThisCollection({
 }: PlantsProps) {
   const [showAddPlant, setShowAddPlant] = useState(false);
 
+  const plantstoAdd = usersUniquePlants.filter((plant) => {
+    return !plantContentsData.plantContents.some(
+      (plantContent: any) => plantContent.id === plant.id
+    );
+  });
+  console.log(plantstoAdd);
+
+  const router = useRouter();
   const handleAddPlantClick = (e: any) => {
     e.preventDefault();
     setShowAddPlant(true);
+  };
+
+  const onSubmitFromParent = () => {
+    setShowAddPlant(false);
+    router.push(router.asPath);
   };
 
   const showAddPlantForm = !showAddPlant ? (
@@ -60,9 +75,10 @@ export default function ThisCollection({
     </div>
   ) : (
     <AddUniquePlantToCollection
-      usersPlants={usersUniquePlants}
+      usersPlants={plantstoAdd}
       collectionId={collectionID}
       userId={userId}
+      onSubmit={onSubmitFromParent}
     />
   );
 
@@ -76,7 +92,11 @@ export default function ThisCollection({
       <ul>
         {plantContentsData.plantContents.map((plantContent: any) => (
           <li key={plantContent.id}>
-            <p>Plant ID: {plantContent.id.toUpperCase()}</p>
+            <p>
+              <Link href={`/myplants/${plantContent.id}`}>
+                Plant ID: {plantContent.id.toUpperCase()}
+              </Link>
+            </p>
             <p>Plant Name: {plantContent.name}</p>
             <p>Plant Owner ID: {plantContentsData.owner.name}</p>
             <img
@@ -89,6 +109,7 @@ export default function ThisCollection({
                 uniquePlantId={plantContent.id}
                 collectionId={collectionID}
                 userId={userId}
+                onConfirm={onSubmitFromParent}
               />
             </div>
           </li>

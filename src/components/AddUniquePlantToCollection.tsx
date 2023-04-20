@@ -10,7 +10,9 @@ export default function AddUniquePlantToCollection(props: any) {
       collectionId: props.collectionId,
       userId: props.userId,
     };
-    addPlantToCollection(plantData);
+    addPlantToCollection(plantData).then((data) => {
+      props.onSubmit();
+    });
   };
 
   const handleCheckboxChange = (e: any) => {
