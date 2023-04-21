@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import prisma from "lib/prisma";
+import { toast } from "react-toastify";
 const colors = {
   //ansi color codes for console.log
   black: "\u001b[38;5;0m",
@@ -83,8 +84,13 @@ export default function CreateCollectionForm(data: any) {
         ownerId: user,
         name: collectionName,
       });
-      console.log(`new collection created: ${newCollection}`);
-      // alert("Collection created!");
+      toast.success(`${newCollection.name} created!`, {
+        style: {
+          background: "#e0f0e3",
+          color: "#ffffff",
+          textShadow: "0 0 0.5rem #000000",
+        },
+      });
       handleSubmissionFromParent();
     } catch (error) {
       console.log(error);

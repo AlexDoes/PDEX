@@ -70,9 +70,13 @@ export default function ThisCollection({
   };
 
   const showAddPlantForm = !showAddPlant ? (
-    <div>
-      <button onClick={handleAddPlantClick}>Add Plant</button>
-    </div>
+    plantstoAdd.length ? (
+      <div>
+        <button onClick={handleAddPlantClick}>Add Plant</button>
+      </div>
+    ) : (
+      <></>
+    )
   ) : (
     <AddUniquePlantToCollection
       usersPlants={plantstoAdd}

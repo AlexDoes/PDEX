@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import ConfirmationDialog from "@/components/ConfirmationDialog";
 
 async function removeUniquePlant(props: any) {
   const response = await fetch(
@@ -18,6 +20,7 @@ async function removeUniquePlant(props: any) {
 }
 
 export default function RemoveUniquePlantFromCollectionButton(props: any) {
+  const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
   const [user, setUser] = useState<string>(props.userId);
   const [uniquePlantId, setUniquePlantId] = useState<string>(
     props.uniquePlantId
@@ -25,18 +28,38 @@ export default function RemoveUniquePlantFromCollectionButton(props: any) {
   const [collectionId, setCollectionId] = useState<string>(props.collectionId);
   const handleSubmissionFromParent = props.onConfirm;
 
-  const handleOnClick = (event: any) => {
-    if (
-      window.confirm(
-        "Are you sure you want to remove this plant from the collection?"
-      )
-    ) {
-      handleRemove(event);
-    }
+  const deletePlant = async () => {
+    setConfirmDelete(true);
+    await handleRemove();
+    toast.success("Plant removed from collection!", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000,
+      closeOnClick: true,
+      draggable: false,
+      closeButton: true,
+      hideProgressBar: false,
+      className: "confirm-toast",
+    });
+    setConfirmDelete(false);
   };
 
-  async function handleRemove(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  //   const handleOnClick = async (event: any) => {
+  //     if (confirmDelete) {
+  //       setConfirmDelete(false);
+  //       await handleRemove(event);
+  //       toast.success("Plant removed from collection!", {
+  //         position: toast.POSITION.TOP_CENTER,
+  //         autoClose: 3000,
+  //         closeOnClick: true,
+  //         draggable: false,
+  //         closeButton: true,
+  //         hideProgressBar: true,
+  //         className: "confirm-toast",
+  //       });
+  //     }
+  //   };
+
+  async function handleRemove() {
     try {
       const removedUniquePlant = await removeUniquePlant({
         uniquePlantId: uniquePlantId,
@@ -51,16 +74,10 @@ export default function RemoveUniquePlantFromCollectionButton(props: any) {
   }
 
   return (
-    <div>
-      <form onSubmit={handleRemove}>
-        <button
-          type="submit"
-          onClick={handleOnClick}
-          className="underline border-4 border-black bg-red-400"
-        >
-          Remove Unique Plant
-        </button>
-      </form>
-    </div>
+    <ConfirmationDialog
+      onConfirm={() => deletePlant()}
+      prompt={"remove this plant from the collection"}
+      promptType={"removeCollection"}
+    />
   );
 }

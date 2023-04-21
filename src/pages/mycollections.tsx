@@ -37,7 +37,6 @@ interface CollectionProps {
 }
 
 export default function MyCollections({ items, userId }: CollectionProps) {
-  console.log(items);
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);
   const [state, setState] = useState(items);
@@ -46,7 +45,6 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   };
   const handleAddCollectionClick = () => {
     setShowForm(true);
-    console.log(showForm ? "true" : "false");
   };
 
   const handleSubmitCollectionForm = async () => {
@@ -73,7 +71,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
               <p>Owner ID: {collection.ownerId}</p>{" "}
               {collection.plantContents.map((plantItemData: any) => {
                 return (
-                  <p key={plantItemData.name} className="text-orange-600">
+                  <p key={plantItemData.id} className="text-orange-600">
                     <Link href={`/myplants/${plantItemData.id}`}>
                       {plantItemData.name}
                     </Link>

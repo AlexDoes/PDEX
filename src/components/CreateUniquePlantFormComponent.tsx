@@ -5,6 +5,7 @@ import { getSession, useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { toast } from "react-toastify";
 
 interface User {
   id: string;
@@ -87,6 +88,13 @@ export default function CreateUniquePlant(props: any) {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     data.user = userId;
     createTheUniquePlant(data).then((res) => {
+      toast.success(`${data.plantName} created successfully!`, {
+        style: {
+          background: "#e0f0e3",
+          color: "#ffffff",
+          textShadow: "0 0 0.5rem #000000",
+        },
+      });
       onSubmitFunction();
     });
   };
@@ -228,10 +236,11 @@ async function createTheUniquePlant(uniquePlantData: any) {
     method: "POST",
     body: JSON.stringify(uniquePlantData),
   });
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
 
-  alert("Plant Created!");
+  if (!response.ok) {
+    console.log(response);
+    return;
+  }
+  // alert("Plant Created!");
   return await response.json();
 }

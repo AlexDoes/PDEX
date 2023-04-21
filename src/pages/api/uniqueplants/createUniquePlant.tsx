@@ -20,6 +20,7 @@ export default async function handler(
   try {
     const createUniquePlant = await prisma.uniquePlant.create({
       data: {
+        // id: "CLGO7AHRD000DMUEEHMC7WFZF",
         name: uniquePlantData.plantName,
         description: uniquePlantData.plantDescription,
         image: uniquePlantData.plantImage,
@@ -35,11 +36,10 @@ export default async function handler(
       },
     });
     res.status(200).json(createUniquePlant);
-  } catch (error) {
+  } catch (error: any) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code);
+      console.log(error.message);
     }
-    console.log("error");
-    res.status(500).json({ message: "Error creating unique plant" });
+    res.status(500).json({ message: `${error.code}` });
   }
 }

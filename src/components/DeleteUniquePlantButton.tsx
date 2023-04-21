@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import prisma from "lib/prisma";
+import { toast } from "react-toastify";
+import ConfirmationDialog from "@/components/ConfirmationDialog";
 
 async function deleteUniquePlant(uniqueplantanduserdata: any) {
   const response = await fetch("/api/uniqueplants/deleteUniquePlantAPI", {
@@ -27,20 +27,21 @@ export default function DeleteUniquePlantButton(props: any) {
     }
   }, [props.user]);
 
-  const handleOnClick = (event: any) => {
-    if (window.confirm("Are you sure you want to delete this plant?")) {
-      handleDelete(event);
-    }
-  };
-
-  async function handleDelete(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleDelete() {
     try {
       const deletedUniquePlant = await deleteUniquePlant({
         uniquePlantId: uniquePlantId,
         userId: user,
       });
-      console.log(`deleted unique plant: ${deletedUniquePlant}`);
+      toast.success("The plant has been deleted!", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+        closeOnClick: true,
+        draggable: false,
+        closeButton: true,
+        hideProgressBar: false,
+        className: "confirm-toast",
+      });
       handleSubmissionFromParent();
     } catch (error) {
       console.log(error);
@@ -48,16 +49,10 @@ export default function DeleteUniquePlantButton(props: any) {
   }
 
   return (
-    <div>
-      <form onSubmit={handleDelete}>
-        <button
-          type="submit"
-          onClick={handleOnClick}
-          className="underline border-4 border-black bg-red-400"
-        >
-          Delete Unique Plant
-        </button>
-      </form>
-    </div>
+    <ConfirmationDialog
+      onConfirm={() => handleDelete()}
+      prompt={"delete this plant"}
+      promptType={"deletePlant"}
+    />
   );
 }

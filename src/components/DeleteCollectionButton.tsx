@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import prisma from "lib/prisma";
+import ConfirmationDialog from "@/components/ConfirmationDialog";
+import { toast } from "react-toastify";
 
 async function deleteCollection(collectionanduserdata: any) {
   const response = await fetch("/api/collections/deleteCollectionAPI", {
@@ -25,20 +25,21 @@ export default function DeleteCollectionButton(props: any) {
     }
   }, [props.user]);
 
-  const handleOnClick = (event: any) => {
-    if (window.confirm("Are you sure you want to delete this collection?")) {
-      handleDelete(event);
-    }
-  };
-
-  async function handleDelete(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleDelete() {
     try {
       const deletedCollection = await deleteCollection({
         collectionId: collectionId,
         userId: user,
       });
-      console.log(`deleted collection: ${deletedCollection}`);
+      toast.success("Collection has been deleted!", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+        closeOnClick: true,
+        draggable: false,
+        closeButton: true,
+        hideProgressBar: false,
+        className: "confirm-toast",
+      });
       handleSubmissionFromParent();
     } catch (error) {
       console.log(error);
@@ -46,16 +47,10 @@ export default function DeleteCollectionButton(props: any) {
   }
 
   return (
-    <div>
-      <form onSubmit={handleDelete}>
-        <button
-          type="submit"
-          onClick={handleOnClick}
-          className="underline border-4 border-black bg-red-400"
-        >
-          Delete Collection
-        </button>
-      </form>
-    </div>
+    <ConfirmationDialog
+      onConfirm={() => handleDelete()}
+      prompt={"delete this collection"}
+      promptType={"deleteCollection"}
+    />
   );
 }
