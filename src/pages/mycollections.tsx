@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import prisma from "lib/prisma";
 import CreateCollectionForm from "@/components/CreateCollectionForm";
 import DeleteCollectionButton from "@/components/DeleteCollectionButton";
+import { usePreviousScrollPosition } from "@/components/PreviousScrollPosition";
 
 interface Collection {
   id: string;
@@ -40,6 +41,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);
   const [state, setState] = useState(items);
+  usePreviousScrollPosition();
   const handleClick = (id: string) => {
     router.push(`/collections/${id}`);
   };

@@ -15,6 +15,9 @@ export default async function handler(
   const profileData = JSON.parse(req.body);
   const userId = profileData.userId;
   const field = profileData.field;
+  const userInfo = profileData.userInfo;
+  const data = profileData.data;
+  console.log(userInfo.field);
 
   const user = await prisma.user.findUnique({
     where: {
@@ -22,17 +25,20 @@ export default async function handler(
     },
   });
 
-  userId !== user?.id  {
+  if (!user) {
+    res.status(403).json({ message: "Unauthorized" });
+  } else if (user.id !== userId) {
     res.status(403).json({ message: "Unauthorized" });
   }
 
   const updatedUser = await prisma.user.update({
     where: {
-        id: userId,
+      id: userId,
     },
     data: {
-        field: field,
-    }
+      [field]: data,
+    },
+  });
 
-  res.status(200).json(profileData);
+  res.status(200).json(updatedUser);
 }

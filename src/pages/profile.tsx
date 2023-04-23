@@ -22,27 +22,33 @@ interface userInfoProps {
 type fieldName = keyof fieldState;
 
 interface fieldState {
-  username: boolean;
+  nickname: boolean;
   email: boolean;
   name: boolean;
   image: boolean;
 }
 
 export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
+  const router = useRouter();
   const [fieldsChangeButton, setFieldsChangeButton] = useState<fieldState>({
-    username: false,
+    nickname: false,
     email: false,
     name: false,
     image: false,
   });
 
+  const reload = () => {
+    router.push(router.asPath);
+  };
+
   const showChangeButton = (field: fieldName) => {
+    const props = { field, userId, userInfo };
     return (
       <UpdateDataComponent
         field={field}
         userId={userId}
         userInfo={userInfo}
-        onConfirm={() => console.log("executed")}
+        onConfirm={(data: string) => handleUpdate(field, props, data, reload)}
       />
     );
   };
@@ -52,7 +58,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
       <div className="border-4 border-green-900">
         <h1>Profile Dashboard</h1>
         <div className="flex border-red-400 border 2 justify-between">
-          Username: {userInfo.nickname} {showChangeButton("username")}
+          Username: {userInfo.nickname} {showChangeButton("nickname")}
         </div>
         <div className="flex border-red-400 border 2 justify-between">
           Email: {userInfo.email} {showChangeButton("email")}
@@ -106,20 +112,27 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-async function handleUpdate(field: fieldName, props: userInfoProps) {
-  const response = fetch(`/api/profile/updateProfileAPI.ts`, {
+async function handleUpdate(
+  field: fieldName,
+  props: userInfoProps,
+  data: string,
+  reload: any
+) {
+  const response = await fetch(`/api/profile/updateProfileAPI`, {
     method: "PATCH",
     body: JSON.stringify({
       field: field,
       userId: props.userId,
       userInfo: props.userInfo,
+      data: data,
     }),
   });
 
   if (!response.ok) {
     console.log(response);
     return;
+  } else {
+    reload();
+    return await response.json();
   }
-
-  return await response.json();
 }

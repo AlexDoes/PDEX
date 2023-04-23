@@ -28,8 +28,9 @@ export default function UpdateDataComponent({
   userInfo,
   onConfirm,
 }: updateProps) {
+  const nickname = String(userInfo.nickname);
   const [open, setOpen] = useState(false);
-  const [textInputValue, setTextInputValue] = useState("");
+  const [textInputValue, setTextInputValue] = useState(`${nickname}`);
 
   const handleOpen = () => {
     setOpen(true);
@@ -46,38 +47,47 @@ export default function UpdateDataComponent({
   };
 
   const handleSubmit = () => {
-    onConfirm();
+    const data = textInputValue;
+    onConfirm(data);
     handleClose();
   };
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleOpen}>
-        Open Modal
+      <Button
+        variant="outlined"
+        color="primary"
+        className="w-60"
+        onClick={handleOpen}
+      >
+        Update {field}
       </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>
-          What would you like to change your [{field}] to? :
-        </DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="text-input"
-            label="Text Input"
-            fullWidth
-            value={textInputValue}
-            onChange={handleTextInputChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            Update
-          </Button>
-        </DialogActions>
+      <Dialog className="" open={open} onClose={handleClose}>
+        <div className="bg-green-400 text-white">
+          <DialogTitle className="p-2 mt-2">
+            What would you like to change your {field} to :
+          </DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="text-input"
+              label="Text Input"
+              fullWidth
+              value={textInputValue}
+              onChange={handleTextInputChange}
+              className="opacity-100"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleSubmit} color="primary">
+              Update
+            </Button>
+          </DialogActions>
+        </div>
       </Dialog>
     </div>
   );
