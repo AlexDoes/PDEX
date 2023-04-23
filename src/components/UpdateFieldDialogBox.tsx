@@ -28,9 +28,8 @@ export default function UpdateDataComponent({
   userInfo,
   onConfirm,
 }: updateProps) {
-  const nickname = String(userInfo.nickname);
   const [open, setOpen] = useState(false);
-  const [textInputValue, setTextInputValue] = useState(`${nickname}`);
+  const [textInputValue, setTextInputValue] = useState(`${userInfo[field]}`);
 
   const handleOpen = () => {
     setOpen(true);
