@@ -17,9 +17,9 @@ export default function NavBar() {
   return (
     <>
       {show && (
-        <div className="flex w-full gap-2 h-16 bg-purple-400 max-h-16 overflow-hidden justify-between ">
+        <div className="flex w-full gap-2 h-16 bg-purple-400 max-h-16 overflow-hidden justify-between  ">
           <Link href={"/"} className="inherit">
-            <div className="flex flex-row h-full items-center">
+            <div className="flex flex-row h-full items-center sm:ml-[200px]">
               <img
                 src="/logotransparent.png"
                 alt="My Image"
@@ -31,7 +31,7 @@ export default function NavBar() {
             </div>
           </Link>
           {/* <button onClick={() => signOut()}>Sign out</button> */}
-          <div className="flex w-[10%] items-center justify-center h-[100%]">
+          <div className="flex w-[10%] items-center justify-center h-[100%] sm:mr-[200px]">
             <AuthButtonComponent />
           </div>
         </div>
