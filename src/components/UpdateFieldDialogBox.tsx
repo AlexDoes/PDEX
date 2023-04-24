@@ -62,7 +62,7 @@ export default function UpdateDataComponent({
         Update {field}
       </Button>
       <Dialog className="" open={open} onClose={handleClose}>
-        <div className="bg-green-400 text-white">
+        <div className="bg-[#d5ffdd] text-[#e8ded1] font-outline-2">
           <DialogTitle className="p-2 mt-2">
             What would you like to change your {field} to :
           </DialogTitle>

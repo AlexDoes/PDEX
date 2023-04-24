@@ -1,10 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* 
-img {
-  height: 200px;
-} */
+
+@layer base {
+  .font-outline-2 {
+    -webkit-text-stroke: 0.3px slateblue;
+  }
+  .font-outline-4 {
+    -webkit-text-stroke: 0.25px black;
+  }
+}
+
 .dropdown-enter {
   max-height: 0;
   opacity: 0;
@@ -34,4 +40,15 @@ img {
   transform: scaleY(0);
   transition: max-height 200ms ease-out, opacity 200ms ease-out,
     transform 200ms ease-out;
+}
+
+body {
+  background-color: #d5ffdd;
+}
+
+#center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
