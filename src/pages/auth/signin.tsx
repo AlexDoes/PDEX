@@ -14,7 +14,7 @@ const SignInPage = () => {
   const { data: session, status } = useSession();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [toggleSignUpAndSignIn, setToggleSignUpAndSignIn] = useState(false);
+  const [toggleSignUpAndSignIn, setToggleSignUpAndSignIn] = useState(true);
 
   useEffect(() => {
     if (session) {
@@ -50,7 +50,8 @@ const SignInPage = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleGoogleSignIn = () => {
+  const handleGoogleSignIn = (e: any) => {
+    e.preventDefault();
     signIn("google", { callbackUrl: "/", redirect: false });
   };
 
