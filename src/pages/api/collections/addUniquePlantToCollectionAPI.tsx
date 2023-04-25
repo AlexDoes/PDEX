@@ -7,7 +7,6 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log({ req: req.body });
   if (req.method !== "POST") {
     res.status(405).json({ message: "Method not allowed" });
   }
@@ -35,8 +34,6 @@ export default async function handle(
       .json({ message: "Not authorized to add to this collection" });
   }
 
-  console.log(plants);
-
   const updatedCollection = await prisma.plantCollection.update({
     where: {
       id: collectionId,
@@ -48,5 +45,6 @@ export default async function handle(
     },
   });
 
+  await prisma.$disconnect();
   res.status(200).json(updatedCollection);
 }

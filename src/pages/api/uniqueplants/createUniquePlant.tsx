@@ -17,10 +17,10 @@ export default async function handler(
     return res.status(405).json({ message: "Method not allowed" });
   }
   const uniquePlantData = JSON.parse(req.body);
+  console.log(uniquePlantData);
   try {
     const createUniquePlant = await prisma.uniquePlant.create({
       data: {
-        // id: "CLGO7AHRD000DMUEEHMC7WFZF",
         name: uniquePlantData.plantName,
         description: uniquePlantData.plantDescription,
         image: uniquePlantData.plantImage,
@@ -35,11 +35,13 @@ export default async function handler(
         ),
       },
     });
+    await prisma.$disconnect();
     res.status(200).json(createUniquePlant);
   } catch (error: any) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.message);
     }
+    await prisma.$disconnect();
     res.status(500).json({ message: `${error.code}` });
   }
 }

@@ -75,7 +75,7 @@ export default function UpdateDataComponent({
               fullWidth
               value={textInputValue}
               onChange={handleTextInputChange}
-              className="opacity-100"
+              className="opacity-100 text-green-400"
             />
           </DialogContent>
           <DialogActions>

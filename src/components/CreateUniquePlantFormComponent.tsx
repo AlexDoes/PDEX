@@ -1,11 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import prisma from "lib/prisma";
 import { getSession, useSession } from "next-auth/react";
-import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { toast } from "react-toastify";
+import s3 from "lib/aws";
 
 interface User {
   id: string;
@@ -66,6 +65,26 @@ const errorsMap = {
 export default function CreateUniquePlant(props: any) {
   const userId = props.userId;
   const onSubmitFunction = props.onSubmit;
+  // // // // // // // // // // //
+  const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImage(e.target.files[0]);
+    }
+  };
+  const uploadImage = async (file: File): Promise<string> => {
+    const params = {
+      Bucket: process.env.AWS_BUCKET_NAME || "",
+      Key: file.name + Date.now(),
+      Body: file,
+      ContentType: file.type,
+    };
+
+    const { Location } = await s3.upload(params).promise();
+    return Location;
+  };
+  // // // // // // // // // // //
 
   const [fields, setFields] = useState<Fields>({
     height: false,
@@ -85,9 +104,23 @@ export default function CreateUniquePlant(props: any) {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data, e) => {
+    e?.preventDefault();
+    if (!image) {
+      toast.error("Please upload an image", {
+        style: {
+          background: "#f8e0e0",
+          color: "#ffffff",
+          textShadow: "0 0 0.5rem #000000",
+        },
+      });
+      return;
+    }
+    const url = await uploadImage(image);
     data.user = userId;
-    createTheUniquePlant(data).then((res) => {
+    data.plantImage = url;
+    console.log(data.plantImage);
+    await createTheUniquePlant(data).then((res) => {
       toast.success(`${data.plantName} created successfully!`, {
         style: {
           background: "#e0f0e3",
@@ -135,14 +168,15 @@ export default function CreateUniquePlant(props: any) {
           {errors.plantName?.type &&
             ({ ...errorsMap.plantName } as any)[errors.plantName.type]}
         </p>
-
-        <input
-          placeholder="Plant Image (URL required)"
-          {...register("plantImage")}
-          defaultValue={
-            "https://plus.unsplash.com/premium_photo-1665653066799-acafe686fba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-          }
-        />
+        <div className="flex gap-5">
+          <label htmlFor="plantImage">Plant Image</label>
+          <input
+            type="file"
+            placeholder="Plant Image (URL required)"
+            onChange={handleImageChange}
+            // defaultValue={"https://plus.unsplash.com/premium_photo-1665653066799-acafe686fba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"}
+          />
+        </div>
 
         <input
           placeholder="Plant Species"

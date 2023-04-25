@@ -61,7 +61,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
   const uploadImage = async (file: File): Promise<string> => {
     const params = {
       Bucket: process.env.AWS_BUCKET_NAME || "",
-      Key: file.name,
+      Key: file.name + Date.now(),
       Body: file,
       ContentType: file.type,
     };
