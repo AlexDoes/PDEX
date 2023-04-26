@@ -61,7 +61,7 @@ const SignInPage = () => {
 
   const style = "flex flex-col h-full  ";
   return (
-    <div className={`flex flex-col h-[100vh] items-center border  `}>
+    <div className={`flex flex-col h-[100vh] items-center border `}>
       <div className=" fixed h-[100vh] w-full -z-20">
         <Image
           src="/loginPageBg.avif"
