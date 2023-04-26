@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   const password = await hash("tashisamatashisama", 12);
   const user = await prisma.user.upsert({
-    where: { email: "dummyuser3@pdex.com" },
+    where: { email: "DummyUser3@pdex.com" },
     update: {},
     create: {
       email: "DummyUser3@pdex.com",
@@ -69,7 +69,7 @@ async function main() {
     },
   });
 
-  const user5 = await prisma.user.upsert({
+  const user0303 = await prisma.user.upsert({
     where: { email: "kt@pdex.com" },
     update: {},
     create: {
@@ -138,6 +138,84 @@ async function main() {
         connect: {
           id: "1",
         },
+      },
+    },
+  });
+
+  const KatiesPlants = await prisma.uniquePlant.upsert({
+    where: { id: "BAX" },
+    update: {},
+    create: {
+      id: "BAX",
+      name: "Bax",
+      description: "Monstera Albo",
+      image: "https://pdex.s3.amazonaws.com/BAX.HEIC",
+      species: "Monstera Albo",
+      ownedBy: {
+        connect: {
+          id: "0303",
+        },
+      },
+    },
+  });
+
+  const KatiesPlants2 = await prisma.uniquePlant.createMany({
+    data: [
+      {
+        name: "Parker",
+        description: "Scinapsis Mayari",
+        image: "https://pdex.s3.amazonaws.com/Parker.PNG",
+        species: "Scinapsis Mayari",
+        ownerId: "0303",
+        id: "PARKER",
+      },
+      {
+        name: "Pink Princess",
+        description: "Philodendron Erubescens low variegation",
+        image: "https://pdex.s3.amazonaws.com/PinkPrincess.HEIC",
+        species: "Philodendron Erubescens",
+        ownerId: "0303",
+        id: "PINKPRINCESS",
+      },
+      {
+        name: "Green Princess",
+        description: "Anthurium Clarinervium",
+        image: "https://pdex.s3.amazonaws.com/GREEN.HEIC",
+        species: "Anthurium Clarinervium",
+        ownerId: "0303",
+        id: "GREENPRINCESS",
+      },
+    ],
+  });
+
+  const KatiesCollection = await prisma.plantCollection.upsert({
+    where: { id: "KatieCollection" },
+    update: {},
+    create: {
+      id: "KatieCollection",
+      name: "Katie's Collection",
+      public: true,
+      weight: 999,
+      owner: {
+        connect: {
+          id: "0303",
+        },
+      },
+      plantContents: {
+        connect: [
+          {
+            id: "PARKER",
+          },
+          {
+            id: "PINKPRINCESS",
+          },
+          {
+            id: "GREENPRINCESS",
+          },
+          {
+            id: "BAX",
+          },
+        ],
       },
     },
   });
