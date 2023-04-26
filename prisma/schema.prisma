@@ -86,9 +86,9 @@ model PlantCollection {
 
 model ImageOrderCollection {
   id           String          @id @default(cuid())
-  plant        UniquePlant     @relation(fields: [plantId], references: [id])
+  plant        UniquePlant     @relation(fields: [plantId], references: [id], onDelete: Cascade)
   plantId      String
-  collection   PlantCollection @relation(fields: [collectionId], references: [id])
+  collection   PlantCollection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
   collectionId String
   position     Int             @default(0)
 }
