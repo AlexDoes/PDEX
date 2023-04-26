@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import UpdateDataComponent from "@/components/UpdateFieldDialogBox";
 import s3 from "lib/aws";
+import { toast } from "react-toastify";
 
 interface User {
   id: string;
@@ -168,10 +169,21 @@ async function handleUpdate(
   });
 
   if (!response.ok) {
-    console.log(response);
+    const error = await response.json();
+    console.log(error.message);
+    toast.error(error.message, {
+      position: "top-center",
+      autoClose: 5000,
+      style: { fontWeight: "bold", backgroundColor: "#FECACA" },
+    });
     return;
   } else {
     reload();
+    toast.success("Updated Successfully", {
+      position: "top-center",
+      autoClose: 5000,
+      style: { fontWeight: "bold", backgroundColor: "#C6F6D5" },
+    });
     return await response.json();
   }
 }

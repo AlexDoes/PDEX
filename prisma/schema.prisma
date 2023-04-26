@@ -12,13 +12,14 @@ model User {
   id              String            @id @default(cuid())
   email           String            @unique
   name            String            @default("Plant Lover")
+  nickname        String?           @unique
+  username        String?           @unique
   password        String?
+  emailVerified   DateTime?
+  image           String?
   ownedPlants     UniquePlant[]     @relation("UniquePlants")
   favoritePlants  Favorites[]
   plantCollection PlantCollection[]
-  nickname        String?           @unique
-  emailVerified   DateTime?
-  image           String?
   accounts        Account[]
   sessions        Session[]
   UniquePlant     UniquePlant?      @relation(fields: [uniquePlantId], references: [id])
@@ -42,23 +43,25 @@ model Plant {
 }
 
 model UniquePlant {
-  id                String            @id @default(cuid())
-  name              String
-  description       String
-  image             String
-  species           String?
-  water             String?
-  light             String?
-  ownedBy           User              @relation("UniquePlants", references: [id], fields: [ownerId])
-  ownerId           String
-  species2          String?
-  favoritedBy       User[]
-  collectionsPartOf PlantCollection[]
-  plantHeight       String?
-  plantWidth        String?
-  plantDepth        String?
-  plantWeight       String?
-  Favorites         Favorites[]
+  id                   String                 @id @default(cuid())
+  name                 String
+  description          String
+  image                String
+  species              String?
+  water                String?
+  light                String?
+  ownedBy              User                   @relation("UniquePlants", references: [id], fields: [ownerId])
+  ownerId              String
+  species2             String?
+  favoritedBy          User[]
+  collectionsPartOf    PlantCollection[]
+  plantHeight          String?
+  plantWidth           String?
+  plantDepth           String?
+  plantWeight          String?
+  Favorites            Favorites[]
+  ImageOrderCollection ImageOrderCollection[]
+  Leaves               Leaves[]
 }
 
 model Favorites {
@@ -70,11 +73,33 @@ model Favorites {
 }
 
 model PlantCollection {
-  id            String        @id @default(cuid())
-  name          String
-  plantContents UniquePlant[]
-  owner         User          @relation(fields: [ownerId], references: [id])
-  ownerId       String
+  id                   String                 @id @default(cuid())
+  name                 String
+  plantContents        UniquePlant[]
+  owner                User                   @relation(fields: [ownerId], references: [id])
+  ownerId              String
+  public               Boolean                @default(false)
+  description          String?
+  ImageOrderCollection ImageOrderCollection[]
+  weight               Int                    @default(0)
+}
+
+model ImageOrderCollection {
+  id           String          @id @default(cuid())
+  plant        UniquePlant     @relation(fields: [plantId], references: [id])
+  plantId      String
+  collection   PlantCollection @relation(fields: [collectionId], references: [id])
+  collectionId String
+  position     Int             @default(0)
+}
+
+model Leaves {
+  id          String      @id @default(cuid())
+  name        String
+  description String?
+  image       String?
+  plant       UniquePlant @relation(fields: [plantId], references: [id])
+  plantId     String
 }
 
 enum Role {

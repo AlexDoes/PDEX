@@ -31,14 +31,39 @@ export default async function handler(
     res.status(403).json({ message: "Unauthorized" });
   }
 
-  const updatedUser = await prisma.user.update({
-    where: {
-      id: userId,
-    },
-    data: {
-      [field]: data,
-    },
-  });
-
-  res.status(200).json(updatedUser);
+  if (field === "nickname") {
+    const adjustName = data.toLowerCase();
+    try {
+      const updatedUser = await prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          nickname: data,
+          username: adjustName,
+        },
+      });
+      prisma.$disconnect();
+      res.status(200).json(updatedUser);
+    } catch (error: any) {
+      console.log(error);
+      if (error.code === "P2002") {
+        prisma.$disconnect();
+        res.status(500).json({ message: "The username is already taken." });
+      }
+      prisma.$disconnect();
+      res.status(500).json({ message: "Unknown error" });
+    }
+  } else {
+    const updatedUser = await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        [field]: data,
+      },
+    });
+    prisma.$disconnect();
+    res.status(200).json(updatedUser);
+  }
 }

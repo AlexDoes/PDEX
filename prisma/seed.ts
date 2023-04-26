@@ -22,6 +22,8 @@ async function main() {
     create: {
       email: "alex@pdex.com",
       name: "Alex Wong",
+      nickname: "Alex",
+      username: "alex",
       password: password,
       id: "1",
     },
@@ -34,6 +36,8 @@ async function main() {
     create: {
       email: "tashi@pdex.com",
       name: "Tashi Sangpo",
+      nickname: "Tashi",
+      username: "tashi",
       password: password2,
       id: "3",
     },
@@ -45,6 +49,8 @@ async function main() {
     create: {
       email: "marco@pdex.com",
       name: "Marco Countryman",
+      nickname: "Marco",
+      username: "marco",
       password: password2,
       id: "4",
     },
@@ -56,8 +62,23 @@ async function main() {
     create: {
       email: "steven@pdex.com",
       name: "Steven Sookhai",
+      nickname: "Steven",
+      username: "steven",
       password: password2,
       id: "2",
+    },
+  });
+
+  const user5 = await prisma.user.upsert({
+    where: { email: "kt@pdex.com" },
+    update: {},
+    create: {
+      email: "kt@pdex.com",
+      name: "Katie",
+      nickname: "Katie",
+      username: "katie",
+      password: password2,
+      id: "0303",
     },
   });
 
@@ -198,6 +219,7 @@ async function main() {
     ],
   });
 }
+
 main()
   .then(() => prisma.$disconnect())
   .catch(async (e) => {
