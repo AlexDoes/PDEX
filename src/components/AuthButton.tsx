@@ -21,7 +21,7 @@ export default function AuthButtonComponent() {
   if (session) {
     return (
       <>
-        <div className="h-full w-full" onClick={openMenu}>
+        <div className="h-full w-full  " onClick={openMenu}>
           {/* {"Hello " + session.user.name?.split(" ")[0]} */}
           <div className="h-full w-full flex justify-center items-center cursor-pointer">
             <div>{!showmenu && <GiHamburgerMenu size={30} color="" />}</div>
@@ -34,6 +34,12 @@ export default function AuthButtonComponent() {
             </div> */}
           </div>
         </div>
+        {showmenu && (
+          <div
+            onClick={closeMenu}
+            className="fixed top-60 w-full h-full bg-none right-0 z-20 "
+          ></div>
+        )}
         <CSSTransition
           in={showmenu}
           timeout={400}
@@ -42,10 +48,10 @@ export default function AuthButtonComponent() {
           onExited={closeMenu}
         >
           <div
-            className="absolute top-16 w-full  right-0 z-20 bg-purple-400 shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3 "
+            className="absolute top-16 w-full right-0 z-20 bg-purple-400 shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3 "
             onClick={openMenu}
           >
-            <div id="menu-items" className="sm:ml-[200px]">
+            <div id="menu-items" className="sm:ml-[200px] ">
               <div
                 className=""
                 onClick={openMenu}

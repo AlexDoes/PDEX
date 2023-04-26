@@ -6,6 +6,9 @@ import prisma from "lib/prisma";
 import CreateCollectionForm from "@/components/CreateCollectionForm";
 import DeleteCollectionButton from "@/components/DeleteCollectionButton";
 import { usePreviousScrollPosition } from "@/components/PreviousScrollPosition";
+import { CSSTransition } from "react-transition-group";
+import { Transition } from "react-transition-group";
+import { useTransition } from "react";
 
 interface Collection {
   id: string;
@@ -55,54 +58,62 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   };
 
   return (
-    <div>
-      <ul>
-        {items.map((collection: any) => (
-          <li
-            key={collection.id}
-            className="bg-red-300 border-sky-500 border-2"
+    <CSSTransition
+      in={true}
+      timeout={500}
+      classNames="page"
+      unmountOnExit
+      mountOnEnter
+    >
+      <div className="border-8 border-black h-[90vh]">
+        <ul>
+          {items.map((collection: any) => (
+            <li
+              key={collection.id}
+              className="bg-red-300 border-sky-500 border-2"
+            >
+              <div>
+                <Link
+                  onClick={() => handleClick(collection.id)}
+                  href={`/collections/${collection.id}`}
+                >
+                  Name: {collection.name}
+                </Link>
+                <p>Collection ID: {collection.id}</p>
+                <p>Owner ID: {collection.ownerId}</p>{" "}
+                {collection.plantContents.map((plantItemData: any) => {
+                  return (
+                    <p key={plantItemData.id} className="text-orange-600">
+                      <Link href={`/myplants/${plantItemData.id}`}>
+                        {plantItemData.name}
+                      </Link>
+                    </p>
+                  );
+                })}{" "}
+                <DeleteCollectionButton
+                  user={userId}
+                  collectionId={collection.id}
+                  onConfirm={handleSubmitCollectionForm}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+        {!showForm ? (
+          <button
+            onClick={handleAddCollectionClick}
+            className="border-2 border-red-500 bg-slate-700 text-red-500"
           >
-            <div>
-              <Link
-                onClick={() => handleClick(collection.id)}
-                href={`/collections/${collection.id}`}
-              >
-                Name: {collection.name}
-              </Link>
-              <p>Collection ID: {collection.id}</p>
-              <p>Owner ID: {collection.ownerId}</p>{" "}
-              {collection.plantContents.map((plantItemData: any) => {
-                return (
-                  <p key={plantItemData.id} className="text-orange-600">
-                    <Link href={`/myplants/${plantItemData.id}`}>
-                      {plantItemData.name}
-                    </Link>
-                  </p>
-                );
-              })}{" "}
-              <DeleteCollectionButton
-                user={userId}
-                collectionId={collection.id}
-                onConfirm={handleSubmitCollectionForm}
-              />
-            </div>
-          </li>
-        ))}
-      </ul>
-      {!showForm ? (
-        <button
-          onClick={handleAddCollectionClick}
-          className="border-2 border-red-500 bg-slate-700 text-red-500"
-        >
-          'Create a new collection +'
-        </button>
-      ) : (
-        <CreateCollectionForm
-          user={userId}
-          onSubmit={handleSubmitCollectionForm}
-        />
-      )}
-    </div>
+            'Create a new collection +'
+          </button>
+        ) : (
+          <CreateCollectionForm
+            user={userId}
+            onSubmit={handleSubmitCollectionForm}
+          />
+        )}
+      </div>
+    </CSSTransition>
   );
 }
 
