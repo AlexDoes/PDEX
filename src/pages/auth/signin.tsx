@@ -177,24 +177,46 @@ const SignInPage = () => {
                 Continue
               </button>
 
-              <span>
-                Don't have an account?
-                {toggleSignUpAndSignIn ? (
-                  <span
-                    className="text-blue-500 font-semibold underline cursor-pointer ml-1"
-                    onClick={handleSignUpandSignInToggle}
-                  >
-                    Sign Up
-                  </span>
-                ) : (
-                  <span
-                    className="text-blue-500 font-semibold underline cursor-pointer ml-1"
-                    onClick={handleSignUpandSignInToggle}
-                  >
-                    Sign In
-                  </span>
-                )}
-              </span>
+              {toggleSignUpAndSignIn && (
+                <span>
+                  Don't have an account?
+                  {toggleSignUpAndSignIn ? (
+                    <span
+                      className="text-blue-500 font-semibold underline cursor-pointer ml-1"
+                      onClick={handleSignUpandSignInToggle}
+                    >
+                      Sign Up
+                    </span>
+                  ) : (
+                    <span
+                      className="text-blue-500 font-semibold underline cursor-pointer ml-1"
+                      onClick={handleSignUpandSignInToggle}
+                    >
+                      Sign In
+                    </span>
+                  )}
+                </span>
+              )}
+              {!toggleSignUpAndSignIn && (
+                <span>
+                  Have an Account?
+                  {toggleSignUpAndSignIn ? (
+                    <span
+                      className="text-blue-500 font-semibold underline cursor-pointer ml-1"
+                      onClick={handleSignUpandSignInToggle}
+                    >
+                      Sign Up
+                    </span>
+                  ) : (
+                    <span
+                      className="text-blue-500 font-semibold underline cursor-pointer ml-1"
+                      onClick={handleSignUpandSignInToggle}
+                    >
+                      Sign In
+                    </span>
+                  )}
+                </span>
+              )}
             </div>
 
             <div className="flex items-center ">
