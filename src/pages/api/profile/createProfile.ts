@@ -1,5 +1,5 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import prisma from "lib/prisma";
 
 export default async function createProfileAPI(
   req: NextApiRequest,

@@ -8,6 +8,9 @@ const nextConfig = {
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
     AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME,
   },
+  images: {
+    domains: ["pdex.s3.amazonaws.com"],
+  },
 };
 
 module.exports = nextConfig;

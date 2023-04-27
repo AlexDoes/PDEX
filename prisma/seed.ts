@@ -149,7 +149,7 @@ async function main() {
       id: "BAX",
       name: "Bax",
       description: "Monstera Albo",
-      image: "https://pdex.s3.amazonaws.com/BAX.HEIC",
+      image: "https://pdex.s3.amazonaws.com/BAX.png",
       species: "Monstera Albo",
       ownedBy: {
         connect: {
@@ -172,7 +172,7 @@ async function main() {
       {
         name: "Pink Princess",
         description: "Philodendron Erubescens low variegation",
-        image: "https://pdex.s3.amazonaws.com/PinkPrincess.HEIC",
+        image: "https://pdex.s3.amazonaws.com/PinkPrincess.png",
         species: "Philodendron Erubescens",
         ownerId: "0303",
         id: "PINKPRINCESS",
@@ -180,7 +180,7 @@ async function main() {
       {
         name: "Green Princess",
         description: "Anthurium Clarinervium",
-        image: "https://pdex.s3.amazonaws.com/GREEN.HEIC",
+        image: "https://pdex.s3.amazonaws.com/GREEN.png",
         species: "Anthurium Clarinervium",
         ownerId: "0303",
         id: "GREENPRINCESS",
@@ -192,7 +192,7 @@ async function main() {
     where: { id: "KatieCollection" },
     update: {},
     create: {
-      id: "KatieCollection",
+      id: "KatiesCollection",
       name: "Katie's Collection",
       public: true,
       weight: 999,

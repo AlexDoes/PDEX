@@ -5,6 +5,7 @@
 @layer base {
   .font-outline-2 {
     -webkit-text-stroke: 0.3px slateblue;
+    /* -webkit-text-stroke: 0.3px red; */
   }
   .font-outline-4 {
     -webkit-text-stroke: 0.25px black;
@@ -43,7 +44,8 @@
 }
 
 body {
-  background-color: #d5ffdd;
+  background-color: #fefae0;
+  /* background-color: #d5ffdd; */
 }
 
 #center {
@@ -73,4 +75,9 @@ body {
   opacity: 0;
   transform: translateX(-100%);
   transition: opacity 500ms, transform 500ms;
+}
+
+.glass-background {
+  background-color: #e9edc9;
+  backdrop-filter: blur(30px);
 }

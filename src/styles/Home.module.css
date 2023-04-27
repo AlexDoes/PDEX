@@ -1,0 +1,10 @@
+.bgisplash {
+  background-image: url(/public/BG/BG1-rahul-goyal-3m1Z2S96FuY-unsplash.jpg);
+  height: auto;
+  width: auto;
+}
+
+.glass-background {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+}
