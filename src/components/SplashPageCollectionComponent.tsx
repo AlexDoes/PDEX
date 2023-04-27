@@ -61,31 +61,38 @@ export default function Splash(Data: Props) {
             className="w-[55%] border-2 border-black rounded-xl px-5 py-5 overflow-auto"
           >
             {displayData.plantContents.map((plant, i) => {
-              const reverse = i % 2 === 0 ? "flex-row-reverse" : null;
+              const reverse =
+                i % 2 === 0
+                  ? "flex-row-reverse gradient-bg-card2"
+                  : "gradient-bg-card2-reverse";
               return (
                 <div
                   key={plant.id}
                   className={`glass-background 
+                  bg-card
                   ${reverse} 
                   flex flex-row 
-                  border-2 border-black
-                  rounded-lg 
+                  border-2 border-[#C1E1C1]
+                  rounded-xl 
                   justify-between mb-2 
                   min-h-[200px] p-4 gap-4
                   overflow-auto
+
                   `}
                 >
                   <div
                     className="
-                    outline outline-4 outline-red-400
                     flex
                     flex-col
                     justify-center
+                    gap-2
                     w-[80%]"
                   >
-                    <h3 className="text-[20px]">{plant.name}</h3>
-                    <p>Species {plant.species}</p>
-                    <p className="overflow-auto h-[60%] bg-[#FFF4BD]">
+                    <div>
+                      <h3 className="text-[20px]">{plant.name}</h3>
+                      <p className="">Species {plant.species}</p>
+                    </div>
+                    <p className="overflow-auto h-[60%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2">
                       {plant.description}
                     </p>
                   </div>
