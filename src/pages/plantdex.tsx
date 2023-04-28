@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SearchBar from "../components/searchBar";
+import SearchBar from "../components/oldSearchBar";
 import { FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/fa";
 interface Plant {
   id: number;

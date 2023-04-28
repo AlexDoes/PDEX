@@ -1,4 +1,4 @@
-import SearchBar from "./searchBar";
+import SearchBar from "./oldSearchBar";
 import { useEffect, useState } from "react";
 
 export default function PlantForm(tempdata: any) {

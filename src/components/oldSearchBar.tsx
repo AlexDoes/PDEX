@@ -36,7 +36,7 @@ const searchBarStyle = {
   borderRadius: "30px",
 };
 
-export default function SearchBar(datum: any) {
+export default function SearchBar2(datum: any) {
   const [searchText, setSearchText] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   let data = Object.keys(datum.props);
