@@ -4,6 +4,7 @@ import bg2 from "public/BG/BG2-annie-spratt-9DedxUSwLg4-unsplash.jpg";
 import bg3 from "public/BG/BG3-gryffyn-m-fNipzSgk6t4-unsplash.jpg";
 import bg4 from "public/BG/BG4-annie-spratt-HB-Kf9WLy_0-unsplash.jpg";
 import bg5 from "public/BG/BG5-evie-s-uuCjYxJVf4o-unsplash.jpg";
+import LoadingText from "./LoadinText";
 
 type PlantContent = {
   id: string;
@@ -37,24 +38,37 @@ type Props = {
 
 export default function Splash(Data: Props) {
   const displayData = Data.collection;
+
   return (
     <>
-      <div className="border-8 w-full">
-        <div className="border-2 flex flex-row w-full">
+      <div className="w-full">
+        <div className="flex flex-row w-full">
           <div
             id="leftSplash"
-            className="w-[45%] border-2 border-green-700"
-            // make this background image take up the height of the container
-
+            className="w-[45%] 
+            font-serif
+            border-2 border-green-700 flex items-center justify-center"
             style={{
-              backgroundImage: `url(${bg3.src})`,
+              backgroundImage: `url(${bg5.src})`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "100%",
               // backgroundPosition: "center",
               border: "2px solid black",
             }}
           >
-            <p> content</p>
+            <div
+              id="splashtextcontainer"
+              className="flex rounded-3xl bg-opacity-20 bg-yellow-700 w-[80%]
+               h-[40vh] justify-center items-center
+               overflow-hidden
+               "
+            >
+              <h1 className="text-6xl text-black text-center font-outline-2">
+                <div className="">
+                  <LoadingText text="Introducing" />
+                </div>
+              </h1>
+            </div>
           </div>
           <div
             id="rightSplash"
@@ -92,7 +106,7 @@ export default function Splash(Data: Props) {
                       <h3 className="text-[20px]">{plant.name}</h3>
                       <p className="">Species {plant.species}</p>
                     </div>
-                    <p className="overflow-auto h-[60%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2">
+                    <p className="overflow-auto text-[12px] h-[60%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2">
                       {plant.description}
                     </p>
                   </div>

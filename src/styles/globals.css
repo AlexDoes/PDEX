@@ -44,8 +44,8 @@
 }
 
 body {
-  background-color: #fefae0;
-  /* background-color: #d5ffdd; */
+  /* background-color: #fefae0; */
+  background-color: #d5ffdd;
 }
 
 #center {
@@ -147,4 +147,69 @@ body {
 }
 .bg-card {
   transition: all 0.3s ease-in-out;
+}
+
+#BAX:hover {
+  /* transform: scale(1.03); */
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); */
+  /* box-shadow: 0px 0px 20px 5px #fff; */
+}
+
+#splashtextcontainer:hover,
+#splashtextcontainer:focus {
+  box-shadow: 0px 0px 20px 5px #fff;
+  backdrop-filter: blur(10px);
+  transition: ease-in-out 0.25s;
+}
+
+#splashtextcontainer:hover #BAX div {
+  animation: jump;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 2;
+  transition: color 0.5s ease-in-out;
+}
+
+#splashtextcontainer:hover #BAX div:nth-child(1) {
+  animation-delay: 0.15s;
+  transition-delay: 0.15s;
+  color: #799f0c;
+}
+#splashtextcontainer:hover #BAX div:nth-child(2) {
+  animation-delay: 0.3s;
+  transition-delay: 0.3s;
+  color: #799f0c;
+  /* animation: ease-in-out; */
+}
+#splashtextcontainer:hover #BAX div:nth-child(3) {
+  animation-delay: 0.45s;
+  transition-delay: 1s;
+  color: #799f0c;
+  /* animation: ease-in-out; */
+}
+
+#splashtextcontainer:hover #BAX div:nth-child(3) {
+  transition-delay: 0s;
+  transition: ease-out;
+  /* animation: ease-in-out; */
+}
+#splashtextcontainer:hover #BAX div:nth-child(2) {
+  transition-delay: 0.3s;
+  /* animation: ease-in-out; */
+}
+#splashtextcontainer:hover #BAX div:nth-child(1) {
+  transition-delay: 1s;
+  /* animation: ease-in-out; */
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.2rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
