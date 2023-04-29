@@ -2,6 +2,7 @@ import SearchBar from "@/components/NewSearchBar";
 
 interface props {
   speciesInDatabase: any;
+  users: any;
 }
 
 export default function TestSite(props: props) {
@@ -11,6 +12,12 @@ export default function TestSite(props: props) {
     const specie = species.species;
     UniqueSpecies.add(specie);
   });
+
+  // console.log(props.users);
+  // props.users.map((user: any) => {
+  //   const username = user.username;
+  //   user.username && UniqueSpecies.add(username);
+  // });
 
   const SUGGESTIONS: string[] = Array.from(UniqueSpecies);
 
@@ -28,9 +35,16 @@ export async function getStaticProps() {
     },
   });
 
+  // const users = await prisma.user.findMany({
+  //   select: {
+  //     username: true,
+  //   },
+  // });
+
   return {
     props: {
       speciesInDatabase,
+      // users,
     },
   };
 }

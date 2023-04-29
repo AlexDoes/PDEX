@@ -6,11 +6,11 @@ interface Props {
   width: string;
 }
 
-export default function SearchBar(props: Props) {
+export default function SearchBar({ data, width }: Props) {
   const [searchText, setSearchText] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const data = props.data;
-  const width = props.width;
+  //   const data = props.data;
+  //   const width = props.width;
   const handleOnChange = (e: any) => {
     const input = e.target.value;
     setSearchText(input);
@@ -35,10 +35,11 @@ export default function SearchBar(props: Props) {
     }
     return (
       <ul
-        className="w-inherit
+        className={`w-inherit
       absolute  
       top-[100%]
-      "
+      ${width}
+      `}
       >
         {suggestions.slice(0, 6).map((item: string) => (
           <li
@@ -49,7 +50,6 @@ export default function SearchBar(props: Props) {
             cursor-pointer
             hover:bg-gray-200
             border-2 border-black
-            w-[20vw]
             "
           >
             {item}

@@ -11,5 +11,11 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require("tailwindcss-textshadow")],
+  plugins: [
+    require("tailwindcss-textshadow"),
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/aspect-ratio"),
+    require("tailwind-scrollbar"),
+  ],
 };

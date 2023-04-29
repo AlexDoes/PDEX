@@ -60,10 +60,12 @@ export default function LoadingText(prop: any) {
             start={{
               transform: "translateX(-10px)",
               opacity: 0,
+              color: "white",
             }}
             end={{
               transform: "translateX(0px)",
               opacity: 1,
+              color: "black",
             }}
           >
             <div id={letter}>{letter}</div>
@@ -86,7 +88,7 @@ export default function LoadingText(prop: any) {
             opacity: 1,
           }}
         >
-          <div className="flex flex-col text-lg">
+          <div className="flex flex-col text-lg font-outline-3">
             <span>{sentence}</span>
           </div>
         </Animate>

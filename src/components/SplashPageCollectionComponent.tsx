@@ -106,7 +106,13 @@ export default function Splash(Data: Props) {
                       <h3 className="text-[20px]">{plant.name}</h3>
                       <p className="">Species {plant.species}</p>
                     </div>
-                    <p className="overflow-auto text-[12px] h-[60%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2">
+                    <p
+                      className="overflow-auto text-[12px] h-[60%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md
+                      scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+                      scrollbar-rounded-sm
+                    "
+                      id="plantDescriptionText"
+                    >
                       {plant.description}
                     </p>
                   </div>
