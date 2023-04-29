@@ -48,11 +48,13 @@ model UniquePlant {
   description          String
   image                String
   species              String?
+  normalized_species   String?
   water                String?
   light                String?
   ownedBy              User                   @relation("UniquePlants", references: [id], fields: [ownerId])
   ownerId              String
   species2             String?
+  normalized_species2  String?
   favoritedBy          User[]
   collectionsPartOf    PlantCollection[]
   plantHeight          String?

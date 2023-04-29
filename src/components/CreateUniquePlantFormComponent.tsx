@@ -5,6 +5,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { toast } from "react-toastify";
 import s3 from "lib/aws";
+import { toTitleCase } from "lib/generalFunctions";
+import prisma from "lib/prisma";
 
 interface User {
   id: string;
@@ -41,6 +43,8 @@ type Inputs = {
   unit: string;
   unit2: string;
   user: string;
+  normalized_species: string;
+  normalized_species2: string;
 };
 
 const errorsMap = {
@@ -54,9 +58,12 @@ const errorsMap = {
     required: "Plant image is required",
   },
   plantSpecies: {
-    required: "Plant species is required",
+    required: "Plant species is required, if it's unknown please enter unknown",
+    pattern: "Plant species is invalid, alphanumeric characters only",
   },
-  plantSubspecies: {},
+  plantSubspecies: {
+    pattern: "Plant subspecies is invalid, alphanumeric characters only",
+  },
   plantHeight: {},
   plantWidth: {},
   plantDescription: {},
@@ -104,6 +111,17 @@ export default function CreateUniquePlant(props: any) {
     formState: { errors },
   } = useForm<Inputs>();
 
+  const checkValidUser = async (id: string) => {
+    const response = fetch(`/api/user/getUserAPI`, {
+      body: JSON.stringify({ id }),
+      method: "POST",
+    });
+    if ((await response).status !== 200) {
+      return false;
+    }
+    return true;
+  };
+
   const onSubmit: SubmitHandler<Inputs> = async (data, e) => {
     e?.preventDefault();
     if (!image) {
@@ -116,10 +134,33 @@ export default function CreateUniquePlant(props: any) {
       });
       return;
     }
-    const url = await uploadImage(image);
+    data.plantSpecies = toTitleCase(data.plantSpecies);
+    data.plantSubspecies = toTitleCase(data.plantSubspecies);
+    data.normalized_species = toTitleCase(data.plantSpecies);
+    data.normalized_species2 = toTitleCase(data.plantSubspecies);
     data.user = userId;
+    const res = await checkValidUser(data.user);
+    if (!res) {
+      toast.error(
+        <div>
+          Something went wrong, try refreshing or logging again.
+          <br />
+          If this persists, please contact us.
+        </div>,
+        {
+          autoClose: 8000,
+          style: {
+            background: "#f8e0e0",
+            color: "#ffffff",
+            textShadow: "0 0 0.15rem #000000",
+          },
+        }
+      );
+      return;
+    }
+    const url = await uploadImage(image);
+    // const url = "https://pdex.s3.amazonaws.com/0_3.png1682803498914";
     data.plantImage = url;
-    console.log(data.plantImage);
     await createTheUniquePlant(data).then((res) => {
       toast.success(`${data.plantName} created successfully!`, {
         style: {
@@ -159,7 +200,7 @@ export default function CreateUniquePlant(props: any) {
           placeholder="Plant Name (required)"
           {...register("plantName", {
             required: true,
-            pattern: /^[A-Za-z0-9]+$/,
+            pattern: /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/,
             maxLength: 32,
             minLength: 2,
           })}
@@ -174,10 +215,10 @@ export default function CreateUniquePlant(props: any) {
             type="file"
             placeholder="Plant Image (URL required)"
             onChange={handleImageChange}
+            required
             // defaultValue={"https://plus.unsplash.com/premium_photo-1665653066799-acafe686fba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"}
           />
         </div>
-
         <input
           placeholder="Plant Species"
           {...register("plantSpecies", {
@@ -185,14 +226,12 @@ export default function CreateUniquePlant(props: any) {
           })}
           //   defaultValue={"Plant Species"}
         />
-
         {fields.subspecies && (
           <input
             placeholder="Plant Subspecies"
             {...register("plantSubspecies")}
           />
         )}
-
         {fields.height && (
           <div>
             <input
@@ -219,6 +258,7 @@ export default function CreateUniquePlant(props: any) {
         {fields.width && (
           <div>
             <input
+              type="number"
               placeholder="Plant Width"
               {...register("plantWidth", {
                 //   required: true,
@@ -232,7 +272,6 @@ export default function CreateUniquePlant(props: any) {
             </select>
           </div>
         )}
-
         <textarea
           placeholder="Plant Description"
           {...register("plantDescription")}
@@ -275,6 +314,6 @@ async function createTheUniquePlant(uniquePlantData: any) {
     console.log(response);
     return;
   }
-  // alert("Plant Created!");
+
   return await response.json();
 }

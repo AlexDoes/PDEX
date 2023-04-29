@@ -10,8 +10,7 @@ interface Props {
 export default function SearchBar({ data, width, onChange }: Props) {
   const [searchText, setSearchText] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  //   const data = props.data;
-  //   const width = props.width;
+
   const handleOnChange = (e: any) => {
     onChange(e.target.value);
     const input = e.target.value;

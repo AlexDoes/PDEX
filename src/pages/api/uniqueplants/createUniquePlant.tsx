@@ -27,6 +27,8 @@ export default async function handler(
         ownerId: String(uniquePlantData.user),
         species: uniquePlantData.plantSpecies,
         species2: uniquePlantData.plantSubspecies,
+        normalized_species: uniquePlantData.normalized_species,
+        normalized_species2: uniquePlantData.normalized_species2,
         plantHeight: String(
           uniquePlantData.plantHeight + " " + uniquePlantData.unit
         ),

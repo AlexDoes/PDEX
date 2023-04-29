@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { hash } from "bcrypt";
+import { uniq } from "lodash";
 
 const prisma = new PrismaClient();
 
@@ -134,6 +135,7 @@ async function main() {
       water: "once a week",
       light: "direct sunlight",
       species: "Aloe Vera",
+      normalized_species: "Aloe Vera",
       ownedBy: {
         connect: {
           id: "1",
@@ -148,45 +150,73 @@ async function main() {
     create: {
       id: "BAX",
       name: "Bax",
-      description: "Monstera Albo",
       image: "https://pdex.s3.amazonaws.com/BAX.png",
       species: "Monstera Albo",
+      normalized_species: "Monstera Albo",
       ownedBy: {
         connect: {
           id: "0303",
         },
       },
+      description:
+        "Meet BAX my stunning Albino Monstera Albo plant 🌿✨ This unique beauty is a true head-turner and always stands out in my plant collection. Loving the contrast of his white variegation against the lush green leaves. 🤍🌿 Who else loves this plant as much as I do?#AlbinoMonstera #PlantLove #RareBeauty #BAX",
     },
   });
 
-  const KatiesPlants2 = await prisma.uniquePlant.createMany({
-    data: [
-      {
-        name: "Parker",
-        description: "Scinapsis Mayari",
-        image: "https://pdex.s3.amazonaws.com/Parker.PNG",
-        species: "Scinapsis Mayari",
-        ownerId: "0303",
-        id: "PARKER",
-      },
-      {
-        name: "Pink Princess",
-        description: "Philodendron Erubescens low variegation",
-        image: "https://pdex.s3.amazonaws.com/PinkPrincess.png",
-        species: "Philodendron Erubescens",
-        ownerId: "0303",
-        id: "PINKPRINCESS",
-      },
-      {
-        name: "Green Princess",
-        description: "Anthurium Clarinervium",
-        image: "https://pdex.s3.amazonaws.com/GREEN.png",
-        species: "Anthurium Clarinervium",
-        ownerId: "0303",
-        id: "GREENPRINCESS",
-      },
-    ],
-  });
+  const KatiesPlantsData = [
+    {
+      name: "Parker",
+      image: "https://pdex.s3.amazonaws.com/PARKER.PNG",
+      species: "Scinapsis Mayari",
+      normalized_species: "Scinapsis Mayari",
+      ownerId: "0303",
+      id: "PARKER",
+      description:
+        "I'm excited to show you Parker, also known as the Mayori Pothos or Marble Pothos. This climbing plant has heart-shaped leaves that are marbled with green and white colors, giving it a unique and striking appearance.  Parker is native to the Solomon Islands and is a popular houseplant because he’s easy to care for and can tolerate low-light conditions. He can grow up to 10 feet long, but I've kept mine at a more manageable size for my home.",
+    },
+    {
+      name: "Pink Princess",
+      image: "https://pdex.s3.amazonaws.com/PINKPRINCESS.png",
+      species: "Philodendron Erubescens",
+      normalized_species: "Philodendron Erubescens",
+      ownerId: "0303",
+      id: "PINKPRINCESS",
+      description:
+        "Say hello to my new stunning Philodendron Erubescens, Pink Princess 🌿😍 While she may not have the flashy variegation of some of my other plants, this low-variegation beauty has a charm of its own. Her deep green leaves have a gorgeous glossy finish, and the way they gracefully trail down the pot is a sight to behold. 🌱💚 Can't wait to watch her grow and flourish in my home! #PhilodendronErubescens #PlantLove #GreenBeauty",
+    },
+    {
+      name: "Green Princess",
+      image: "https://pdex.s3.amazonaws.com/GREEN.png",
+      ownerId: "0303",
+      id: "GREENPRINCESS",
+      normalized_species: "Anthurium Clarinervium",
+      species: "Anthurium Clarinervium",
+      description:
+        "Introducing my new heartthrob Green Princess, the Anthurium Clarinervium ❤️🌿 This velvety beauty has stolen my heart with its large, heart-shaped leaves and striking white veins. Her unique and exotic appearance is a real show-stopper in my plant collection, and I can't stop admiring its beauty. 😍🌱 Who else is crushing on this gorgeous plant? #AnthuriumClarinervium #PlantLove #ExoticBeauty #BAX",
+    },
+  ];
+
+  const generateManyPlants = await prisma.$transaction(
+    KatiesPlantsData.map((uniquePlant) =>
+      prisma.uniquePlant.upsert({
+        where: { id: uniquePlant.id },
+        update: { description: uniquePlant.description },
+        create: {
+          id: uniquePlant.id,
+          name: uniquePlant.name,
+          description: uniquePlant.description,
+          image: uniquePlant.image,
+          species: uniquePlant.species,
+          normalized_species: uniquePlant.normalized_species,
+          ownedBy: {
+            connect: {
+              id: uniquePlant.ownerId,
+            },
+          },
+        },
+      })
+    )
+  );
 
   const KatiesCollection = await prisma.plantCollection.upsert({
     where: { id: "KatieCollection" },
@@ -220,51 +250,71 @@ async function main() {
     },
   });
 
-  await prisma.uniquePlant.createMany({
-    data: [
-      {
-        description:
-          "Bonsai is a Japanese art form using cultivation techniques to produce small trees in containers that mimic the shape and scale of full size trees.",
-        image:
-          "https://images.unsplash.com/photo-1599598177991-ec67b5c37318?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1325&q=80",
+  const TashisPlantsData = [
+    {
+      description:
+        "Bonsai is a Japanese art form using cultivation techniques to produce small trees in containers that mimic the shape and scale of full size trees.",
+      image:
+        "https://images.unsplash.com/photo-1599598177991-ec67b5c37318?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1325&q=80",
 
-        water: "once a week",
-        light: "direct sunlight",
-        species: "Bonsai",
-        name: "Bonsai",
-        ownerId: "3",
-        id: "BonsaiSeed",
-      },
-      {
-        ownerId: "3",
-        description:
-          "Aloe vera is a succulent plant species of the genus Aloe. An evergreen perennial, it originates from the Arabian Peninsula, but grows wild in tropical, semi-tropical, and arid climates around the world.",
-        image:
-          "https://images.unsplash.com/photo-1629426956597-1f94bac22333?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-        water: "once a week",
-        light: "direct sunlight",
-        species: "Aloe Vera",
-        name: "Aloe Vera",
-        id: "AloeSeed",
-      },
-      {
-        ownerId: "3",
-        description:
-          "The snake plant, also known as mother-in-law's tongue or Saint George's sword, is a flowering plant species in the family Asparagaceae, native to tropical West Africa.",
-        image:
-          "https://plus.unsplash.com/premium_photo-1673969608395-9281e5e4395f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=708&q=80",
-        water: "once a week",
-        light: "direct sunlight",
-        species: "Snake Plant",
-        name: "Snake Plant",
-        id: "SnakeSeed",
-      },
-    ],
-  });
+      water: "once a week",
+      light: "direct sunlight",
+      species: "Bonsai",
+      name: "Bonsai",
+      ownerId: "3",
+      id: "BonsaiSeed",
+    },
+    {
+      ownerId: "3",
+      description:
+        "Aloe vera is a succulent plant species of the genus Aloe. An evergreen perennial, it originates from the Arabian Peninsula, but grows wild in tropical, semi-tropical, and arid climates around the world.",
+      image:
+        "https://images.unsplash.com/photo-1629426956597-1f94bac22333?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      water: "once a week",
+      light: "direct sunlight",
+      species: "Aloe Vera",
+      name: "Aloe Vera",
+      id: "AloeSeed",
+    },
+    {
+      ownerId: "3",
+      description:
+        "The snake plant, also known as mother-in-law's tongue or Saint George's sword, is a flowering plant species in the family Asparagaceae, native to tropical West Africa.",
+      image:
+        "https://plus.unsplash.com/premium_photo-1673969608395-9281e5e4395f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=708&q=80",
+      water: "once a week",
+      light: "direct sunlight",
+      species: "Snake Plant",
+      name: "Snake Plant",
+      id: "SnakeSeed",
+    },
+  ];
+
+  const generateManyPlants2 = await prisma.$transaction(
+    TashisPlantsData.map((uniquePlant) =>
+      prisma.uniquePlant.upsert({
+        where: { id: uniquePlant.id },
+        update: { description: uniquePlant.description },
+        create: {
+          id: uniquePlant.id,
+          name: uniquePlant.name,
+          description: uniquePlant.description,
+          image: uniquePlant.image,
+          species: uniquePlant.species,
+          normalized_species: uniquePlant.species,
+          ownedBy: {
+            connect: {
+              id: uniquePlant.ownerId,
+            },
+          },
+        },
+      })
+    )
+  );
 
   const plantCollection = await prisma.plantCollection.upsert({
     where: { id: id },
-    update: {},
+    update: { description: "Tashi's Collection" },
     create: {
       name: `Tashi's Collection`,
       ownerId: "3",

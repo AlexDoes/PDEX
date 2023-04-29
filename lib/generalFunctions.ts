@@ -1,4 +1,5 @@
 export function toTitleCase(str: string) {
+  if (!str) return str;
   const res = str
     .toLowerCase()
     .split(" ")
