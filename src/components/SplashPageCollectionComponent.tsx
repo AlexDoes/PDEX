@@ -103,8 +103,10 @@ export default function Splash(Data: Props) {
                     w-[80%]"
                   >
                     <div>
-                      <h3 className="text-[20px]">{plant.name}</h3>
-                      <p className="">Species {plant.species}</p>
+                      <h3 className="text-[20px] font-semibold">
+                        {plant.name}
+                      </h3>
+                      <p className="text-slate-500">Species {plant.species}</p>
                     </div>
                     <p
                       className="overflow-auto text-[12px] h-[60%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md

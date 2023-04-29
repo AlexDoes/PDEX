@@ -4,14 +4,16 @@ import { FaSearch } from "react-icons/fa";
 interface Props {
   data: string[];
   width: string;
+  onChange: (entry: string) => void;
 }
 
-export default function SearchBar({ data, width }: Props) {
+export default function SearchBar({ data, width, onChange }: Props) {
   const [searchText, setSearchText] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   //   const data = props.data;
   //   const width = props.width;
   const handleOnChange = (e: any) => {
+    onChange(e.target.value);
     const input = e.target.value;
     setSearchText(input);
     const newSuggestions = getSuggestions(input);
@@ -50,6 +52,7 @@ export default function SearchBar({ data, width }: Props) {
             cursor-pointer
             hover:bg-gray-200
             border-2 border-black
+            indent-3
             "
           >
             {item}
@@ -63,6 +66,7 @@ export default function SearchBar({ data, width }: Props) {
     const input = e.target.innerText;
     setSearchText(input);
     setSuggestions([]);
+    onChange(input);
   };
 
   return (
