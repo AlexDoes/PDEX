@@ -147,7 +147,11 @@ async function main() {
 
   const KatiesPlants = await prisma.uniquePlant.upsert({
     where: { id: "BAX" },
-    update: {},
+    update: {
+      description:
+        "Meet BAX my stunning Albino Monstera Albo plant 🌿✨ This unique beauty is a true head-turner and always stands out in my plant collection. Loving the contrast of his white variegation against the lush green leaves. 🤍🌿 Who else loves this plant as much as I do?#AlbinoMonstera #PlantLove #RareBeauty #BAX",
+      image: "https://pdex.s3.amazonaws.com/BAX.png",
+    },
     create: {
       id: "BAX",
       name: "Bax",
@@ -201,7 +205,10 @@ async function main() {
     KatiesPlantsData.map((uniquePlant) =>
       prisma.uniquePlant.upsert({
         where: { id: uniquePlant.id },
-        update: { description: uniquePlant.description },
+        update: {
+          description: uniquePlant.description,
+          image: uniquePlant.image,
+        },
         create: {
           id: uniquePlant.id,
           name: uniquePlant.name,
@@ -220,7 +227,7 @@ async function main() {
   );
 
   const KatiesCollection = await prisma.plantCollection.upsert({
-    where: { id: "KatieCollection" },
+    where: { id: "KatiesCollection" },
     update: {},
     create: {
       id: "KatiesCollection",
