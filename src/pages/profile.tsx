@@ -14,6 +14,7 @@ interface User {
   image?: string | null | undefined;
   address: string;
   nickname: string;
+  description: string | null | undefined;
 }
 
 interface userInfoProps {
@@ -28,6 +29,7 @@ interface fieldState {
   email: boolean;
   name: boolean;
   image: boolean;
+  description: boolean;
 }
 
 export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
@@ -41,6 +43,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
     email: false,
     name: false,
     image: false,
+    description: false,
   });
 
   const reload = () => {
@@ -102,6 +105,9 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
         <div className="flex border-red-400 border 2 justify-between">
           Name: {userInfo.name} {showChangeButton("name")}
         </div>
+        <div className="flex border-red-400 border 2 justify-between">
+          Bio: {userInfo.description} {showChangeButton("description")}
+        </div>
         <div>
           Image:
           <img
@@ -142,6 +148,7 @@ export async function getServerSideProps(context: any) {
       image: true,
       nickname: true,
       role: true,
+      description: true,
     },
   });
   return {
