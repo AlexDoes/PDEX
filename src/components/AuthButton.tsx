@@ -24,8 +24,12 @@ export default function AuthButtonComponent() {
         <div className="h-full w-full  " onClick={openMenu}>
           {/* {"Hello " + session.user.name?.split(" ")[0]} */}
           <div className="h-full w-full flex justify-center items-center cursor-pointer">
-            <div>{!showmenu && <GiHamburgerMenu size={30} color="" />}</div>
-            <div>{showmenu && <AiOutlineClose size={30} color="" />}</div>
+            <div>
+              {!showmenu && <GiHamburgerMenu size={30} color="#efe6c1" />}
+            </div>
+            <div className="border border-[#efe6c1] rounded-md shadow-sm hover:shadow-md">
+              {showmenu && <AiOutlineClose size={30} color="#efe6c1" />}
+            </div>
             {/* <div className={`${!showmenu ? "opacity-100 visible" : "opacity-0 invisible"}`}>
              <GiHamburgerMenu size={30} color="" /> 
             </div>
@@ -48,7 +52,7 @@ export default function AuthButtonComponent() {
           onExited={closeMenu}
         >
           <div
-            className="absolute top-16 w-full right-0 z-20 bg-purple-400 shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3 "
+            className="absolute top-16 w-full right-0 z-20 bg-[#c1e1c1] shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3 "
             onClick={openMenu}
           >
             <div
@@ -61,7 +65,7 @@ export default function AuthButtonComponent() {
                 // style={{ animationDelay: "5000ms" }}
               >
                 <Link
-                  className="sm:text-2xl text-lg text-white  "
+                  className="sm:text-2xl text-lg text-[#efe6c1] text-shadow-md "
                   href={"/profile"}
                 >
                   Profile
@@ -69,28 +73,37 @@ export default function AuthButtonComponent() {
               </div>
               <div className="w-full">
                 <Link
-                  className="sm:text-2xl text-white "
+                  className="sm:text-2xl text-[#efe6c1] text-shadow-md"
                   href={"/mycollections"}
                 >
                   My collections
                 </Link>{" "}
               </div>
               <div>
-                <Link className="sm:text-2xl text-white " href={"/myplants"}>
+                <Link
+                  className="sm:text-2xl text-[#efe6c1] text-shadow-md"
+                  href={"/myplants"}
+                >
                   Personal plants
                 </Link>{" "}
               </div>
               <div>
-                <Link className="sm:text-2xl text-white " href={"/"}>
+                <Link
+                  className="sm:text-2xl text-[#efe6c1] text-shadow-md "
+                  href={"/"}
+                >
                   Favorited Plants
                 </Link>{" "}
               </div>
               <div>
-                <Link className="sm:text-2xl text-white " href={"/"}>
+                <Link
+                  className="sm:text-2xl text-[#efe6c1] text-shadow-md"
+                  href={"/"}
+                >
                   Settings
                 </Link>{" "}
               </div>
-              <div className="sm:text-2xl text-red-500 ">
+              <div className="sm:text-2xl text-slate-500 text-shadow-md">
                 <button onClick={() => signOut()}>Sign out</button>
               </div>
             </div>

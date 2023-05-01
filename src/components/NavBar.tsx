@@ -17,7 +17,7 @@ export default function NavBar() {
   return (
     <>
       {show && (
-        <div className="flex w-full gap-2 h-16 bg-purple-400 max-h-16 overflow-hidden justify-between  ">
+        <div className="flex w-full gap-2 h-16 bg-[#c1e1c1] max-h-16 overflow-hidden justify-between  ">
           <Link href={"/"} className="inherit">
             <div className="flex flex-row h-full items-center lg:ml-[150px] transition-all ease-in-out duration-500">
               <img
@@ -25,7 +25,7 @@ export default function NavBar() {
                 alt="My Image"
                 className="h-full"
               />
-              <div className="text-[50px] font-serif text-emerald-600">
+              <div className="text-[50px] font-serif text-[#efe6c1] text-shadow-md">
                 BAX
               </div>
             </div>
