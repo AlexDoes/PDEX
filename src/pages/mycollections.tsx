@@ -49,7 +49,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
     router.push(`/collections/${id}`);
   };
   const handleAddCollectionClick = () => {
-    setShowForm(true);
+    setShowForm(!showForm);
   };
 
   const handleSubmitCollectionForm = async () => {
@@ -58,62 +58,71 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   };
 
   return (
-    <CSSTransition
-      in={true}
-      timeout={500}
-      classNames="page"
-      unmountOnExit
-      mountOnEnter
-    >
-      <div className="border-8 border-black h-[90vh]">
-        <ul>
-          {items.map((collection: any) => (
-            <li
-              key={collection.id}
-              className="bg-red-300 border-sky-500 border-2"
-            >
-              <div>
-                <Link
-                  onClick={() => handleClick(collection.id)}
-                  href={`/collections/${collection.id}`}
-                >
-                  Name: {collection.name}
-                </Link>
-                <p>Collection ID: {collection.id}</p>
-                <p>Owner ID: {collection.ownerId}</p>{" "}
-                {collection.plantContents.map((plantItemData: any) => {
-                  return (
-                    <p key={plantItemData.id} className="text-orange-600">
-                      <Link href={`/myplants/${plantItemData.id}`}>
-                        {plantItemData.name}
-                      </Link>
-                    </p>
-                  );
-                })}{" "}
-                <DeleteCollectionButton
-                  user={userId}
-                  collectionId={collection.id}
-                  onConfirm={handleSubmitCollectionForm}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
-        {!showForm ? (
-          <button
-            onClick={handleAddCollectionClick}
-            className="border-2 border-red-500 bg-slate-700 text-red-500"
+    <div className="">
+      <ul>
+        {items.map((collection: any) => (
+          <li
+            key={collection.id}
+            className="bg-red-300 border-sky-500 border-2"
           >
-            'Create a new collection +'
-          </button>
-        ) : (
-          <CreateCollectionForm
-            user={userId}
-            onSubmit={handleSubmitCollectionForm}
-          />
-        )}
-      </div>
-    </CSSTransition>
+            <div>
+              <Link
+                onClick={() => handleClick(collection.id)}
+                href={`/collections/${collection.id}`}
+              >
+                Name: {collection.name}
+              </Link>
+              <p>Collection ID: {collection.id}</p>
+              <p>Owner ID: {collection.ownerId}</p>{" "}
+              {collection.plantContents.map((plantItemData: any) => {
+                return (
+                  <p key={plantItemData.id} className="text-orange-600">
+                    <Link href={`/myplants/${plantItemData.id}`}>
+                      {plantItemData.name}
+                    </Link>
+                  </p>
+                );
+              })}{" "}
+              <DeleteCollectionButton
+                user={userId}
+                collectionId={collection.id}
+                onConfirm={handleSubmitCollectionForm}
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <button
+        onClick={handleAddCollectionClick}
+        className="border-2 border-red-500 bg-slate-700 text-red-500"
+      >
+        'Create a new collection +'
+      </button>
+      <CSSTransition
+        in={showForm}
+        timeout={1000}
+        classNames="fade"
+        unmountOnExit
+        mountOnEnter
+      >
+        <div className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] right-0"></div>
+      </CSSTransition>
+
+      <CSSTransition
+        in={showForm}
+        timeout={1000}
+        classNames="page"
+        unmountOnExit
+        mountOnEnter
+      >
+        <CreateCollectionForm
+          user={userId}
+          onSubmit={handleSubmitCollectionForm}
+          closeCollectionForm={handleAddCollectionClick}
+        />
+      </CSSTransition>
+    </div>
   );
 }
 

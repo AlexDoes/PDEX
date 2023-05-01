@@ -51,7 +51,10 @@ export default function AuthButtonComponent() {
             className="absolute top-16 w-full right-0 z-20 bg-purple-400 shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3 "
             onClick={openMenu}
           >
-            <div id="menu-items" className="sm:ml-[200px] ">
+            <div
+              id="menu-items"
+              className=" transition-all ease-in-out duration-500 lg:ml-[200px] "
+            >
               <div
                 className=""
                 onClick={openMenu}

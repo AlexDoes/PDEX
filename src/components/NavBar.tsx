@@ -19,19 +19,19 @@ export default function NavBar() {
       {show && (
         <div className="flex w-full gap-2 h-16 bg-purple-400 max-h-16 overflow-hidden justify-between  ">
           <Link href={"/"} className="inherit">
-            <div className="flex flex-row h-full items-center sm:ml-[200px]">
+            <div className="flex flex-row h-full items-center lg:ml-[150px] transition-all ease-in-out duration-500">
               <img
                 src="/logotransparent.png"
                 alt="My Image"
                 className="h-full"
               />
               <div className="text-[50px] font-serif text-emerald-600">
-                Plantdex
+                BAX
               </div>
             </div>
           </Link>
           {/* <button onClick={() => signOut()}>Sign out</button> */}
-          <div className="flex w-[10%] items-center justify-center h-[100%] sm:mr-[200px]">
+          <div className="flex w-[10%] items-center justify-center h-[100%]  lg:mr-[150px] transition-all ease-in-out duration-500">
             <AuthButtonComponent />
           </div>
         </div>
