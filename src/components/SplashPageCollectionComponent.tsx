@@ -47,18 +47,21 @@ export default function Splash(Data: Props) {
             id="leftSplash"
             className="w-[45%] 
             font-serif
-            border-2 border-green-700 flex items-center justify-center"
-            style={{
-              backgroundImage: `url(${bg5.src})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "100%",
-              // backgroundPosition: "center",
-              border: "2px solid black",
-            }}
+             border-green-700 
+            flex items-center justify-center"
+            style={
+              {
+                // backgroundImage: `url(${bg5.src})`,
+                // backgroundRepeat: "no-repeat",
+                // backgroundSize: "100%",
+                // backgroundPosition: "center",
+                // border: "2px solid black",
+              }
+            }
           >
             <div
               id="splashtextcontainer"
-              className="flex rounded-3xl bg-opacity-20 bg-yellow-700 w-[80%]
+              className="flex rounded-3xl bg-opacity-20 bg-yellow-400 w-[80%]
                h-[40vh] justify-center items-center
                overflow-hidden
                "
@@ -72,7 +75,8 @@ export default function Splash(Data: Props) {
           </div>
           <div
             id="rightSplash"
-            className="w-[55%] border-2 border-black rounded-xl px-5 py-5 overflow-auto"
+            className="w-[55%] border-black 
+            rounded-xl px-5 py-5 overflow-auto"
           >
             {displayData.plantContents.map((plant, i) => {
               const reverse =
@@ -86,7 +90,7 @@ export default function Splash(Data: Props) {
                   bg-card
                   ${reverse} 
                   flex flex-row 
-                  border-2 border-[#C1E1C1]
+                  border border-[#C1E1C1]
                   rounded-xl 
                   justify-between mb-2 
                   min-h-[200px] p-4 gap-4
@@ -106,7 +110,7 @@ export default function Splash(Data: Props) {
                       <h3 className="text-[20px] font-semibold">
                         {plant.name}
                       </h3>
-                      <p className="text-slate-500">Species {plant.species}</p>
+                      <p className="text-slate-500 italic ">{plant.species}</p>
                     </div>
                     <p
                       className="overflow-auto text-[12px] h-[60%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md

@@ -14,6 +14,7 @@ model User {
   name            String            @default("Plant Lover")
   nickname        String?           @unique
   username        String?           @unique
+  description     String?           @default("I love plants! I'm not sure what to say about myself yet but check in later!")
   password        String?
   emailVerified   DateTime?
   image           String?
@@ -45,7 +46,7 @@ model Plant {
 model UniquePlant {
   id                   String                 @id @default(cuid())
   name                 String
-  description          String
+  description          String?
   image                String
   species              String?
   normalized_species   String?

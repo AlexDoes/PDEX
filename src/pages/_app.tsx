@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <ToastContainer />
       <SessionProvider session={pageProps.session}>
-        {/* <NavBar /> */}
+        <NavBar />
         <div className="w-[100vw]" id="center">
           <div className="w-[90%]">
             <Component {...pageProps} />

@@ -41,6 +41,7 @@ async function main() {
       username: "tashi",
       password: password2,
       id: "3",
+      image: "https://pdex.s3.amazonaws.com/tashi.jpeg",
     },
   });
 

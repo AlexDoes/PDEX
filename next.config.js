@@ -9,7 +9,11 @@ const nextConfig = {
     AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME,
   },
   images: {
-    domains: ["pdex.s3.amazonaws.com"],
+    domains: [
+      "pdex.s3.amazonaws.com",
+      "lh3.googleusercontent.com",
+      "https://lh3.googleusercontent.com",
+    ],
   },
 };
 
