@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import prisma from "lib/prisma";
 import { toast } from "react-toastify";
+import { CSSTransition } from "react-transition-group";
 const colors = {
   //ansi color codes for console.log
   black: "\u001b[38;5;0m",
@@ -70,6 +71,7 @@ export default function CreateCollectionForm(data: any) {
   const [user, setUser] = useState<string>(data.user);
   const [collectionName, setCollectionName] = useState<string>("");
   const handleSubmissionFromParent = data.onSubmit;
+  const closeCollectionForm = data.closeCollectionForm;
 
   useEffect(() => {
     if (data.user) {
@@ -98,19 +100,28 @@ export default function CreateCollectionForm(data: any) {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Collection Name:
-          <input
-            type="text"
-            style={{ border: "1px solid black" }}
-            value={collectionName}
-            onChange={(e) => setCollectionName(e.target.value)}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
+    <div className="fixed  top-0 h-[100vh] w-[100vw]  right-0 flex justify-end">
+      {/* <div className=" absolute w-[100vw] h-[100vh] bg-red-500 "></div> */}
+      <div className="bg-gray-500 w-[50%] border">
+        <form onSubmit={handleSubmit}>
+          <label>
+            Collection Name:
+            <input
+              type="text"
+              style={{ border: "1px solid black" }}
+              value={collectionName}
+              onChange={(e) => setCollectionName(e.target.value)}
+            />
+          </label>
+          {/* //TODO: add a description field //TODO: add a privacy field */}
+          <button className="text-white" type="submit">
+            Submit{" "}
+          </button>
+        </form>
+        <button onClick={closeCollectionForm} className="text-white ml-1">
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }
