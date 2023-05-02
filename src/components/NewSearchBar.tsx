@@ -19,6 +19,11 @@ export default function SearchBar({ data, width, onChange }: Props) {
     setSuggestions(newSuggestions);
   };
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const input = e.target.value;
+  };
+
   const getSuggestions = (input: string) => {
     const suggestions = data.filter((item: any) => {
       const res = item.toLowerCase().includes(input.toLowerCase());
@@ -78,9 +83,6 @@ export default function SearchBar({ data, width, onChange }: Props) {
           onChange={handleOnChange}
           className={width}
         />
-        <button>
-          <FaSearch />
-        </button>
       </div>
       {renderSuggestions()}
     </div>
