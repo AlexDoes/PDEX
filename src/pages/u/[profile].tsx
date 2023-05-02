@@ -51,14 +51,19 @@ export default function UserProfile({ user }: Props) {
         return (
           <div
             id="profileCollection"
-            className="border border-black min-w-[300px] min-h-[300px]"
+            className="border border-black min-w-[300px] min-h-[250px] flex flex-row justify-between gap-4"
           >
-            <h2 className="text-2xl font-medium">{collection.name}</h2>
-            <p>
-              {collection.description ||
-                `Hey checkout ${collection.name} great plant collection I made!`}
-            </p>
-            <div id="profileCollectionImage" className="w-[200px] h-[200px]">
+            <div>
+              <h2 className="text-2xl font-medium">{collection.name}</h2>
+              <p>
+                {collection.description ||
+                  `Hey checkout ${collection.name} great plant collection I made!`}
+              </p>
+            </div>
+            <div
+              id="profileCollectionImage"
+              className="w-[50%] border-red-500 border flex justify-center items-center"
+            >
               {collection.plantContents.length > 0 ? (
                 <ImageCarousel
                   images={collection.plantContents.map((plant: any) => {
@@ -101,17 +106,56 @@ export default function UserProfile({ user }: Props) {
         </div>
       </div>
       {/* ////////////////////////// */}
-      <div id="profileRight" className="w-[60vw]">
+      <div
+        id="profileRight"
+        className="w-[60vw] bg-[green] border-8 border-black"
+      >
         <div id="profileCollections">
           <h1 className="text-3xl font-medium">Collections</h1>
           <div
             id="profileCollectionsList"
             className="
-            border border-2 border-blue-200
             grid grid-cols-2 gap-4
             "
           >
             {profileTopDisplay}
+          </div>
+          <div>
+            <h1 className="text-3xl font-medium">
+              {name.split(" ")[0] + "'s"} Plants
+            </h1>
+            <div
+              id="profilePlantsList"
+              className="
+                border border-2 border-blue-200
+                grid grid-cols-2 gap-4
+                "
+            >
+              {ownedPlants.map((plant: any) => {
+                return (
+                  <div id="profilePlant" className="border border-black flex">
+                    <div id="leftSideOfPlant">
+                      <div id="profilePlantName">
+                        <h2 className="text-2xl font-medium">{plant.name}</h2>
+                      </div>
+                      <div id="profilePlantSpecies">
+                        <p>{plant.species}</p>
+                      </div>
+                      <div id="plantDescription">
+                        <p>{plant.description}</p>
+                      </div>
+                    </div>
+                    <div id="profilePlantImage">
+                      <img
+                        src={plant.image}
+                        alt=""
+                        className="w-[200px] h-[200px] min-h-[200px] min-w-[200px] max-h-[200px] max-w-[200px] object-cover"
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ type CarouselProps = {
 
 export default function ImageCarousel({ images }: CarouselProps) {
   return (
-    <Carousel showThumbs={false} showStatus={false} autoPlay>
+    <Carousel showThumbs={false} showStatus={false} infiniteLoop>
       {images.map((image, index) => (
         <div key={index}>
           <img
