@@ -7,6 +7,7 @@ import { toTitleCase } from "lib/generalFunctions";
 import avatarImage from "public/images/avatar.jpg";
 import { GiCarousel } from "react-icons/gi";
 import ImageCarousel from "@/components/ImageCarouselComponent";
+import { int } from "aws-sdk/clients/datapipeline";
 
 interface Props {
   user: any;
@@ -44,10 +45,14 @@ export default function UserProfile({ user }: Props) {
     }
     return images;
   };
-
+  let boxesToShow = 0;
   const profileTopDisplay =
-    plantCollection.length > 0 ? (
-      plantCollection.map((collection: any) => {
+    plantCollection.length > 0 && boxesToShow < 3 ? (
+      plantCollection.map((collection: any, boxesToShow: int) => {
+        boxesToShow++;
+        if (boxesToShow > 4) {
+          return;
+        }
         return (
           <div
             id="profileCollection"
@@ -127,7 +132,7 @@ export default function UserProfile({ user }: Props) {
             <div
               id="profilePlantsList"
               className="
-                border border-2 border-blue-200
+                border-2 border-blue-200
                 grid grid-cols-2 gap-4
                 "
             >
