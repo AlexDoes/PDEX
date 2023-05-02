@@ -1,17 +1,18 @@
 {
-  "id": "clgmrf2290009mup3urmviek8",
-  "name": "Tashi's Collection",
-  "ownerId": "3",
-  "plantContents": [
+  "id": "3",
+  "username": "tashi",
+  "name": "Tashi Sangpo",
+  "email": "tashi@pdex.com",
+  "image": null,
+  "description": "Hello, I am Tashi!",
+  "favoritePlants": [],
+  "ownedPlants": [
     {
       "id": "BonsaiSeed",
       "name": "Bonsai",
-      "description": "Bonsai is a Japanese art form using cultivation techniques to produce small trees in containers that mimic the shape and scale of full size trees.",
       "image": "https://images.unsplash.com/photo-1599598177991-ec67b5c37318?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1325&q=80",
+      "description": "Bonsai is a Japanese art form using cultivation techniques to produce small trees in containers that mimic the shape and scale of full size trees.",
       "species": "Bonsai",
-      "water": "once a week",
-      "light": "direct sunlight",
-      "ownerId": "3",
       "species2": null,
       "plantHeight": null,
       "plantWidth": null,
@@ -21,12 +22,9 @@
     {
       "id": "AloeSeed",
       "name": "Aloe Vera",
-      "description": "Aloe vera is a succulent plant species of the genus Aloe. An evergreen perennial, it originates from the Arabian Peninsula, but grows wild in tropical, semi-tropical, and arid climates around the world.",
       "image": "https://images.unsplash.com/photo-1629426956597-1f94bac22333?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      "description": "Aloe vera is a succulent plant species of the genus Aloe. An evergreen perennial, it originates from the Arabian Peninsula, but grows wild in tropical, semi-tropical, and arid climates around the world.",
       "species": "Aloe Vera",
-      "water": "once a week",
-      "light": "direct sunlight",
-      "ownerId": "3",
       "species2": null,
       "plantHeight": null,
       "plantWidth": null,
@@ -36,17 +34,71 @@
     {
       "id": "SnakeSeed",
       "name": "Snake Plant",
-      "description": "The snake plant, also known as mother-in-law's tongue or Saint George's sword, is a flowering plant species in the family Asparagaceae, native to tropical West Africa.",
       "image": "https://plus.unsplash.com/premium_photo-1673969608395-9281e5e4395f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=708&q=80",
+      "description": "The snake plant, also known as mother-in-law's tongue or Saint George's sword, is a flowering plant species in the family Asparagaceae, native to tropical West Africa.",
       "species": "Snake Plant",
-      "water": "once a week",
-      "light": "direct sunlight",
-      "ownerId": "3",
       "species2": null,
       "plantHeight": null,
       "plantWidth": null,
       "plantDepth": null,
       "plantWeight": null
+    }
+  ],
+  "plantCollection": [
+    {
+      "id": "clh2e3qqr0009p4ynhpf45jbk",
+      "name": "Tashi's Collection",
+      "description": null,
+      "plantContents": [
+        {
+          "id": "BonsaiSeed",
+          "name": "Bonsai",
+          "image": "https://images.unsplash.com/photo-1599598177991-ec67b5c37318?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1325&q=80",
+          "description": "Bonsai is a Japanese art form using cultivation techniques to produce small trees in containers that mimic the shape and scale of full size trees.",
+          "species": "Bonsai",
+          "species2": null,
+          "plantHeight": null,
+          "plantWidth": null,
+          "plantDepth": null,
+          "plantWeight": null
+        },
+        {
+          "id": "AloeSeed",
+          "name": "Aloe Vera",
+          "image": "https://images.unsplash.com/photo-1629426956597-1f94bac22333?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+          "description": "Aloe vera is a succulent plant species of the genus Aloe. An evergreen perennial, it originates from the Arabian Peninsula, but grows wild in tropical, semi-tropical, and arid climates around the world.",
+          "species": "Aloe Vera",
+          "species2": null,
+          "plantHeight": null,
+          "plantWidth": null,
+          "plantDepth": null,
+          "plantWeight": null
+        },
+        {
+          "id": "SnakeSeed",
+          "name": "Snake Plant",
+          "image": "https://plus.unsplash.com/premium_photo-1673969608395-9281e5e4395f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=708&q=80",
+          "description": "The snake plant, also known as mother-in-law's tongue or Saint George's sword, is a flowering plant species in the family Asparagaceae, native to tropical West Africa.",
+          "species": "Snake Plant",
+          "species2": null,
+          "plantHeight": null,
+          "plantWidth": null,
+          "plantDepth": null,
+          "plantWeight": null
+        }
+      ]
+    },
+    {
+      "id": "clh2e3qqu000ap4ynh0b1r22k",
+      "name": "Marco's Collection",
+      "description": null,
+      "plantContents": []
+    },
+    {
+      "id": "clh2e3qqu000bp4ynysxc1aau",
+      "name": "Steven's Collection",
+      "description": null,
+      "plantContents": []
     }
   ]
 }
