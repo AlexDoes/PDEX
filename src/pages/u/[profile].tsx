@@ -45,7 +45,9 @@ export default function UserProfile({ user }: Props) {
     }
     return images;
   };
+
   let boxesToShow = 0;
+
   const profileTopDisplay =
     plantCollection.length > 0 && boxesToShow < 3 ? (
       plantCollection.map((collection: any, boxesToShow: int) => {
@@ -56,18 +58,27 @@ export default function UserProfile({ user }: Props) {
         return (
           <div
             id="profileCollection"
-            className="border border-black min-w-[300px] min-h-[250px] flex flex-row justify-between gap-4"
+            className="border border-black 
+            p-[10px]
+            min-w-[300px] min-h-[250px] flex flex-row justify-between gap-4"
           >
-            <div>
+            <div className="w-[60%] flex flex-col justify-center gap-4">
               <h2 className="text-2xl font-medium">{collection.name}</h2>
-              <p>
+              <p
+                className="overflow-auto text-[12px] h-[50%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md
+                      scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+                      scrollbar-rounded-sm
+                    "
+              >
                 {collection.description ||
                   `Hey checkout ${collection.name} great plant collection I made!`}
               </p>
             </div>
             <div
               id="profileCollectionImage"
-              className="w-[50%] border-red-500 border flex justify-center items-center"
+              className="w-[40%]
+               border-red-500  border
+               flex justify-center items-center"
             >
               {collection.plantContents.length > 0 ? (
                 <ImageCarousel
@@ -121,6 +132,7 @@ export default function UserProfile({ user }: Props) {
             id="profileCollectionsList"
             className="
             grid grid-cols-2 gap-4
+            p-[10x]
             "
           >
             {profileTopDisplay}
@@ -132,14 +144,21 @@ export default function UserProfile({ user }: Props) {
             <div
               id="profilePlantsList"
               className="
-                border-2 border-blue-200
+                p-[10px]
                 grid grid-cols-2 gap-4
-                "
+              "
             >
               {ownedPlants.map((plant: any) => {
                 return (
-                  <div id="profilePlant" className="border border-black flex">
-                    <div id="leftSideOfPlant">
+                  <div
+                    id="profilePlant"
+                    className="border border-black flex
+                    min-w-[300px] min-h-[250px] gap-4"
+                  >
+                    <div
+                      id="leftSideOfPlant"
+                      className="flex flex-col h-full justify-center"
+                    >
                       <div id="profilePlantName">
                         <h2 className="text-2xl font-medium">{plant.name}</h2>
                       </div>
@@ -147,14 +166,27 @@ export default function UserProfile({ user }: Props) {
                         <p>{plant.species}</p>
                       </div>
                       <div id="plantDescription">
-                        <p>{plant.description}</p>
+                        <p
+                          className="overflow-auto text-[12px] h-[40%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md
+                      scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+                      scrollbar-rounded-sm
+                    "
+                          id="plantDescriptionText"
+                        >
+                          {plant.description}
+                        </p>
                       </div>
                     </div>
-                    <div id="profilePlantImage">
+                    <div
+                      id="profilePlantImage"
+                      className="w-[40%]
+                    border-red-500  border
+                      flex justify-center items-center"
+                    >
                       <img
                         src={plant.image}
                         alt=""
-                        className="w-[200px] h-[200px] min-h-[200px] min-w-[200px] max-h-[200px] max-w-[200px] object-cover"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   </div>
