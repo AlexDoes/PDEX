@@ -98,6 +98,7 @@ export default function NavBarSearchBar({}) {
             <li
               key={item}
               onClick={handleClickingSuggestion}
+              onKeyDown={handleKeyDown}
               className="
                 bg-white
                 cursor-pointer
@@ -140,6 +141,7 @@ export default function NavBarSearchBar({}) {
                 "
               data-value={item}
               tabIndex={0}
+              onKeyDown={handleKeyDown}
             >
               {item}
               <HiSparkles />
@@ -169,6 +171,7 @@ export default function NavBarSearchBar({}) {
                 items-center
                 "
               tabIndex={0}
+              onKeyDown={handleKeyDown}
             >
               <Link
                 href={`/u/${item}`}
@@ -190,7 +193,7 @@ export default function NavBarSearchBar({}) {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const input = e.target.value;
+    const input = searchText;
     router.push(`/search/${input}`);
   };
 
@@ -203,7 +206,7 @@ export default function NavBarSearchBar({}) {
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      e.target.blur();
+      e.target.click();
     }
   };
 
@@ -218,6 +221,7 @@ export default function NavBarSearchBar({}) {
             onChange={handleOnChange}
             className="w-[40vw]"
             tabIndex={0}
+            ref={(input) => input && input.focus()}
           />
         </div>
         {renderSuggestions()}
