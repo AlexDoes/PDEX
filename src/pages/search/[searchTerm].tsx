@@ -1,5 +1,6 @@
 import prisma from "lib/prisma";
 import avatarImage from "public/images/avatar.jpg";
+import { useEffect, useState } from "react";
 
 interface Props {
   searchTerm: string;
@@ -33,50 +34,143 @@ interface users {
   image: string;
 }
 
+const breakPoints = {
+  xs: 320,
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+};
+
 export default function SearchResult({
   searchTerm,
   uniquePlants,
   users,
 }: Props) {
+  const [windowWidth, setWindowWidth] = useState<number>(0);
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(Number(window.innerWidth));
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const screenSize = () => {
+    // switch case
+
+    if (windowWidth < breakPoints.sm && windowWidth > breakPoints.xs) {
+      return "xs";
+    } else if (windowWidth < breakPoints.md && windowWidth > breakPoints.sm) {
+      return "sm";
+    } else if (windowWidth < breakPoints.lg && windowWidth > breakPoints.md) {
+      return "md";
+    } else if (windowWidth < breakPoints.xl && windowWidth > breakPoints.lg) {
+      return "lg";
+    } else {
+      return "xl";
+    }
+  };
+
   return (
-    <div>
+    <div className="w-full">
+      <div className="flex flex-row gap-1">
+        <div
+          className="                   
+                     xs:text-purple-500
+                    sm:text-red-400
+                    md:text-blue-400
+                    lg:text-green-400"
+        >
+          Window Size: {screenSize()?.toUpperCase()}
+        </div>
+        {/* <p className="text-purple-500">purple xs: {breakPoints.xs}</p>
+        <p className="text-red-500">red sm: {breakPoints.sm}</p>
+        <p className="text-blue-500">blue md: {breakPoints.md}</p>
+        <p className="text-green-500">green lg: {breakPoints.lg}</p> */}
+      </div>
       <h1> Search Results for `{searchTerm}`</h1>
-      <div className="border-2 border-black">
-        <h2> User's personal plants related to {searchTerm}: </h2>
+      <h2> User's personal plants related to {searchTerm}: </h2>
+      <div
+        className="border-black border-2
+            items-center justify-center
+            flex
+            xs:flex-col sm:flex-row 
+            md:flex-row lg:flex-row 
+            flex-wrap 
+            xl:flex-row xl:flex-wrap xl:row-3
+      "
+      >
         {uniquePlants.length ? (
           uniquePlants.map((plant) => (
-            <div key={plant.id} className="border border-red-400">
+            <div
+              key={plant.id}
+              className="
+              border-2 
+              border-red-200 
+              rounded-xl p-2 m-2
+              pt-4
+              pb-6
+              bg-orange-100
+              flex 
+              items-center justify-center
+              flex-col
+              xs:w-[80vw]
+              sm:w-[40vw]
+              md:w-[40vw]
+              lg:w-[25vw]
+              hover:scale-105
+              hover:relative
+            "
+            >
               {plant.image ? (
                 <div className="flex items-center justify-center rounded-lg">
                   <img
                     src={plant.image}
                     alt=""
                     className="
-                    border-2
-                    sm:border-red-400
-                    md:border-blue-400
-                    lg:border-green-400
-                    rounded-lg p-3
-                    sm:h-[40vh] md:h-[40vh] 
-                    sm:w-[60vw] md:w-[35vw] md:max-w-80
-                    lg:w-80 lg:h-80
+                  border-green-400
+                    rounded-xl
+                    border
+                    xs:h-[40vh] xs:w-[50vw] 
+                    sm:h-[40vh] md:h-[40vh] lg:h-80
+                    sm:w-[40vw] md:w-[35vw] md:max-w-80 lg:w-80 xl:w-80
+                    sm:max-w-[80]
                     "
                   />
                 </div>
               ) : (
                 ""
               )}
-              <h3>Plant name: {plant.name}</h3>
-              <h3>Owner: {plant.ownedBy.nickname}</h3>
-              <h4>Plant species: {plant.species}</h4>
-              <p>Plant Id: {plant.id}</p>
-              <p>
-                Plant description:{" "}
+              <p className="font">{plant.name}</p>
+              <p className="font-light italic">{plant.species}</p>
+              <p className="font-thin">By {plant.ownedBy.nickname}</p>
+              {/* <p>Plant Id: {plant.id}</p> */}
+              {/* <div className="flex items-center justify-center"> */}
+              <p
+                className="
+                bg-yellow-200
+                rounded-lg
+                w-[80%]
+                overflow-x-hidden
+                xs:max-h-[92px]
+                lg:h-[90px]
+                xl:h-[90px]
+                max-h-[80px]
+                overflow-y-auto
+                ellipsis
+                text-center
+                p-2
+                xs:text-sm sm:text-sm md:text-md
+              "
+              >
                 {plant.description
                   ? plant.description
-                  : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tell's us more about it!`}
+                  : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
               </p>
             </div>
+            // </div>
           ))
         ) : (
           <p>No plants found related to `{searchTerm}`</p>

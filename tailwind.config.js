@@ -9,7 +9,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: "475px",
+      },
+    },
   },
   plugins: [
     require("tailwindcss-textshadow"),

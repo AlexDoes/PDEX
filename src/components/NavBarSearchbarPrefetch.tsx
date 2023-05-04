@@ -14,11 +14,15 @@ interface Data {
 export default function NavBarSearchBar({}) {
   const [searchText, setSearchText] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [show, setShow] = useState<boolean>(false);
   const router = useRouter();
   let fetched = false;
   let data: Data;
   const onSubmit = (e: any) => {
     e.preventDefault();
+    setSearchText("");
+    setSuggestions([]);
+    fetched = false;
     router.push(`/search/${searchText}`);
   };
 
