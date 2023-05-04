@@ -42,7 +42,13 @@ export default function NavBarSearchBar({}) {
     }
   };
 
-  useEffect(() => {}, [searchText]);
+  useEffect(() => {
+    if (searchText.length > 2 && fetched) {
+      const newSuggestions = getSuggestions(searchText);
+      setSuggestions(newSuggestions);
+      console.log("useEffect");
+    }
+  }, [searchText]);
 
   const getSuggestions = (input: string) => {
     let suggestions: any = [];
@@ -61,6 +67,9 @@ export default function NavBarSearchBar({}) {
   const renderSuggestions = () => {
     if (suggestions.length === 0) {
       return null;
+    }
+    if (searchText.length < 3) {
+      setSuggestions([]);
     }
     const plant = suggestions[0];
     const species = suggestions[1];
