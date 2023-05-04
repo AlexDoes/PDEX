@@ -24,10 +24,9 @@ export default function TestSite(props: props) {
 
   return (
     <>
-      {text}
-      <SearchBar data={SUGGESTIONS} onChange={handleChange} width="w-[20vw]" />
+      {/* {text} */}
+      {/* <SearchBar data={SUGGESTIONS} onChange={handleChange} width="w-[20vw]" /> */}
       <NavBarSearchBar />
-      <div></div>
     </>
   );
 }

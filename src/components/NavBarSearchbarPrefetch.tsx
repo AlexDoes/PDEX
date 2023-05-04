@@ -83,7 +83,7 @@ export default function NavBarSearchBar({}) {
     if (searchText.length < 3) {
       return null;
     }
-
+    let i = 0;
     return (
       <ul className={`w-inherit absolute top-[100%] w-[40vw]`}>
         {speciesSuggestions.length > 0 && (
@@ -109,6 +109,7 @@ export default function NavBarSearchBar({}) {
                 pr-3
                 items-center
                 "
+              tabIndex={0}
             >
               {item}
               <FaLeaf />
@@ -138,6 +139,7 @@ export default function NavBarSearchBar({}) {
                 items-center
                 "
               data-value={item}
+              tabIndex={0}
             >
               {item}
               <HiSparkles />
@@ -166,6 +168,7 @@ export default function NavBarSearchBar({}) {
                 pr-3
                 items-center
                 "
+              tabIndex={0}
             >
               <Link
                 href={`/u/${item}`}
@@ -197,6 +200,13 @@ export default function NavBarSearchBar({}) {
     setSuggestions([]);
   };
 
+  const handleKeyDown = (e: any) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      e.target.blur();
+    }
+  };
+
   return (
     <form className="flex flex-row" onSubmit={handleSubmit}>
       <div className="flex flex-col border-8 items-start relative">
@@ -207,6 +217,7 @@ export default function NavBarSearchBar({}) {
             value={searchText}
             onChange={handleOnChange}
             className="w-[40vw]"
+            tabIndex={0}
           />
         </div>
         {renderSuggestions()}
