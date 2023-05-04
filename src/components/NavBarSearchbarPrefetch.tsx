@@ -65,9 +65,9 @@ export default function NavBarSearchBar({}) {
     const plant = suggestions[0];
     const species = suggestions[1];
     const users = suggestions[2];
-    const plantSuggestions = suggestions[0].slice(1);
-    const speciesSuggestions = suggestions[1].slice(1);
-    const usersSuggestions = suggestions[2].slice(1);
+    const plantSuggestions: string[] | string = suggestions[0].slice(1);
+    const speciesSuggestions: string[] | string = suggestions[1].slice(1);
+    const usersSuggestions: string[] | string = suggestions[2].slice(1);
     if (!plant && !species && !users) {
       return null;
     }
@@ -77,6 +77,13 @@ export default function NavBarSearchBar({}) {
 
     return (
       <ul className={`w-inherit absolute top-[100%] w-[40vw]`}>
+        {speciesSuggestions.length > 0 && (
+          <div>
+            <h1 className="text-lg font-thin bg-slate-300 border-2 border-black">
+              Species suggested:{" "}
+            </h1>
+          </div>
+        )}
         {speciesSuggestions &&
           speciesSuggestions.slice(0, 5).map((item: any) => (
             <li
@@ -98,6 +105,13 @@ export default function NavBarSearchBar({}) {
               <FaLeaf />
             </li>
           ))}
+        {plantSuggestions.length > 0 && (
+          <div>
+            <h1 className="text-lg font-thin bg-slate-300 border-2 border-black">
+              Plants suggested:{" "}
+            </h1>
+          </div>
+        )}
         {plantSuggestions &&
           plantSuggestions.slice(0, 3).map((item: any) => (
             <li
@@ -120,6 +134,13 @@ export default function NavBarSearchBar({}) {
               <HiSparkles />
             </li>
           ))}
+        {usersSuggestions.length > 0 && (
+          <div>
+            <h1 className="text-lg font-thin bg-slate-300 border-2 border-black">
+              Users suggested:{" "}
+            </h1>
+          </div>
+        )}
         {usersSuggestions &&
           usersSuggestions.slice(0, 2).map((item: any) => (
             <li

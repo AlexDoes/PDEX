@@ -59,7 +59,7 @@ const SAMPLEDATA = [
 
 function memoize(func: any) {
   const [cache, setCache] = useState(new Map());
-  return function (...args: any) {
+  return  (...args: any) => {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       return cache.get(key);

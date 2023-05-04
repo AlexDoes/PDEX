@@ -1,4 +1,5 @@
 import prisma from "lib/prisma";
+import avatarImage from "public/images/avatar.jpg";
 
 interface Props {
   searchTerm: string;
@@ -67,6 +68,11 @@ export default function SearchResult({
           users.map((user) => (
             <div key={user.nickname} className="border-2 border-red-500">
               <h4>{user.nickname}</h4>
+              {user.image ? (
+                <img src={user.image} alt="" className="w-20 h-20" />
+              ) : (
+                <img src={avatarImage.src} alt="" className="w-20 h-20" />
+              )}
             </div>
           ))
         ) : (
@@ -83,12 +89,6 @@ export async function getServerSideProps(context: any) {
     where: {
       OR: [
         {
-          name: {
-            contains: searchTerm as string,
-            mode: "insensitive",
-          },
-        },
-        {
           species: {
             contains: searchTerm as string,
             mode: "insensitive",
@@ -96,6 +96,12 @@ export async function getServerSideProps(context: any) {
         },
         {
           species2: {
+            contains: searchTerm as string,
+            mode: "insensitive",
+          },
+        },
+        {
+          name: {
             contains: searchTerm as string,
             mode: "insensitive",
           },
@@ -130,7 +136,7 @@ export async function getServerSideProps(context: any) {
       nickname: true,
       image: true,
     },
-    take: 20,
+    take: 10,
   });
 
   return {
