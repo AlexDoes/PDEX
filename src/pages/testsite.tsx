@@ -1,6 +1,6 @@
 import SearchBar from "@/components/NewSearchBar";
 import { useState } from "react";
-import NavBarSearchBar from "@/components/NavBarSearchbar";
+import NavBarSearchBar from "@/components/NavBarSearchbarPrefetch";
 
 interface props {
   speciesInDatabase: any;
@@ -27,6 +27,7 @@ export default function TestSite(props: props) {
       {text}
       <SearchBar data={SUGGESTIONS} onChange={handleChange} width="w-[20vw]" />
       <NavBarSearchBar />
+      <div></div>
     </>
   );
 }

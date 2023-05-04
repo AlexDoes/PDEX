@@ -1,5 +1,5 @@
 import SearchBar from "./NewSearchBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { FaSearch } from "react-icons/fa";
 
@@ -57,15 +57,23 @@ const SAMPLEDATA = [
   "Zantedeschia",
 ];
 
+function memoize(func: any) {
+  const [cache, setCache] = useState(new Map());
+  return function (...args: any) {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    const result = func.apply(this, args);
+    setCache(new Map(cache.set(key, result)));
+    return result;
+  };
+}
+
 export default function NavBarSearchBar({}) {
   const [searchText, setSearchText] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const router = useRouter();
-  const [data, setData] = useState<string[]>([]);
-
-  const handleChange = (entry: string) => {
-    setSearchText(entry);
-  };
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -75,32 +83,44 @@ export default function NavBarSearchBar({}) {
   const handleOnChange = async (e: any) => {
     const input = e.target.value;
     setSearchText(input);
-    if (input.length > 3) {
-      const newSuggestions = await getSuggestions(input);
-      setSuggestions(newSuggestions);
-    }
   };
 
   const getSuggestions = async (input: string) => {
+    if (input.length <= 2) {
+      return [];
+    }
     const data = await fetch(
       `/api/search/getSearchBarData?searchTerm=${searchText}`
     );
+    console.log("searchTerm", searchText);
     const response = await data.json();
     console.log(response);
     response.filter((item: any) => {
       const res = item.toLowerCase().includes(input.toLowerCase());
       return res;
     });
-    return suggestions || [];
+    return [response] || [];
   };
+
+  const memoizedGetSuggestions = memoize(getSuggestions);
+
+  useEffect(() => {
+    if (searchText.length > 2) {
+      const res = memoizedGetSuggestions(searchText);
+      Promise.resolve(res).then((value) => {
+        setSuggestions(value[0]);
+      });
+    }
+  }, [searchText]);
 
   const renderSuggestions = () => {
     if (suggestions.length === 0) {
       return null;
     }
-    if (searchText.length < 2) {
+    if (searchText.length <= 2) {
       return null;
     }
+
     return (
       <ul
         className={`w-inherit
