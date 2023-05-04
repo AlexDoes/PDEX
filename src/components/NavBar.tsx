@@ -5,6 +5,7 @@ import Image from "next/image";
 import AuthButtonComponent from "@/components/AuthButton";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useRouter } from "next/router";
+import NavBarSearchBar from "./NavBarSearchbarPrefetch";
 
 export default function NavBar() {
   const router = useRouter();
@@ -17,7 +18,10 @@ export default function NavBar() {
   return (
     <>
       {show && (
-        <div className="flex w-full gap-2 h-16 bg-[#c1e1c1] max-h-16 overflow-hidden justify-between  ">
+        <div
+          className="flex w-full gap-2 h-16 bg-[#c1e1c1] max-h-16 justify-between 
+          "
+        >
           <Link href={"/"} className="inherit">
             <div className="flex flex-row h-full items-center lg:ml-[150px] transition-all ease-in-out duration-500">
               <img
@@ -30,6 +34,9 @@ export default function NavBar() {
               </div>
             </div>
           </Link>
+          <div className="">
+            <NavBarSearchBar />
+          </div>
           {/* <button onClick={() => signOut()}>Sign out</button> */}
           <div className="flex w-[10%] items-center justify-center h-[100%]  lg:mr-[150px] transition-all ease-in-out duration-500">
             <AuthButtonComponent />

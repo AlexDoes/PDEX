@@ -85,7 +85,9 @@ export default function NavBarSearchBar({}) {
     }
     let i = 0;
     return (
-      <ul className={`w-inherit absolute top-[100%] w-[40vw]`}>
+      <ul
+        className={`w-inherit absolute top-[100%] w-[40vw] z-50 text-ellipsis`}
+      >
         {speciesSuggestions.length > 0 && (
           <div>
             <h1 className="text-lg font-thin bg-slate-300 border-2 border-black">
@@ -100,6 +102,7 @@ export default function NavBarSearchBar({}) {
               onClick={handleClickingSuggestion}
               onKeyDown={handleKeyDown}
               className="
+                text-ellipsis
                 bg-white
                 cursor-pointer
                 hover:bg-gray-200
@@ -129,6 +132,7 @@ export default function NavBarSearchBar({}) {
               key={item}
               onClick={handleClickingSuggestion}
               className="
+                truncate ...
                 bg-white
                 cursor-pointer
                 hover:bg-gray-200
@@ -160,6 +164,7 @@ export default function NavBarSearchBar({}) {
               key={item}
               onClick={handleClickingSuggestion}
               className="
+              text-ellipsis
                 bg-white
                 cursor-pointer
                 hover:bg-gray-200
@@ -176,6 +181,7 @@ export default function NavBarSearchBar({}) {
               <Link
                 href={`/u/${item}`}
                 className="
+                text-ellipsis
                     flex flex-row
                     justify-between
                     w-full
@@ -211,8 +217,8 @@ export default function NavBarSearchBar({}) {
   };
 
   return (
-    <form className="flex flex-row" onSubmit={handleSubmit}>
-      <div className="flex flex-col border-8 items-start relative">
+    <form className="flex flex-row z-50" onSubmit={handleSubmit}>
+      <div className="flex flex-col border-8 items-start relative overflow-visible">
         <div className="flex flex-row justify-center items-center gap-2">
           <input
             type="text"

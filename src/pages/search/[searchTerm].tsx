@@ -46,6 +46,26 @@ export default function SearchResult({
         {uniquePlants.length ? (
           uniquePlants.map((plant) => (
             <div key={plant.id} className="border border-red-400">
+              {plant.image ? (
+                <div className="flex items-center justify-center rounded-lg">
+                  <img
+                    src={plant.image}
+                    alt=""
+                    className="
+                    border-2
+                    sm:border-red-400
+                    md:border-blue-400
+                    lg:border-green-400
+                    rounded-lg p-3
+                    sm:h-[40vh] md:h-[40vh] 
+                    sm:w-[60vw] md:w-[35vw] md:max-w-80
+                    lg:w-80 lg:h-80
+                    "
+                  />
+                </div>
+              ) : (
+                ""
+              )}
               <h3>Plant name: {plant.name}</h3>
               <h3>Owner: {plant.ownedBy.nickname}</h3>
               <h4>Plant species: {plant.species}</h4>
@@ -69,9 +89,39 @@ export default function SearchResult({
             <div key={user.nickname} className="border-2 border-red-500">
               <h4>{user.nickname}</h4>
               {user.image ? (
-                <img src={user.image} alt="" className="w-20 h-20" />
+                <div className="flex items-center justify-center rounded-lg">
+                  <img
+                    src={user.image}
+                    alt=""
+                    className="
+                                  border-2
+                                  sm:border-red-400
+                                  md:border-blue-400
+                                  lg:border-green-400
+                                  rounded-lg p-3
+                                  sm:h-[40vh] md:h-[40vh] 
+                                  sm:w-[60vw] md:w-[35vw] md:max-w-80
+                                  lg:w-80 lg:h-80
+                                  "
+                  />
+                </div>
               ) : (
-                <img src={avatarImage.src} alt="" className="w-20 h-20" />
+                <div className="flex items-center justify-center rounded-lg">
+                  <img
+                    src={avatarImage.src}
+                    alt=""
+                    className="
+                  border-2
+                  sm:border-red-400
+                  md:border-blue-400
+                  lg:border-green-400
+                  rounded-lg p-3
+                  sm:h-[40vh] md:h-[40vh] 
+                  sm:w-[60vw] md:w-[35vw] md:max-w-80
+                  lg:w-80 lg:h-80
+                  "
+                  />
+                </div>
               )}
             </div>
           ))
