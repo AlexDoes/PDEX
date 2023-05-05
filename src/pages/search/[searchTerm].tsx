@@ -32,6 +32,8 @@ interface users {
   name: string;
   nickname: string;
   image: string;
+  _count: any;
+  ownedPlants: any;
 }
 
 const breakPoints = {
@@ -47,6 +49,7 @@ export default function SearchResult({
   uniquePlants,
   users,
 }: Props) {
+  console.log(users);
   const [windowWidth, setWindowWidth] = useState<number>(0);
   useEffect(() => {
     function handleResize() {
@@ -121,11 +124,16 @@ export default function SearchResult({
               md:w-[40vw]
               lg:w-[25vw]
               hover:scale-105
+              focus:scale-105
+              focus:focus-within:
               hover:relative
+              hover:transition-all
+              focus:transition-all
             "
+              tabIndex={0}
             >
               {plant.image ? (
-                <div className="flex items-center justify-center rounded-lg">
+                <div className="flex items-center justify-center rounded-lg snap-proximity">
                   <img
                     src={plant.image}
                     alt=""
@@ -145,7 +153,7 @@ export default function SearchResult({
               )}
               <p className="font">{plant.name}</p>
               <p className="font-light italic">{plant.species}</p>
-              <p className="font-thin">By {plant.ownedBy.nickname}</p>
+              <p className="font-thin snap-y">By {plant.ownedBy.nickname}</p>
               {/* <p>Plant Id: {plant.id}</p> */}
               {/* <div className="flex items-center justify-center"> */}
               <p
@@ -176,47 +184,81 @@ export default function SearchResult({
           <p>No plants found related to `{searchTerm}`</p>
         )}
       </div>
-      <div className="border-2 border-black">
-        <h2> Users </h2>
+      <h2> Users </h2>
+      <div
+        className="border-2 border-black
+                  items-center justify-center
+                  flex
+                  xs:flex-col sm:flex-row 
+                  md:flex-row lg:flex-row 
+                  flex-wrap 
+                  xl:flex-row xl:flex-wrap xl:row-3
+      "
+      >
         {users.length ? (
           users.map((user) => (
-            <div key={user.nickname} className="border-2 border-red-500">
-              <h4>{user.nickname}</h4>
-              {user.image ? (
-                <div className="flex items-center justify-center rounded-lg">
-                  <img
-                    src={user.image}
-                    alt=""
-                    className="
-                                  border-2
-                                  sm:border-red-400
-                                  md:border-blue-400
-                                  lg:border-green-400
-                                  rounded-lg p-3
-                                  sm:h-[40vh] md:h-[40vh] 
-                                  sm:w-[60vw] md:w-[35vw] md:max-w-80
-                                  lg:w-80 lg:h-80
-                                  "
-                  />
-                </div>
-              ) : (
-                <div className="flex items-center justify-center rounded-lg">
-                  <img
-                    src={avatarImage.src}
-                    alt=""
-                    className="
-                  border-2
-                  sm:border-red-400
-                  md:border-blue-400
-                  lg:border-green-400
-                  rounded-lg p-3
-                  sm:h-[40vh] md:h-[40vh] 
-                  sm:w-[60vw] md:w-[35vw] md:max-w-80
-                  lg:w-80 lg:h-80
-                  "
-                  />
-                </div>
-              )}
+            <div key={user.nickname} className="">
+              <div
+                className="
+                            border-2 
+                            border-red-200 
+                            rounded-xl p-2 m-2
+                            pt-4
+                            pb-6
+                            bg-blue-200
+                            flex 
+                            gap-4
+                            items-center justify-center
+                            flex-col
+                            xs:w-[80vw]
+                            sm:w-[40vw]
+                            md:w-[40vw]
+                            lg:w-[25vw]
+                            hover:scale-105
+                            focus:scale-105
+                            focus:focus-within:
+                            hover:relative
+                            hover:transition-all
+                            focus:transition-all
+                            focus:outline-none
+                            "
+              >
+                {user.image ? (
+                  <div className="flex items-center justify-center rounded-lg">
+                    <img
+                      src={user.image}
+                      alt=""
+                      className="
+                    border-green-400
+                    rounded-xl
+                    border
+                    xs:h-[40vh] xs:w-[50vw] 
+                    sm:h-[40vh] md:h-[40vh] lg:h-80
+                    sm:w-[40vw] md:w-[35vw] md:max-w-80 lg:w-80 xl:w-80
+                    sm:max-w-[80]
+                    "
+                    />
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center rounded-lg">
+                    <img
+                      src={avatarImage.src}
+                      alt=""
+                      className="
+                    border-green-400
+                    rounded-xl
+                    border
+                    xs:h-[40vh] xs:w-[50vw] 
+                    sm:h-[40vh] md:h-[40vh] lg:h-80
+                    sm:w-[40vw] md:w-[35vw] md:max-w-80 lg:w-80 xl:w-80
+                    sm:max-w-[80]
+                    "
+                    />
+                  </div>
+                )}
+                <p>{user.nickname}</p>
+                <p>{user._count.ownedPlants} unique plants</p>
+              </div>
             </div>
           ))
         ) : (
@@ -279,6 +321,11 @@ export async function getServerSideProps(context: any) {
       name: true,
       nickname: true,
       image: true,
+      _count: {
+        select: {
+          ownedPlants: true,
+        },
+      },
     },
     take: 10,
   });
