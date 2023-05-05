@@ -50,7 +50,6 @@ export default function SearchResult({
   uniquePlants,
   users,
 }: Props) {
-  console.log(users);
   const [windowWidth, setWindowWidth] = useState<number>(0);
   useEffect(() => {
     function handleResize() {
@@ -99,7 +98,7 @@ export default function SearchResult({
     }
   };
   return (
-    <div className="w-full">
+    <div className="w-full scroll-auto">
       <div className="flex flex-row gap-1">
         <div
           className="                   
@@ -107,9 +106,8 @@ export default function SearchResult({
                     sm:text-red-400
                     md:text-blue-400
                     lg:text-green-400"
-        >
-          {/* Window Size: {screenSize()?.toUpperCase()} */}
-        </div>
+        ></div>
+        {/* Window Size: {screenSize()?.toUpperCase()} */}
         {/* <p className="text-purple-500">purple xs: {breakPoints.xs}</p>
         <p className="text-red-500">red sm: {breakPoints.sm}</p>
         <p className="text-blue-500">blue md: {breakPoints.md}</p>
@@ -134,29 +132,41 @@ export default function SearchResult({
           Users
         </button>
       </div>
-      <h2 ref={plantRef}> User's personal plants related to {searchTerm}: </h2>
       <div
-        className="border-black border-2
+        className="            "
+        // backdrop-filter backdrop-blur-md
+        // bg-opacity-50 bg-green-200"
+      >
+        <h2 ref={plantRef}>
+          {" "}
+          User's personal plants related to {searchTerm}:{" "}
+        </h2>
+        <div
+          className="border-slate-300 border rounded-xl p-2 m-2
             items-center justify-center
             flex
             xs:flex-col sm:flex-row 
             md:flex-row lg:flex-row 
             flex-wrap 
             xl:flex-row xl:flex-wrap xl:row-3
+            backdrop-filter backdrop-blur-md 
+            bg-opacity-50 bg-green-200
+            xs:relative
         "
-        ref={plantRef}
-      >
-        {uniquePlants.length ? (
-          uniquePlants.map((plant) => (
-            <div
-              key={plant.id}
-              className="
+          ref={plantRef}
+        >
+          {uniquePlants.length ? (
+            uniquePlants.map((plant) => (
+              <div
+                id="glassBackPlant"
+                key={plant.id}
+                className="
               border-2 
-              border-red-200 
+              border-[#c1e1c1] 
               rounded-xl p-2 m-2
               pt-4
               pb-6
-              bg-orange-100
+              // bg-orange-100
               flex 
               items-center justify-center
               flex-col
@@ -170,15 +180,16 @@ export default function SearchResult({
               hover:relative
               hover:transition-all
               focus:transition-all
+              md:h-min-[492px]
             "
-              tabIndex={0}
-            >
-              {plant.image ? (
-                <div className="flex items-center justify-center rounded-lg snap-proximity">
-                  <img
-                    src={plant.image}
-                    alt=""
-                    className="
+                tabIndex={0}
+              >
+                {plant.image ? (
+                  <div className="flex items-center justify-center rounded-lg snap-proximity">
+                    <img
+                      src={plant.image}
+                      alt=""
+                      className="
                   border-green-400
                     rounded-xl
                     border
@@ -187,63 +198,69 @@ export default function SearchResult({
                     sm:w-[40vw] md:w-[35vw] md:max-w-80 lg:w-80 xl:w-80
                     sm:max-w-[80]
                     "
-                  />
-                </div>
-              ) : (
-                ""
-              )}
-              <p className="font">{plant.name}</p>
-              <p className="font-light italic">{plant.species}</p>
-              <p className="font-thin snap-y">By {plant.ownedBy.nickname}</p>
-              {/* <p>Plant Id: {plant.id}</p> */}
-              {/* <div className="flex items-center justify-center"> */}
-              <p
-                className="
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
+                <p className="font">{plant.name}</p>
+                <p className="font-light italic">{plant.species}</p>
+                <p className="font-thin snap-y">By {plant.ownedBy.nickname}</p>
+                {/* <p>Plant Id: {plant.id}</p> */}
+                {/* <div className="flex items-center justify-center"> */}
+                <p
+                  className="
                 bg-yellow-200
                 rounded-lg
                 w-[80%]
                 overflow-x-hidden
                 xs:max-h-[92px]
+                md:h-[92px]
                 lg:h-[90px]
                 xl:h-[90px]
                 max-h-[80px]
                 overflow-y-auto
                 ellipsis
                 text-center
+                flex
                 p-2
                 xs:text-sm sm:text-sm md:text-md
               "
-              >
-                {plant.description
-                  ? plant.description
-                  : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
-              </p>
-            </div>
-            // </div>
-          ))
-        ) : (
-          <p>No plants found related to `{searchTerm}`</p>
-        )}
-      </div>
-      <h2 ref={userRef}> Users </h2>
-      <div
-        className="border-2 border-black
+                >
+                  {plant.description
+                    ? plant.description
+                    : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
+                </p>
+              </div>
+              // </div>
+            ))
+          ) : (
+            <p>No plants found related to `{searchTerm}`</p>
+          )}
+        </div>
+        <h2 ref={userRef}> Users </h2>
+        <div
+          className=" border-slate-300 border
+                  rounded-xl p-2 m-2
                   items-center justify-center
                   flex
                   xs:flex-col sm:flex-row 
                   md:flex-row lg:flex-row 
                   flex-wrap 
                   xl:flex-row xl:flex-wrap xl:row-3
+                  backdrop-filter backdrop-blur-md
+                  bg-opacity-80 bg-orange-100
       "
-        ref={userRef}
-      >
-        {users.length ? (
-          users.map((user) => (
-            <div key={user.nickname} className="">
-              <div
-                className="
-                            border-2 
-                            border-red-200 
+          ref={userRef}
+        >
+          {users.length ? (
+            users.map((user) => (
+              <div key={user.nickname} className="">
+                <div
+                  id="glassBackCard"
+                  className="
+                            border-4 
+                            border-[#c1e1c1]
                             rounded-xl p-2 m-2
                             pt-4
                             pb-6
@@ -264,13 +281,13 @@ export default function SearchResult({
                             focus:transition-all
                             focus:outline-none
                             "
-              >
-                {user.image ? (
-                  <div className="flex items-center justify-center rounded-lg">
-                    <img
-                      src={user.image}
-                      alt=""
-                      className="
+                >
+                  {user.image ? (
+                    <div className="flex items-center justify-center rounded-lg">
+                      <img
+                        src={user.image}
+                        alt=""
+                        className="
                     border-green-400
                     rounded-xl
                     border
@@ -279,14 +296,14 @@ export default function SearchResult({
                     sm:w-[40vw] md:w-[35vw] md:max-w-80 lg:w-80 xl:w-80
                     sm:max-w-[80]
                     "
-                    />
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center rounded-lg">
-                    <img
-                      src={avatarImage.src}
-                      alt=""
-                      className="
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center rounded-lg">
+                      <img
+                        src={avatarImage.src}
+                        alt=""
+                        className="
                     border-green-400
                     rounded-xl
                     border
@@ -295,17 +312,26 @@ export default function SearchResult({
                     sm:w-[40vw] md:w-[35vw] md:max-w-80 lg:w-80 xl:w-80
                     sm:max-w-[80]
                     "
-                    />
-                  </div>
-                )}
-                <p>{user.nickname}</p>
-                <p>{user._count.ownedPlants} unique plants</p>
+                      />
+                    </div>
+                  )}
+                  <p>{user.nickname}</p>
+                  <p>
+                    {user._count?.ownedPlants ? (
+                      <span>
+                        {user._count.ownedPlants} {"plants 💚"}
+                      </span>
+                    ) : (
+                      "Sprouting soon 🌱"
+                    )}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <p>No users found with the name `{searchTerm}`</p>
-        )}
+            ))
+          ) : (
+            <p>No users found with the name `{searchTerm}`</p>
+          )}
+        </div>
       </div>
     </div>
   );
