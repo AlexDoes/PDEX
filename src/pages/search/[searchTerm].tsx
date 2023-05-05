@@ -1,6 +1,7 @@
 import prisma from "lib/prisma";
 import avatarImage from "public/images/avatar.jpg";
 import { useEffect, useState } from "react";
+import { useRef } from "react";
 
 interface Props {
   searchTerm: string;
@@ -60,6 +61,23 @@ export default function SearchResult({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const plantRef = useRef<HTMLDivElement>(null);
+  const userRef = useRef<HTMLDivElement>(null);
+
+  const goToPlant = () => {
+    plantRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const goToUser = () => {
+    userRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   const screenSize = () => {
     // switch case
 
@@ -76,6 +94,10 @@ export default function SearchResult({
     }
   };
 
+  const showUsers = () => {
+    if (users.length) {
+    }
+  };
   return (
     <div className="w-full">
       <div className="flex flex-row gap-1">
@@ -86,7 +108,7 @@ export default function SearchResult({
                     md:text-blue-400
                     lg:text-green-400"
         >
-          Window Size: {screenSize()?.toUpperCase()}
+          {/* Window Size: {screenSize()?.toUpperCase()} */}
         </div>
         {/* <p className="text-purple-500">purple xs: {breakPoints.xs}</p>
         <p className="text-red-500">red sm: {breakPoints.sm}</p>
@@ -94,7 +116,25 @@ export default function SearchResult({
         <p className="text-green-500">green lg: {breakPoints.lg}</p> */}
       </div>
       <h1> Search Results for `{searchTerm}`</h1>
-      <h2> User's personal plants related to {searchTerm}: </h2>
+      <div className="flex gap-4 items-center">
+        Jump to :
+        <button
+          className="bg-green-400
+        hover:bg-green-500
+        text-white font-bold py-1 px-4 rounded
+        "
+          onClick={goToPlant}
+        >
+          Plants
+        </button>
+        <button
+          className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-1 px-4 rounded"
+          onClick={goToUser}
+        >
+          Users
+        </button>
+      </div>
+      <h2 ref={plantRef}> User's personal plants related to {searchTerm}: </h2>
       <div
         className="border-black border-2
             items-center justify-center
@@ -103,7 +143,8 @@ export default function SearchResult({
             md:flex-row lg:flex-row 
             flex-wrap 
             xl:flex-row xl:flex-wrap xl:row-3
-      "
+        "
+        ref={plantRef}
       >
         {uniquePlants.length ? (
           uniquePlants.map((plant) => (
@@ -184,7 +225,7 @@ export default function SearchResult({
           <p>No plants found related to `{searchTerm}`</p>
         )}
       </div>
-      <h2> Users </h2>
+      <h2 ref={userRef}> Users </h2>
       <div
         className="border-2 border-black
                   items-center justify-center
@@ -194,6 +235,7 @@ export default function SearchResult({
                   flex-wrap 
                   xl:flex-row xl:flex-wrap xl:row-3
       "
+        ref={userRef}
       >
         {users.length ? (
           users.map((user) => (
