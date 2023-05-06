@@ -1,3 +1,4 @@
+import { bool } from "aws-sdk/clients/signer";
 import prisma from "lib/prisma";
 import avatarImage from "public/images/avatar.jpg";
 import { useEffect, useState } from "react";
@@ -92,6 +93,34 @@ export default function SearchResult({
       return "xl";
     }
   };
+  const [filtered, setFiltered] = useState<boolean>(false);
+  const speciesButton = (species: string) => {
+    return (
+      <button
+        className="bg-green-400
+        hover:bg-green-500
+        text-white font-bold py-1 px-4 rounded
+        focus:outline-none focus:shadow-outline"
+        onClick={() => {
+          setShowPlant(!showPlant);
+          setFiltered(!filtered);
+        }}
+      >
+        {!filtered ? `Filter ` + searchTerm + ` in species` : "Show All"}
+      </button>
+    );
+  };
+
+  const [showPlant, setShowPlant] = useState<boolean>(true);
+
+  const filter = (searchTerm: string, species: string) => {
+    if (showPlant) return "";
+    if (species.includes(searchTerm)) {
+      return "";
+    } else {
+      return "hidden";
+    }
+  };
 
   const showUsers = () => {
     if (users.length) {
@@ -107,11 +136,11 @@ export default function SearchResult({
                     md:text-blue-400
                     lg:text-green-400"
         ></div>
-        {/* Window Size: {screenSize()?.toUpperCase()} */}
-        {/* <p className="text-purple-500">purple xs: {breakPoints.xs}</p>
+        Window Size: {screenSize()?.toUpperCase()}
+        <p className="text-purple-500">purple xs: {breakPoints.xs}</p>
         <p className="text-red-500">red sm: {breakPoints.sm}</p>
         <p className="text-blue-500">blue md: {breakPoints.md}</p>
-        <p className="text-green-500">green lg: {breakPoints.lg}</p> */}
+        <p className="text-green-500">green lg: {breakPoints.lg}</p>
       </div>
       <h1> Search Results for `{searchTerm}`</h1>
       <div className="flex gap-4 items-center">
@@ -131,6 +160,7 @@ export default function SearchResult({
         >
           Users
         </button>
+        {speciesButton(searchTerm)}
       </div>
       <div
         className="            "
@@ -152,6 +182,8 @@ export default function SearchResult({
             backdrop-filter backdrop-blur-md 
             bg-opacity-50 bg-green-200
             xs:relative
+            snap-mandatory
+            snap-y snap-center
         "
           ref={plantRef}
         >
@@ -160,7 +192,7 @@ export default function SearchResult({
               <div
                 id="glassBackPlant"
                 key={plant.id}
-                className="
+                className={`
               border-2 
               border-[#c1e1c1] 
               rounded-xl p-2 m-2
@@ -181,7 +213,11 @@ export default function SearchResult({
               hover:transition-all
               focus:transition-all
               md:h-min-[492px]
-            "
+              snap-center
+              focus:focus-within
+              focus:outline-none
+              ${filter(searchTerm, plant.species)}
+            `}
                 tabIndex={0}
               >
                 {plant.image ? (
@@ -281,6 +317,7 @@ export default function SearchResult({
                             focus:transition-all
                             focus:outline-none
                             "
+                  tabIndex={0}
                 >
                   {user.image ? (
                     <div className="flex items-center justify-center rounded-lg">
