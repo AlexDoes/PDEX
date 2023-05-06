@@ -121,7 +121,7 @@ export default function SearchResult({
       return "hidden";
     }
   };
-
+  console.log(uniquePlants);
   const showUsers = () => {
     if (users.length) {
     }
@@ -143,7 +143,11 @@ export default function SearchResult({
         <p className="text-green-500">green lg: {breakPoints.lg}</p>
       </div>
       <h1> Search Results for `{searchTerm}`</h1>
-      <div className="flex gap-4 items-center">
+      <div
+        className={`flex gap-4 items-center
+        ${uniquePlants.length > 0 ? `visible` : `hidden`}
+      `}
+      >
         Jump to :
         <button
           className="bg-green-400
@@ -167,12 +171,15 @@ export default function SearchResult({
         // backdrop-filter backdrop-blur-md
         // bg-opacity-50 bg-green-200"
       >
-        <h2 ref={plantRef}>
+        <h2
+          ref={plantRef}
+          className={`   ${uniquePlants.length < 1 ? "hidden" : ""} `}
+        >
           {" "}
           User's personal plants related to {searchTerm}:{" "}
         </h2>
         <div
-          className="border-slate-300 border rounded-xl p-2 m-2
+          className={`border-slate-300 border rounded-xl p-2 m-2
             items-center justify-center
             flex
             xs:flex-col sm:flex-row 
@@ -184,7 +191,8 @@ export default function SearchResult({
             xs:relative
             snap-mandatory
             snap-y snap-center
-        "
+            ${uniquePlants.length < 1 ? "hidden" : ""}
+  `}
           ref={plantRef}
         >
           {uniquePlants.length ? (
