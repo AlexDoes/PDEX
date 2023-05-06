@@ -3,6 +3,8 @@ import prisma from "lib/prisma";
 import avatarImage from "public/images/avatar.jpg";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
+import ScreenChecker from "@/components/ScreenChecker";
 
 interface Props {
   searchTerm: string;
@@ -38,29 +40,11 @@ interface users {
   ownedPlants: any;
 }
 
-const breakPoints = {
-  xs: 320,
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-};
-
 export default function SearchResult({
   searchTerm,
   uniquePlants,
   users,
 }: Props) {
-  const [windowWidth, setWindowWidth] = useState<number>(0);
-  useEffect(() => {
-    function handleResize() {
-      setWindowWidth(Number(window.innerWidth));
-    }
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   const plantRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
 
@@ -78,35 +62,23 @@ export default function SearchResult({
     });
   };
 
-  const screenSize = () => {
-    // switch case
-
-    if (windowWidth < breakPoints.sm && windowWidth > breakPoints.xs) {
-      return "xs";
-    } else if (windowWidth < breakPoints.md && windowWidth > breakPoints.sm) {
-      return "sm";
-    } else if (windowWidth < breakPoints.lg && windowWidth > breakPoints.md) {
-      return "md";
-    } else if (windowWidth < breakPoints.xl && windowWidth > breakPoints.lg) {
-      return "lg";
-    } else {
-      return "xl";
-    }
-  };
   const [filtered, setFiltered] = useState<boolean>(false);
   const speciesButton = (species: string) => {
     return (
       <button
-        className="bg-green-400
+        className={`bg-green-400
         hover:bg-green-500
         text-white font-bold py-1 px-4 rounded
-        focus:outline-none focus:shadow-outline"
+        focus:outline-none focus:shadow-outline
+        transition-all duration-500 ease-in-out
+        ${filtered ? "bg-green-500" : ""}
+    `}
         onClick={() => {
           setShowPlant(!showPlant);
           setFiltered(!filtered);
         }}
       >
-        {!filtered ? `Filter ` + searchTerm + ` in species` : "Show All"}
+        {!filtered ? `Species` : "Show all"}
       </button>
     );
   };
@@ -121,63 +93,64 @@ export default function SearchResult({
       return "hidden";
     }
   };
-  console.log(uniquePlants);
   const showUsers = () => {
     if (users.length) {
     }
   };
   return (
     <div className="w-full scroll-auto">
-      <div className="flex flex-row gap-1">
+      <div className="flex flex-col gap-2">
+        <p className="border-b-2 border-slate-300 pb-2 pt-2 text-xl">
+          Search Results for `{searchTerm}`:
+        </p>
         <div
-          className="                   
-                     xs:text-purple-500
-                    sm:text-red-400
-                    md:text-blue-400
-                    lg:text-green-400"
-        ></div>
-        Window Size: {screenSize()?.toUpperCase()}
-        <p className="text-purple-500">purple xs: {breakPoints.xs}</p>
-        <p className="text-red-500">red sm: {breakPoints.sm}</p>
-        <p className="text-blue-500">blue md: {breakPoints.md}</p>
-        <p className="text-green-500">green lg: {breakPoints.lg}</p>
-      </div>
-      <h1> Search Results for `{searchTerm}`</h1>
-      <div
-        className={`flex gap-4 items-center
+          className={`flex gap-4 items-center
         ${uniquePlants.length > 0 ? `visible` : `hidden`}
       `}
-      >
-        Jump to :
-        <button
-          className="bg-green-400
-        hover:bg-green-500
-        text-white font-bold py-1 px-4 rounded
-        "
-          onClick={goToPlant}
         >
-          Plants
-        </button>
-        <button
-          className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-1 px-4 rounded"
-          onClick={goToUser}
-        >
-          Users
-        </button>
-        {speciesButton(searchTerm)}
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-1 border-b-2 border-slate-300 pb-2">
+              <p>Jump to:</p>
+              <div className="flex gap-2">
+                <button
+                  className="bg-green-400
+                        hover:bg-green-500
+                        text-white font-bold py-1 px-4 rounded
+              "
+                  onClick={goToPlant}
+                >
+                  Plants
+                </button>
+                <button
+                  className={`bg-blue-400 hover:bg-blue-500 text-white font-bold py-1 px-4 rounded
+          ${users.length > 0 ? `visible` : `hidden`}
+          `}
+                  onClick={goToUser}
+                >
+                  Users
+                </button>
+              </div>
+            </div>
+            <div className="flex gap-1 border-b-2 border-slate-300 pb-2">
+              <p>Filter by: </p>
+              {speciesButton(searchTerm)}
+            </div>
+          </div>
+        </div>
       </div>
-      <div
-        className="            "
-        // backdrop-filter backdrop-blur-md
-        // bg-opacity-50 bg-green-200"
-      >
-        <h2
-          ref={plantRef}
-          className={`   ${uniquePlants.length < 1 ? "hidden" : ""} `}
+      <div className="">
+        <p
+          className={`${uniquePlants.length < 1 ? "hidden" : ""} 
+          text-xl text-green-500 text-center
+          bg-yellow-100
+          text-shadow-sm
+          shadow-md
+          w-[100%]
+          p-2
+        `}
         >
-          {" "}
-          User's personal plants related to {searchTerm}:{" "}
-        </h2>
+          Community plants related to `{searchTerm}`
+        </p>
         <div
           className={`border-slate-300 border rounded-xl p-2 m-2
             items-center justify-center
@@ -239,7 +212,8 @@ export default function SearchResult({
                     border
                     xs:h-[40vh] xs:w-[50vw] 
                     sm:h-[40vh] md:h-[40vh] lg:h-80
-                    sm:w-[40vw] md:w-[35vw] md:max-w-80 lg:w-80 xl:w-80
+                    sm:w-[40vw] md:w-[30vw] md:max-w-70 lg:w-80 xl:w-80
+                    lg:max-w-80
                     sm:max-w-[80]
                     "
                     />
@@ -282,7 +256,16 @@ export default function SearchResult({
             <p>No plants found related to `{searchTerm}`</p>
           )}
         </div>
-        <h2 ref={userRef}> Users </h2>
+        <h2
+          ref={userRef}
+          className="text-2xl text-yellow-100 text-center bg-green-200
+          shadow-xl
+          text-shadow-sm
+          p-2
+          "
+        >
+          Users
+        </h2>
         <div
           className=" border-slate-300 border
                   rounded-xl p-2 m-2
@@ -354,7 +337,8 @@ export default function SearchResult({
                     border
                     xs:h-[40vh] xs:w-[50vw] 
                     sm:h-[40vh] md:h-[40vh] lg:h-80
-                    sm:w-[40vw] md:w-[35vw] md:max-w-80 lg:w-80 xl:w-80
+                    sm:w-[40vw] md:w-[30vw] md:max-w-70 lg:w-80 xl:w-80
+                    lg:max-w-80
                     sm:max-w-[80]
                     "
                       />
@@ -364,7 +348,8 @@ export default function SearchResult({
                   <p>
                     {user._count?.ownedPlants ? (
                       <span>
-                        {user._count.ownedPlants} {"plants 💚"}
+                        {user._count.ownedPlants}{" "}
+                        {user._count.ownedPlants > 1 ? "plants 💚" : "plant 🪴"}
                       </span>
                     ) : (
                       "Sprouting soon 🌱"
@@ -378,6 +363,7 @@ export default function SearchResult({
           )}
         </div>
       </div>
+      {ScrollToTopButton()}
     </div>
   );
 }
