@@ -63,18 +63,22 @@ export default function UserProfile({ user }: Props) {
             <div
               className="
               flex flex-col
+              indent-3
             "
             >
               <p className="text-xl">{collection.name}</p>
               <p className="font-light text-lg">
                 {collection.description || "Check out this collection"}
               </p>
-              {/* <p>{collection.plantContents.length}</p> */}
             </div>
             <div
               id="profileCollectionImage"
-              className="w-[40%]
-               border-red-500  border
+              className="
+                w-[200px] h-[200px]
+                sm:max-w-[300px] sm:max-h-[300px]
+                lg:max-w-[300px] lg:max-h-[300px]
+                xl:max-w-[300px] xl:max-h-[300px]
+                border-2 border-cyan-500
                flex justify-center items-center"
             >
               {collection.plantContents.length > 0 ? (
@@ -95,6 +99,22 @@ export default function UserProfile({ user }: Props) {
           </div>
         );
       }
+    });
+  };
+
+  const plantsToShow = () => {
+    return ownedPlants.map((plant: any) => {
+      return (
+        <div className="flex-row flex">
+          <div className="">
+            <p>{plant.name}</p>
+            <p className="h-[150px] w-[80%]">{plant.description}</p>
+          </div>
+          <div className="w-[200px] h-[200px] border-4">
+            <img src={plant.image} alt="Plant Image" />
+          </div>
+        </div>
+      );
     });
   };
 
@@ -196,7 +216,14 @@ export default function UserProfile({ user }: Props) {
           </p>
         </div>
       </div>
-      {collectionsToShow()}
+      <div>
+        Collection
+        {collectionsToShow()}
+      </div>
+      <div>
+        Plants
+        {plantsToShow()}
+      </div>
     </div>
   );
 }
