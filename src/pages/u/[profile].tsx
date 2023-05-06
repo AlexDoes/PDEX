@@ -7,7 +7,7 @@ import { toTitleCase } from "lib/generalFunctions";
 import avatarImage from "public/images/avatar.jpg";
 import { GiCarousel } from "react-icons/gi";
 import ImageCarousel from "@/components/ImageCarouselComponent";
-import { int } from "aws-sdk/clients/datapipeline";
+import ScreenChecker from "@/components/ScreenChecker";
 
 interface Props {
   user: any;
@@ -46,33 +46,30 @@ export default function UserProfile({ user }: Props) {
     return images;
   };
 
+  const collectionCarousel = () => {};
+
   let boxesToShow = 0;
 
-  const profileTopDisplay =
-    plantCollection.length > 0 && boxesToShow < 3 ? (
-      plantCollection.map((collection: any, boxesToShow: int) => {
+  const collectionsToShow = () => {
+    return plantCollection.map((collection: any) => {
+      if (boxesToShow < 4) {
         boxesToShow++;
-        if (boxesToShow > 4) {
-          return;
-        }
         return (
           <div
-            id="profileCollection"
-            className="border border-black 
-            p-[10px]
-            min-w-[300px] min-h-[250px] flex flex-row justify-between gap-4"
+            className="border-red-500 border-2 flex-row flex
+            items-center justify-between w-[100%] h-[200px]
+          "
           >
-            <div className="w-[60%] flex flex-col justify-center gap-4">
-              <h2 className="text-2xl font-medium">{collection.name}</h2>
-              <p
-                className="overflow-auto text-[12px] h-[50%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md
-                      scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
-                      scrollbar-rounded-sm
-                    "
-              >
-                {collection.description ||
-                  `Hey checkout ${collection.name} great plant collection I made!`}
+            <div
+              className="
+              flex flex-col
+            "
+            >
+              <p className="text-xl">{collection.name}</p>
+              <p className="font-light text-lg">
+                {collection.description || "Check out this collection"}
               </p>
+              {/* <p>{collection.plantContents.length}</p> */}
             </div>
             <div
               id="profileCollectionImage"
@@ -87,116 +84,119 @@ export default function UserProfile({ user }: Props) {
                   })}
                 />
               ) : (
-                <div id="profileCollectionPlantImage">NO IMG</div>
+                <div
+                  id="profileCollectionPlantImage"
+                  className="flex justify-center items-center h-[200px] w-[200px]"
+                >
+                  <div>Coming Soon</div>
+                </div>
               )}
             </div>
           </div>
         );
-      })
-    ) : (
-      <div id="profileCollection" className="border border-black">
-        <h2 className="text-2xl font-medium">No collections yet</h2>
-      </div>
-    );
+      }
+    });
+  };
 
   return (
-    <div id="profileContainer" className="flex grid-cols-2 gap-6 mt-8">
-      <div id="profileLeft" className="border border-black flex flex-col gap-5">
-        <div id="profileImage">
-          <img
-            src={image ? image : avatarImage.src}
-            alt=""
-            className="rounded-full w-[300px] h-[300px] min-h-[300px] min-w-[300px] max-h-[300px] max-w-[300px] object-cover"
-          />
-        </div>
-        <div id="userAndName">
-          <div id="profileName">
-            <h1 className="text-3xl font-medium">{name}</h1>
-          </div>
-          <div id="profileUsername">
-            <h3 className="font-thin text-xl ">{toTitleCase(username)}</h3>
-          </div>
-        </div>
-        <div id="profileDescription">
-          <p>{description}</p>
-        </div>
-      </div>
-      {/* ////////////////////////// */}
+    <div>
+      <ScreenChecker />
       <div
-        id="profileRight"
-        className="w-[60vw] bg-[green] border-8 border-black"
+        className="border-2 border-black 
+      "
       >
-        <div id="profileCollections">
-          <h1 className="text-3xl font-medium">Collections</h1>
+        <div
+          id="usersProfileDisplayImageAndName"
+          className="
+            xs:flex xs: flex-row xs:items-center
+            sm:flex sm:flex-row sm:justify-center sm:items-center
+            border-green-400 border-2
+          "
+        >
           <div
-            id="profileCollectionsList"
+            id="usersProfileDisplayImage"
             className="
-            grid grid-cols-2 gap-4
-            p-[10x]
-            "
+          xs:w-[25] xs:h-[25] XS:rounded-full
+          flex justify-center 
+          sm:flex-row sm:justify-center sm:items-center
+          xs:flex-row xs:justify-center xs:items-center
+          border-2 border-red-300
+          sm:max-w-[300px] sm:max-h-[300px]
+          md:max-w-[300px] md:max-h-[300px]
+          lg:w-[300px] lg:h-[300px]
+          xl:w-[300px] xl:h-[300px]
+        "
           >
-            {profileTopDisplay}
+            <img
+              src={image ? image : avatarImage.src}
+              alt="User Profile Image"
+              className="rounded-full 
+            xs:w-[20vw] xs:h-[20vw]
+            sm:w-[50vw] sm:h-[50vw]
+            md:w-[50vw] md:h-[50vw]
+            sm:max-w-[300px] sm:max-h-[300px]
+            md:max-w-[300px] md:max-h-[300px]
+            lg:w-[300px] lg:h-[300px]
+            xl:w-[300px] xl:h-[300px]
+            "
+            />
           </div>
-          <div>
-            <h1 className="text-3xl font-medium">
-              {name.split(" ")[0] + "'s"} Plants
-            </h1>
+          <div className="flex">
             <div
-              id="profilePlantsList"
               className="
-                p-[10px]
-                grid grid-cols-2 gap-4
-              "
+            "
             >
-              {ownedPlants.map((plant: any) => {
-                return (
-                  <div
-                    id="profilePlant"
-                    className="border border-black flex
-                    min-w-[300px] min-h-[250px] gap-4"
-                  >
-                    <div
-                      id="leftSideOfPlant"
-                      className="flex flex-col h-full justify-center"
-                    >
-                      <div id="profilePlantName">
-                        <h2 className="text-2xl font-medium">{plant.name}</h2>
-                      </div>
-                      <div id="profilePlantSpecies">
-                        <p>{plant.species}</p>
-                      </div>
-                      <div id="plantDescription">
-                        <p
-                          className="overflow-auto text-[12px] h-[40%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md
-                      scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
-                      scrollbar-rounded-sm
-                    "
-                          id="plantDescriptionText"
-                        >
-                          {plant.description}
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      id="profilePlantImage"
-                      className="w-[40%]
-                    border-red-500  border
-                      flex justify-center items-center"
-                    >
-                      <img
-                        src={plant.image}
-                        alt=""
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+              <h1
+                className="
+              text-xl
+              xs:text-2xl
+              "
+              >
+                {toTitleCase(name)}
+              </h1>
+              <h2
+                className="
+              text-lg font-light
+              xs:text-xl
+              "
+              >
+                {toTitleCase(username)}
+              </h2>
             </div>
           </div>
         </div>
+        <div
+          id="profileDescription"
+          className="
+        border-2 border-blue-400
+        xs:mt-2
+        xs:text-xl
+        sm:text-2xl
+        "
+        >
+          {description ? description : "No description"}
+        </div>
+        <div
+          id="profileStats"
+          className="flex flex-row gap-1
+          xs:text-lg
+        "
+        >
+          <p>
+            🪴{" "}
+            {ownedPlants.length === 1
+              ? `1 plant`
+              : `${ownedPlants.length}` + " plants"}
+          </p>
+          <p> • </p>
+          <p>
+            {plantCollection.length === 1
+              ? `1 collection`
+              : `${plantCollection.length}` + " collections"}
+          </p>
+        </div>
       </div>
-      {/* ////////////////////////// */}
+      {collectionsToShow()}
     </div>
   );
 }
