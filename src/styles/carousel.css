@@ -52,7 +52,9 @@
 .carousel {
   position: relative;
   width: 100%;
+  border-radius: 10px;
 }
+
 .carousel * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

@@ -56,30 +56,69 @@ export default function UserProfile({ user }: Props) {
         boxesToShow++;
         return (
           <div
-            className="border-red-500 border-2 flex-row flex
-            items-center justify-between w-[100%] h-[200px]
+            className="flex-row flex
+            items-center justify-between w-[98%] h-full
+            border-slate-300 border rounded-xl p-2
+            bg-opacity-50 bg-green-200
           "
           >
             <div
               className="
-              flex flex-col
-              indent-3
-            "
+                flex flex-col
+                w-full
+                gap-1
+              "
             >
-              <p className="text-xl">{collection.name}</p>
-              <p className="font-light text-lg">
-                {collection.description || "Check out this collection"}
+              <p
+                className="
+                  text-xl indent-3
+                  xl:indent-5
+                "
+              >
+                {collection.name}
               </p>
+              <div className="w-full h-[100px]">
+                <div
+                  className="
+                  h-[100px] 
+                  w-[80%]
+                  xl:w-[95%]
+                  md:w-[95%]
+                  lg:w-[95%]
+                  sm:w-[95%]
+                  "
+                >
+                  <p
+                    className="              
+                      overflow-auto 
+                      font-light
+                      mx-3
+                      xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]
+                      h-full bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md
+                      scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+                      scrollbar-rounded-sm
+                      w-[100%]
+                      "
+                  >
+                    {collection.description || "Check out this collection."}
+                  </p>
+                </div>
+                {/* <div>{collection.plantContents.length} plants</div> */}
+              </div>
             </div>
             <div
               id="profileCollectionImage"
               className="
+                min-w-[200px] min-h-[200px]
+                rounded-lg
                 w-[200px] h-[200px]
                 sm:max-w-[300px] sm:max-h-[300px]
                 lg:max-w-[300px] lg:max-h-[300px]
                 xl:max-w-[300px] xl:max-h-[300px]
-                border-2 border-cyan-500
-               flex justify-center items-center"
+                flex justify-center items-center
+                bg-opacity-50 bg-yellow-200
+                border border-slate-300
+                "
             >
               {collection.plantContents.length > 0 ? (
                 <ImageCarousel
@@ -90,7 +129,8 @@ export default function UserProfile({ user }: Props) {
               ) : (
                 <div
                   id="profileCollectionPlantImage"
-                  className="flex justify-center items-center h-[200px] w-[200px]"
+                  className="flex justify-center items-center h-[200px] w-[200px]
+                  "
                 >
                   <div>Coming Soon</div>
                 </div>
@@ -105,13 +145,62 @@ export default function UserProfile({ user }: Props) {
   const plantsToShow = () => {
     return ownedPlants.map((plant: any) => {
       return (
-        <div className="flex-row flex">
-          <div className="">
-            <p>{plant.name}</p>
-            <p className="h-[150px] w-[80%]">{plant.description}</p>
+        <div
+          className="flex-row flex
+            w-[98%] 
+            border border-slate-300
+            justify-between items-center  
+            bg-opacity-80 bg-orange-100
+            h-full
+            rounded-lg p-2
+          "
+        >
+          <div className="flex flex-col justify-center w-full">
+            <p
+              className="text-xl indent-3
+            xl:indent-5
+            "
+            >
+              {plant.name}
+            </p>
+            <p
+              className="text-lg indent-3 font-extralight italic
+            xl:indent-5
+            "
+            >
+              {plant.species}
+            </p>
+            <div
+              className="h-[100px] 
+                w-[80%]
+                xl:w-[95%]
+                md:w-[95%]
+                lg:w-[95%]
+                sm:w-[95%]
+              "
+            >
+              <p
+                className="
+                  overflow-auto
+                  font-light
+                  mx-3
+                  xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]
+                  h-full bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md
+                  scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+                  scrollbar-rounded-sm
+                  w-[100%]
+                "
+              >
+                {plant.description}
+              </p>
+            </div>
           </div>
-          <div className="w-[200px] h-[200px] border-4">
-            <img src={plant.image} alt="Plant Image" />
+          <div className="w-[200px] h-[200px]">
+            <img
+              className="min-w-[200px] min-h-[200px] max-w-[200px] max-h-[200px] rounded-lg"
+              src={plant.image}
+              alt="Plant Image"
+            />
           </div>
         </div>
       );
@@ -216,13 +305,39 @@ export default function UserProfile({ user }: Props) {
           </p>
         </div>
       </div>
-      <div>
+      <div
+        className="                  
+            bg-opacity-80 bg-orange-100
+            backdrop-filter backdrop-blur-md
+          "
+      >
         Collection
-        {collectionsToShow()}
+        <div
+          className="
+          flex flex-col gap-2
+          items-center
+          py-2
+        "
+        >
+          {collectionsToShow()}
+        </div>
       </div>
-      <div>
+      <div
+        className="
+            w-full
+            bg-opacity-50 bg-green-200
+            backdrop-filter backdrop-blur-md
+            py-2
+      "
+      >
         Plants
-        {plantsToShow()}
+        <div
+          className="flex flex-col gap-1
+          items-center
+        "
+        >
+          {plantsToShow()}
+        </div>
       </div>
     </div>
   );
