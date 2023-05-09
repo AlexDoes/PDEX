@@ -36,18 +36,20 @@ export default function ScreenChecker() {
 
   return (
     <div className="flex flex-row gap-1">
+      Window Size:
       <div
         className="                   
                      xs:text-purple-500
                     sm:text-red-400
                     md:text-blue-400
                     lg:text-green-400"
-      ></div>
-      Window Size: {screenSize()?.toUpperCase()}
-      <p className="text-purple-500">purple xs: {breakPoints.xs}</p>
+      >
+        {screenSize()?.toUpperCase()}
+      </div>
+      {/* <p className="text-purple-500">purple xs: {breakPoints.xs}</p>
       <p className="text-red-500">red sm: {breakPoints.sm}</p>
       <p className="text-blue-500">blue md: {breakPoints.md}</p>
-      <p className="text-green-500">green lg: {breakPoints.lg}</p>
+      <p className="text-green-500">green lg: {breakPoints.lg}</p> */}
     </div>
   );
 }

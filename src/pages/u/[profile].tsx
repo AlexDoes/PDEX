@@ -51,6 +51,22 @@ export default function UserProfile({ user }: Props) {
   let boxesToShow = 0;
 
   const collectionsToShow = () => {
+    if (plantCollection.length === 0) {
+      return (
+        <div
+          className="
+            text-xl font-light
+            max-w-[800px]
+            min-w-[60vw]
+            h-[100px]
+            flex items-center justify-center
+          "
+        >
+          Still currating
+        </div>
+      );
+    }
+
     return plantCollection.map((collection: any) => {
       if (boxesToShow < 4) {
         boxesToShow++;
@@ -60,6 +76,9 @@ export default function UserProfile({ user }: Props) {
             items-center justify-between w-[98%] h-full
             border-slate-300 border rounded-xl p-2
             bg-opacity-50 bg-green-200
+            md:gap-5
+            lg:gap-4
+            xl:gap-1
           "
           >
             <div
@@ -143,6 +162,22 @@ export default function UserProfile({ user }: Props) {
   };
 
   const plantsToShow = () => {
+    if (ownedPlants.length === 0) {
+      return (
+        <div
+          className="
+        text-xl font-light
+        max-w-[800px]
+        min-w-[60vw]
+        h-[100px]
+        flex items-center justify-center
+      "
+        >
+          Sprouting soon 🌱{" "}
+        </div>
+      );
+    }
+
     return ownedPlants.map((plant: any) => {
       return (
         <div
@@ -153,6 +188,9 @@ export default function UserProfile({ user }: Props) {
             bg-opacity-80 bg-orange-100
             h-full
             rounded-lg p-2
+            md:gap-5
+            lg:gap-4
+            xl:gap-1
           "
         >
           <div className="flex flex-col justify-center w-full">
@@ -164,8 +202,9 @@ export default function UserProfile({ user }: Props) {
               {plant.name}
             </p>
             <p
-              className="text-lg indent-3 font-extralight italic
-            xl:indent-5
+              className="text-lg 
+              indent-3 font-extralight italic
+              xl:indent-5
             "
             >
               {plant.species}
@@ -208,49 +247,78 @@ export default function UserProfile({ user }: Props) {
   };
 
   return (
-    <div>
-      <ScreenChecker />
+    <div
+      className="
+      xs:mt-2
+      md:flex md:flex-row md:justify-center mt-5
+      md:gap-2
+    "
+    >
+      <div className="absolute bottom-0 left-0 z-10">
+        <ScreenChecker />
+      </div>
       <div
-        className="border-2 border-black 
-      "
+        className="
+        md:flex md:flex-col
+        gap-2
+        border-2
+        h-full
+        rounded-xl
+        bg-opacity-60 bg-green-100
+        md:p-4
+        "
       >
         <div
           id="usersProfileDisplayImageAndName"
           className="
             xs:flex xs: flex-row xs:items-center
             sm:flex sm:flex-row sm:justify-center sm:items-center
-            border-green-400 border-2
+            border-green-400 
+            md:flex md:flex-col md:items-center
+            gap-2 
           "
         >
           <div
             id="usersProfileDisplayImage"
             className="
-          xs:w-[25] xs:h-[25] XS:rounded-full
-          flex justify-center 
-          sm:flex-row sm:justify-center sm:items-center
-          xs:flex-row xs:justify-center xs:items-center
-          border-2 border-red-300
-          sm:max-w-[300px] sm:max-h-[300px]
-          md:max-w-[300px] md:max-h-[300px]
-          lg:w-[300px] lg:h-[300px]
-          xl:w-[300px] xl:h-[300px]
-        "
+              xs:w-[150px] xs:h-[100px]
+              sm:h-full
+              sm:ml-3
+              md:w-full md:h-full
+              xs:mt-5
+              flex justify-center 
+              sm:flex-row sm:justify-center sm:items-center
+              xs:flex-row xs:justify-center xs:items-center
+             border-red-300
+              sm:max-w-[300px] sm:max-h-[300px]
+              md:max-w-[300px] md:max-h-[300px]
+              lg:w-[300px] lg:h-[300px]
+              xl:w-[300px] xl:h-[300px]
+          "
           >
             <img
               src={image ? image : avatarImage.src}
               alt="User Profile Image"
               className="rounded-full 
-            xs:w-[20vw] xs:h-[20vw]
-            sm:w-[50vw] sm:h-[50vw]
-            md:w-[50vw] md:h-[50vw]
-            sm:max-w-[300px] sm:max-h-[300px]
-            md:max-w-[300px] md:max-h-[300px]
-            lg:w-[300px] lg:h-[300px]
-            xl:w-[300px] xl:h-[300px]
+                xs:w-[20vw] xs:h-[20vw]
+                sm:w-[20vw] sm:h-[20vw]
+                md:w-[50vw] md:h-[50vw]
+                sm:max-w-[300px] sm:max-h-[300px]
+                md:max-w-[300px] md:max-h-[300px]
+                lg:w-[300px] lg:h-[300px]
+                xl:w-[300px] xl:h-[300px]
             "
             />
           </div>
-          <div className="flex">
+          <div
+            className="
+            flex 
+            md:justify-start md:items-start
+            w-full
+            sm:ml-4
+            md:ml-0
+          "
+          >
             <div
               className="
             "
@@ -265,7 +333,7 @@ export default function UserProfile({ user }: Props) {
               </h1>
               <h2
                 className="
-              text-lg font-light
+              text-lg font-extralight
               xs:text-xl
               "
               >
@@ -277,66 +345,107 @@ export default function UserProfile({ user }: Props) {
         <div
           id="profileDescription"
           className="
-        border-2 border-blue-400
-        xs:mt-2
-        xs:text-xl
-        sm:text-2xl
+            font-light
+            xs:mt-2
+            xs:text-xl
+            sm:text-2xl
+            md:text-xl
         "
         >
           {description ? description : "No description"}
         </div>
         <div
           id="profileStats"
-          className="flex flex-row gap-1
+          className="
+          md:mt-2
+          flex flex-row gap-1
           xs:text-lg
-        "
+          font-extralight
+          w-full
+          xs:mb-2
+          "
         >
-          <p>
+          <div>
             🪴{" "}
             {ownedPlants.length === 1
               ? `1 plant`
               : `${ownedPlants.length}` + " plants"}
-          </p>
+          </div>
           <p> • </p>
-          <p>
+          <div>
             {plantCollection.length === 1
               ? `1 collection`
               : `${plantCollection.length}` + " collections"}
-          </p>
+          </div>
         </div>
       </div>
-      <div
-        className="                  
-            bg-opacity-80 bg-orange-100
-            backdrop-filter backdrop-blur-md
-          "
-      >
-        Collection
+      <div>
         <div
-          className="
+          className="                  
+        bg-opacity-80 bg-orange-100
+        backdrop-filter backdrop-blur-md
+        border border-slate-300
+        md:rounded-xl
+        xs:rounded-t-xl
+        "
+        >
+          <div
+            className="
+            xs:text-2xl
+            text-xl flex
+            justify-center items-center
+            border-b-2
+            py-1
+            border-cyan-300
+            w-[90%]
+            mx-auto
+          "
+          >
+            Collections
+          </div>
+          <div
+            className="
           flex flex-col gap-2
           items-center
           py-2
-        "
-        >
-          {collectionsToShow()}
+          "
+          >
+            {collectionsToShow()}
+          </div>
         </div>
-      </div>
-      <div
-        className="
-            w-full
-            bg-opacity-50 bg-green-200
-            backdrop-filter backdrop-blur-md
-            py-2
-      "
-      >
-        Plants
         <div
-          className="flex flex-col gap-1
-          items-center
+          className="
+        w-full
+        bg-opacity-60 bg-green-200
+        backdrop-filter backdrop-blur-md
+        py-2
+        border border-slate-300
+        md:rounded-xl
+        xs:rounded-b-xl
         "
         >
-          {plantsToShow()}
+          <div
+            className="
+                      xs:text-2xl
+                      text-xl flex
+                      justify-center items-center
+                      border-b-2
+                      py-1
+                      border-cyan-300
+                      w-[90%]
+                      mx-auto
+                    "
+          >
+            Plants
+          </div>
+          <div
+            className="
+              flex flex-col gap-1
+              items-center py-2
+            "
+          >
+            {plantsToShow()}
+          </div>
         </div>
       </div>
     </div>
