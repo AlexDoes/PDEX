@@ -41,8 +41,8 @@ export default function Splash(Data: Props) {
 
   return (
     <>
-      <div className="w-full">
-        <div className="flex flex-row w-full">
+      <div className="w-full ">
+        <div className="flex flex-row w-full ">
           <div
             id="leftSplash"
             className="w-[45%] 

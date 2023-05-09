@@ -52,15 +52,22 @@ export default function UpdateDataComponent({
   };
 
   return (
-    <div>
-      <Button
+    <div className="mt-2">
+      {/* <Button
         variant="outlined"
         color="primary"
-        className="w-60"
+        className="w-60 border border-red-500"
         onClick={handleOpen}
       >
         Update {field}
-      </Button>
+      </Button> */}
+
+      <button
+        className="  w-[200px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-slate-400  font-bold"
+        onClick={handleOpen}
+      >
+        Update {field}
+      </button>
       <Dialog className="" open={open} onClose={handleClose}>
         <div className="bg-[#d5ffdd] text-[#e8ded1] font-outline-2">
           <DialogTitle className="p-2 mt-2">
