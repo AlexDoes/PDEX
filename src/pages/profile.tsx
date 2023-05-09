@@ -38,6 +38,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [editPhoto, setEditPhoto] = useState<boolean>(false);
+  const [upload, setUpload] = useState<boolean>(false);
 
   const [fieldsChangeButton, setFieldsChangeButton] = useState<fieldState>({
     nickname: false,
@@ -86,14 +87,31 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
     setImageUrl(url);
     await updateImage({ userInfo, userId }, url, reload);
     setEditPhoto(false);
+    setUpload(false);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setImage(e.target.files[0]);
+      setUpload(true);
+    } else if (e.target.files && e.target.files.length === 0) {
+      setUpload(false);
     }
   };
 
+  // console.log(upload);
+  const EditPhoto = () => {
+    console.log("clicked");
+    setEditPhoto(true);
+  };
+
+  const handleClosePhotoUploadButton = (e: any) => {
+    e.preventDefault();
+    console.log("close photo upload button");
+    setEditPhoto(false);
+  };
+
+  console.log(editPhoto);
   return (
     <>
       <div className=" w-[90vw] h-[80vh] justify-center flex mt-10">
@@ -104,39 +122,57 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
           <div className="  flex flex-col justify-center items-center">
             <div className="h-full w-full flex flex-col justify-center items-center relative">
               <img
-                className="h-64 w-64 w object-cover rounded-full border border-black"
+                className="h-64 w-64 w object-cover rounded-full  "
                 src={
                   userInfo.image
                     ? userInfo.image
                     : "https://images.unsplash.com/photo-1634926878768-2a5b3c42f139?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=912&q=80"
                 }
               />
-              <div
-                onClick={() => setEditPhoto(!editPhoto)}
-                className="bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1 absolute bottom-2  mr-32 "
-              >
-                Edit
-                {editPhoto && (
-                  <form className="" onSubmit={handleSubmitForm}>
-                    <div>
-                      <label htmlFor="profilePhoto" className="">
-                        <input
-                          id="profilePhoto"
-                          type="file"
-                          className="text-transparent "
-                          onChange={handleImageChange}
-                          placeholder="hi"
-                        />
-                      </label>
-                    </div>
+              <div className="absolute bottom-2 mr-32 h-[30px] w-[60px]">
+                <div
+                  className="bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1 "
+                  onClick={EditPhoto}
+                >
+                  Edit
+                </div>
 
-                    <button
-                      className="text-black border border-black font-bold text-center w-[99px]"
-                      type="submit"
-                    >
-                      Upload
-                    </button>
-                  </form>
+                {editPhoto && (
+                  <div className=" w-[99px]">
+                    <form className=" " onSubmit={handleSubmitForm}>
+                      <div className="flex flex-row ">
+                        <label className="flex flex-row  ">
+                          <input
+                            type="file"
+                            className=" cursor-pointer"
+                            onChange={handleImageChange}
+                            accept="image/*"
+                            multiple={false}
+                            Data-ButtonText="Select images"
+                          />
+                        </label>
+                      </div>
+
+                      <div className="flex flex-row gap-2 w-[200px]">
+                        {upload && (
+                          <button
+                            onClick={() => handleClosePhotoUploadButton}
+                            className="bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1  "
+                            type="submit"
+                          >
+                            Upload
+                          </button>
+                        )}
+                        <button
+                          className="bg-red-400 hover:bg-red-500   cursor-pointer shadow-lg font-bold h-[30px] w-[60px] rounded-md  text-white  text-center py-1   "
+                          onClick={handleClosePhotoUploadButton}
+                        >
+                          {" "}
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 )}
               </div>
             </div>
