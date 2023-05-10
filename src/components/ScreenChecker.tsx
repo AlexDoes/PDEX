@@ -35,7 +35,7 @@ export default function ScreenChecker() {
   };
 
   return (
-    <div className="flex flex-row gap-1">
+    <div className="flex flex-row gap-1 fixed bottom-0 z-50 left-0">
       Window Size:
       <div
         className="                   

@@ -119,12 +119,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
             }
           />
           <form onSubmit={handleSubmitForm}>
-            <input
-              type="file"
-              onChange={handleImageChange}
-              accept="image/*"
-              multiple={false}
-            />
+            <input type="file" onChange={handleImageChange} />
             <button type="submit">Upload</button>
           </form>
         </div>

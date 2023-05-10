@@ -19,12 +19,17 @@ model User {
   emailVerified   DateTime?
   image           String?
   ownedPlants     UniquePlant[]     @relation("UniquePlants")
-  favoritePlants  Favorites[]
   plantCollection PlantCollection[]
   accounts        Account[]
   sessions        Session[]
-  UniquePlant     UniquePlant?      @relation(fields: [uniquePlantId], references: [id])
   uniquePlantId   String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @default(now()) @updatedAt
+  UniquePlant     UniquePlant[]
+  Like            Like[]
+  Comments        Comments[]
+  Following       Follows[]         @relation("follower")
+  Follower        Follows[]         @relation("following")
 
   @@index([email], name: "email")
 }
@@ -41,6 +46,8 @@ model Plant {
   species         String?
   water           String?
   light           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
 }
 
 model UniquePlant {
@@ -56,23 +63,19 @@ model UniquePlant {
   ownerId              String
   species2             String?
   normalized_species2  String?
-  favoritedBy          User[]
   collectionsPartOf    PlantCollection[]
   plantHeight          String?
   plantWidth           String?
   plantDepth           String?
   plantWeight          String?
-  Favorites            Favorites[]
   ImageOrderCollection ImageOrderCollection[]
   Leaves               Leaves[]
-}
-
-model Favorites {
-  id      String      @id @default(cuid())
-  plantId String
-  userId  String
-  plant   UniquePlant @relation(fields: [plantId], references: [id])
-  user    User        @relation(fields: [userId], references: [id])
+  Comments             Comments[]
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @default(now()) @updatedAt
+  likes                Like[]
+  userId               String?
+  User                 User?                  @relation(fields: [userId], references: [id])
 }
 
 model PlantCollection {
@@ -85,6 +88,10 @@ model PlantCollection {
   description          String?
   ImageOrderCollection ImageOrderCollection[]
   weight               Int                    @default(0)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @default(now()) @updatedAt
+  likes                Like[]
+  Comments             Comments[]
 }
 
 model ImageOrderCollection {
@@ -103,12 +110,28 @@ model Leaves {
   image       String?
   plant       UniquePlant @relation(fields: [plantId], references: [id])
   plantId     String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
 }
 
 enum Role {
   USER
   EDITOR
   ADMIN
+}
+
+model Comments {
+  id           String           @id @default(cuid())
+  text         String
+  author       User             @relation(fields: [authorId], references: [id])
+  plant        UniquePlant?     @relation(fields: [plantId], references: [id])
+  collection   PlantCollection? @relation(fields: [collectionId], references: [id])
+  authorId     String
+  plantId      String?
+  collectionId String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @default(now()) @updatedAt
+  Like         Like[]
 }
 
 model Account {
@@ -144,4 +167,30 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Like {
+  id           String           @id @default(cuid())
+  User         User             @relation(fields: [userId], references: [id])
+  collection   PlantCollection? @relation(fields: [collectionId], references: [id])
+  plants       UniquePlant?     @relation(fields: [plantId], references: [id])
+  userId       String
+  collectionId String?
+  plantId      String?
+  isFavorite   Boolean          @default(false)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @default(now()) @updatedAt
+  Comments     Comments?        @relation(fields: [commentsId], references: [id])
+  commentsId   String?
+
+  @@unique([plantId, collectionId, userId])
+}
+
+model Follows {
+  follower    User   @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following   User   @relation("following", fields: [followingId], references: [id])
+  followingId String
+
+  @@id([followerId, followingId])
 }

@@ -254,9 +254,7 @@ export default function UserProfile({ user }: Props) {
       md:gap-2
     "
     >
-      <div className="absolute bottom-0 left-0 z-10">
-        <ScreenChecker />
-      </div>
+      <ScreenChecker />
       <div
         className="
         md:flex md:flex-col
@@ -469,7 +467,6 @@ export async function getServerSideProps(context: any) {
         email: true,
         image: true,
         description: true,
-        favoritePlants: true,
         ownedPlants: {
           select: {
             id: true,
@@ -519,6 +516,41 @@ export async function getServerSideProps(context: any) {
         email: true,
         image: true,
         description: true,
+        ownedPlants: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+            description: true,
+            species: true,
+            species2: true,
+            plantHeight: true,
+            plantWidth: true,
+            plantDepth: true,
+            plantWeight: true,
+          },
+        },
+        plantCollection: {
+          select: {
+            id: true,
+            name: true,
+            description: true,
+            plantContents: {
+              select: {
+                id: true,
+                name: true,
+                image: true,
+                description: true,
+                species: true,
+                species2: true,
+                plantHeight: true,
+                plantWidth: true,
+                plantDepth: true,
+                plantWeight: true,
+              },
+            },
+          },
+        },
       },
     });
   }
