@@ -229,7 +229,7 @@ export default function NavBarSearchBar({}) {
             placeholder="Search"
             value={searchText}
             onChange={handleOnChange}
-            className="w-[40vw]"
+            className="w-[40vw]  "
             tabIndex={0}
             ref={(input) => input && input.focus()}
           />

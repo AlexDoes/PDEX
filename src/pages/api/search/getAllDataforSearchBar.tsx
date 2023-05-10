@@ -37,7 +37,7 @@ export default async function handler(
   const userSet = new Set<string>();
 
   uniquePlant.map((item) => {
-    plantSet.add(toTitleCase(item.name));
+    item.name && plantSet.add(toTitleCase(item.name));
   });
 
   species.map((item) => {

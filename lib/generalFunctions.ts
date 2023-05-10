@@ -1,6 +1,7 @@
 export function toTitleCase(str: string) {
   if (!str) return str;
   const res = str
+    .trim()
     .toLowerCase()
     .split(" ")
     .map(function (word) {

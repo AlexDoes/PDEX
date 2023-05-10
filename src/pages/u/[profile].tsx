@@ -57,6 +57,7 @@ export default function UserProfile({ user }: Props) {
     if (plantCollection.length === 0) {
       return (
         <div
+          key={Math.random() * 1000000000}
           className="
             text-xl font-light
             max-w-[800px]
@@ -75,6 +76,7 @@ export default function UserProfile({ user }: Props) {
         boxesToShow++;
         return (
           <div
+            key={"bts" + boxesToShow}
             className="flex-row flex
             items-center justify-between w-[98%] h-full
             border-slate-300 border rounded-xl p-2
@@ -168,6 +170,7 @@ export default function UserProfile({ user }: Props) {
     if (ownedPlants.length === 0) {
       return (
         <div
+ 
           className="
         text-xl font-light
         max-w-[800px]
@@ -184,6 +187,7 @@ export default function UserProfile({ user }: Props) {
     return ownedPlants.map((plant: any) => {
       return (
         <div
+          key={plant.name}
           className="flex-row flex
             w-[98%] 
             border border-slate-300
@@ -267,6 +271,7 @@ export default function UserProfile({ user }: Props) {
         rounded-xl
         bg-opacity-60 bg-green-100
         md:p-4
+        max-w-[500px]
         "
       >
         <div
@@ -380,7 +385,7 @@ export default function UserProfile({ user }: Props) {
           </div>
         </div>
       </div>
-      <div>
+      <div className="border border-black w-[75%]">
         <div
           className="                  
         bg-opacity-80 bg-orange-100

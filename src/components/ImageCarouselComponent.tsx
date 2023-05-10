@@ -8,7 +8,7 @@ export default function ImageCarousel({ images }: CarouselProps) {
   return (
     <Carousel showThumbs={false} showStatus={false} infiniteLoop>
       {images.map((image, index) => (
-        <div key={{ image } + String({ index })}>
+        <div key={{ image } + String(Math.random() * 1000000000)}>
           <img
             src={image}
             alt={`Image ${index}`}
