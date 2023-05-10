@@ -432,7 +432,7 @@ export async function getServerSideProps(context: any) {
   return {
     props: {
       searchTerm,
-      uniquePlants,
+      uniquePlants: JSON.parse(JSON.stringify(uniquePlants)),
       users,
     },
   };

@@ -50,7 +50,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      collection,
+      collection: JSON.parse(JSON.stringify(collection)),
     },
   };
 }

@@ -38,6 +38,12 @@ export default function MyCollections({
 
   return (
     <div>
+      {!showForm && (
+        <button onClick={() => setShowForm(true)}>Add a plant</button>
+      )}
+      {showForm && (
+        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
+      )}
       <h1>My plants {} </h1>
       <ul>
         {items.map((item: any) => (
@@ -53,6 +59,7 @@ export default function MyCollections({
               </p>
               <p>Plant ID: {item.id.toUpperCase()}</p>
               <p>Owner ID: {item.ownedBy.name}</p>
+              <p>Species: {item.species}</p>
               <img src={item.image} className="h-[200px] w-[200px]"></img>
             </div>
             <div className="flex justify-end">
@@ -94,6 +101,11 @@ export async function getServerSideProps(context: any) {
     where: {
       ownerId: String(userId),
     },
+    orderBy: [
+      {
+        createdAt: "asc",
+      },
+    ],
     include: {
       ownedBy: {
         select: {
@@ -107,7 +119,7 @@ export async function getServerSideProps(context: any) {
     props: {
       session,
       userId,
-      items,
+      items: JSON.parse(JSON.stringify(items)),
       username,
     },
   };

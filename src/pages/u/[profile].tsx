@@ -26,6 +26,9 @@ interface User {
 }
 
 export default function UserProfile({ user }: Props) {
+  if (!user) {
+    return <div>The princess isn't in this castle.</div>;
+  }
   const {
     id,
     username,

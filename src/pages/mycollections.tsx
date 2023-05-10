@@ -154,7 +154,7 @@ export async function getServerSideProps(context: any) {
     props: {
       session,
       userId,
-      items,
+      items: JSON.parse(JSON.stringify(items)),
     },
   };
 }

@@ -38,16 +38,16 @@ export async function getStaticProps() {
     },
   });
 
-  // const users = await prisma.user.findMany({
-  //   select: {
-  //     username: true,
-  //   },
-  // });
+  const users = await prisma.user.findMany({
+    select: {
+      username: true,
+    },
+  });
 
   return {
     props: {
       speciesInDatabase,
-      // users,
+      users,
     },
   };
 }
