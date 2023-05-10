@@ -1,5 +1,6 @@
 import SearchBar from "@/components/NewSearchBar";
 import { useState } from "react";
+import NavBarSearchBar from "@/components/NavBarSearchbarPrefetch";
 
 interface props {
   speciesInDatabase: any;
@@ -15,12 +16,6 @@ export default function TestSite(props: props) {
     UniqueSpecies.add(specie);
   });
 
-  // console.log(props.users);
-  // props.users.map((user: any) => {
-  //   const username = user.username;
-  //   user.username && UniqueSpecies.add(username);
-  // });
-
   const SUGGESTIONS: string[] = Array.from(UniqueSpecies);
 
   function handleChange(entry: any) {
@@ -29,8 +24,9 @@ export default function TestSite(props: props) {
 
   return (
     <>
-      {text}
-      <SearchBar data={SUGGESTIONS} onChange={handleChange} width="w-[20vw]" />
+      {/* {text} */}
+      {/* <SearchBar data={SUGGESTIONS} onChange={handleChange} width="w-[20vw]" /> */}
+      {/* <NavBarSearchBar /> */}
     </>
   );
 }
@@ -42,16 +38,16 @@ export async function getStaticProps() {
     },
   });
 
-  // const users = await prisma.user.findMany({
-  //   select: {
-  //     username: true,
-  //   },
-  // });
+  const users = await prisma.user.findMany({
+    select: {
+      username: true,
+    },
+  });
 
   return {
     props: {
       speciesInDatabase,
-      // users,
+      users,
     },
   };
 }

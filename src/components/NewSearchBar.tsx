@@ -7,7 +7,7 @@ interface Props {
   onChange: (entry: string) => void;
 }
 
-export default function SearchBar({ data, width, onChange }: Props) {
+export default function NewSearchBar({ data, width, onChange }: Props) {
   const [searchText, setSearchText] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
@@ -17,6 +17,11 @@ export default function SearchBar({ data, width, onChange }: Props) {
     setSearchText(input);
     const newSuggestions = getSuggestions(input);
     setSuggestions(newSuggestions);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const input = e.target.value;
   };
 
   const getSuggestions = (input: string) => {
@@ -73,14 +78,11 @@ export default function SearchBar({ data, width, onChange }: Props) {
       <div className="flex flex-row justify-center items-center gap-2">
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Plant Species"
           value={searchText}
           onChange={handleOnChange}
           className={width}
         />
-        <button>
-          <FaSearch />
-        </button>
       </div>
       {renderSuggestions()}
     </div>

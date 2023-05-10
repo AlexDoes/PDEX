@@ -6,10 +6,14 @@ import Image from "next/image";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineGithub } from "react-icons/ai";
+import { toast } from "react-toastify";
+import { error } from "console";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [noUser, setNoUser] = useState<any>("");
+  const [wrongPassword, setWrongPassword] = useState("");
   const router = useRouter();
   const { data: session, status } = useSession();
   const [showPassword, setShowPassword] = useState(false);
@@ -28,17 +32,33 @@ const SignInPage = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setNoUser("");
+    setWrongPassword("");
+    const standardizedEmail = email.toLowerCase();
 
     const authenticate = await signIn("credentials", {
-      email,
-      password,
+      email: standardizedEmail,
+      password: password,
+      redirect: false,
       callbackUrl: "/",
     });
+    console.log(authenticate);
 
     if (authenticate?.error) {
-      console.log(authenticate.error);
+      const error = JSON.parse(authenticate.error);
+      toast.error(error.message);
+      switch (error.code) {
+        case "NO_USER":
+          setNoUser("No account is associated with this email");
+          break;
+        case "WRONG_PASSWORD":
+          setWrongPassword("Wrong password combination");
+          break;
+        default:
+          break;
+      }
     } else {
-      console.log("success");
+      console.log("Successfully logged in");
     }
   };
 
@@ -73,7 +93,11 @@ const SignInPage = () => {
       </div>
       <div
         id="loginForm"
-        className=" flex flex-col  bg-[rgb(255,255,255)] min-w-[400px]  min-h-[693px] rounded-3xl justify-center items-center mt-[20vh] mb-[20vh] "
+        // change rgba to < 1 for opaque and blur
+        className=" flex flex-col 
+        bg-[rgba(255,255,255,1)]
+        backdrop-blur-md 
+        min-w-[400px]  min-h-[693px] rounded-3xl justify-center items-center mt-[20vh] mb-[20vh] "
       >
         <div
           id="logo"
@@ -112,6 +136,9 @@ const SignInPage = () => {
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col w-full gap-[14px]  ">
+              {noUser && (
+                <div className="text-red-500 font-thin"> {noUser} </div>
+              )}
               <input
                 className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace]  min-h-[52px] text-black"
                 type="email"
@@ -121,6 +148,9 @@ const SignInPage = () => {
                 // required
               />
 
+              {wrongPassword && (
+                <div className="text-red-500 font-thin"> {wrongPassword} </div>
+              )}
               <div className="relative">
                 <input
                   className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] min-h-[52px] text-black"

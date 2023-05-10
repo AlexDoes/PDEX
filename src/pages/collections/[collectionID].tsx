@@ -43,7 +43,6 @@ interface PlantsProps {
 }
 
 export default function ThisCollection({
-  plants,
   plantContentsData,
   userId,
   usersUniquePlants,
@@ -90,7 +89,7 @@ export default function ThisCollection({
     <div>
       {showAddPlantForm}
       <h1 className="text-cyan-500 underline text-lg">
-        {plants[0].name}'s content
+        {plantContentsData.name}'s content
       </h1>
 
       <ul>
@@ -138,16 +137,6 @@ export async function getServerSideProps(context: any) {
 
   const userId = (session.user as User).id;
 
-  const plants = await prisma.plantCollection.findMany({
-    where: {
-      id: String(collectionID),
-    },
-    include: {
-      plantContents: {},
-      owner: true,
-    },
-  });
-
   const plantContentsData = await prisma.plantCollection.findUnique({
     where: {
       id: String(collectionID),
@@ -172,11 +161,10 @@ export async function getServerSideProps(context: any) {
 
   return {
     props: {
-      plants,
       userId,
-      plantContentsData,
-      usersUniquePlants,
-      collectionID,
+      plantContentsData: JSON.parse(JSON.stringify(plantContentsData)),
+      usersUniquePlants: JSON.parse(JSON.stringify(usersUniquePlants)),
+      collectionID: String(collectionID),
     },
   };
 }

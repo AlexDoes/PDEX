@@ -75,7 +75,7 @@ export async function getServerSideProps(context: any) {
 
   return {
     props: {
-      plant,
+      plant: JSON.parse(JSON.stringify(plant)),
       userId,
     },
   };

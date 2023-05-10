@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "lib/prisma";
 import { compare } from "bcrypt";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -22,8 +23,14 @@ export default NextAuth({
           placeholder: "Your password",
         },
       },
-      async authorize(credentials) {
+      async authorize(credentials: any, req) {
         if (!credentials?.email || !credentials.password) {
+          throw new Error(
+            JSON.stringify({
+              message: "Please enter your email and password",
+              code: "NO_CREDENTIALS",
+            })
+          );
           return null;
         }
 
@@ -34,6 +41,24 @@ export default NextAuth({
         });
 
         if (!user) {
+          // throw new Error("No account associated with that email was found");
+          throw new Error(
+            JSON.stringify({
+              message: "No account associated with that email was found",
+              code: "NO_USER",
+            })
+          );
+          return null;
+        }
+
+        if (!user.password) {
+          throw new Error(
+            JSON.stringify({
+              message:
+                "No password set for this account, please sign in with Google or Github.",
+              code: "NO_PASSWORD",
+            })
+          );
           return null;
         }
 
@@ -43,9 +68,14 @@ export default NextAuth({
         );
 
         if (!passwordValid) {
+          throw new Error(
+            JSON.stringify({
+              message: "The password doesn't match the account",
+              code: "WRONG_PASSWORD",
+            })
+          );
           return null;
         }
-
         return {
           id: user.id + "",
           email: user.email,
@@ -61,7 +91,7 @@ export default NextAuth({
   ],
   callbacks: {
     async session({ session, token, user }) {
-      // session.accessToken = token.accessToken; //errror here
+      // session.accessToken = token.accessToken; //error here
       // console.log("Session callback", { session, token, user });
       // The return type will match the one returned in `useSession()`
       return {

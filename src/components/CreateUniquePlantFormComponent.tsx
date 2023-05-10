@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { toast } from "react-toastify";
 import s3 from "lib/aws";
 import { toTitleCase } from "lib/generalFunctions";
 import prisma from "lib/prisma";
+import NewSearchBar from "./NewSearchBar";
 
 interface User {
   id: string;
@@ -70,8 +70,12 @@ const errorsMap = {
 };
 
 export default function CreateUniquePlant(props: any) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const userId = props.userId;
   const onSubmitFunction = props.onSubmit;
+  const [species, setSpecies] = useState<string>("");
+  const [species2, setSpecies2] = useState<string>("");
+
   // // // // // // // // // // //
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string>("");
@@ -134,7 +138,7 @@ export default function CreateUniquePlant(props: any) {
       });
       return;
     }
-    data.plantSpecies = toTitleCase(data.plantSpecies);
+    data.plantSpecies = toTitleCase(species);
     data.plantSubspecies = toTitleCase(data.plantSubspecies);
     data.normalized_species = toTitleCase(data.plantSpecies);
     data.normalized_species2 = toTitleCase(data.plantSubspecies);
@@ -158,8 +162,8 @@ export default function CreateUniquePlant(props: any) {
       );
       return;
     }
-    const url = await uploadImage(image);
-    // const url = "https://pdex.s3.amazonaws.com/0_3.png1682803498914";
+    // const url = await uploadImage(image);
+    const url = "https://pdex.s3.amazonaws.com/0_3.png1682803498914";
     data.plantImage = url;
     await createTheUniquePlant(data).then((res) => {
       toast.success(`${data.plantName} created successfully!`, {
@@ -182,6 +186,10 @@ export default function CreateUniquePlant(props: any) {
         Add {field}
       </button>
     );
+  };
+
+  const handleChangeOnForm = (entry: string) => {
+    setSpecies(entry);
   };
 
   return (
@@ -219,12 +227,17 @@ export default function CreateUniquePlant(props: any) {
             // defaultValue={"https://plus.unsplash.com/premium_photo-1665653066799-acafe686fba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"}
           />
         </div>
+        <NewSearchBar
+          data={["monstera albo", "red fern", "bonsai", "snake plant"]}
+          width="w-[20vw]"
+          onChange={handleChangeOnForm}
+        />
         <input
-          placeholder="Plant Species"
-          {...register("plantSpecies", {
-            required: true,
-          })}
-          //   defaultValue={"Plant Species"}
+          placeholder="Plant Species (required)"
+          ref={inputRef}
+          value={species}
+          readOnly
+          required
         />
         {fields.subspecies && (
           <input
@@ -276,7 +289,6 @@ export default function CreateUniquePlant(props: any) {
           placeholder="Plant Description"
           {...register("plantDescription")}
           className="border-2"
-          //   defaultValue={"Testing purposes only"}
         />
         <button type="submit">Submit</button>
       </form>
