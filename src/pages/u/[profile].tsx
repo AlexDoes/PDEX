@@ -170,7 +170,6 @@ export default function UserProfile({ user }: Props) {
     if (ownedPlants.length === 0) {
       return (
         <div
- 
           className="
         text-xl font-light
         max-w-[800px]
@@ -272,6 +271,7 @@ export default function UserProfile({ user }: Props) {
         bg-opacity-60 bg-green-100
         md:p-4
         max-w-[500px]
+        w-[75%]
         "
       >
         <div
