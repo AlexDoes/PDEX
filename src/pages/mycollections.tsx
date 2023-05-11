@@ -11,6 +11,7 @@ import { Transition } from "react-transition-group";
 import { useTransition } from "react";
 import { FaSeedling } from "react-icons/fa";
 import ImageCarousel from "@/components/ImageCarouselComponent";
+import { RiPlantLine } from "react-icons/ri";
 
 interface Collection {
   id: string;
@@ -204,7 +205,10 @@ export default function MyCollections({ items, userId }: CollectionProps) {
       className=" xs:m-0 sm:m-0 w-full border-slate-300 flex flex-col justify-center items-center border pb-4 gap-2 
     backdrop-filter backdrop-blur-sm bg-opacity-50 rounded-xl bg-orange-100"
     >
-      <h1 className="text-3xl flex justify-center mt-4">My Collections</h1>
+      <h1 className="text-3xl flex justify-center mt-4 items-center gap-1">
+        My Collections
+        <RiPlantLine className="text-3xl text-green-400" />
+      </h1>
       <div
         className="                      
                       xs:text-2xl
@@ -255,7 +259,15 @@ export default function MyCollections({ items, userId }: CollectionProps) {
 
       <button
         onClick={handleAddCollectionClick}
-        className="bg-green-300 border-sky-300 border-2 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 hover:bg-green-400"
+        className="bg-green-300 border-sky-300 border rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
+   ease-in-out duration-300
+        hover:bg-[#fffbcc]
+        "
+        //#fffbcc
+        //#389168
+        //#389168
+        //#fffbcc
+        //#ec9e69
       >
         Create a collection <FaSeedling />
       </button>
