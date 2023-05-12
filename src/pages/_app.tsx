@@ -7,8 +7,7 @@ import Head from "next/head";
 import { Inter, Lato } from "@next/font/google";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import dotenv from "dotenv";
-// dotenv.config();
+import ScreenChecker from "@/components/ScreenChecker";
 
 const lato = Lato({ subsets: ["latin"], weight: ["300", "400", "700", "900"] });
 export default function App({ Component, pageProps }: AppProps) {
@@ -24,10 +23,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <SessionProvider session={pageProps.session}>
         <NavBar />
         <div className="" id="center">
-          <div className="w-[90%]">
+          <div className="w-[90%] xs:w-[100%] sm:w-[100%] md:w-[90%] xs:px-3 md:px-0">
             <Component {...pageProps} />
           </div>
         </div>
+        <ScreenChecker />
       </SessionProvider>
     </>
   );

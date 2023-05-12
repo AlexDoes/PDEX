@@ -87,12 +87,13 @@ export default function SearchResult({
 
   const filter = (searchTerm: string, species: string) => {
     if (showPlant) return "";
-    if (species.includes(searchTerm)) {
+    if (species && species.includes(searchTerm)) {
       return "";
     } else {
       return "hidden";
     }
   };
+  
   const showUsers = () => {
     if (users.length) {
     }
@@ -173,31 +174,8 @@ export default function SearchResult({
               <div
                 id="glassBackPlant"
                 key={plant.id}
-                className={`
-              border-2 
-              border-[#c1e1c1] 
-              rounded-xl p-2 m-2
-              pt-4
-              pb-6
-              // bg-orange-100
-              flex 
-              items-center justify-center
-              flex-col
-              xs:w-[80vw]
-              sm:w-[40vw]
-              md:w-[40vw]
-              lg:w-[25vw]
-              hover:scale-105
-              focus:scale-105
-              focus:focus-within:
-              hover:relative
-              hover:transition-all
-              focus:transition-all
-              md:h-min-[492px]
-              snap-center
-              focus:focus-within
-              focus:outline-none
-              ${filter(searchTerm, plant.species)}
+                className={`border-2 border-[#c1e1c1] rounded-xl p-2 m-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[40vw] md:w-[40vw] lg:w-[25vw] hover:scale-105             focus:scale-105 focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[492px] focus:outline-none bg-orange-100
+                ${filter(searchTerm, plant.species)}
             `}
                 tabIndex={0}
               >
@@ -250,7 +228,6 @@ export default function SearchResult({
                     : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
                 </p>
               </div>
-              // </div>
             ))
           ) : (
             <p>No plants found related to `{searchTerm}`</p>

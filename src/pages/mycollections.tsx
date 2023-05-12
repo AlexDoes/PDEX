@@ -97,6 +97,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
             lg:gap-4
             xl:gap-1
           "
+          key={collection.id}
         >
           <div className="flex flex-col w-full gap-1">
             <p className="text-xl indent-3 xl:indent-5">
@@ -131,6 +132,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                       scrollbar-rounded-sm
                       w-full
                       flex flex-col
+                      justify-center
                       "
                 >
                   {collection.plantContents.length > 0 && <p> Contents: </p>}
