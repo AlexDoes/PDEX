@@ -55,6 +55,7 @@ body {
   background-position: fixed;
   background-attachment: fixed;
   min-width: 640px;
+  overflow-x: hidden;
 }
 
 #center {
