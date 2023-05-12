@@ -272,6 +272,8 @@ export default function UserProfile({ user }: Props) {
         md:p-4
         max-w-[500px]
         w-[75%]
+        lg:w-[40%]
+        md:w-[37%]
         "
       >
         <div

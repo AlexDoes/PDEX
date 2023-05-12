@@ -219,6 +219,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                       py-1
                       border-cyan-300
                       w-[100%]
+                      gap-2
                       "
       >
         {collectionsToShow()}
