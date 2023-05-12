@@ -206,12 +206,9 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
             <div>{showChangeButton("name")}</div>
           </div>
           <div className="flex flex-col  items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
-            <label
-              className="bg-[#efe6c1] rounded-md w-[80%] items-center py-2 outline outline-white"
-              htmlFor=""
-            >
+            <p className="bg-[#efe6c1] rounded-md w-[80%] items-center py-2 outline px-5 outline-white">
               Description: {userInfo.description}{" "}
-            </label>
+            </p>
             <div>{showChangeButton("description")}</div>
           </div>
         </div>

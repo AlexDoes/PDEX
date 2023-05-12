@@ -6,6 +6,7 @@ import CreateUniquePlant from "@/components/CreateUniquePlantFormComponent";
 import { useState, useEffect } from "react";
 import DeleteUniquePlantButton from "@/components/DeleteUniquePlantButton";
 import { usePreviousScrollPosition } from "@/components/PreviousScrollPosition";
+import { CSSTransition } from "react-transition-group";
 
 interface User {
   id: string;
@@ -37,13 +38,35 @@ export default function MyCollections({
   };
 
   return (
-    <div>
+    <div className="">
       {!showForm && (
         <button onClick={() => setShowForm(true)}>Add a plant</button>
       )}
-      {showForm && (
+      {/* {showForm && (
         <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
-      )}
+      )} */}
+      <CSSTransition
+        in={showForm}
+        timeout={1000}
+        classNames="fade"
+        unmountOnExit
+        mountOnEnter
+      >
+        <div
+          onClick={onSubmitFromParent}
+          className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] right-0"
+        ></div>
+      </CSSTransition>
+
+      <CSSTransition
+        in={showForm}
+        timeout={1000}
+        classNames="page"
+        unmountOnExit
+        mountOnEnter
+      >
+        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
+      </CSSTransition>
       <h1>My plants {} </h1>
       <ul>
         {items.map((item: any) => (
@@ -75,9 +98,9 @@ export default function MyCollections({
       {!showForm && (
         <button onClick={() => setShowForm(true)}>Add a plant</button>
       )}
-      {showForm && (
+      {/* {showForm && (
         <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
-      )}
+      )} */}
     </div>
   );
 }

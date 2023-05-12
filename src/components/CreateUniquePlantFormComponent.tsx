@@ -194,104 +194,121 @@ export default function CreateUniquePlant(props: any) {
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit((values, e) => {
-          onSubmit(values);
-        })}
-        className="flex flex-col w-[600px] 
-        border-2 border-sky-500
-        gap-1
-        "
+      <div
+        onClick={props.onSubmit}
+        className="border-2 absolute border-blue-500 w-[90vw] flex items-center justify-center  "
       >
-        <input
-          className="outline-dotted outline-2 outline-blue-500"
-          placeholder="Plant Name (required)"
-          {...register("plantName", {
-            required: true,
-            pattern: /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/,
-            maxLength: 32,
-            minLength: 2,
+        <form
+          onSubmit={handleSubmit((values, e) => {
+            onSubmit(values);
           })}
-        />
-        <p className="text-red-500">
-          {errors.plantName?.type &&
-            ({ ...errorsMap.plantName } as any)[errors.plantName.type]}
-        </p>
-        <div className="flex gap-5">
-          <label htmlFor="plantImage">Plant Image</label>
-          <input
-            type="file"
-            placeholder="Plant Image (URL required)"
-            onChange={handleImageChange}
-            required
-            // defaultValue={"https://plus.unsplash.com/premium_photo-1665653066799-acafe686fba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"}
-          />
-        </div>
-        <NewSearchBar
-          data={["monstera albo", "red fern", "bonsai", "snake plant"]}
-          width="w-[20vw]"
-          onChange={handleChangeOnForm}
-        />
-        <input
-          placeholder="Plant Species (required)"
-          ref={inputRef}
-          value={species}
-          readOnly
-          required
-        />
-        {fields.subspecies && (
-          <input
-            placeholder="Plant Subspecies"
-            {...register("plantSubspecies")}
-          />
-        )}
-        {fields.height && (
-          <div>
-            <input
-              type="number"
-              placeholder="Plant Height"
-              {...register("plantHeight", {
-                //   required: true,
-                min: { value: 0, message: "Height must be at least 0" },
-              })}
-              // defaultValue={Number(18)}
+          className="  flex flex-col w-[60vw] max-w-[1200px] h-[80vh]  items-center mt-10
+        border-2 border-red-500 gap-8 rounded-lg gradient-bg-card2-reverse"
+        >
+          <h2 className="text-4xl mt-5 font-bold text-slate-500 ">
+            Add a Plant
+          </h2>
+          <div className="border border-black h-[100%] w-[80%] flex flex-col gap-4">
+            <div className="border border-green-500 flex justify-between">
+              <label className="h-full text-center flex items-center border border-orange-500 px-1">
+                Plant Name
+              </label>
+              <input
+                className="outline-dotted outline-2 outline-blue-500 w-[600px] h-[50px]"
+                placeholder="Plant Name (required)"
+                {...register("plantName", {
+                  required: true,
+                  pattern: /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/,
+                  maxLength: 32,
+                  minLength: 2,
+                })}
+              />
+            </div>
+            <p className="text-red-500">
+              {errors.plantName?.type &&
+                ({ ...errorsMap.plantName } as any)[errors.plantName.type]}
+            </p>
+            <div className="flex gap-5">
+              <label htmlFor="plantImage">Plant Image</label>
+              <input
+                type="file"
+                placeholder="Plant Image (URL required)"
+                onChange={handleImageChange}
+                required
+                // defaultValue={"https://plus.unsplash.com/premium_photo-1665653066799-acafe686fba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"}
+              />
+            </div>
+            <NewSearchBar
+              data={["monstera albo", "red fern", "bonsai", "snake plant"]}
+              width="w-[20vw] "
+              onChange={handleChangeOnForm}
             />
-            <select id="unit" className="border-2" {...register("unit")}>
-              <option value="cm">cm</option>
-              <option value="inches">in</option>
-            </select>
-            {errors && (
-              <p className="text-red-500">{errors.plantHeight?.message}</p>
+            <input
+              placeholder="Plant Species (required)"
+              ref={inputRef}
+              value={species}
+              readOnly
+              required
+              className="border border-red-500 hidden"
+            />
+            {fields.subspecies && (
+              <input
+                placeholder="Plant Subspecies"
+                {...register("plantSubspecies")}
+              />
             )}
-          </div>
-        )}
-        {!fields.height && renderButton("height")}
-        {!fields.subspecies && renderButton("subspecies")}
-        {!fields.width && renderButton("width")}
-        {fields.width && (
-          <div>
-            <input
-              type="number"
-              placeholder="Plant Width"
-              {...register("plantWidth", {
-                //   required: true,
-                min: { value: 0, message: "Height must be at least 0" },
-              })}
-              // defaultValue={18}
+            {fields.height && (
+              <div>
+                <input
+                  type="number"
+                  placeholder="Plant Height"
+                  {...register("plantHeight", {
+                    //   required: true,
+                    min: { value: 0, message: "Height must be at least 0" },
+                  })}
+                  // defaultValue={Number(18)}
+                />
+                <select id="unit" className="border-2" {...register("unit")}>
+                  <option value="cm">cm</option>
+                  <option value="inches">in</option>
+                </select>
+                {errors && (
+                  <p className="text-red-500">{errors.plantHeight?.message}</p>
+                )}
+              </div>
+            )}
+            <div>
+              {!fields.height && renderButton("height")}
+              {!fields.subspecies && renderButton("subspecies")}
+              {!fields.width && renderButton("width")}
+              {fields.width && (
+                <div>
+                  <input
+                    type="number"
+                    placeholder="Plant Width"
+                    {...register("plantWidth", {
+                      //   required: true,
+                      min: { value: 0, message: "Height must be at least 0" },
+                    })}
+                    // defaultValue={18}
+                  />
+                  <select id="unit" className="border-2" {...register("unit2")}>
+                    <option value="cm">cm</option>
+                    <option value="inches">in</option>
+                  </select>
+                </div>
+              )}
+            </div>
+            <textarea
+              placeholder="Plant Description"
+              {...register("plantDescription")}
+              className="border-2 h-[50%] rounded-b-md"
             />
-            <select id="unit" className="border-2" {...register("unit2")}>
-              <option value="cm">cm</option>
-              <option value="inches">in</option>
-            </select>
           </div>
-        )}
-        <textarea
-          placeholder="Plant Description"
-          {...register("plantDescription")}
-          className="border-2"
-        />
-        <button type="submit">Submit</button>
-      </form>
+          <button type="submit">Submit</button>
+          <button onClick={props.onSubmit}>Cancel</button>
+        </form>
+      </div>
     </>
   );
 }
