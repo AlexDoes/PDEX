@@ -71,6 +71,17 @@ export default async function handler(
       prisma.$disconnect();
       res.status(500).json({ message: "Unknown error" });
     }
+  } else if (field === "plantWidth" || field === "plantHeight") {
+    const updatedPlant = await prisma.uniquePlant.update({
+      where: {
+        id: plantId,
+      },
+      data: {
+        [field]: data + " cm",
+      },
+    });
+    prisma.$disconnect();
+    res.status(200).json(updatedPlant);
   } else {
     const updatedPlant = await prisma.uniquePlant.update({
       where: {

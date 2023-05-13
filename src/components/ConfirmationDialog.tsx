@@ -7,6 +7,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
+import { BsFillTrashFill } from "react-icons/bs";
 
 interface ConfirmationDialogProps {
   onConfirm: any;
@@ -33,7 +34,7 @@ const ConfirmationDialog = ({
     },
     deletePlant: {
       message: "delete this plant",
-      button: "Delete plant",
+      button: `<BsFillTrashFill />`,
     },
     deleteCollection: {
       message: "delete this collection",
@@ -52,7 +53,11 @@ const ConfirmationDialog = ({
 
   return (
     <>
-      <Button onClick={handleOpen}>{actions[promptType].button}</Button>
+      <Button onClick={handleOpen} className="">
+        <div className="hover:outline outline-slate-400 rounded-lg p-1 text-red-500 hover:text-red-600">
+          {<BsFillTrashFill className="text-xl" />}
+        </div>
+      </Button>
       <Dialog open={open} onClose={handleClose}>
         <div className="bg-[#ECF87F] text-[#d6ae87] ">
           <DialogTitle>Confirm to {actions[promptType].message}</DialogTitle>

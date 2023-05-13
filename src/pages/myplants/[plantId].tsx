@@ -89,7 +89,7 @@ export default function plantDisplay({ plant, userId }: any) {
   };
 
   return (
-    <div className="bg-red-200 p-4 flex flex-col gap-1">
+    <div className="bg-orange-100 rounded-xl p-10 py-14 flex flex-col gap-1">
       <h1 className="underline text-lg text-green-400 flex items-center justify-center">
         {plantData.name}'s information displayed below{" "}
       </h1>
@@ -99,57 +99,87 @@ export default function plantDisplay({ plant, userId }: any) {
           src={plantData.image}
           alt={plantData.name}
         />
-        <div className="flex flex-col gap-2 border-2 border-cyan-300">
+        <div className="flex flex-col gap-2 border border-cyan-300 rounded-2xl p-3">
           <div className="flex items-center">
             {showChangeButton("name")}
-            <p className="">Name: {plantData.name} </p>
+            <div className="gap-1 flex">
+              Name: <p className="font-light"> {plantData.name}</p>
+            </div>
           </div>
           <div className="flex">
             {showChangeButton("species")}
-            <p>Species: {plantData.species}</p>
+            <div className="gap-1 flex">
+              Species: <p className="font-light"> {plantData.species}</p>
+            </div>
           </div>
           <div className="flex">
             {showChangeButton("species2")}
-            <p>Secondary Species: {plantData.species2 || "None provided"}</p>
+            <div className="gap-1 flex">
+              Secondary Species:{" "}
+              <p className="font-light">
+                {" "}
+                {plantData.species2 || "None provided"}
+              </p>
+            </div>
           </div>
           <div className="flex">
             <div>{showChangeButton("water")}</div>
-            <p>Watering Schedule: {plantData.water || "None provided"}</p>{" "}
+            <div className="gap-1 flex">
+              Watering schedule:{" "}
+              <p className="font-light">
+                {" "}
+                {plantData.water || "None provided"}
+              </p>
+            </div>
           </div>
           <div className="flex">
             <div>{showChangeButton("light")}</div>
-            <p>Sunlight: {plantData.light || "None provided"} </p>{" "}
+            <div className="gap-1 flex">
+              Sunlight:{" "}
+              <p className="font-light">
+                {" "}
+                {plantData.light || "None provided"}
+              </p>
+            </div>
           </div>
           <div className="flex">
             <div>{showChangeButton("plantHeight")}</div>
-            <p>Height: {plantData.plantHeight || "None provided"} </p>{" "}
+            <div className="gap-1 flex">
+              Height:{" "}
+              <p className="font-light">
+                {" "}
+                {plantData.plantHeight || "None provided"}
+              </p>
+            </div>
           </div>
           <div className="flex">
             <div>{showChangeButton("plantWidth")}</div>
-            <p>Width: {plantData.plantWidth || "None provided"} </p>{" "}
-          </div>
-          <div className="flex">
-            <div>{showChangeButton("description")}</div>
-            <p className="text-left">Description:</p>
-            <div className="flex flex-col items-center justify-center">
-              <div className="border w-[95%] p-2">{plantData.description}</div>
+            <div className="gap-1 flex">
+              Width:{" "}
+              <p className="font-light">
+                {" "}
+                {plantData.plantWidth || "None provided"}
+              </p>
             </div>
           </div>
-          {/* {plantData.collectionsPartOf.length > 0 && (
-            <div className="border">
-              <ul>
-                Collections this plant is part of:
-                {plantData.collectionsPartOf.map((collection: MyObject) => (
-                  <li key={collection.id}>{collection.name}</li>
-                ))}
-              </ul>
+          <div className="flex flex-col">
+            <div className="flex">
+              <div>{showChangeButton("description")}</div>
+              <p className="text-left">Description:</p>
             </div>
-          )} */}
-          <DeleteUniquePlantButton
-            uniquePlantId={plantData.id}
-            user={userId}
-            onConfirm={onDelete}
-          />
+            <div className="flex flex-col items-center justify-center pt-2">
+              <div className="border-slate-400 border rounded-xl w-[80%] p-2 font-extralight">
+                {plantData.description || "None provided please add one"}
+              </div>
+            </div>
+          </div>
+          <div className="w-inherit flex justify-end">
+            <DeleteUniquePlantButton
+              uniquePlantId={plantData.id}
+              user={userId}
+              onConfirm={onDelete}
+            />
+          </div>
         </div>
       </div>
     </div>

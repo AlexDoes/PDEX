@@ -24,13 +24,13 @@ interface updateProps {
 }
 
 const map: Myobject = {
-  name: "Name",
-  species: "Species",
-  species2: "Secondary Species",
-  water: "Watering Schedule",
-  light: "Sunlight Required",
-  plantHeight: "Height",
-  plantWidth: "Width",
+  name: "name",
+  species: "species",
+  species2: "secondary Species",
+  water: "watering Schedule",
+  light: "sunlight requirements",
+  plantHeight: "height",
+  plantWidth: "width",
   description: "description",
   image: "Image",
 };
@@ -82,7 +82,7 @@ export default function UpdateDataComponent({
       </Button> */}
 
       <button
-        className=" border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-slate-400 font-bold"
+        className=" border-green-500 rounded-md w-[25px] h-[25px] shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-slate-400 font-bold flex mx-auto my-auto justify-center items-center"
         onClick={handleOpen}
       >
         <SlPencil />
@@ -90,18 +90,23 @@ export default function UpdateDataComponent({
       <Dialog className="" open={open} onClose={handleClose}>
         <div className="bg-[#d5ffdd] text-[#e8ded1] font-outline-2">
           <DialogTitle className="p-2 mt-2">
-            What would you like to change {plantInfo.name}'s {field} to :
+            Update {plantInfo.name}'s {map[field]} to:
           </DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
               margin="dense"
               id="text-input"
-              label="Text Input"
+              label="Input"
+              type={
+                field === "plantHeight" || field === "plantWidth"
+                  ? "number"
+                  : "text"
+              }
               fullWidth
               value={textInputValue}
               onChange={handleTextInputChange}
-              className="opacity-100 text-green-400"
+              className=""
             />
           </DialogContent>
           <DialogActions>
