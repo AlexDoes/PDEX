@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import DeleteUniquePlantButton from "@/components/DeleteUniquePlantButton";
 import { usePreviousScrollPosition } from "@/components/PreviousScrollPosition";
 import { CSSTransition } from "react-transition-group";
+import { RiPlantLine } from "react-icons/ri";
 
 interface User {
   id: string;
@@ -16,12 +17,7 @@ interface User {
   address: string;
 }
 
-export default function MyCollections({
-  items,
-  userId,
-  username,
-  session,
-}: any) {
+export default function MyPlants({ items, userId, username, session }: any) {
   const router = useRouter();
 
   const handleClick = (id: string) => {
@@ -49,29 +45,43 @@ export default function MyCollections({
       xl:flex-row xl:flex-wrap xl:row-3
       backdrop-filter backdrop-blur-md 
       bg-opacity-50 bg-green-200
-      xs:relative z-0
-      ${showForm ? "-z-10" : "z-0"}
+      xs:relative
+      ${showForm ? "-z-20" : "z-0"}
       `}
+        tabIndex={0}
       >
         {items.map((plant: any) => {
           return (
-            <div className=" border-2 border-[#c1e1c1] bg-orange-100 rounded-xl p-2 m-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[55vw] md:w-[40vw] lg:w-[25vw] focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[492px] focus:outline-none overflow-x-hidden">
+            <div
+              className=" border-2 border-[#c1e1c1] bg-orange-100 rounded-xl p-2 m-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[55vw] md:w-[40vw] lg:w-[25vw] focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[492px] focus:outline-none overflow-x-hidden group"
+              tabIndex={0}
+            >
               <div className="relative group flex">
-                <img
-                  src={plant.image}
-                  alt={plant.name}
-                  className="                  border-green-200
+                <Link
+                  onClick={() => handleClick(plant.id)}
+                  href={`/myplants/${plant.id}`}
+                  className="focus:outline-none"
+                >
+                  <img
+                    src={plant.image}
+                    alt={plant.name}
+                    className="
                     rounded-xl
                     border
                     xs:h-[40vh] xs:w-[50vw] 
                     sm:h-[40vh] md:h-[40vh] lg:h-80
                     sm:w-[40vw] md:w-[30vw] md:max-w-70 lg:w-80 xl:w-80
                     lg:max-w-80
-                    sm:max-w-[80] mb-2"
-                />
+                    sm:max-w-[80] mb-2
+                    hover:brightness-90
+                    hover:outline-none
+                    "
+                  />
+                </Link>
                 <div
                   className="absolute bottom-2 left-0 right-0 px-2 py-2 bg-gray-800 opacity-0 transition-opacity ease-in-out duration-100
                   group-hover:opacity-70
+                  group-focus:opacity-70
                   w-[99%]
                   mx-auto
                   rounded-b-xl
@@ -89,11 +99,11 @@ export default function MyCollections({
                       <p>{plant.plantHeight && "H: " + plant.plantHeight}</p>
                       <p>{plant.plantWidth && "W: " + plant.plantWidth}</p>
                     </div>
-                    <p>{plant.plantWeight && plant.plantWeight}</p>
+                    {/* <p>{plant.plantWeight && plant.plantWeight}</p> */}
                   </div>
                 </div>
               </div>
-              <div className=""> {plant.name} </div>
+              <div className="elipsis"> {plant.name} </div>
               <div className="font-light italic">
                 {" "}
                 {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
@@ -158,7 +168,6 @@ export default function MyCollections({
       >
         <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
       </CSSTransition>
-      <h1>My plants {} </h1>
       {/* <ul>
         {items.map((item: any) => (
           <li key={item.id} className="bg-red-300 border-sky-500 border-2">
@@ -186,6 +195,10 @@ export default function MyCollections({
           </li>
         ))}
       </ul> */}
+      <h1 className="text-3xl flex justify-center mt-4 items-center gap-1">
+        My plants
+        <RiPlantLine className="text-3xl text-green-400" />
+      </h1>
       {showPlantsCard()}
       {!showForm && (
         <button onClick={() => setShowForm(true)}>Add a plant</button>

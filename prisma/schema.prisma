@@ -22,10 +22,8 @@ model User {
   plantCollection PlantCollection[]
   accounts        Account[]
   sessions        Session[]
-  uniquePlantId   String?
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @default(now()) @updatedAt
-  UniquePlant     UniquePlant[]
   Like            Like[]
   Comments        Comments[]
   Following       Follows[]         @relation("follower")
@@ -74,8 +72,6 @@ model UniquePlant {
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @default(now()) @updatedAt
   likes                Like[]
-  userId               String?
-  User                 User?                  @relation(fields: [userId], references: [id])
 }
 
 model PlantCollection {
