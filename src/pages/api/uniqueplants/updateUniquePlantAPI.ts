@@ -12,7 +12,6 @@ export default async function handler(
   console.log("reached;");
 
   const plantData = JSON.parse(req.body);
-  console.log(plantData);
   const userId = plantData.userId;
   const field = plantData.field;
   const plantInfo = plantData.plantInfo;

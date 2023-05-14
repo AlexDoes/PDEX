@@ -55,18 +55,6 @@ export default function plantDisplay({ plant, userId }: any) {
   const plantData = plant;
   const router = useRouter();
 
-  const [fieldsChangeButton, setFieldsChangeButton] = useState<fieldState>({
-    name: false,
-    species: false,
-    species2: false,
-    water: false,
-    light: false,
-    plantHeight: false,
-    plantWidth: false,
-    description: false,
-    image: false,
-  });
-
   const reload = () => {
     router.push(router.asPath);
   };
@@ -88,16 +76,31 @@ export default function plantDisplay({ plant, userId }: any) {
     );
   };
 
+  const updatedDate = new Date(plantData.updatedAt).toLocaleDateString(
+    "en-US",
+    {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }
+  );
+
   return (
-    <div className="bg-orange-100 rounded-xl p-10 py-14 flex flex-col gap-1">
-      <h1 className="text-xl text-green-400 flex items-center justify-center">
+    <div className="bg-orange-100 rounded-xl p-10 py-10 flex flex-col gap-1">
+      <h1 className="text-2xl text-[#a0cfa0] flex items-center justify-center mb-2">
         {plantData.name}'s information displayed below{" "}
       </h1>
       <div className="flex xs:flex-col md:flex-row gap-4 items-center">
         <img
-          className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]"
+          className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-xl cursor-pointer"
           src={plantData.image}
           alt={plantData.name}
+          onClick={() => {
+            window.open(plantData.image, "_blank");
+          }}
         />
         <div className="flex flex-col gap-2 border border-cyan-300 rounded-2xl p-3">
           <div className="flex items-center">
@@ -173,7 +176,7 @@ export default function plantDisplay({ plant, userId }: any) {
               </div>
             </div>
           </div>
-          <div className="w-inherit flex justify-end">
+          <div className="w-inherit flex justify-end item-center">
             <DeleteUniquePlantButton
               uniquePlantId={plantData.id}
               user={userId}

@@ -82,7 +82,7 @@ export default function UpdateDataComponent({
       </Button> */}
 
       <button
-        className=" border-green-500 rounded-md w-[25px] h-[25px] shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-slate-400 font-bold flex mx-auto my-auto justify-center items-center"
+        className=" border-green-500 rounded-md w-[25px] h-[25px] shadow-md bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-slate-400 font-bold flex mx-auto my-auto justify-center items-center hover:shadow-lg hover:shadow-slate-300"
         onClick={handleOpen}
       >
         <SlPencil />
