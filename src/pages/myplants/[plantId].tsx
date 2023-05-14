@@ -90,7 +90,7 @@ export default function plantDisplay({ plant, userId }: any) {
 
   return (
     <div className="bg-orange-100 rounded-xl p-10 py-14 flex flex-col gap-1">
-      <h1 className="underline text-lg text-green-400 flex items-center justify-center">
+      <h1 className="text-xl text-green-400 flex items-center justify-center">
         {plantData.name}'s information displayed below{" "}
       </h1>
       <div className="flex xs:flex-col md:flex-row gap-4 items-center">
