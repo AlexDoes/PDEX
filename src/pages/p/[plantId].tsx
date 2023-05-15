@@ -30,7 +30,7 @@ export default function plantPublicDisplayPage({ plant, comments }: any) {
 
   const commentsToDisplay = () => {
     return (
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 border-y my-2 py-4 border-black mx-4 h-[50%]">
         {comments.map((comment: any) => (
           <div key={comment.id} className="flex flex-row gap-1 items-center">
             <img
@@ -61,8 +61,8 @@ export default function plantPublicDisplayPage({ plant, comments }: any) {
   };
   return (
     <div
-      className=" border-2 border-[#c1e1c1] bg-orange-100 rounded-xl p-2 m-2 pt-6 pb-6 items-center justify-center focus:focus-within hover:relative hover:transition-all focus:transition-all 
-      w-inherit md:h-min-[492px] focus:outline-none overflow-x-hidden flex flex-col md:flex-row gap-6"
+      className=" border border-[#c1e1c1] bg-orange-100 rounded-xl p-4 m-2 pt-6 pb-6 items-center justify-between focus:focus-within hover:relative hover:transition-all focus:transition-all 
+      w-inherit md:h-min-[492px] h-inherit focus:outline-none overflow-x-hidden flex flex-col md:flex-row gap-2 md:items-stretch"
       tabIndex={0}
     >
       <div
@@ -74,9 +74,8 @@ export default function plantPublicDisplayPage({ plant, comments }: any) {
           alt={plant.name}
           className="
             rounded-xl
-            border
-            xs:w-[100vw] xs:h-w[110vw]
-            md:w-[50vw] md:h-[50vw] md:max-w-[50vw] lg:max-h-[75vh] lg:max-w-[90vh]
+            xs:w-[80vw] xs:h-[95vw] sm:w-[50vw] sm:h-[60vw]
+            md:w-[50vw] md:h-[50vw] md:max-w-[50vw] lg:max-h-[80vh] lg:max-w-[80vh] xl:max-w-[80vh] xl:max-h-[80vh]
             sm:max-w-[80] mb-2
             hover:brightness-90
             hover:outline-none
@@ -111,20 +110,19 @@ export default function plantPublicDisplayPage({ plant, comments }: any) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col xs:items-center xs:justify-center md:items-start gap-1">
+      <div className="flex flex-col xs:items-center xs:justify-center md:items-start gap-1 border-2 px-2 py-4 h-full lg:max-h-[80vh] xl:max-h-[80vh] md:max-h-[50vh] overflow-y-auto">
         <div className="elipsis"> {plant.name} </div>
         <div className="font-light italic">
           {" "}
           {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
         </div>
-        <p
+        <div
           className="
         bg-yellow-200
         rounded-lg
-        w-[80%]
         overflow-x-hidden
         xs:max-h-[92px]
-        md:h-[92px]
+        md:h-[50%]
         lg:h-[90px]
         xl:h-[90px]
         max-h-[80px]
@@ -133,13 +131,15 @@ export default function plantPublicDisplayPage({ plant, comments }: any) {
         text-center
         flex
         p-2
-        xs:text-sm sm:text-sm md:text-md
+        xs:text-sm sm:text-sm md:text-md items-center justify-center
       "
         >
-          {plant.description
-            ? plant.description
-            : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
-        </p>
+          <p>
+            {plant.description
+              ? plant.description
+              : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
+          </p>
+        </div>
         {commentsToDisplay()}
       </div>
     </div>
