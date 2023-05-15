@@ -203,16 +203,17 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   };
 
   return (
-    <div
-      className=" xs:m-0 sm:m-0 w-full border-slate-300 flex flex-col justify-center items-center border pb-4 gap-2 
-    backdrop-filter backdrop-blur-sm bg-opacity-50 rounded-xl bg-orange-100"
-    >
-      <h1 className="text-3xl flex justify-center mt-4 items-center gap-1">
-        My Collections
-        <RiPlantLine className="text-3xl text-green-400" />
-      </h1>
+    <>
       <div
-        className="                      
+        className=" xs:m-0 sm:m-0 w-full border-slate-300 flex flex-col justify-center items-center border pb-4 gap-2 
+    backdrop-filter backdrop-blur-sm bg-opacity-50 rounded-xl bg-orange-100"
+      >
+        <h1 className="text-3xl flex justify-center mt-4 items-center gap-1">
+          My Collections
+          <RiPlantLine className="text-3xl text-green-400" />
+        </h1>
+        <div
+          className="                      
                       xs:text-2xl
                       text-xl 
                       flex
@@ -223,10 +224,10 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                       w-[100%]
                       gap-2
                       "
-      >
-        {collectionsToShow()}
-      </div>
-      {/* <ul>
+        >
+          {collectionsToShow()}
+        </div>
+        {/* <ul>
         {items.map((collection: any) => (
           <li
             key={collection.id}
@@ -260,20 +261,21 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         ))}
       </ul> */}
 
-      <button
-        onClick={handleAddCollectionClick}
-        className="bg-green-300 border-sky-300 border rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
+        <button
+          onClick={handleAddCollectionClick}
+          className="bg-green-300 border-sky-300 border rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
    ease-in-out duration-300
         hover:bg-[#fffbcc]
         "
-        //#fffbcc
-        //#389168
-        //#389168
-        //#fffbcc
-        //#ec9e69
-      >
-        Create a collection <FaSeedling />
-      </button>
+          //#fffbcc
+          //#389168
+          //#389168
+          //#fffbcc
+          //#ec9e69
+        >
+          Create a collection <FaSeedling />
+        </button>
+      </div>
       <CSSTransition
         in={showForm}
         timeout={1000}
@@ -281,7 +283,10 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         unmountOnExit
         mountOnEnter
       >
-        <div className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] right-0"></div>
+        <div
+          onClick={handleAddCollectionClick}
+          className="fixed top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "
+        ></div>
       </CSSTransition>
 
       <CSSTransition
@@ -297,7 +302,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
           closeCollectionForm={handleAddCollectionClick}
         />
       </CSSTransition>
-    </div>
+    </>
   );
 }
 

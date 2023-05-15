@@ -100,7 +100,7 @@ export default function CreateCollectionForm(data: any) {
   }
 
   return (
-    <div className="fixed  top-0 h-[100vh] w-[100vw]  right-0 flex justify-end">
+    <div className="fixed z-50 top-0 h-[400px]  w-[100vw] border border-red-50  flex justify-end">
       {/* <div className=" absolute w-[100vw] h-[100vh] bg-red-500 "></div> */}
       <div className="bg-gray-500 w-[50%] border">
         <form onSubmit={handleSubmit}>

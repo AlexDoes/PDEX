@@ -7,6 +7,7 @@ import s3 from "lib/aws";
 import { toTitleCase } from "lib/generalFunctions";
 import prisma from "lib/prisma";
 import NewSearchBar from "./NewSearchBar";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 interface User {
   id: string;
@@ -180,7 +181,7 @@ export default function CreateUniquePlant(props: any) {
   const renderButton = (field: string) => {
     return (
       <button
-        className="border-2 border-red-500 w-40"
+        className="border-2 w-[160px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  font-bold "
         onClick={() => handleAddFieldClick(field as keyof Fields)}
       >
         Add {field}
@@ -195,26 +196,32 @@ export default function CreateUniquePlant(props: any) {
   return (
     <>
       <div
-        onClick={props.onSubmit}
-        className="border-2 absolute border-blue-500 w-[90vw] flex items-center justify-center  "
+        // onClick={props.onSubmit}
+        className="  z-50 absolute border-blue-500 w-[90vw] flex items-center justify-center  "
       >
         <form
           onSubmit={handleSubmit((values, e) => {
             onSubmit(values);
           })}
-          className="  flex flex-col w-[60vw] max-w-[1200px] h-[80vh]  items-center mt-10
-        border-2 border-red-500 gap-8 rounded-lg gradient-bg-card2-reverse"
+          className=" flex flex-col w-[80vw] sm:w-[60vw] transition-all ease-in-out duration-200 max-w-[1200px] h-[1000px]  items-center mt-10
+        border-2 border-[#c1e1c1] gap-8 rounded-lg gradient-bg-card2-reverse z-50  "
         >
+          <div
+            onClick={props.onSubmit}
+            className="absolute right-6 top-6 shadow-md rounded-full cursor-pointer"
+          >
+            <AiOutlineCloseCircle size={30} color="white" />
+          </div>
           <h2 className="text-4xl mt-5 font-bold text-slate-500 ">
             Add a Plant
           </h2>
-          <div className="border border-black h-[100%] w-[80%] flex flex-col gap-4">
-            <div className="border border-green-500 flex justify-between">
-              <label className="h-full text-center flex items-center border border-orange-500 px-1">
+          <div className="  h-[100%] w-[80%] flex flex-col gap-4">
+            <div className=" border-2 border-white rounded-r-md   ">
+              {/* <label className="h-full text-center flex items-center border border-orange-500 px-1">
                 Plant Name
-              </label>
+              </label> */}
               <input
-                className="outline-dotted outline-2 outline-blue-500 w-[600px] h-[50px]"
+                className=" w-full h-[50px] bg-[#efe6c1] pl-5"
                 placeholder="Plant Name (required)"
                 {...register("plantName", {
                   required: true,
@@ -228,8 +235,13 @@ export default function CreateUniquePlant(props: any) {
               {errors.plantName?.type &&
                 ({ ...errorsMap.plantName } as any)[errors.plantName.type]}
             </p>
-            <div className="flex gap-5">
-              <label htmlFor="plantImage">Plant Image</label>
+            <div className="flex gap-5 items-center h-[50px]  border-2 border-white rounded-r-md  text-center bg-[#efe6c1] rounded-md">
+              <label
+                className="pl-5 text-slate-500 font-semibold"
+                htmlFor="plantImage"
+              >
+                Plant Image
+              </label>
               <input
                 type="file"
                 placeholder="Plant Image (URL required)"
@@ -238,28 +250,34 @@ export default function CreateUniquePlant(props: any) {
                 // defaultValue={"https://plus.unsplash.com/premium_photo-1665653066799-acafe686fba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"}
               />
             </div>
-            <NewSearchBar
-              data={["monstera albo", "red fern", "bonsai", "snake plant"]}
-              width="w-[20vw] "
-              onChange={handleChangeOnForm}
-            />
+            {/* plant species */}
+            <div className="w-full border border-blue">
+              <NewSearchBar
+                data={["monstera albo", "red fern", "bonsai", "snake plant"]}
+                width="w-[20vw] "
+                onChange={handleChangeOnForm}
+              />
+            </div>
+
             <input
               placeholder="Plant Species (required)"
               ref={inputRef}
               value={species}
               readOnly
               required
-              className="border border-red-500 hidden"
+              className="border border-red-500 hidden "
             />
             {fields.subspecies && (
               <input
                 placeholder="Plant Subspecies"
+                className="w-full h-[50px] bg-[#efe6c1]  pl-5 border-2 border-white rounded-r-md  "
                 {...register("plantSubspecies")}
               />
             )}
             {fields.height && (
-              <div>
+              <div className="w-full flex">
                 <input
+                  className="w-full h-[50px] bg-[#efe6c1] pl-5 border-2 border-white rounded-r-md "
                   type="number"
                   placeholder="Plant Height"
                   {...register("plantHeight", {
@@ -268,7 +286,11 @@ export default function CreateUniquePlant(props: any) {
                   })}
                   // defaultValue={Number(18)}
                 />
-                <select id="unit" className="border-2" {...register("unit")}>
+                <select
+                  id="unit"
+                  className="border-2 bg-[#efe6c1] border-white "
+                  {...register("unit")}
+                >
                   <option value="cm">cm</option>
                   <option value="inches">in</option>
                 </select>
@@ -278,12 +300,15 @@ export default function CreateUniquePlant(props: any) {
               </div>
             )}
             <div>
-              {!fields.height && renderButton("height")}
-              {!fields.subspecies && renderButton("subspecies")}
-              {!fields.width && renderButton("width")}
+              <div className="space-x-5 flex">
+                {!fields.height && renderButton("height")}
+                {!fields.subspecies && renderButton("subspecies")}
+                {!fields.width && renderButton("width")}
+              </div>
               {fields.width && (
-                <div>
+                <div className="w-full flex">
                   <input
+                    className="w-full h-[50px] bg-[#efe6c1] rounded-l-md pl-5 border-2 border-white rounded-r-md "
                     type="number"
                     placeholder="Plant Width"
                     {...register("plantWidth", {
@@ -292,7 +317,11 @@ export default function CreateUniquePlant(props: any) {
                     })}
                     // defaultValue={18}
                   />
-                  <select id="unit" className="border-2" {...register("unit2")}>
+                  <select
+                    id="unit"
+                    className="border-2 bg-[#efe6c1] border-white"
+                    {...register("unit2")}
+                  >
                     <option value="cm">cm</option>
                     <option value="inches">in</option>
                   </select>
@@ -302,11 +331,15 @@ export default function CreateUniquePlant(props: any) {
             <textarea
               placeholder="Plant Description"
               {...register("plantDescription")}
-              className="border-2 h-[50%] rounded-b-md"
+              className="border-2 pl-5 border-white h-[40%] rounded-b-md bg-[#efe6c1]"
             />
+            <button
+              className=" border h-[50px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  font-bold"
+              type="submit"
+            >
+              Submit
+            </button>
           </div>
-          <button type="submit">Submit</button>
-          <button onClick={props.onSubmit}>Cancel</button>
         </form>
       </div>
     </>
