@@ -29,12 +29,8 @@ export default async function handler(
         species2: uniquePlantData.plantSubspecies,
         normalized_species: uniquePlantData.normalized_species,
         normalized_species2: uniquePlantData.normalized_species2,
-        plantHeight: String(
-          uniquePlantData.plantHeight + " " + uniquePlantData.unit
-        ),
-        plantWidth: String(
-          uniquePlantData.plantWidth + " " + uniquePlantData.unit
-        ),
+        plantHeight: uniquePlantData.plantHeight,
+        plantWidth: uniquePlantData.plantWidth,
       },
     });
     await prisma.$disconnect();

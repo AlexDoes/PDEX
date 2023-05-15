@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import ScreenChecker from "@/components/ScreenChecker";
+import Link from "next/link";
 
 interface Props {
   searchTerm: string;
@@ -171,20 +172,22 @@ export default function SearchResult({
         >
           {uniquePlants.length ? (
             uniquePlants.map((plant) => (
-              <div
-                id="glassBackPlant"
-                key={plant.id}
-                className={`border-2 border-[#c1e1c1] rounded-xl p-2 m-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[40vw] md:w-[40vw] lg:w-[25vw] hover:scale-105             focus:scale-105 focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[492px] focus:outline-none bg-orange-100
+              <Link href={`/p/${plant.id}`} key={plant.id}>
+                <div
+                  id="glassBackPlant"
+                  key={plant.id}
+                  className={`border-2 border-[#c1e1c1] rounded-xl p-2 m-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[40vw] md:w-[40vw] lg:w-[25vw]
+                focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[492px] focus:outline-none bg-orange-100
                 ${filter(searchTerm, plant.species)}
             `}
-                tabIndex={0}
-              >
-                {plant.image ? (
-                  <div className="flex items-center justify-center rounded-lg snap-proximity">
-                    <img
-                      src={plant.image}
-                      alt=""
-                      className="
+                  tabIndex={0}
+                >
+                  {plant.image ? (
+                    <div className="flex items-center justify-center rounded-lg snap-proximity">
+                      <img
+                        src={plant.image}
+                        alt=""
+                        className="
                   border-green-400
                     rounded-xl
                     border
@@ -194,18 +197,20 @@ export default function SearchResult({
                     lg:max-w-80
                     sm:max-w-[80]
                     "
-                    />
-                  </div>
-                ) : (
-                  ""
-                )}
-                <p className="font">{plant.name}</p>
-                <p className="font-light italic">{plant.species}</p>
-                <p className="font-thin snap-y">By {plant.ownedBy.nickname}</p>
-                {/* <p>Plant Id: {plant.id}</p> */}
-                {/* <div className="flex items-center justify-center"> */}
-                <p
-                  className="
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  <p className="font">{plant.name}</p>
+                  <p className="font-light italic">{plant.species}</p>
+                  <p className="font-thin snap-y">
+                    By {plant.ownedBy.nickname}
+                  </p>
+                  {/* <p>Plant Id: {plant.id}</p> */}
+                  {/* <div className="flex items-center justify-center"> */}
+                  <p
+                    className="
                 bg-yellow-200
                 rounded-lg
                 w-[80%]
@@ -222,12 +227,13 @@ export default function SearchResult({
                 p-2
                 xs:text-sm sm:text-sm md:text-md
               "
-                >
-                  {plant.description
-                    ? plant.description
-                    : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
-                </p>
-              </div>
+                  >
+                    {plant.description
+                      ? plant.description
+                      : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
+                  </p>
+                </div>
+              </Link>
             ))
           ) : (
             <p>No plants found related to `{searchTerm}`</p>
@@ -259,10 +265,11 @@ export default function SearchResult({
         >
           {users.length ? (
             users.map((user) => (
-              <div key={user.nickname} className="">
-                <div
-                  id="glassBackCard"
-                  className="
+              <Link href={`/u/${user.nickname}`} key={user.nickname}>
+                <div key={user.nickname} className="">
+                  <div
+                    id="glassBackCard"
+                    className="
                             border-4 
                             border-[#c1e1c1]
                             rounded-xl p-2 m-2
@@ -277,22 +284,21 @@ export default function SearchResult({
                             sm:w-[40vw]
                             md:w-[40vw]
                             lg:w-[25vw]
-                            hover:scale-105
-                            focus:scale-105
+                            xl:w-[22vw]
                             focus:focus-within:
                             hover:relative
                             hover:transition-all
                             focus:transition-all
                             focus:outline-none
                             "
-                  tabIndex={0}
-                >
-                  {user.image ? (
-                    <div className="flex items-center justify-center rounded-lg">
-                      <img
-                        src={user.image}
-                        alt=""
-                        className="
+                    tabIndex={0}
+                  >
+                    {user.image ? (
+                      <div className="flex items-center justify-center rounded-lg">
+                        <img
+                          src={user.image}
+                          alt=""
+                          className="
                     border-green-400
                     rounded-xl
                     border
@@ -301,14 +307,14 @@ export default function SearchResult({
                     sm:w-[40vw] md:w-[35vw] md:max-w-80 lg:w-80 xl:w-80
                     sm:max-w-[80]
                     "
-                      />
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center rounded-lg">
-                      <img
-                        src={avatarImage.src}
-                        alt=""
-                        className="
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center rounded-lg">
+                        <img
+                          src={avatarImage.src}
+                          alt=""
+                          className="
                     border-green-400
                     rounded-xl
                     border
@@ -318,22 +324,25 @@ export default function SearchResult({
                     lg:max-w-80
                     sm:max-w-[80]
                     "
-                      />
-                    </div>
-                  )}
-                  <p>{user.nickname}</p>
-                  <p>
-                    {user._count?.ownedPlants ? (
-                      <span>
-                        {user._count.ownedPlants}{" "}
-                        {user._count.ownedPlants > 1 ? "plants 💚" : "plant 🪴"}
-                      </span>
-                    ) : (
-                      "Sprouting soon 🌱"
+                        />
+                      </div>
                     )}
-                  </p>
+                    <p>{user.nickname}</p>
+                    <p>
+                      {user._count?.ownedPlants ? (
+                        <span>
+                          {user._count.ownedPlants}{" "}
+                          {user._count.ownedPlants > 1
+                            ? "plants 💚"
+                            : "plant 🪴"}
+                        </span>
+                      ) : (
+                        "Sprouting soon 🌱"
+                      )}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))
           ) : (
             <p>No users found with the name `{searchTerm}`</p>

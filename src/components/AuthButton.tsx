@@ -115,14 +115,22 @@ export default function AuthButtonComponent() {
   return (
     <>
       {/* Not signed in <br /> */}
-      <button
+      {/* <button
         className="flex gap-1 text-blue-600 border-2 pt-1 pb-1 pr-2 pl-2 rounded-full"
         onClick={() => signIn()}
       >
         <AccountCircleOutlinedIcon />
-        Sign in
-      </button>{" "}
-      <br />
+      </button> */}
+      <div className="relative group">
+        <button
+          onClick={() => signIn()}
+          className="w-12 h-12 rounded-lg shadow-2xl text-[#33af9b] border-[#4bcdb7] border-2 flex items-center justify-center group hover:bg-[#4ed9c2] hover:text-[#2ca08d] transition-all ease-in-out duration-500 hover:bg-opacity-60"
+        >
+          <AccountCircleOutlinedIcon style={{ fontSize: "200%" }} />
+        </button>
+        <div className="absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-blue-400 animate-ping-short overflow-hidden group-hover:hidden "></div>
+        <div className="absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-blue-400 "></div>
+      </div>
     </>
   );
 }

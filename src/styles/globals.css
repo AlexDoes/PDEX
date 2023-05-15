@@ -55,6 +55,7 @@ body {
   background-position: fixed;
   background-attachment: fixed;
   min-width: 480px;
+  overflow-x: hidden;
 }
 
 #center {
@@ -300,3 +301,15 @@ input[type="file"]::file-selector-button {
   background-color: #81ecec;
   border: 2px solid #00cec9;
 } */
+
+.animate-ping-short {
+  animation: ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

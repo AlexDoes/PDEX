@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import UpdateDataComponent from "@/components/UpdatePlantDetailsComponent";
 import { toast } from "react-toastify";
 import { useState } from "react";
-
+import Link from "next/link";
 interface User {
   id: string;
   name?: string | null | undefined;
@@ -90,7 +90,7 @@ export default function plantDisplay({ plant, userId }: any) {
 
   return (
     <div className="bg-orange-100 rounded-xl p-10 py-10 flex flex-col gap-1">
-      <h1 className="text-2xl text-[#a0cfa0] flex items-center justify-center mb-2">
+      <h1 className=" text-[#a0cfa0] flex items-center justify-center mb-2 xs:text-xl sm:text-2xl">
         {plantData.name}'s information displayed below{" "}
       </h1>
       <div className="flex xs:flex-col md:flex-row gap-4 items-center">
@@ -176,7 +176,16 @@ export default function plantDisplay({ plant, userId }: any) {
               </div>
             </div>
           </div>
-          <div className="w-inherit flex justify-end item-center">
+          <div className="w-inherit flex justify-between item-center">
+            <div className="flex items-center hover:text-blue-600hover:underline">
+              {" "}
+              <Link
+                href={`/p/${plantData.id}`}
+                className="text-blue-400 font-light"
+              >
+                Public view of {plantData.name}
+              </Link>
+            </div>
             <DeleteUniquePlantButton
               uniquePlantId={plantData.id}
               user={userId}

@@ -117,10 +117,11 @@ export default function plantPublicDisplayPage({ plant, comments }: any) {
           {" "}
           {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
         </div>
-        <div
-          className="
-        bg-yellow-200
-        rounded-lg
+        <div className="flex justify-center">
+          <div
+            className="
+          border-2 border-slate-300
+        rounded-lg font-light
         overflow-x-hidden
         xs:max-h-[92px]
         md:h-[50%]
@@ -132,14 +133,15 @@ export default function plantPublicDisplayPage({ plant, comments }: any) {
         text-center
         flex
         p-2
-        xs:text-sm sm:text-sm md:text-md items-center justify-center
+        xs:text-sm sm:text-sm md:text-md items-center justify-center w-[95%]
       "
-        >
-          <p>
-            {plant.description
-              ? plant.description
-              : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
-          </p>
+          >
+            <p>
+              {plant.description
+                ? plant.description
+                : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
+            </p>
+          </div>
         </div>
         {commentsToDisplay()}
       </div>
