@@ -93,7 +93,7 @@ export default function SearchResult({
       return "hidden";
     }
   };
-  
+
   const showUsers = () => {
     if (users.length) {
     }
@@ -132,7 +132,7 @@ export default function SearchResult({
                 </button>
               </div>
             </div>
-            <div className="flex gap-1 border-b-2 border-slate-300 pb-2">
+            <div className="flex gap-1 border-b-2 border-slate-300 pb-2 items-center">
               <p>Filter by: </p>
               {speciesButton(searchTerm)}
             </div>

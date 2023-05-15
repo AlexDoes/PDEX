@@ -257,10 +257,9 @@ export default function UserProfile({ user }: Props) {
       className="
       xs:mt-2
       md:flex md:flex-row md:justify-center mt-5
-      md:gap-2
+      md:gap-2 xs:flex xs:flex-col
     "
     >
-      <ScreenChecker />
       <div
         className="
         md:flex md:flex-col
@@ -270,10 +269,13 @@ export default function UserProfile({ user }: Props) {
         rounded-xl
         bg-opacity-60 bg-green-100
         md:p-4
-        max-w-[500px]
+        max-w-[1000px]
+        xs:w-[100%]
         w-[75%]
         lg:w-[40%]
-        md:w-[37%]
+        md:w-[40%]
+        md:w-max-[50%]
+        md:min-w-[320px]
         "
       >
         <div
@@ -291,7 +293,7 @@ export default function UserProfile({ user }: Props) {
             className="
               xs:w-[150px] xs:h-[100px]
               sm:h-full
-              sm:ml-3
+              sm:ml-3 md:ml-0
               md:w-full md:h-full
               xs:mt-5
               flex justify-center 
@@ -387,7 +389,7 @@ export default function UserProfile({ user }: Props) {
           </div>
         </div>
       </div>
-      <div className="border border-black w-[75%]">
+      <div className="w-[100%]">
         <div
           className="                  
         bg-opacity-80 bg-orange-100
@@ -395,6 +397,7 @@ export default function UserProfile({ user }: Props) {
         border border-slate-300
         md:rounded-xl
         xs:rounded-t-xl
+        xs:w-[100%]
         "
         >
           <div
@@ -430,6 +433,7 @@ export default function UserProfile({ user }: Props) {
         border border-slate-300
         md:rounded-xl
         xs:rounded-b-xl
+        xs:w-[100%]
         "
         >
           <div
