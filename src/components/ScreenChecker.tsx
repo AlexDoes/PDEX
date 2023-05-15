@@ -1,3 +1,4 @@
+import { set } from "lodash";
 import { useEffect, useState } from "react";
 
 export default function ScreenChecker() {
@@ -9,9 +10,11 @@ export default function ScreenChecker() {
     xl: 1280,
   };
   const [windowWidth, setWindowWidth] = useState<number>(0);
+  const [windowHeight, setWindowHeight] = useState<number>(0);
   useEffect(() => {
     function handleResize() {
       setWindowWidth(Number(window.innerWidth));
+      setWindowHeight(Number(window.innerHeight));
     }
     window.addEventListener("resize", handleResize);
     handleResize();
@@ -35,16 +38,22 @@ export default function ScreenChecker() {
   };
 
   return (
-    <div className="flex flex-row gap-1 fixed bottom-0 z-50 left-0">
-      Window Size:
+    <div className="flex flex-row gap-1 fixed bottom-0 z-50 right-0">
       <div
         className="                   
-                     xs:text-purple-500
-                    sm:text-red-400
-                    md:text-blue-400
-                    lg:text-green-400"
+        xs:text-purple-500
+        sm:text-red-400
+        md:text-blue-400
+        lg:text-green-400"
       >
+        Window Size:
         {screenSize()?.toUpperCase()}
+        <br />
+        Window Height: {windowHeight}
+        <br />
+        Window Width: {windowWidth}
+        <br />
+        Alex's Height: 707
       </div>
       {/* <p className="text-purple-500">purple xs: {breakPoints.xs}</p>
       <p className="text-red-500">red sm: {breakPoints.sm}</p>

@@ -1,5 +1,6 @@
 import { update } from "lodash";
 import { useRouter } from "next/router";
+import prisma from "lib/prisma";
 
 const defaultAvatars = [
   "https://pdex.s3.amazonaws.com/defaultavatar-1.jpg",
