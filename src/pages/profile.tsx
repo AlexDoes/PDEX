@@ -114,7 +114,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
   console.log(editPhoto);
   return (
     <>
-      <div className=" w-[90vw] h-[80vh] justify-center flex mt-10">
+      <div className=" w-[85vw] md:w-[90vw] h-[7vh] justify-center flex mt-10">
         <div className="border-4 border-[#c1e1c1]  bg-gradient-to-b from-[#efefbb] to-slate-400 flex flex-col gap-14 items-center h-[1100px] w-[900px] rounded-lg ">
           <h1 className="text-4xl mt-5 font-bold text-slate-400 ">
             Profile Dashboard
