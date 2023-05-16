@@ -19,8 +19,6 @@ export default async function handler(
 
   const commentData = JSON.parse(req.body);
   const { reference, refId, comment, userId } = commentData;
-  console.log(reference);
-  console.log(refId);
   let type = "";
   let typeId = "";
   if (reference === "UniquePlant") {
@@ -30,7 +28,6 @@ export default async function handler(
     type = "collection";
     typeId = "collectionId";
   }
-  console.log(type, typeId);
   try {
     const savedComment = await prisma.comments.create({
       data: {

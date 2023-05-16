@@ -12,7 +12,6 @@ interface Props {
 
 const CommentBox = (props: Props) => {
   const { reference, refId, userId } = props;
-  if (!userId) return null;
   const [comment, setComment] = useState("");
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,35 +50,34 @@ const CommentBox = (props: Props) => {
     });
   };
   return (
-    <>
+    <div className="h-full">
       <form
         onSubmit={onSubmit}
-        className="w-full h-full border-2 flex justify-center items-center"
+        className="w-full h-full flex flex-row justify-center"
       >
-        <div className="w-full flex flex-row justify-center">
+        <div className="w-full flex flex-row justify-center items-center">
           <input
-            className="w-[90%] h-full focus:outline-none focus:ring border-none"
+            className="w-[90%] h-full   bg-yellow-100 border-none rounded-l-2xl outline-none p-2 focus:ring-0 indent-3"
             type="text"
-            placeholder="Add a comment"
+            placeholder={userId ? "Add a comment..." : "Login to comment!"}
             value={comment}
             onChange={onChange}
             minLength={4}
             maxLength={256}
+            spellCheck={true}
+            disabled={!userId}
           />
-          <Button
-            className="h-full w-[10%] flex justify-center items-center"
+          <button
+            className="w-[10%] h-[100%] flex justify-center items-center"
             type="submit"
           >
-            <div
-              className="border-y border-right h-full w-full 
-            text-center flex items-center justify-center"
-            >
+            <div className="text-center flex justify-center items-center h-full w-full text-blue-300">
               Post
             </div>
-          </Button>
+          </button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

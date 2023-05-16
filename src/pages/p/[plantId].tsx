@@ -1,9 +1,10 @@
 import { get, update } from "lodash";
 import { useRouter } from "next/router";
 import prisma from "lib/prisma";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CommentBox from "@/components/CommentBox";
 import { getSession } from "next-auth/react";
+import Link from "next/link";
 
 const defaultAvatars = [
   "https://pdex.s3.amazonaws.com/defaultavatar-1.jpg",
@@ -23,51 +24,67 @@ interface User {
 export default function plantPublicDisplayPage({ plant, comments, user }: any) {
   const router = useRouter();
 
+  const [commentsToDisplayState, setCommentsToDisplay] = useState(comments);
+  console.log(plant.ownerId);
+  useEffect(() => {
+    setCommentsToDisplay(comments);
+  }, [commentsToDisplayState]);
+
   if (!plant) {
     return <div> Weird, you shouldn't be here</div>;
   }
-
-  const dateMaker = (date: string) => {
-    const localeDate = new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    return localeDate;
-  };
-
-  const plantData = plant;
 
   const commentsToDisplay = () => {
     if (comments.length === 0) {
       return <div>Be the first to comment!</div>;
     }
     return (
-      <div className="flex flex-col gap-1 border-y border-black px-4 h-full overflow-y-auto">
-        {comments.map((comment: any) => (
-          <div key={comment.id} className="flex flex-row gap-1 items-center">
-            <img
-              src={
-                comment.author.image || defaultAvatars[comment.author.id % 4]
+      <div className="flex flex-col gap-1 border-y border-black px-4 h-full overflow-y-auto p-2">
+        {commentsToDisplayState.map((comment: any) => (
+          <div
+            key={comment.id}
+            className="flex flex-row gap-4 items-center mr-2 px-2"
+          >
+            <Link
+              href={
+                comment.author.nickname
+                  ? `/u/${comment.author.nickname}`
+                  : `/u/${comment.author.id}`
               }
-              alt={comment.author.image}
-              className="rounded-full w-6 h-6"
-            />
+            >
+              <img
+                src={
+                  comment.author.image || defaultAvatars[comment.author.id % 4]
+                }
+                alt={comment.author.image}
+                className="rounded-full w-8 h-8"
+              />
+            </Link>
             <div className="flex flex-col gap-1">
               <div className="flex flex-col gap-1">
                 <div>
-                  <p className="font-bold">
-                    {comment.author.nickname ||
-                      comment.author.name.split(" ")[0]}
-                  </p>
+                  <Link
+                    className="flex flex-row gap-1 items-center"
+                    href={
+                      comment.author.nickname
+                        ? `/u/${comment.author.nickname}`
+                        : `/u/${comment.author.id}`
+                    }
+                  >
+                    <p className="font-semibold">
+                      {comment.author.nickname ||
+                        comment.author.name.split(" ")[0]}
+                    </p>
+                    <p className="text-xs font-bold text-blue-400">
+                      {comment.author.id === plant.ownerId ? "Author" : ""}
+                    </p>
+                  </Link>
                   <p className="italic text-xs text-gray-500">
                     {comment.createdAt}
                   </p>
                 </div>
               </div>
-              <p className="text-sm">{comment.text}</p>
+              <p className="text-sm font-light">{comment.text}</p>
             </div>
           </div>
         ))}
@@ -128,20 +145,21 @@ export default function plantPublicDisplayPage({ plant, comments, user }: any) {
         </div>
       </div>
       <div
-        className="relative flex flex-col xs:items-center xs:justify-center md:items-start gap-1 border-2 border-red-500 px-2 h-full lg:max-h-[80vh] xl:max-h-[80vh] md:max-h-[50vw]
+        className="relative flex flex-col xs:items-center xs:justify-center md:items-start gap-1 px-2 h-full lg:max-h-[80vh] xl:max-h-[80vh] md:max-h-[50vw]
         md:h-[50vw]
         md:justify-evenly
+        lg:justify-start
       "
       >
         <div
-          className="h-[30%] border-black border flex 
+          className="h-[30%] flex 
         flex-col items-start justify-evenly relative"
         >
-          <div className="elipsis top-0"> {plant.name} </div>
+          <div className="elipsis top-0 text-xl"> {plant.name} </div>
           <div className="font-light italic">
             {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
           </div>
-          <div className="flex flex-col justify-center border-2 border-green-900 relative">
+          <div className="flex flex-col justify-center relative">
             <div
               className="
               border-2 border-slate-300
@@ -168,10 +186,8 @@ export default function plantPublicDisplayPage({ plant, comments, user }: any) {
             </div>
           </div>
         </div>
-        <div className="h-[50%] w-full border-2 border-green-500">
-          {commentsToDisplay()}
-        </div>
-        <div className="h-[10%] relative w-full">
+        <div className="h-[55%] w-full mb-auto">{commentsToDisplay()}</div>
+        <div className="h-[10%] w-full bottom-0">
           <CommentBox
             reference={"UniquePlant"}
             refId={plant.id}
