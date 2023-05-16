@@ -5,6 +5,7 @@ import AddUniquePlantToCollection from "@/components/AddUniquePlantToCollection"
 import RemoveUniquePlantFromCollectionButton from "@/components/RemoveUniquePlantFromCollectionButton";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { CSSTransition } from "react-transition-group";
 
 interface User {
   id: string;
@@ -49,7 +50,7 @@ export default function ThisCollection({
   collectionID,
 }: PlantsProps) {
   const [showAddPlant, setShowAddPlant] = useState(false);
-
+  const [addPlant, setAddPlant] = useState(false);
   const plantstoAdd = usersUniquePlants.filter((plant) => {
     return !plantContentsData.plantContents.some(
       (plantContent: any) => plantContent.id === plant.id
@@ -68,57 +69,94 @@ export default function ThisCollection({
     router.push(router.asPath);
   };
 
-  const showAddPlantForm = !showAddPlant ? (
-    plantstoAdd.length ? (
-      <div>
-        <button onClick={handleAddPlantClick}>Add Plant</button>
-      </div>
-    ) : (
-      <></>
-    )
-  ) : (
-    <AddUniquePlantToCollection
-      usersPlants={plantstoAdd}
-      collectionId={collectionID}
-      userId={userId}
-      onSubmit={onSubmitFromParent}
-    />
-  );
+  // useEffect(() => {
+
+  // const showAddPlantForm = !showAddPlant ? (
+  //   plantstoAdd.length ? (
+  //     <div>
+  //       <button onClick={handleAddPlantClick}>Add Plant</button>
+  //     </div>
+  //   ) : (
+  //     <></>
+  //   )
+  // ) : (
+  //   <AddUniquePlantToCollection
+  //     usersPlants={plantstoAdd}
+  //     collectionId={collectionID}
+  //     userId={userId}
+  //     onSubmit={onSubmitFromParent}
+  //   />
+  // );
 
   return (
-    <div>
-      {showAddPlantForm}
-      <h1 className="text-cyan-500 underline text-lg">
-        {plantContentsData.name}'s content
-      </h1>
+    <>
+      <div>
+        {!showAddPlant && plantstoAdd.length ? (
+          <div>
+            <button onClick={handleAddPlantClick}>Add Plant</button>
+          </div>
+        ) : null}
 
-      <ul>
-        {plantContentsData.plantContents.map((plantContent: any) => (
-          <li key={plantContent.id}>
-            <p>
-              <Link href={`/myplants/${plantContent.id}`}>
-                Plant ID: {plantContent.id.toUpperCase()}
-              </Link>
-            </p>
-            <p>Plant Name: {plantContent.name}</p>
-            <p>Plant Owner ID: {plantContentsData.owner.name}</p>
-            <img
-              className="w-[200px] h-[200px]"
-              src={plantContent.image}
-              alt={plantContent.name}
-            />
-            <div>
-              <RemoveUniquePlantFromCollectionButton
-                uniquePlantId={plantContent.id}
-                collectionId={collectionID}
-                userId={userId}
-                onConfirm={onSubmitFromParent}
+        <h1 className="text-cyan-500 underline text-lg">
+          {plantContentsData.name}'s content
+        </h1>
+
+        <ul>
+          {plantContentsData.plantContents.map((plantContent: any) => (
+            <li key={plantContent.id}>
+              <p>
+                <Link href={`/myplants/${plantContent.id}`}>
+                  Plant ID: {plantContent.id.toUpperCase()}
+                </Link>
+              </p>
+              <p>Plant Name: {plantContent.name}</p>
+              <p>Plant Owner ID: {plantContentsData.owner.name}</p>
+              <img
+                className="w-[200px] h-[200px]"
+                src={plantContent.image}
+                alt={plantContent.name}
               />
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+              <div>
+                <RemoveUniquePlantFromCollectionButton
+                  uniquePlantId={plantContent.id}
+                  collectionId={collectionID}
+                  userId={userId}
+                  onConfirm={onSubmitFromParent}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <CSSTransition
+        in={showAddPlant}
+        timeout={1000}
+        classNames="fade"
+        unmountOnExit
+        mountOnEnter
+      >
+        <div
+          // onClick={handleAddCollectionClick}
+          className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "
+        ></div>
+      </CSSTransition>
+
+      <CSSTransition
+        in={showAddPlant}
+        timeout={1000}
+        classNames="page"
+        unmountOnExit
+        mountOnEnter
+      >
+        <AddUniquePlantToCollection
+          usersPlants={plantstoAdd}
+          collectionId={collectionID}
+          userId={userId}
+          onSubmit={onSubmitFromParent}
+        />
+      </CSSTransition>
+    </>
   );
 }
 

@@ -23,7 +23,7 @@ export default function NavBar() {
           "
         >
           <Link href={"/"} className="inherit">
-            <div className="flex flex-row h-full  items-center lg:ml-[150px] transition-all ease-in-out duration-500">
+            <div className="flex flex-row h-full md:ml-[4vw] items-center  transition-all ease-in-out duration-500">
               <img
                 src="/logotransparent.png"
                 alt="My Image"
@@ -38,7 +38,7 @@ export default function NavBar() {
             <NavBarSearchBar />
           </div>
           {/* <button onClick={() => signOut()}>Sign out</button> */}
-          <div className="flex w-[10%] items-center justify-center h-[100%]  lg:mr-[150px] transition-all ease-in-out duration-500">
+          <div className="flex items-center justify-center h-[100%] md:mr-[3vw] transition-all ease-in-out duration-500">
             <AuthButtonComponent />
           </div>
         </div>

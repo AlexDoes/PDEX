@@ -89,7 +89,7 @@ export default function plantDisplay({ plant, userId }: any) {
   );
 
   return (
-    <div className="bg-orange-100 rounded-xl p-10 py-10 flex flex-col gap-1">
+    <div className="bg-orange-100 rounded-xl p-10 py-10 flex flex-col gap-1 w-full">
       <h1 className=" text-[#a0cfa0] flex items-center justify-center mb-2 xs:text-xl sm:text-2xl">
         {plantData.name}'s information displayed below{" "}
       </h1>
@@ -102,7 +102,7 @@ export default function plantDisplay({ plant, userId }: any) {
             window.open(plantData.image, "_blank");
           }}
         />
-        <div className="flex flex-col gap-2 border border-cyan-300 rounded-2xl p-3">
+        <div className="flex flex-col gap-2 border border-cyan-300 rounded-2xl p-3 w-full">
           <div className="flex items-center">
             {showChangeButton("name")}
             <div className="gap-1 flex">

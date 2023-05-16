@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import prisma from "lib/prisma";
 import { toast } from "react-toastify";
 import { CSSTransition } from "react-transition-group";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { FaSeedling } from "react-icons/fa";
 const colors = {
   //ansi color codes for console.log
   black: "\u001b[38;5;0m",
@@ -99,27 +101,52 @@ export default function CreateCollectionForm(data: any) {
   }
 
   return (
-    <div className="fixed z-50 top-0 h-[400px]  w-[100vw] border border-red-50  flex justify-end">
+    <div className="fixed z-50 top-0 left-0 right-0 bottom-0 h-[100vh]  w-[100vw] flex justify-center items-center  ">
       {/* <div className=" absolute w-[100vw] h-[100vh] bg-red-500 "></div> */}
-      <div className="bg-gray-500 w-[50%] border">
-        <form onSubmit={handleSubmit}>
-          <label>
-            Collection Name:
-            <input
-              type="text"
-              style={{ border: "1px solid black" }}
-              value={collectionName}
-              onChange={(e) => setCollectionName(e.target.value)}
-            />
-          </label>
+      <div className="gradient-bg-card2-reverse rounded-md md:w-[50%] w-[80%] h-[50%]  max-w-[600px]  border-2 border-[#c1e1c1] p-2   ">
+        <div
+          onClick={closeCollectionForm}
+          className="absolute right-6 top-6 shadow-md rounded-full cursor-pointer"
+        >
+          <AiOutlineCloseCircle size={30} color="#C0C2C9" />
+        </div>
+        <form
+          onSubmit={handleSubmit}
+          className=" w-full flex flex-col justify-center items-center gap-5 h-full"
+        >
+          <h2 className="text-3xl top-0  mt-2 font-bold text-slate-500 pt-2 text-center">
+            What would you like to name your new collection?
+          </h2>
+          <input
+            type="text"
+            placeholder="Collection's Name"
+            className="w-[80%] h-[50px] rounded-md border-2 border-[#c1e1c1] bg-[#efe6c1] "
+            value={collectionName}
+            minLength={3}
+            onChange={(e) => setCollectionName(e.target.value)}
+          />
           {/* //TODO: add a description field //TODO: add a privacy field */}
-          <button className="text-white" type="submit">
-            Submit{" "}
+          {/* <button
+            className="border h-[40px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  sm:font-bold"
+            type="submit"
+          >
+            Create{" "}
+          </button> */}
+          <button
+            type="submit"
+            className="bg-green-300 border-sky-300 border rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
+            ease-in-out duration-300
+          hover:bg-[#fffbcc]
+        "
+            //#fffbcc
+            //#389168
+            //#389168
+            //#fffbcc
+            //#ec9e69
+          >
+            Create <FaSeedling />
           </button>
         </form>
-        <button onClick={closeCollectionForm} className="text-white ml-1">
-          Cancel
-        </button>
       </div>
     </div>
   );
