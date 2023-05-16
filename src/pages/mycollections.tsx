@@ -320,7 +320,7 @@ export async function getServerSideProps(context: any) {
 
   const userId: string = (session.user as User).id;
   const apiUrl: string = `/api/collections/findMyCollections?userId=${userId}`;
-  console.log(userId);
+
   const items = await prisma.plantCollection.findMany({
     where: {
       ownerId: String(userId),

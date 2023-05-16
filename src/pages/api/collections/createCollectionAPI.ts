@@ -15,6 +15,6 @@ export default async function handler(
   const savedPlantCollection = await prisma.plantCollection.create({
     data: plantCollectionData,
   });
-  //   res.status(200).json(usersCollection);
+
   res.status(200).json(savedPlantCollection);
 }

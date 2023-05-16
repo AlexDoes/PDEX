@@ -72,7 +72,6 @@ export default function CreateCollectionForm(data: any) {
   const [collectionName, setCollectionName] = useState<string>("");
   const handleSubmissionFromParent = data.onSubmit;
   const closeCollectionForm = data.closeCollectionForm;
-
   useEffect(() => {
     if (data.user) {
       setUser(data.user);

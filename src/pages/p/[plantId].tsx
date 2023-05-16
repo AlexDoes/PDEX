@@ -1,6 +1,9 @@
-import { update } from "lodash";
+import { get, update } from "lodash";
 import { useRouter } from "next/router";
 import prisma from "lib/prisma";
+import { useState } from "react";
+import CommentBox from "@/components/CommentBox";
+import { getSession } from "next-auth/react";
 
 const defaultAvatars = [
   "https://pdex.s3.amazonaws.com/defaultavatar-1.jpg",
@@ -9,7 +12,15 @@ const defaultAvatars = [
   "https://pdex.s3.amazonaws.com/defaultavatar-4.jpg",
 ];
 
-export default function plantPublicDisplayPage({ plant, comments }: any) {
+interface User {
+  id: string;
+  name?: string | null | undefined;
+  email?: string | null | undefined;
+  image?: string | null | undefined;
+  address: string;
+}
+
+export default function plantPublicDisplayPage({ plant, comments, user }: any) {
   const router = useRouter();
 
   if (!plant) {
@@ -30,8 +41,11 @@ export default function plantPublicDisplayPage({ plant, comments }: any) {
   const plantData = plant;
 
   const commentsToDisplay = () => {
+    if (comments.length === 0) {
+      return <div>Be the first to comment!</div>;
+    }
     return (
-      <div className="flex flex-col gap-1 border-y my-2 py-4 border-black mx-4 h-[50%]">
+      <div className="flex flex-col gap-1 border-y border-black px-4 h-full overflow-y-auto">
         {comments.map((comment: any) => (
           <div key={comment.id} className="flex flex-row gap-1 items-center">
             <img
@@ -60,10 +74,12 @@ export default function plantPublicDisplayPage({ plant, comments }: any) {
       </div>
     );
   };
+
   return (
     <div
       className=" border border-[#c1e1c1] bg-orange-100 rounded-xl p-4 m-2 pt-6 pb-6 items-center justify-between focus:focus-within hover:relative hover:transition-all focus:transition-all 
-      w-inherit md:h-min-[492px] h-inherit focus:outline-none overflow-x-hidden flex flex-col md:flex-row gap-2 md:items-stretch"
+      w-inherit md:h-min-[492px] h-inherit focus:outline-none overflow-x-hidden flex flex-col md:flex-row gap-2 md:items-stretch
+      h-full"
       tabIndex={0}
     >
       <div
@@ -111,45 +127,69 @@ export default function plantPublicDisplayPage({ plant, comments }: any) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col xs:items-center xs:justify-center md:items-start gap-1 border-2 px-2 py-4 h-full lg:max-h-[80vh] xl:max-h-[80vh] md:max-h-[50vh] overflow-y-auto">
-        <div className="elipsis"> {plant.name} </div>
-        <div className="font-light italic">
-          {" "}
-          {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
-        </div>
-        <div className="flex justify-center">
-          <div
-            className="
-          border-2 border-slate-300
-        rounded-lg font-light
-        overflow-x-hidden
-        xs:max-h-[92px]
-        md:h-[50%]
-        lg:h-[90px]
-        xl:h-[90px]
-        max-h-[80px]
-        overflow-y-auto
-        ellipsis
-        text-center
-        flex
-        p-2
-        xs:text-sm sm:text-sm md:text-md items-center justify-center w-[95%]
+      <div
+        className="relative flex flex-col xs:items-center xs:justify-center md:items-start gap-1 border-2 border-red-500 px-2 h-full lg:max-h-[80vh] xl:max-h-[80vh] md:max-h-[50vw]
+        md:h-[50vw]
+        md:justify-evenly
       "
-          >
-            <p>
-              {plant.description
-                ? plant.description
-                : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
-            </p>
+      >
+        <div
+          className="h-[30%] border-black border flex 
+        flex-col items-start justify-evenly relative"
+        >
+          <div className="elipsis top-0"> {plant.name} </div>
+          <div className="font-light italic">
+            {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
+          </div>
+          <div className="flex flex-col justify-center border-2 border-green-900 relative">
+            <div
+              className="
+              border-2 border-slate-300
+              rounded-lg font-light
+              overflow-y-auto
+              xs:max-h-[92px]
+              md:h-full
+              lg:h-[90px]
+              xl:h-[90px]
+              max-h-[92px]
+              ellipsis
+              text-center
+              flex
+              p-2
+              xs:text-sm sm:text-sm md:text-md items-center 
+              relative
+            "
+            >
+              <p>
+                {plant.description
+                  ? plant.description
+                  : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
+              </p>
+            </div>
           </div>
         </div>
-        {commentsToDisplay()}
+        <div className="h-[50%] w-full border-2 border-green-500">
+          {commentsToDisplay()}
+        </div>
+        <div className="h-[10%] relative w-full">
+          <CommentBox
+            reference={"UniquePlant"}
+            refId={plant.id}
+            userId={user}
+          />
+        </div>
       </div>
     </div>
   );
 }
 
 export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+  let user = null;
+  if (session) {
+    user = (session.user as User).id;
+  }
+
   const plant = await prisma.uniquePlant.findUnique({
     where: {
       id: String(context.params.plantId),
@@ -198,6 +238,7 @@ export async function getServerSideProps(context: any) {
     props: {
       plant: JSON.parse(JSON.stringify(plant)),
       comments: JSON.parse(JSON.stringify(plantsWithFormattedTime)),
+      user,
     },
   };
 }
