@@ -181,7 +181,7 @@ export default function CreateUniquePlant(props: any) {
   const renderButton = (field: string) => {
     return (
       <button
-        className="border-2 w-[160px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  font-bold "
+        className="border-2 w-[160px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  sm:font-bold "
         onClick={() => handleAddFieldClick(field as keyof Fields)}
       >
         Add {field}
@@ -197,31 +197,33 @@ export default function CreateUniquePlant(props: any) {
     <>
       <div
         // onClick={props.onSubmit}
-        className="  z-50 absolute border-blue-500 w-[90vw] flex items-center justify-center  "
+        className=" z-50  bottom-0 top-0 fixed w-[90vw] flex items-center justify-center  "
       >
         <form
           onSubmit={handleSubmit((values, e) => {
             onSubmit(values);
           })}
-          className=" flex flex-col w-[80vw] sm:w-[60vw] transition-all ease-in-out duration-200 max-w-[1200px] h-[1000px]  items-center mt-10
-        border-2 border-[#c1e1c1] gap-8 rounded-lg gradient-bg-card2-reverse z-50  "
+          className=" flex flex-col w-[80vw] sm:w-[60vw] transition-all ease-in-out duration-200 max-w-[1200px] h-[80vh] max-h-[750px] items-center 
+        border-2 border-[#c1e1c1]  pb-7   rounded-lg gradient-bg-card2-reverse z-50  "
         >
-          <div
-            onClick={props.onSubmit}
-            className="absolute right-6 top-6 shadow-md rounded-full cursor-pointer"
-          >
-            <AiOutlineCloseCircle size={30} color="white" />
-          </div>
-          <h2 className="text-4xl mt-5 font-bold text-slate-500 ">
-            Add a Plant
-          </h2>
-          <div className="  h-[100%] w-[80%] flex flex-col gap-4">
+          <div className="  h-[100%] w-[80%] flex flex-col justify-center gap-4 ">
+            <div
+              onClick={props.onSubmit}
+              className="absolute right-6 top-6 shadow-md rounded-full cursor-pointer"
+            >
+              <AiOutlineCloseCircle size={30} color="white" />
+            </div>
+            <div className="w-full  flex justify-center relative text-center ">
+              <h2 className="text-3xl   top-0  mt-2 font-bold text-slate-500 pt-2">
+                Add a Plant
+              </h2>
+            </div>
             <div className=" border-2 border-white rounded-r-md   ">
               {/* <label className="h-full text-center flex items-center border border-orange-500 px-1">
                 Plant Name
               </label> */}
               <input
-                className=" w-full h-[50px] bg-[#efe6c1] pl-5"
+                className=" w-full h-[40px] bg-[#efe6c1] pl-5"
                 placeholder="Plant Name (required)"
                 {...register("plantName", {
                   required: true,
@@ -235,7 +237,7 @@ export default function CreateUniquePlant(props: any) {
               {errors.plantName?.type &&
                 ({ ...errorsMap.plantName } as any)[errors.plantName.type]}
             </p>
-            <div className="flex gap-5 items-center h-[50px]  border-2 border-white rounded-r-md  text-center bg-[#efe6c1] rounded-md">
+            <div className="flex gap-5 items-center h-[40px]  border-2 border-white rounded-r-md  text-center bg-[#efe6c1] rounded-md">
               <label
                 className="pl-5 text-slate-500 font-semibold"
                 htmlFor="plantImage"
@@ -253,7 +255,15 @@ export default function CreateUniquePlant(props: any) {
             {/* plant species */}
             <div className="w-full border border-blue">
               <NewSearchBar
-                data={["monstera albo", "red fern", "bonsai", "snake plant"]}
+                data={[
+                  "monstera albo",
+                  "red fern",
+                  "bonsai",
+                  "snake plant",
+                  "red fern",
+                  "red fern",
+                  "red fern",
+                ]}
                 width="w-[20vw] "
                 onChange={handleChangeOnForm}
               />
@@ -270,14 +280,14 @@ export default function CreateUniquePlant(props: any) {
             {fields.subspecies && (
               <input
                 placeholder="Plant Subspecies"
-                className="w-full h-[50px] bg-[#efe6c1]  pl-5 border-2 border-white rounded-r-md  "
+                className="w-full h-[40px] bg-[#efe6c1]  pl-5 border-2 border-white rounded-r-md  "
                 {...register("plantSubspecies")}
               />
             )}
             {fields.height && (
               <div className="w-full flex">
                 <input
-                  className="w-full h-[50px] bg-[#efe6c1] pl-5 border-2 border-white rounded-r-md "
+                  className="w-full h-[40px] bg-[#efe6c1] pl-5 border-2 border-white rounded-r-md "
                   type="number"
                   placeholder="Plant Height"
                   {...register("plantHeight", {
@@ -308,7 +318,7 @@ export default function CreateUniquePlant(props: any) {
               {fields.width && (
                 <div className="w-full flex">
                   <input
-                    className="w-full h-[50px] bg-[#efe6c1] rounded-l-md pl-5 border-2 border-white rounded-r-md "
+                    className="w-full h-[40px] bg-[#efe6c1] rounded-l-md pl-5 border-2 border-white rounded-r-md "
                     type="number"
                     placeholder="Plant Width"
                     {...register("plantWidth", {
@@ -331,10 +341,10 @@ export default function CreateUniquePlant(props: any) {
             <textarea
               placeholder="Plant Description"
               {...register("plantDescription")}
-              className="border-2 pl-5 border-white h-[40%] rounded-b-md bg-[#efe6c1]"
+              className="border-2 pl-5 border-white h-[20%] rounded-b-md bg-[#efe6c1]"
             />
             <button
-              className=" border h-[50px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  font-bold"
+              className=" border h-[40px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  sm:font-bold"
               type="submit"
             >
               Submit

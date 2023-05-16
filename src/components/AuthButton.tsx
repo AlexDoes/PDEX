@@ -21,7 +21,7 @@ export default function AuthButtonComponent() {
   if (session) {
     return (
       <>
-        <div className="h-full w-full  " onClick={openMenu}>
+        <div className="h-full w-full  px-2 md:px-4 xl:mr-3 " onClick={openMenu}>
           {/* {"Hello " + session.user.name?.split(" ")[0]} */}
           <div className="h-full w-full flex justify-center items-center cursor-pointer">
             <div>
@@ -57,7 +57,7 @@ export default function AuthButtonComponent() {
           >
             <div
               id="menu-items"
-              className=" transition-all ease-in-out duration-500 lg:ml-[200px] "
+              className=" transition-all ease-in-out duration-500   md:ml-[4vw] "
             >
               <div
                 className=""

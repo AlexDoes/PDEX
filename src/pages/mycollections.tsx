@@ -284,8 +284,8 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         mountOnEnter
       >
         <div
-          onClick={handleAddCollectionClick}
-          className="fixed top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "
+          // onClick={handleAddCollectionClick}
+          className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "
         ></div>
       </CSSTransition>
 

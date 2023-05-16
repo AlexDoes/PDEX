@@ -110,7 +110,8 @@ export default function MyPlants({ items, userId, username, session }: any) {
               </div>
               <p
                 className="
-                bg-yellow-200
+                bg-yellow-100
+                font-light
                 rounded-lg
                 w-[80%]
                 overflow-x-hidden
@@ -139,36 +140,16 @@ export default function MyPlants({ items, userId, username, session }: any) {
   };
 
   return (
-    <div className="">
-      {/* {!showForm && (
+    <>
+      <div className="">
+        {/* {!showForm && (
         <button onClick={() => setShowForm(true)}>Add a plant</button>
       )} */}
-      {/* {showForm && (
+        {/* {showForm && (
         <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
       )} */}
-      <CSSTransition
-        in={showForm}
-        timeout={1000}
-        classNames="fade"
-        unmountOnExit
-        mountOnEnter
-      >
-        <div
-          onClick={onSubmitFromParent}
-          className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] right-0"
-        ></div>
-      </CSSTransition>
 
-      <CSSTransition
-        in={showForm}
-        timeout={1000}
-        classNames="page"
-        unmountOnExit
-        mountOnEnter
-      >
-        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
-      </CSSTransition>
-      {/* <ul>
+        {/* <ul>
         {items.map((item: any) => (
           <li key={item.id} className="bg-red-300 border-sky-500 border-2">
             <div>
@@ -195,18 +176,41 @@ export default function MyPlants({ items, userId, username, session }: any) {
           </li>
         ))}
       </ul> */}
-      <h1 className="text-3xl flex justify-center mt-4 items-center gap-1">
-        My plants
-        <RiPlantLine className="text-3xl text-green-400" />
-      </h1>
-      {showPlantsCard()}
-      {!showForm && (
-        <button onClick={() => setShowForm(true)}>Add a plant</button>
-      )}
-      {/* {showForm && (
+        <h1 className="text-3xl flex justify-center mt-4 items-center gap-1">
+          My plants
+          <RiPlantLine className="text-3xl text-green-400" />
+        </h1>
+        {showPlantsCard()}
+        {!showForm && (
+          <button onClick={() => setShowForm(true)}>Add a plant</button>
+        )}
+        {/* {showForm && (
         <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
       )} */}
-    </div>
+      </div>
+      <CSSTransition
+        in={showForm}
+        timeout={1000}
+        classNames="fade"
+        unmountOnExit
+        mountOnEnter
+      >
+        <div
+          onClick={onSubmitFromParent}
+          className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] right-0"
+        ></div>
+      </CSSTransition>
+
+      <CSSTransition
+        in={showForm}
+        timeout={600}
+        classNames="page"
+        unmountOnExit
+        mountOnEnter
+      >
+        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
+      </CSSTransition>
+    </>
   );
 }
 
