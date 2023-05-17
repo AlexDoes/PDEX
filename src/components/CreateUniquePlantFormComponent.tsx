@@ -311,8 +311,8 @@ export default function CreateUniquePlant(props: any) {
             )}
             <div>
               <div className="space-x-5 flex">
-                {!fields.height && renderButton("height")}
                 {!fields.subspecies && renderButton("subspecies")}
+                {!fields.height && renderButton("height")}
                 {!fields.width && renderButton("width")}
               </div>
               {fields.width && (

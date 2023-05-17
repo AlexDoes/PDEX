@@ -90,52 +90,53 @@ export default function NavBarSearchBar({}) {
     let i = 0;
     return (
       <ul
-        className={`w-inherit absolute top-[100%] w-[40vw] z-50 text-ellipsis`}
+        className={`w-inherit absolute top-[100%] w-[40vw] z-50 text-ellipsis rounded-lg border-8 border-white bg-white  `}
       >
-        {speciesSuggestions.length > 0 && (
-          <div>
-            <h1 className="text-lg font-thin bg-slate-300 border-2 border-black">
-              Species suggested:{" "}
-            </h1>
-          </div>
-        )}
-        {speciesSuggestions &&
-          speciesSuggestions.slice(0, 5).map((item: any) => (
-            <li
-              key={item}
-              onClick={handleClickingSuggestion}
-              onKeyDown={handleKeyDown}
-              className="
+        <div className="border-slate-500 border-[2px] rounded-md">
+          {speciesSuggestions.length > 0 && (
+            <div>
+              <h1 className="text-lg font-semibold bg-slate-300 border-2 border-black">
+                Species suggested:{" "}
+              </h1>
+            </div>
+          )}
+          {speciesSuggestions &&
+            speciesSuggestions.slice(0, 5).map((item: any) => (
+              <li
+                key={item}
+                onClick={handleClickingSuggestion}
+                onKeyDown={handleKeyDown}
+                className="
                 text-ellipsis
-                bg-white
+                bg-green-300
                 cursor-pointer
                 hover:bg-gray-200
-                border-2 border-black
+                border-2 border-slate-500
                 indent-3
                 flex flex-row
                 justify-between
                 pr-3
                 items-center
                 "
-              tabIndex={0}
-            >
-              {item}
-              <FaLeaf />
-            </li>
-          ))}
-        {plantSuggestions.length > 0 && (
-          <div>
-            <h1 className="text-lg font-thin bg-slate-300 border-2 border-black">
-              Plants suggested:{" "}
-            </h1>
-          </div>
-        )}
-        {plantSuggestions &&
-          plantSuggestions.slice(0, 3).map((item: any) => (
-            <li
-              key={item}
-              onClick={handleClickingSuggestion}
-              className="
+                tabIndex={0}
+              >
+                {item}
+                <FaLeaf />
+              </li>
+            ))}
+          {plantSuggestions.length > 0 && (
+            <div>
+              <h1 className="text-lg font-thin bg-slate-300 border-2 border-black">
+                Plants suggested:{" "}
+              </h1>
+            </div>
+          )}
+          {plantSuggestions &&
+            plantSuggestions.slice(0, 3).map((item: any) => (
+              <li
+                key={item}
+                onClick={handleClickingSuggestion}
+                className="
                 truncate ...
                 bg-white
                 cursor-pointer
@@ -147,56 +148,58 @@ export default function NavBarSearchBar({}) {
                 pr-3
                 items-center
                 "
-              data-value={item}
-              tabIndex={0}
-              onKeyDown={handleKeyDown}
-            >
-              {item}
-              <HiSparkles />
-            </li>
-          ))}
-        {usersSuggestions.length > 0 && (
-          <div>
-            <h1 className="text-lg font-thin bg-slate-300 border-2 border-black">
-              Users suggested:{" "}
-            </h1>
-          </div>
-        )}
-        {usersSuggestions &&
-          usersSuggestions.slice(0, 2).map((item: any) => (
-            <li
-              key={item}
-              onClick={handleClickingSuggestion}
-              className="
+                data-value={item}
+                tabIndex={0}
+                onKeyDown={handleKeyDown}
+              >
+                {item}
+                <HiSparkles />
+              </li>
+            ))}
+          {usersSuggestions.length > 0 && (
+            <div>
+              <h1 className="text-lg font-semibold bg-slate-300 border-2 border-slate-500">
+                Users suggested:{" "}
+              </h1>
+            </div>
+          )}
+          {usersSuggestions &&
+            usersSuggestions.slice(0, 2).map((item: any) => (
+              <li
+                key={item}
+                onClick={handleClickingSuggestion}
+                className="
               text-ellipsis
-                bg-white
+                rounded-
                 cursor-pointer
                 hover:bg-gray-200
-                border-2 border-black
+                border-2 border-slate-500
+                bg-[#fffbcc]
                 indent-3
                 flex flex-row
                 justify-between
                 pr-3
                 items-center
                 "
-              tabIndex={0}
-              onKeyDown={handleKeyDown}
-            >
-              <Link
-                href={`/u/${item}`}
-                className="
+                tabIndex={0}
+                onKeyDown={handleKeyDown}
+              >
+                <Link
+                  href={`/u/${item}`}
+                  className="
                 text-ellipsis
                     flex flex-row
                     justify-between
                     w-full
                     items-center
               "
-              >
-                {item}
-                <FaUser />
-              </Link>
-            </li>
-          ))}
+                >
+                  {item}
+                  <FaUser />
+                </Link>
+              </li>
+            ))}
+        </div>
       </ul>
     );
   };
@@ -222,27 +225,27 @@ export default function NavBarSearchBar({}) {
 
   return (
     <form className="flex flex-row z-50" onSubmit={handleSubmit}>
-      <div className="flex flex-col border-8 items-start relative overflow-visible">
+      <div className="flex flex-col z-50 border-[12px] items-start relative overflow-visible rounded-full border-white ">
         <div className="flex flex-row justify-center items-center gap-2">
           <input
             type="text"
             placeholder="Search"
             value={searchText}
             onChange={handleOnChange}
-            className="w-[40vw]  "
+            className="w-[40vw] bg-[#fffbcc] rounded-full  "
             tabIndex={0}
             ref={(input) => input && input.focus()}
           />
         </div>
         {renderSuggestions()}
       </div>
-      <button
+      {/* <button
         type="submit"
         onClick={onSubmit}
         className="border-2 flex items-center justify-center hover:bg-black"
       >
         <FaSearch />
-      </button>
+      </button> */}
     </form>
   );
 }

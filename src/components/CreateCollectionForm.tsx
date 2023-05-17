@@ -72,6 +72,8 @@ async function createCollection(collectionData: any) {
 export default function CreateCollectionForm(data: any) {
   const [user, setUser] = useState<string>(data.user);
   const [collectionName, setCollectionName] = useState<string>("");
+  const [collectionDescription, setCollectionDescription] =
+    useState<string>("");
   const handleSubmissionFromParent = data.onSubmit;
   const closeCollectionForm = data.closeCollectionForm;
   useEffect(() => {
@@ -106,13 +108,13 @@ export default function CreateCollectionForm(data: any) {
       <div className="gradient-bg-card2-reverse rounded-md md:w-[50%] w-[80%] h-[50%]  max-w-[600px]  border-2 border-[#c1e1c1] p-2   ">
         <div
           onClick={closeCollectionForm}
-          className="absolute right-6 top-6 shadow-md rounded-full cursor-pointer"
+          className="absolute right-2 top-2 shadow-md rounded-full cursor-pointer"
         >
           <AiOutlineCloseCircle size={30} color="#C0C2C9" />
         </div>
         <form
           onSubmit={handleSubmit}
-          className=" w-full flex flex-col justify-center items-center gap-5 h-full"
+          className=" w-full flex flex-col justify-center items-center gap-3 h-full"
         >
           <h2 className="text-3xl top-0  mt-2 font-bold text-slate-500 pt-2 text-center">
             What would you like to name your new collection?
@@ -124,6 +126,14 @@ export default function CreateCollectionForm(data: any) {
             value={collectionName}
             minLength={3}
             onChange={(e) => setCollectionName(e.target.value)}
+          />
+          <textarea
+            placeholder="Collection's Description"
+            className="w-[80%] h-[100px] rounded-md border-2 border-[#c1e1c1] bg-[#efe6c1] overflow-y-auto"
+            value={collectionDescription}
+            minLength={3}
+            onChange={(e) => setCollectionDescription(e.target.value)}
+
           />
           {/* //TODO: add a description field //TODO: add a privacy field */}
           {/* <button
