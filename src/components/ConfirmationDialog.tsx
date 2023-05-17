@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { BsFillTrashFill } from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface ConfirmationDialogProps {
   onConfirm: any;
@@ -40,6 +41,10 @@ const ConfirmationDialog = ({
       message: "delete this collection",
       button: "Delete collection",
     },
+    deleteComment: {
+      message: "delete this comment",
+      button: "Delete comment",
+    },
   };
 
   const [open, setOpen] = useState(false);
@@ -53,11 +58,17 @@ const ConfirmationDialog = ({
 
   return (
     <>
-      <Button onClick={handleOpen} className="">
-        <div className="hover:outline outline-slate-400 rounded-lg p-1 text-red-500 hover:text-red-600">
-          {<BsFillTrashFill className="text-xl" />}
-        </div>
-      </Button>
+      <button onClick={handleOpen} className="">
+        {promptType != "deleteComment" ? (
+          <div className="hover:outline outline-slate-400 rounded-lg p-1 text-red-500 hover:text-red-600">
+            <BsFillTrashFill className="text-xl" />
+          </div>
+        ) : (
+          <div>
+            <AiOutlineClose className="text-sm text-gray-400 rounded-sm hover:outline hover:outline-slate-400 hover:bg-gray-300 hover:text-gray-500" />
+          </div>
+        )}
+      </button>
       <Dialog open={open} onClose={handleClose}>
         <div className="bg-[#ECF87F] text-[#d6ae87] ">
           <DialogTitle>Confirm to {actions[promptType].message}</DialogTitle>

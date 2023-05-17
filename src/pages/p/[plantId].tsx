@@ -1,10 +1,11 @@
 import { get, update } from "lodash";
 import { useRouter } from "next/router";
 import prisma from "lib/prisma";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import CommentBox from "@/components/CommentBox";
 import { getSession } from "next-auth/react";
 import Link from "next/link";
+import DeleteCommentButton from "@/components/DeleteCommentButton";
 
 const defaultAvatars = [
   "https://pdex.s3.amazonaws.com/defaultavatar-1.jpg",
@@ -21,25 +22,47 @@ interface User {
   address: string;
 }
 
-export default function plantPublicDisplayPage({ plant, comments, user }: any) {
+export default function plantPublicDisplayPage({
+  plant,
+  comments,
+  user,
+  userInfo,
+}: any) {
   const router = useRouter();
+  const latestComment = useRef<HTMLDivElement>(null);
 
   const [commentsToDisplayState, setCommentsToDisplay] = useState(comments);
-  console.log(plant.ownerId);
-  useEffect(() => {
-    setCommentsToDisplay(comments);
-  }, [commentsToDisplayState]);
+
+  const handleDeleteFromParent = (deletedId: string) => {
+    const newComments = commentsToDisplayState.filter(
+      (comment: any) => comment.id !== deletedId
+    );
+    setCommentsToDisplay(newComments);
+  };
 
   if (!plant) {
     return <div> Weird, you shouldn't be here</div>;
   }
+  const [scroll, setScroll] = useState(false);
+
+  useEffect(() => {
+    if (scroll) {
+      if (latestComment.current) {
+        latestComment.current.scrollTop = latestComment.current.scrollHeight;
+      }
+    }
+    scroll && setScroll(false);
+  }, [commentsToDisplayState]);
 
   const commentsToDisplay = () => {
     if (comments.length === 0) {
       return <div>Be the first to comment!</div>;
     }
     return (
-      <div className="flex flex-col gap-1 border-y border-black px-4 h-full overflow-y-auto p-2">
+      <div
+        className="flex flex-col gap-1 border-y border-black px-4 h-full overflow-y-auto p-2 transition-all duration-500 ease-in-out scroll-smooth"
+        ref={latestComment}
+      >
         {commentsToDisplayState.map((comment: any) => (
           <div
             key={comment.id}
@@ -60,9 +83,9 @@ export default function plantPublicDisplayPage({ plant, comments, user }: any) {
                 className="rounded-full w-8 h-8"
               />
             </Link>
-            <div className="flex flex-col gap-1">
-              <div className="flex flex-col gap-1">
-                <div>
+            <div className="flex flex-col gap-1 w-full">
+              <div className="flex flex-col gap-1 w-full">
+                <div className="relative border-2 w-full">
                   <Link
                     className="flex flex-row gap-1 items-center"
                     href={
@@ -79,6 +102,17 @@ export default function plantPublicDisplayPage({ plant, comments, user }: any) {
                       {comment.author.id === plant.ownerId ? "Author" : ""}
                     </p>
                   </Link>
+                  <div className="absolute right-0 top-0 bottom-0">
+                    {comment.author.id === user ? (
+                      <DeleteCommentButton
+                        commentId={comment.id}
+                        userId={user}
+                        onConfirm={handleDeleteFromParent}
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
                   <p className="italic text-xs text-gray-500">
                     {comment.createdAt}
                   </p>
@@ -90,6 +124,14 @@ export default function plantPublicDisplayPage({ plant, comments, user }: any) {
         ))}
       </div>
     );
+  };
+
+  const handleCommentSubmit = (comment: any) => {
+    comment.author = userInfo;
+    comment.createdAt = "just now";
+    setScroll(true);
+    const newComments = [...commentsToDisplayState, comment];
+    setCommentsToDisplay(newComments);
   };
 
   return (
@@ -192,6 +234,7 @@ export default function plantPublicDisplayPage({ plant, comments, user }: any) {
             reference={"UniquePlant"}
             refId={plant.id}
             userId={user}
+            onAction={handleCommentSubmit}
           />
         </div>
       </div>
@@ -202,8 +245,20 @@ export default function plantPublicDisplayPage({ plant, comments, user }: any) {
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
   let user = null;
+  let userInfo = null;
   if (session) {
     user = (session.user as User).id;
+    userInfo = await prisma.user.findUnique({
+      where: {
+        id: user,
+      },
+      select: {
+        id: true,
+        name: true,
+        nickname: true,
+        image: true,
+      },
+    });
   }
 
   const plant = await prisma.uniquePlant.findUnique({
@@ -255,6 +310,7 @@ export async function getServerSideProps(context: any) {
       plant: JSON.parse(JSON.stringify(plant)),
       comments: JSON.parse(JSON.stringify(plantsWithFormattedTime)),
       user,
+      userInfo,
     },
   };
 }

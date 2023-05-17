@@ -8,10 +8,11 @@ interface Props {
   reference: string;
   refId: string;
   userId: string;
+  onAction: any;
 }
 
 const CommentBox = (props: Props) => {
-  const { reference, refId, userId } = props;
+  const { reference, refId, userId, onAction } = props;
   const [comment, setComment] = useState("");
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +37,10 @@ const CommentBox = (props: Props) => {
             color: "#ffffff",
             textShadow: "0 0 0.5rem #000000",
           },
+        });
+        res.json().then((data) => {
+          console.log(data);
+          onAction(data);
         });
         setComment("");
       } else {
@@ -84,6 +89,8 @@ const CommentBox = (props: Props) => {
 CommentBox.propTypes = {
   reference: PropTypes.string,
   refId: PropTypes.string,
+  userId: PropTypes.string,
+  onAction: PropTypes.func,
 };
 
 export default CommentBox;
