@@ -6,6 +6,7 @@ import CommentBox from "@/components/CommentBox";
 import { getSession } from "next-auth/react";
 import Link from "next/link";
 import DeleteCommentButton from "@/components/DeleteCommentButton";
+import { SlPencil } from "react-icons/sl";
 
 const defaultAvatars = [
   "https://pdex.s3.amazonaws.com/defaultavatar-1.jpg",
@@ -106,7 +107,7 @@ export default function plantPublicDisplayPage({
                       {comment.author.id === plant.ownerId ? "Author" : ""}
                     </p>
                   </Link>
-                  <div className="absolute right-0 top-0 bottom-0 opacity-0 group-hover:opacity-100">
+                  <div className="absolute right-0 top-0 bottom-0 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
                     {comment.author.id === user ? (
                       <DeleteCommentButton
                         commentId={comment.id}
@@ -201,7 +202,20 @@ export default function plantPublicDisplayPage({
           className="h-[30%] flex 
         flex-col items-start justify-evenly relative"
         >
-          <div className="elipsis top-0 text-xl"> {plant.name} </div>
+          <div className="elipsis top-0 text-xl flex flex-row">
+            {plant.name}{" "}
+            <div className="text-sm text-blue-300 font-light rounded-sm">
+              {user === plant.ownerId ? (
+                <div className="ml-1 hover:border hover:backdrop-brightness-90 rounded-sm">
+                  <Link href={`/myplants/${plant.id}`}>
+                    <SlPencil />
+                  </Link>
+                </div>
+              ) : (
+                ""
+              )}{" "}
+            </div>
+          </div>
           <div className="font-light italic">
             {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
           </div>
