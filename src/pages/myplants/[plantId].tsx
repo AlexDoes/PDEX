@@ -189,6 +189,7 @@ export default function plantDisplay({ plant, userId }: any) {
             <DeleteUniquePlantButton
               uniquePlantId={plantData.id}
               user={userId}
+              objectName={plantData.name}
               onConfirm={onDelete}
             />
           </div>

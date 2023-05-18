@@ -163,6 +163,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
               <DeleteCollectionButton
                 user={userId}
                 collectionId={collection.id}
+                objectName={collection.name}
                 onConfirm={handleSubmitCollectionForm}
               />
             </div>

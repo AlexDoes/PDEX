@@ -69,17 +69,27 @@ const ConfirmationDialog = ({
           </div>
         )}
       </button>
+
       <Dialog open={open} onClose={handleClose}>
-        <div className="bg-[#ECF87F] text-[#d6ae87] ">
+        <div className="bg-[#ea9179] text-black">
           <DialogTitle>Confirm to {actions[promptType].message}</DialogTitle>
-          <DialogContent>
-            <DialogContentText className="-[#d6ae87]">
-              Are you sure you want to {prompt}?
+          <DialogContent className="">
+            <DialogContentText className="text-xl ">
+              Are you sure you want to {actions[promptType].message}? <br />
+              This action cannot be undone. <br />
+              {promptType != "deleteComment" &&
+                `(
+                You will be deleting ${(
+                  <b>{prompt && prompt.toUpperCase()}</b>
+                )}.
+              )`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleConfirm} className="text-red-500">
+            <Button variant="outlined" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button onClick={handleConfirm} variant="outlined">
               Delete
             </Button>
           </DialogActions>

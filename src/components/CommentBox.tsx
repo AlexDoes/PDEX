@@ -62,7 +62,7 @@ const CommentBox = (props: Props) => {
       >
         <div className="w-full flex flex-row justify-center items-center">
           <input
-            className="w-[90%] h-full   bg-yellow-100 border-none rounded-l-2xl outline-none p-2 focus:ring-0 indent-3"
+            className="w-[90%] h-full   bg-yellow-100 border-none rounded-l-2xl outline-none p-2 focus:ring-0 indent-3 font-light"
             type="text"
             placeholder={userId ? "Add a comment..." : "Login to comment!"}
             value={comment}
@@ -73,7 +73,9 @@ const CommentBox = (props: Props) => {
             disabled={!userId}
           />
           <button
-            className="w-[10%] h-[100%] flex justify-center items-center"
+            className="w-[10%] h-[100%] flex justify-center items-center border-t border-b border-r hover:backdrop-brightness-95 rounded-r-xl 
+            hover:text-green-300 transition duration-300 ease-in-out
+            "
             type="submit"
           >
             <div className="text-center flex justify-center items-center h-full w-full text-blue-300">

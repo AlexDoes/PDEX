@@ -60,14 +60,18 @@ export default function plantPublicDisplayPage({
     }
     return (
       <div
-        className="flex flex-col gap-1 border-y border-black px-4 h-full overflow-y-auto p-2 transition-all duration-500 ease-in-out scroll-smooth"
+        className="flex flex-col gap-3 border-y border-black px-4 h-full overflow-y-auto p-2 transition-all duration-500 ease-in-out scroll-smooth pt-4 scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+        scrollbar-rounded-sm snap-y snap-mandatory"
         ref={latestComment}
       >
         {commentsToDisplayState.map((comment: any) => (
           <div
             key={comment.id}
-            className="flex flex-row gap-4 items-center mr-2 px-2"
+            className="relative flex flex-row gap-4 items-center mr-2 px-2 pb-5 group snap-center"
           >
+            <div className="absolute bottom-0 w-full flex justify-center items-center">
+              <div className="bottom-0 right-[50%] h-[2px] w-[50%] group-hover:bg-gray-200"></div>
+            </div>
             <Link
               href={
                 comment.author.nickname
@@ -83,11 +87,11 @@ export default function plantPublicDisplayPage({
                 className="rounded-full w-8 h-8"
               />
             </Link>
-            <div className="flex flex-col gap-1 w-full">
+            <div className="flex flex-col gap-1 w-full border-black">
               <div className="flex flex-col gap-1 w-full">
-                <div className="relative border-2 w-full">
+                <div className="relative w-full">
                   <Link
-                    className="flex flex-row gap-1 items-center"
+                    className="flex flex-row gap-1 items-center w-[10%]"
                     href={
                       comment.author.nickname
                         ? `/u/${comment.author.nickname}`
@@ -102,7 +106,7 @@ export default function plantPublicDisplayPage({
                       {comment.author.id === plant.ownerId ? "Author" : ""}
                     </p>
                   </Link>
-                  <div className="absolute right-0 top-0 bottom-0">
+                  <div className="absolute right-0 top-0 bottom-0 opacity-0 group-hover:opacity-100">
                     {comment.author.id === user ? (
                       <DeleteCommentButton
                         commentId={comment.id}
@@ -136,8 +140,8 @@ export default function plantPublicDisplayPage({
 
   return (
     <div
-      className=" border border-[#c1e1c1] bg-orange-100 rounded-xl p-4 m-2 pt-6 pb-6 items-center justify-between focus:focus-within hover:relative hover:transition-all focus:transition-all 
-      w-inherit md:h-min-[492px] h-inherit focus:outline-none overflow-x-hidden flex flex-col md:flex-row gap-2 md:items-stretch
+      className=" border border-[#c1e1c1] bg-orange-100 rounded-xl p-4 pt-6 pb-6 items-center justify-between focus:focus-within hover:relative hover:transition-all focus:transition-all 
+      w-full md:h-min-[492px] h-inherit focus:outline-none overflow-x-hidden flex flex-col md:flex-row gap-2 md:items-stretch
       h-full"
       tabIndex={0}
     >

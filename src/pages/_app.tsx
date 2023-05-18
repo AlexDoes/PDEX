@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </div>
         </div>
-        <ScreenChecker />
+        {/* <ScreenChecker /> */}
         {/* <DontLookHere /> */}
       </SessionProvider>
     </>

@@ -19,6 +19,9 @@ export default function DeleteUniquePlantButton(props: any) {
   const [uniquePlantId, setUniquePlantId] = useState<string>(
     props.uniquePlantId
   );
+  const [uniquePlantName, setUniquePlantName] = useState<string>(
+    props.objectName
+  );
   const handleSubmissionFromParent = props.onConfirm;
 
   useEffect(() => {
@@ -51,7 +54,7 @@ export default function DeleteUniquePlantButton(props: any) {
   return (
     <ConfirmationDialog
       onConfirm={() => handleDelete()}
-      prompt={"delete this plant"}
+      prompt={uniquePlantName}
       promptType={"deletePlant"}
     />
   );

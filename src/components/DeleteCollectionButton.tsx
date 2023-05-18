@@ -18,7 +18,9 @@ export default function DeleteCollectionButton(props: any) {
   const [user, setUser] = useState<string>(props.user);
   const [collectionId, setCollectionId] = useState<string>(props.collectionId);
   const handleSubmissionFromParent = props.onConfirm;
-
+  const [collectionName, setCollectionName] = useState<string>(
+    props.objectName
+  );
   useEffect(() => {
     if (props.user) {
       setUser(props.user);
@@ -49,7 +51,7 @@ export default function DeleteCollectionButton(props: any) {
   return (
     <ConfirmationDialog
       onConfirm={() => handleDelete()}
-      prompt={"delete this collection"}
+      prompt={collectionName}
       promptType={"deleteCollection"}
     />
   );
