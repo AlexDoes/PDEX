@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
 import { getProviders, signIn, getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Redirect } from "next";
 import Image from "next/image";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineGithub } from "react-icons/ai";
 import { toast } from "react-toastify";
-import { error } from "console";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [noUser, setNoUser] = useState<any>("");
   const [wrongPassword, setWrongPassword] = useState("");
   const router = useRouter();
   const { data: session, status } = useSession();
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showConfirmPassword2, setShowConfirmPassword2] = useState(false);
   const [toggleSignUpAndSignIn, setToggleSignUpAndSignIn] = useState(true);
 
   useEffect(() => {
@@ -28,7 +29,35 @@ const SignInPage = () => {
 
   const handleSignUp = async (e: any) => {
     e.preventDefault();
+    if (email.length < 1) {
+      toast.error("Please enter an email");
+      return;
+    }
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+    if (password !== password2) {
+      toast.error("Passwords do not match");
+      return;
+    }
     const standardizedEmail = email.toLowerCase();
+    await signUp({
+      email: standardizedEmail,
+      password: password,
+    }).then((response) => {
+      if (response.error) {
+        toast.error(response.error);
+      } else {
+        signIn("credentials", {
+          email: standardizedEmail,
+          password: password,
+          redirect: false,
+          callbackUrl: "/",
+        });
+        toast.success("Welcome BAX (back) !");
+      }
+    });
   };
 
   const handleSubmit = async (e: any) => {
@@ -173,10 +202,10 @@ const SignInPage = () => {
                 <div className="relative">
                   <input
                     className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] min-h-[52px] text-black"
-                    type={showPassword ? "text" : "password"}
+                    type={showConfirmPassword ? "text" : "password"}
                     placeholder="Confirm Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={password2}
+                    onChange={(e) => setPassword2(e.target.value)}
                     // required
                   />
                   <div
@@ -289,3 +318,18 @@ const SignInPage = () => {
 };
 
 export default SignInPage;
+
+async function signUp(newUserData: any) {
+  const response = await fetch("/api/account/signUpAPI", {
+    method: "POST",
+    body: JSON.stringify(newUserData),
+  });
+
+  if (!response.ok) {
+    const error_message = await response.json().then((data) => {
+      return data.message;
+    });
+    return { error: error_message };
+  }
+  return await response.json();
+}
