@@ -26,8 +26,9 @@ const SignInPage = () => {
     }
   }, [session, router]);
 
-  const handleSignupClick = () => {
-    router.push("/auth/newuser");
+  const handleSignUp = async (e: any) => {
+    e.preventDefault();
+    const standardizedEmail = email.toLowerCase();
   };
 
   const handleSubmit = async (e: any) => {
@@ -42,7 +43,6 @@ const SignInPage = () => {
       redirect: false,
       callbackUrl: "/",
     });
-    console.log(authenticate);
 
     if (authenticate?.error) {
       const error = JSON.parse(authenticate.error);
@@ -133,7 +133,7 @@ const SignInPage = () => {
         <div className="flex flex-col  h-full justify-center items-center w-[80%] min-h-[480px]">
           <form
             className="flex flex-col jusitfy-center items-center w-full h-full  "
-            onSubmit={handleSubmit}
+            onSubmit={toggleSignUpAndSignIn ? handleSubmit : handleSignUp}
           >
             <div className="flex flex-col w-full gap-[14px]  ">
               {noUser && (

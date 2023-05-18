@@ -159,7 +159,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                 </div>
               </div>
             </div>
-            <div>
+            <div className="px-2 py-1 w-full">
               <DeleteCollectionButton
                 user={userId}
                 collectionId={collection.id}
