@@ -53,15 +53,6 @@ export default function UpdateDataComponent({
 
   return (
     <div className="mt-2">
-      {/* <Button
-        variant="outlined"
-        color="primary"
-        className="w-60 border border-red-500"
-        onClick={handleOpen}
-      >
-        Update {field}
-      </Button> */}
-
       <button
         className="  w-[200px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-slate-400  font-bold"
         onClick={handleOpen}
@@ -69,20 +60,24 @@ export default function UpdateDataComponent({
         Update {field}
       </button>
       <Dialog className="" open={open} onClose={handleClose}>
-        <div className="bg-[#d5ffdd] text-[#e8ded1] font-outline-2">
-          <DialogTitle className="p-2 mt-2">
+        <div className="bg-[#d5ffdd] text-[#a995ed] ">
+          <DialogTitle fontSize={24}>
             What would you like to change your {field} to :
           </DialogTitle>
           <DialogContent>
             <TextField
-              autoFocus
-              margin="dense"
-              id="text-input"
-              label="Text Input"
+              variant="standard"
+              margin="normal"
+              id="text-input-dialog"
+              label={field.toUpperCase()}
               fullWidth
               value={textInputValue}
               onChange={handleTextInputChange}
-              className="opacity-100 text-green-400"
+              multiline={field === "description" ? true : false}
+              rows={2}
+              color="success"
+              autoFocus={true}
+              InputProps={{}}
             />
           </DialogContent>
           <DialogActions>

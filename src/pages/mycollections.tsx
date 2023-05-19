@@ -99,11 +99,12 @@ export default function MyCollections({ items, userId }: CollectionProps) {
           "
           key={collection.id}
         >
-          <div className="flex flex-col w-full gap-1">
-            <p className="text-xl indent-3 xl:indent-5">
+          <div className="flex flex-col w-full gap-1 border-2 overflow-hidden">
+            <p className="text-xl indent-3 xl:indent-5 w-full overflow-hidden">
               <Link
                 onClick={() => handleClick(collection.id)}
                 href={`/collections/${collection.id}`}
+                className="whitespace-nowrap overflow-ellipsis hover:underline hover:text-blue-400 w-90% border-2"
               >
                 {collection.name}
               </Link>

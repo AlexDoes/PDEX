@@ -313,3 +313,19 @@ input[type="file"]::file-selector-button {
     opacity: 0;
   }
 }
+
+#text-input-dialog:focus,
+#text-input-dialog:active {
+  outline: none;
+}
+
+.Mui-focused input {
+  border: none;
+  outline-style: dotted;
+  background-color: #baecfb;
+}
+
+.MuiInputBase-input {
+  border: none;
+  outline-style: none;
+}
