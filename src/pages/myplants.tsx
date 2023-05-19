@@ -96,8 +96,12 @@ export default function MyPlants({ items, userId, username, session }: any) {
                         : plant.species + " / " + plant.species2}
                     </p>
                     <div className="flex flex-row gap-1">
-                      <p>{plant.plantHeight && "H: " + plant.plantHeight}</p>
-                      <p>{plant.plantWidth && "W: " + plant.plantWidth}</p>
+                      <p>
+                        {plant.plantHeight && "H: " + plant.plantHeight + " cm"}
+                      </p>
+                      <p>
+                        {plant.plantWidth && "W: " + plant.plantWidth + " cm"}
+                      </p>
                     </div>
                     {/* <p>{plant.plantWeight && plant.plantWeight}</p> */}
                   </div>

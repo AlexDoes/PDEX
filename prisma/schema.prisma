@@ -179,7 +179,8 @@ model Like {
   Comments     Comments?        @relation(fields: [commentsId], references: [id])
   commentsId   String?
 
-  @@unique([plantId, collectionId, userId])
+  @@unique([plantId, userId])
+  @@unique([collectionId, userId])
 }
 
 model Follows {

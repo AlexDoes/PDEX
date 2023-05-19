@@ -19,6 +19,40 @@ const CommentBox = (props: Props) => {
     setComment(e.target.value);
   };
 
+  const onLike = async (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    await fetch("/api/likes/makeLike", {
+      method: "POST",
+      body: JSON.stringify({
+        reference: reference,
+        refId: refId,
+        userId: userId,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        toast.success("Comment liked!", {
+          style: {
+            background: "#e0f0e3",
+            color: "#ffffff",
+            textShadow: "0 0 0.5rem #000000",
+          },
+        });
+        res.json().then((data) => {
+          console.log(data);
+          onAction(data);
+        });
+      } else {
+        toast.error("Error liking comment!", {
+          style: {
+            background: "#e0f0e3",
+            color: "#ffffff",
+            textShadow: "0 0 0.5rem #000000",
+          },
+        });
+      }
+    });
+  };
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await fetch("/api/comment/createComment", {
@@ -60,6 +94,12 @@ const CommentBox = (props: Props) => {
         onSubmit={onSubmit}
         className="w-full h-full flex flex-row justify-center"
       >
+        <div
+          className="w-[5%] border-2 flex justify-center items-center"
+          onClick={onLike}
+        >
+          ❤️
+        </div>
         <div className="w-full flex flex-row justify-center items-center">
           <input
             className="w-[90%] h-full   bg-yellow-100 border-none rounded-l-2xl outline-none p-2 focus:ring-0 indent-3 font-light"

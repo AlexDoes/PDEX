@@ -182,8 +182,8 @@ export default function plantPublicDisplayPage({
               By {plant.ownedBy.name || plant.ownedBy.nickname}{" "}
             </p>
             <div className="flex flex-row gap-1">
-              <p>{plant.plantHeight && "H: " + plant.plantHeight}</p>
-              <p>{plant.plantWidth && "W: " + plant.plantWidth}</p>
+              <p>{plant.plantHeight && "H: " + plant.plantHeight + " cm"}</p>
+              <p>{plant.plantWidth && "W: " + plant.plantWidth + " cm"}</p>
             </div>
             {plant.light ? <p>Sunlight: {plant.light}</p> : null}
             {plant.water ? <p>Water: {plant.water}</p> : null}
