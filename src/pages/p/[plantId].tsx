@@ -28,10 +28,11 @@ export default function plantPublicDisplayPage({
   comments,
   user,
   userInfo,
+  likedId,
+  likerId,
 }: any) {
   const router = useRouter();
   const latestComment = useRef<HTMLDivElement>(null);
-
   const [commentsToDisplayState, setCommentsToDisplay] = useState(comments);
 
   const handleDeleteFromParent = (deletedId: string) => {
@@ -56,8 +57,12 @@ export default function plantPublicDisplayPage({
   }, [commentsToDisplayState]);
 
   const commentsToDisplay = () => {
-    if (comments.length === 0) {
-      return <div>Be the first to comment!</div>;
+    if (commentsToDisplayState.length === 0) {
+      return (
+        <div className="border-y border-black h-full xs:h-[90px] text-center justify-center items-center flex">
+          Be the first to comment!
+        </div>
+      );
     }
     return (
       <div
@@ -253,6 +258,7 @@ export default function plantPublicDisplayPage({
             refId={plant.id}
             userId={user}
             onAction={handleCommentSubmit}
+            likedId={likedId}
           />
         </div>
       </div>
@@ -262,7 +268,7 @@ export default function plantPublicDisplayPage({
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
-  let user = null;
+  let user: string | null = null;
   let userInfo = null;
   if (session) {
     user = (session.user as User).id;
@@ -306,8 +312,17 @@ export async function getServerSideProps(context: any) {
           },
         },
       },
+      likes: {
+        select: {
+          id: true,
+          userId: true,
+        },
+      },
     },
   });
+
+  const likerId = plant?.likes[0]?.userId || null;
+  const likedId = plant?.likes[0]?.id || null;
 
   const plantsWithFormattedTime = plant?.Comments.map((comment: any) => {
     const date = new Date(comment.createdAt);
@@ -329,6 +344,8 @@ export async function getServerSideProps(context: any) {
       comments: JSON.parse(JSON.stringify(plantsWithFormattedTime)),
       user,
       userInfo,
+      likedId,
+      likerId,
     },
   };
 }

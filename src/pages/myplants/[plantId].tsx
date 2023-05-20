@@ -191,6 +191,7 @@ export default function plantDisplay({ plant, userId }: any) {
               user={userId}
               objectName={plantData.name}
               onConfirm={onDelete}
+              liked={false}
             />
           </div>
         </div>
