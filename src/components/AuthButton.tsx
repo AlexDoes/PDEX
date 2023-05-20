@@ -103,7 +103,7 @@ export default function AuthButtonComponent() {
               <div className="">
                 <Link
                   className="sm:text-2xl text-[#efe6c1] text-shadow-md"
-                  href={`/u/${session.user?.id}`}
+                  href={`/u/${session.user?.nickname || session.user?.id}`}
                 >
                   Public Profile
                 </Link>{" "}
