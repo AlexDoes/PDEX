@@ -49,6 +49,11 @@ export default function SearchResult({
   const plantRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
 
+  const [imageError, setImageError] = useState(false);
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   const goToPlant = () => {
     plantRef.current?.scrollIntoView({
       behavior: "smooth",

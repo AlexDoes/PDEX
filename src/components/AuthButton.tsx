@@ -8,6 +8,8 @@ import { FaBars } from "react-icons/fa";
 import { useEffect, useState } from "react";
 export default function AuthButtonComponent() {
   const { data: session } = useSession();
+  console.log(session);
+
   const [showmenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -21,7 +23,10 @@ export default function AuthButtonComponent() {
   if (session) {
     return (
       <>
-        <div className="h-full w-full  px-2 md:px-4 xl:mr-3 " onClick={openMenu}>
+        <div
+          className="h-full w-full  px-2 md:px-4 xl:mr-3 "
+          onClick={openMenu}
+        >
           {/* {"Hello " + session.user.name?.split(" ")[0]} */}
           <div className="h-full w-full flex justify-center items-center cursor-pointer">
             <div>
@@ -76,7 +81,7 @@ export default function AuthButtonComponent() {
                   className="sm:text-2xl text-[#efe6c1] text-shadow-md"
                   href={"/mycollections"}
                 >
-                  My collections
+                  Personal collections
                 </Link>{" "}
               </div>
               <div>
@@ -92,15 +97,15 @@ export default function AuthButtonComponent() {
                   className="sm:text-2xl text-[#efe6c1] text-shadow-md "
                   href={"/"}
                 >
-                  Favorited Plants
+                  Liked Content
                 </Link>{" "}
               </div>
-              <div>
+              <div className="">
                 <Link
                   className="sm:text-2xl text-[#efe6c1] text-shadow-md"
-                  href={"/"}
+                  href={`/u/${session.user?.id}`}
                 >
-                  Settings
+                  Public Profile
                 </Link>{" "}
               </div>
               <div className="sm:text-2xl text-slate-500 text-shadow-md">

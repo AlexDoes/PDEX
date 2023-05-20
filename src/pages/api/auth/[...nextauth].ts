@@ -80,6 +80,7 @@ export default NextAuth({
           id: user.id + "",
           email: user.email,
           name: user.name,
+          nickname: user.nickname,
           randomKey: "Tashi is actually great",
         };
       },
@@ -100,6 +101,7 @@ export default NextAuth({
           ...session.user,
           id: token.id,
           email: token.email,
+          nickname: token.nickname,
           randomKey: token.randomKey,
         },
       };
@@ -111,6 +113,7 @@ export default NextAuth({
           ...token,
           id: u.id,
           email: u.email,
+          nickname: u.nickname,
           randomKey: u.randomKey,
         };
       }
