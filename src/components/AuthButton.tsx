@@ -6,9 +6,19 @@ import { AiOutlineClose } from "react-icons/ai";
 import { CSSTransition } from "react-transition-group";
 import { FaBars } from "react-icons/fa";
 import { useEffect, useState } from "react";
+
+interface User {
+  id: string;
+  name?: string | null | undefined;
+  email?: string | null | undefined;
+  image?: string | null | undefined;
+  address: string;
+  nickname: string;
+  description: string | null | undefined;
+}
+
 export default function AuthButtonComponent() {
   const { data: session } = useSession();
-  console.log(session);
 
   const [showmenu, setShowMenu] = useState(false);
 
@@ -103,7 +113,9 @@ export default function AuthButtonComponent() {
               <div className="">
                 <Link
                   className="sm:text-2xl text-[#efe6c1] text-shadow-md"
-                  href={`/u/${session.user?.nickname || session.user?.id}`}
+                  href={`/u/${
+                    (session.user as User).nickname || (session.user as User).id
+                  }`}
                 >
                   Public Profile
                 </Link>{" "}

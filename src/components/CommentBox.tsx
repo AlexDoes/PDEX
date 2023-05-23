@@ -13,6 +13,10 @@ interface Props {
   likedId: string;
 }
 
+interface MyObject {
+  [key: string]: string;
+}
+
 const CommentBox = (props: Props) => {
   const { reference, refId, userId, onAction } = props;
   const [comment, setComment] = useState("");
@@ -21,6 +25,12 @@ const CommentBox = (props: Props) => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
+  };
+
+  const map: MyObject = {
+    UniquePlant: "unique plant",
+    Comment: "comment",
+    Collection: "plant collection",
   };
 
   const onLike = async (e: any) => {
@@ -35,7 +45,7 @@ const CommentBox = (props: Props) => {
     }).then((res) => {
       if (res.ok) {
         setLiked(true);
-        toast.success("Comment liked!", {
+        toast.success(`You've liked the ${map[reference]}.`, {
           style: {
             background: "#e0f0e3",
             color: "#ffffff",

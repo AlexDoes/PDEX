@@ -4,8 +4,9 @@ import DeleteUniquePlantButton from "@/components/DeleteUniquePlantButton";
 import { useRouter } from "next/router";
 import UpdateDataComponent from "@/components/UpdatePlantDetailsComponent";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { redirect } from "next/dist/server/api-utils";
 interface User {
   id: string;
   name?: string | null | undefined;
@@ -54,6 +55,24 @@ interface MyObject {
 export default function plantDisplay({ plant, userId }: any) {
   const plantData = plant;
   const router = useRouter();
+
+  useEffect(() => {
+    if (userId !== plantData.ownedBy.id) {
+      const redirectTimeout = setTimeout(() => {
+        router.push("/myplants");
+      }, 3000);
+      return () => clearTimeout(redirectTimeout);
+    }
+  }, []);
+
+  if (userId !== plantData.ownedBy.id) {
+    return (
+      <div>
+        This doesn't seem to be the right place to be, we'll get you back to
+        your plants.
+      </div>
+    );
+  }
 
   const reload = () => {
     router.push(router.asPath);
