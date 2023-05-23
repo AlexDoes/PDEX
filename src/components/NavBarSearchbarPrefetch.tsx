@@ -210,6 +210,12 @@ export default function NavBarSearchBar({}) {
     router.push(`/search/${input}`);
   };
 
+  const handleBlur = (e: any) => {
+    setTimeout(() => {
+      setSuggestions([]);
+    }, 500);
+  };
+
   const handleClickingSuggestion = (e: any) => {
     const input = e.target.innerText;
     setSearchText(input);
@@ -235,6 +241,7 @@ export default function NavBarSearchBar({}) {
             className="w-[40vw] bg-[#fffbcc] rounded-full  "
             tabIndex={0}
             ref={(input) => input && input.focus()}
+            onBlur={handleBlur}
           />
         </div>
         {renderSuggestions()}
