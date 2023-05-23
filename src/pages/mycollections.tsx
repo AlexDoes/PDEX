@@ -91,20 +91,52 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         <div
           className="flex-row flex
             items-center justify-between w-[98%] h-full
-            border-slate-300 border rounded-xl p-2
+            border-slate-300 border rounded-xl px-6
             bg-opacity-50 bg-green-200
-            md:gap-5
+            md:gap-3
             lg:gap-4
-            xl:gap-1
+            xl:gap-3 group relative
+            xs:gap-1
+            py-4
           "
           key={collection.id}
         >
-          <div className="flex flex-col w-full gap-1 border-2 overflow-hidden">
+          <div
+            id="profileCollectionImage"
+            className="
+                min-w-[200px] min-h-[200px]
+                rounded-lg
+                w-[200px] h-[200px]
+                sm:max-w-[300px] sm:max-h-[300px]
+                lg:max-w-[300px] lg:max-h-[300px]
+                xl:max-w-[300px] xl:max-h-[300px]
+                flex justify-center items-center
+                bg-opacity-50 bg-yellow-200
+                border border-slate-300
+                "
+          >
+            {collection.plantContents.length > 0 ? (
+              <ImageCarousel
+                images={collection.plantContents.map((plant: any) => {
+                  return plant.image;
+                })}
+              />
+            ) : (
+              <div
+                id="profileCollectionPlantImage"
+                className="flex justify-center items-center h-[200px] w-[200px]
+                  "
+              >
+                <div>Coming Soon</div>
+              </div>
+            )}
+          </div>
+          <div className="flex flex-col w-full gap-2 overflow-hidden">
             <p className="text-xl indent-3 xl:indent-5 w-full overflow-hidden">
               <Link
                 onClick={() => handleClick(collection.id)}
                 href={`/collections/${collection.id}`}
-                className="whitespace-nowrap overflow-ellipsis hover:underline hover:text-blue-400 w-90% border-2"
+                className="whitespace-nowrap overflow-ellipsis hover:underline hover:text-blue-400 w-90%"
               >
                 {collection.name}
               </Link>
@@ -113,10 +145,10 @@ export default function MyCollections({ items, userId }: CollectionProps) {
               <div
                 className="
                   h-[140px]
-                  w-[90%]
-                  xl:w-[95%]
+                  w-[93%]
+                  xl:w-[97%]
                   md:w-[95%]
-                  lg:w-[95%]
+                  lg:w-[96%]
                   sm:w-[95%]
                   flex flex-col
                   "
@@ -128,7 +160,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                       mx-3
                       xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]
                       h-full bg-[#FFF4BD] 
-                      pl-3 pr-3 pt-2 pb-2 rounded-md
+                      pl-3 pt-2 pb-2 rounded-md
                       scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
                       scrollbar-rounded-sm
                       w-full
@@ -160,7 +192,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                 </div>
               </div>
             </div>
-            <div className="px-2 py-1 w-full">
+            <div className="px-3 transition duration-300 ease-in-out hidden absolute right-0 bottom-0  group-hover:inline-block group-hover:opacity-100 opacity-0 ">
               <DeleteCollectionButton
                 user={userId}
                 collectionId={collection.id}
@@ -168,36 +200,6 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                 onConfirm={handleSubmitCollectionForm}
               />
             </div>
-          </div>
-          <div
-            id="profileCollectionImage"
-            className="
-                min-w-[200px] min-h-[200px]
-                rounded-lg
-                w-[200px] h-[200px]
-                sm:max-w-[300px] sm:max-h-[300px]
-                lg:max-w-[300px] lg:max-h-[300px]
-                xl:max-w-[300px] xl:max-h-[300px]
-                flex justify-center items-center
-                bg-opacity-50 bg-yellow-200
-                border border-slate-300
-                "
-          >
-            {collection.plantContents.length > 0 ? (
-              <ImageCarousel
-                images={collection.plantContents.map((plant: any) => {
-                  return plant.image;
-                })}
-              />
-            ) : (
-              <div
-                id="profileCollectionPlantImage"
-                className="flex justify-center items-center h-[200px] w-[200px]
-                  "
-              >
-                <div>Coming Soon</div>
-              </div>
-            )}
           </div>
         </div>
       );
@@ -229,39 +231,6 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         >
           {collectionsToShow()}
         </div>
-        {/* <ul>
-        {items.map((collection: any) => (
-          <li
-            key={collection.id}
-            className="bg-red-300 border-sky-500 border-2"
-          >
-            <div>
-              <Link
-                onClick={() => handleClick(collection.id)}
-                href={`/collections/${collection.id}`}
-              >
-                Name: {collection.name}
-              </Link>
-              <p>Collection ID: {collection.id}</p>
-              <p>Owner ID: {collection.ownerId}</p>{" "}
-              {collection.plantContents.map((plantItemData: any) => {
-                return (
-                  <p key={plantItemData.id} className="text-orange-600">
-                    <Link href={`/myplants/${plantItemData.id}`}>
-                      {plantItemData.name}
-                    </Link>
-                  </p>
-                );
-              })}
-              <DeleteCollectionButton
-                user={userId}
-                collectionId={collection.id}
-                onConfirm={handleSubmitCollectionForm}
-              />
-            </div>
-          </li>
-        ))}
-      </ul> */}
 
         <button
           onClick={handleAddCollectionClick}

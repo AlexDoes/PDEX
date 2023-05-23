@@ -55,7 +55,6 @@ const CommentBox = (props: Props) => {
         res.json().then((data) => {
           const newlikeId = data.id;
           setLikeId(newlikeId);
-          console.log({ newlikeId, likeId });
         });
       } else {
         toast.error("Error liking comment!", {
@@ -111,7 +110,6 @@ const CommentBox = (props: Props) => {
               },
             });
             res.json().then((data) => {
-              console.log(data);
               onAction(data);
             });
             setComment("");

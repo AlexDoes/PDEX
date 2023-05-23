@@ -241,7 +241,7 @@ export default function NavBarSearchBar({}) {
             className="w-[40vw] bg-[#fffbcc] rounded-full  "
             tabIndex={0}
             ref={(input) => input && input.focus()}
-            onBlur={handleBlur}
+            onBlur={() => handleBlur}
           />
         </div>
         {renderSuggestions()}
