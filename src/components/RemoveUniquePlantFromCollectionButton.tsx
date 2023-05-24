@@ -76,7 +76,7 @@ export default function RemoveUniquePlantFromCollectionButton(props: any) {
   return (
     <ConfirmationDialog
       onConfirm={() => deletePlant()}
-      prompt={"remove this plant from the collection"}
+      prompt={props.plantName}
       promptType={"removeCollection"}
     />
   );

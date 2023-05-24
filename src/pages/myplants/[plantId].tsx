@@ -79,7 +79,6 @@ export default function plantDisplay({ plant, userId }: any) {
   };
 
   function onDelete() {
-    // router.push("/myplants");
     router.back();
   }
 

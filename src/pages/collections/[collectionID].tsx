@@ -6,6 +6,7 @@ import RemoveUniquePlantFromCollectionButton from "@/components/RemoveUniquePlan
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { CSSTransition } from "react-transition-group";
+import { FaSeedling } from "react-icons/fa";
 
 interface User {
   id: string;
@@ -56,7 +57,6 @@ export default function ThisCollection({
       (plantContent: any) => plantContent.id === plant.id
     );
   });
-  console.log(plantstoAdd);
 
   const router = useRouter();
   const handleAddPlantClick = (e: any) => {
@@ -65,68 +65,88 @@ export default function ThisCollection({
   };
 
   const onSubmitFromParent = () => {
+    console.log("clicked");
     setShowAddPlant(false);
-    router.push(router.asPath);
   };
 
-  // useEffect(() => {
+  const handleEditDescription = (e: any) => {
+    e.preventDefault();
+  };
 
-  // const showAddPlantForm = !showAddPlant ? (
-  //   plantstoAdd.length ? (
-  //     <div>
-  //       <button onClick={handleAddPlantClick}>Add Plant</button>
-  //     </div>
-  //   ) : (
-  //     <></>
-  //   )
-  // ) : (
-  //   <AddUniquePlantToCollection
-  //     usersPlants={plantstoAdd}
+  const plantsToShow = () => {
+    return (
+      <div className="grid grid-cols-1 gap-2 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3 w-full xl:gap-10">
+        {plantContentsData.plantContents.map((plantContent: any) => (
+          <div
+            key={plantContent.id}
+            className="flex-col items-center justify-center bg-opacity-50 bg-green-200 hover:bg-opacity-70 rounded-xl p-4 border gap-2 pt-6
+            flex border-slate-300 group"
+          >
+            <img
+              src={plantContent.image}
+              alt={plantContent.name}
+              className="rounded-xl xs:w-[250px] xs:h-[300px] 
+              lg:w-[300px] lg:h-[350px] border-gray-400 border"
+            />
+            <div className="whitespace-nowrap overflow-ellipsis hover:underline hover:text-blue-400 w-90%">
+              <Link href={`/myplants/${plantContent.id}`}>
+                <h1>{plantContent.name}</h1>
+              </Link>
+            </div>
+            <div className="px-3 transition duration-500 ease-in-out group-hover:inline-block group-hover:opacity-100 opacity-0 ">
+              <RemoveUniquePlantFromCollectionButton
+                uniquePlantId={plantContent.id}
+                plantName={plantContent.name}
+                collectionId={collectionID}
+                userId={userId}
+                onConfirm={onSubmitFromParent}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  //   <div>
+  //   <RemoveUniquePlantFromCollectionButton
+  //     uniquePlantId={plantContent.id}
+  //     plantName={plantContent.name}
   //     collectionId={collectionID}
   //     userId={userId}
-  //     onSubmit={onSubmitFromParent}
+  //     onConfirm={onSubmitFromParent}
   //   />
-  // );
+  // </div>
 
   return (
     <>
-      <div>
-        {!showAddPlant && plantstoAdd.length ? (
-          <div>
-            <button onClick={handleAddPlantClick}>Add Plant</button>
-          </div>
-        ) : null}
-
-        <h1 className="text-cyan-500 underline text-lg">
+      <div className="bg-orange-100 rounded-xl p-10 py-10 flex flex-col gap-3 w-full min-h-[90vh] justify-center items-center">
+        <h1 className=" text-[#a0cfa0] flex items-center justify-center mb-2 xs:text-xl sm:text-2xl">
           {plantContentsData.name}'s content
         </h1>
+        <div className="flex flex-col py-2 w-full">
+          <div className="flex flex-col items-center justify-center">
+            <div className="border-slate-400 border rounded-xl w-[90%] p-2 font-extralight">
+              {plantContentsData.description ||
+                "You have no description for this collection yet, please add one to tell us about it!"}
+            </div>
+          </div>
+        </div>
 
-        <ul>
-          {plantContentsData.plantContents.map((plantContent: any) => (
-            <li key={plantContent.id}>
-              <p>
-                <Link href={`/myplants/${plantContent.id}`}>
-                  Plant ID: {plantContent.id.toUpperCase()}
-                </Link>
-              </p>
-              <p>Plant Name: {plantContent.name}</p>
-              <p>Plant Owner ID: {plantContentsData.owner.name}</p>
-              <img
-                className="w-[200px] h-[200px]"
-                src={plantContent.image}
-                alt={plantContent.name}
-              />
-              <div>
-                <RemoveUniquePlantFromCollectionButton
-                  uniquePlantId={plantContent.id}
-                  collectionId={collectionID}
-                  userId={userId}
-                  onConfirm={onSubmitFromParent}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
+        {plantsToShow()}
+
+        {plantstoAdd.length ? (
+          <div>
+            <button
+              onClick={handleAddPlantClick}
+              className="bg-green-300 border-sky-300 border rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
+              ease-in-out duration-300
+            hover:bg-[#fffbcc]"
+            >
+              Add Plant <FaSeedling />
+            </button>
+          </div>
+        ) : null}
       </div>
 
       <CSSTransition
@@ -136,10 +156,7 @@ export default function ThisCollection({
         unmountOnExit
         mountOnEnter
       >
-        <div
-          // onClick={handleAddCollectionClick}
-          className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "
-        ></div>
+        <div className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "></div>
       </CSSTransition>
 
       <CSSTransition

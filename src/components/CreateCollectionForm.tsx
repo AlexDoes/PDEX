@@ -88,6 +88,7 @@ export default function CreateCollectionForm(data: any) {
       const newCollection = await createCollection({
         ownerId: user,
         name: collectionName,
+        description: collectionDescription,
       });
       toast.success(`${newCollection.name} created!`, {
         style: {
@@ -133,7 +134,6 @@ export default function CreateCollectionForm(data: any) {
             value={collectionDescription}
             minLength={3}
             onChange={(e) => setCollectionDescription(e.target.value)}
-
           />
           {/* //TODO: add a description field //TODO: add a privacy field */}
           {/* <button

@@ -192,7 +192,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                 </div>
               </div>
             </div>
-            <div className="px-3 transition duration-300 ease-in-out hidden absolute right-0 bottom-0  group-hover:inline-block group-hover:opacity-100 opacity-0 ">
+            <div className="px-3 transition duration-500 ease-in-out hidden absolute right-0 bottom-0  group-hover:inline-block group-hover:opacity-100 opacity-0 ">
               <DeleteCollectionButton
                 user={userId}
                 collectionId={collection.id}
@@ -298,6 +298,9 @@ export async function getServerSideProps(context: any) {
     },
     include: {
       plantContents: {},
+    },
+    orderBy: {
+      createdAt: "asc",
     },
   });
 

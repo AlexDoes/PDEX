@@ -21,6 +21,8 @@ interface updateProps {
   userId: string;
   plantInfo: any;
   onConfirm: any;
+  plantDescription: string;
+  collectionName: string;
 }
 
 const map: Myobject = {
@@ -39,16 +41,13 @@ interface Myobject {
   [key: string]: any;
 }
 
-export default function UpdateDataComponent({
-  field,
-  userId,
-  plantInfo,
+export default function UpdateCollectionDescriptionComponent({
+  plantDescription,
   onConfirm,
+  collectionName,
 }: updateProps) {
   const [open, setOpen] = useState(false);
-  const [textInputValue, setTextInputValue] = useState(
-    `${plantInfo[field]}` || ""
-  );
+  const [textInputValue, setTextInputValue] = useState(plantDescription || "");
 
   const handleOpen = () => {
     setOpen(true);
@@ -81,7 +80,7 @@ export default function UpdateDataComponent({
       <Dialog className="" fullWidth open={open} onClose={handleClose}>
         <div className="bg-[#d5ffdd] text-[#e8ded1] font-outline-2">
           <DialogTitle fontSize={24} className="p-2 mt-2">
-            Update {plantInfo.name}'s {map[field]}:
+            Update {collectionName}'s description:
           </DialogTitle>
           <DialogContent>
             <TextField
@@ -90,16 +89,10 @@ export default function UpdateDataComponent({
               margin="dense"
               id="text-input"
               label="Input"
-              type={
-                field === "plantHeight" || field === "plantWidth"
-                  ? "number"
-                  : "text"
-              }
+              type="text"
               fullWidth
               value={textInputValue}
               onChange={handleTextInputChange}
-              className=""
-              multiline={field === "description" ? true : false}
             />
           </DialogContent>
           <DialogActions>

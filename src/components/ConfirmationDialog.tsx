@@ -59,13 +59,17 @@ const ConfirmationDialog = ({
   return (
     <>
       <button onClick={handleOpen} className="">
-        {promptType != "deleteComment" ? (
+        {promptType != "deleteComment" && promptType !== "removeCollection" ? (
           <div className="hover:outline outline-slate-400 rounded-lg p-1 text-red-500 hover:text-red-600">
             <BsFillTrashFill className="text-xl" />
           </div>
         ) : (
           <div>
-            <AiOutlineClose className="text-sm text-gray-400 rounded-sm hover:outline hover:outline-slate-400 hover:bg-gray-300 hover:text-gray-500" />
+            <AiOutlineClose
+              className={` ${
+                promptType === "removeCollection" ? "text-xl" : "text-sm"
+              } text-gray-400 rounded-sm hover:outline hover:outline-slate-400 hover:bg-gray-300 hover:text-gray-500`}
+            />
           </div>
         )}
       </button>
@@ -76,13 +80,19 @@ const ConfirmationDialog = ({
           <DialogContent className="">
             <DialogContentText className="text-xl ">
               Are you sure you want to {actions[promptType].message}? <br />
-              This action cannot be undone. <br />
+              {promptType != "removeCollection" &&
+                `This action cannot be undone.`}
+              {promptType != "removeCollection" && <br />}
               {promptType != "deleteComment" &&
+                promptType != "removeCollection" &&
                 `(
-                You will be deleting ${(
-                  <b>{prompt && prompt.toUpperCase()}</b>
-                )}.
+                You will be deleting
+                ${prompt && prompt.toUpperCase()}.
               )`}
+              {promptType == "removeCollection" &&
+                `You will be removing ${
+                  prompt && prompt.toUpperCase()
+                } from the collection.`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>

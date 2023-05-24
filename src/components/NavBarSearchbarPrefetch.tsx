@@ -211,6 +211,7 @@ export default function NavBarSearchBar({}) {
   };
 
   const handleBlur = (e: any) => {
+    e.preventDefault();
     setTimeout(() => {
       setSuggestions([]);
     }, 500);
@@ -240,8 +241,8 @@ export default function NavBarSearchBar({}) {
             onChange={handleOnChange}
             className="w-[40vw] bg-[#fffbcc] rounded-full  "
             tabIndex={0}
-            ref={(input) => input && input.focus()}
-            onBlur={() => handleBlur}
+            ref={(input) => input}
+            onBlur={handleBlur}
           />
         </div>
         {renderSuggestions()}
