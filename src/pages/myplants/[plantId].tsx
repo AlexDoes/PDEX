@@ -285,7 +285,9 @@ export default function plantDisplay({ plant, userId }: any) {
               Height:{" "}
               <p className="font-light">
                 {" "}
-                {plantDataDisplay.plantHeight + " cm" || "None provided"}
+                {(plantDataDisplay.plantHeight &&
+                  plantDataDisplay.plantHeight + " cm") ||
+                  "None provided"}
               </p>
             </div>
           </div>
@@ -295,7 +297,9 @@ export default function plantDisplay({ plant, userId }: any) {
               Width:{" "}
               <p className="font-light">
                 {" "}
-                {plantDataDisplay.plantWidth + " cm" || "None provided"}
+                {(plantDataDisplay.plantWidth &&
+                  plantDataDisplay.plantWidth + " cm") ||
+                  "None provided"}
               </p>
             </div>
           </div>

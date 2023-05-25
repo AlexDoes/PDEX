@@ -163,8 +163,8 @@ export default function CreateUniquePlant(props: any) {
       );
       return;
     }
-    // const url = await uploadImage(image);
-    const url = "https://pdex.s3.amazonaws.com/0_3.png1682803498914";
+    const url = await uploadImage(image);
+    // const url = "https://pdex.s3.amazonaws.com/0_3.png1682803498914";
     data.plantImage = url;
     await createTheUniquePlant(data).then((res) => {
       toast.success(`${data.plantName} created successfully!`, {
