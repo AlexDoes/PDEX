@@ -47,7 +47,7 @@ export default function UpdateDataComponent({
 }: updateProps) {
   const [open, setOpen] = useState(false);
   const [textInputValue, setTextInputValue] = useState(
-    `${plantInfo[field]}` || ""
+    `${plantInfo[field] !== null ? plantInfo[field] : ""}` || ""
   );
 
   const handleOpen = () => {
@@ -80,7 +80,7 @@ export default function UpdateDataComponent({
       </button>
       <Dialog className="" fullWidth open={open} onClose={handleClose}>
         <div className="bg-[#d5ffdd] text-[#e8ded1] font-outline-2">
-          <DialogTitle fontSize={24} className="p-2 mt-2">
+          <DialogTitle fontSize={22} className="p-2 mt-2">
             Update {plantInfo.name}'s {map[field]}:
           </DialogTitle>
           <DialogContent>

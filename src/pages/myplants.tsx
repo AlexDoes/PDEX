@@ -8,6 +8,7 @@ import DeleteUniquePlantButton from "@/components/DeleteUniquePlantButton";
 import { usePreviousScrollPosition } from "@/components/PreviousScrollPosition";
 import { CSSTransition } from "react-transition-group";
 import { RiPlantLine } from "react-icons/ri";
+import { FaSeedling } from "react-icons/fa";
 
 interface User {
   id: string;
@@ -23,7 +24,7 @@ export default function MyPlants({ items, userId, username, session }: any) {
   const handleClick = (id: string) => {
     router.push(`/myplants/${id}`);
   };
-  console.log(items[0]);
+
   const [showForm, setShowForm] = useState(false); // change when deployed
 
   usePreviousScrollPosition();
@@ -185,9 +186,18 @@ export default function MyPlants({ items, userId, username, session }: any) {
           <RiPlantLine className="text-3xl text-green-400" />
         </h1>
         {showPlantsCard()}
-        {!showForm && (
-          <button onClick={() => setShowForm(true)}>Add a plant</button>
-        )}
+        <div className="w-full flex justify-center m-4 mb-8">
+          {
+            <button
+              onClick={() => setShowForm(true)}
+              className="bg-green-300 border-sky-300 border rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69] ease-in-out duration-300
+          hover:bg-[#fffbcc]
+          "
+            >
+              Add a new plant <FaSeedling />
+            </button>
+          }
+        </div>
         {/* {showForm && (
         <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
       )} */}
