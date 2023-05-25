@@ -35,6 +35,49 @@ export default function MyPlants({ items, userId, username, session }: any) {
   };
 
   const showPlantsCard = () => {
+    if (items.length === 0) {
+      return (
+        <div
+          className={`border-slate-300 border rounded-xl p-2 m-2
+      items-center justify-center
+      flex
+      xs:flex-col sm:flex-row 
+      md:flex-row lg:flex-row 
+      flex-wrap 
+      xl:flex-row xl:flex-wrap xl:row-3
+      
+      backdrop-filter backdrop-blur-md 
+      bg-opacity-50 bg-green-200
+      xs:relative
+      min-h-[300px]
+      ${showForm ? "-z-20" : "z-0"}
+      `}
+          tabIndex={0}
+        >
+          <div
+            className="
+            text-xl font-light
+            max-w-[600px]
+            min-w-[40vw]
+            w-[96%]
+            h-[100px]
+            items-center justify-between
+            border-slate-300 border rounded-xl p-2
+            bg-opacity-90  bg-orange-100
+            md:gap-5
+            lg:gap-4
+            xl:gap-1
+            text-center
+            flex
+            m-4
+          "
+          >
+            There are currently no collections yet, create a new collection to
+            display your plants!
+          </div>
+        </div>
+      );
+    }
     return (
       <div
         className={`border-slate-300 border rounded-xl p-2 m-2

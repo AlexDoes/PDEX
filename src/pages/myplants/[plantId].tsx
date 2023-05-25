@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import s3 from "lib/aws";
+import spinner from "public/images/spinner.svg";
 
 interface User {
   id: string;
@@ -65,7 +66,7 @@ export default function plantDisplay({ plant, userId }: any) {
     if (userId !== plantData.ownedBy.id) {
       const redirectTimeout = setTimeout(() => {
         router.push("/myplants");
-      }, 3000);
+      }, 5000);
       return () => clearTimeout(redirectTimeout);
     }
   }, []);
@@ -136,9 +137,19 @@ export default function plantDisplay({ plant, userId }: any) {
 
   if (userId !== plantData.ownedBy.id) {
     return (
-      <div>
-        This doesn't seem to be the right place to be, we'll get you back to
-        your plants.
+      <div className="w-full flex justify-center items-center mx-auto h-[75vh]">
+        <div className="w-[80%] border-2 rounded-xl bg-orange-100 h-[70vh] flex justify-evenly  items-center text-center text-3xl flex-col">
+          <p>
+            This doesn't seem to be the right place to be. <br />
+            We'll get you back to your plants.
+          </p>
+          <div className="flex flex-col items-center justify-evenly">
+            <img src={spinner.src} alt="spinner" className="" />
+            <div className="animate-pulse">
+              Redirecting you to your plants...
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
