@@ -54,13 +54,21 @@ export default function ThisCollection({
 }: PlantsProps) {
   const [showAddPlant, setShowAddPlant] = useState(false);
   const [addPlant, setAddPlant] = useState(false);
+  const [collectionDescription, setCollectionDescription] = useState(
+    plantContentsData.description
+  );
   const plantstoAdd = usersUniquePlants.filter((plant) => {
     return !plantContentsData.plantContents.some(
       (plantContent: any) => plantContent.id === plant.id
     );
   });
 
+  useEffect(() => {
+    setCollectionDescription(plantContentsData.description);
+  }, [plantContentsData.description]);
+
   const router = useRouter();
+
   const handleAddPlantClick = (e: any) => {
     e.preventDefault();
     setShowAddPlant(true);
@@ -106,15 +114,15 @@ export default function ThisCollection({
     );
   };
 
-  const reload = () => {
-    router.push(router.asPath);
+  const reload = (response: String) => {
+    setCollectionDescription(response);
   };
 
   const showChangeButton = () => {
     return (
       <UpdateCollectionDescriptionComponent
         collectionName={plantContentsData.name}
-        plantDescription={plantContentsData.description}
+        plantDescription={collectionDescription}
         onConfirm={(data: string) =>
           handleUpdate(data, reload, userId, collectionID)
         }
@@ -141,7 +149,7 @@ export default function ThisCollection({
         <div className="flex flex-col py-2 w-full">
           <div className="flex flex-col items-center justify-center relative border-2">
             <div className="border-slate-400 border rounded-xl w-[90%] p-2 font-extralight relative">
-              {plantContentsData.description ||
+              {collectionDescription ||
                 "You have no description for this collection yet, please add one to tell us about it!"}
               <div className="absolute -bottom-3 -right-3">
                 {showChangeButton()}
@@ -269,7 +277,7 @@ async function handleUpdate(
     });
     return;
   } else {
-    reload();
+    reload(data);
     toast.success("Updated Successfully", {
       position: "top-center",
       autoClose: 5000,

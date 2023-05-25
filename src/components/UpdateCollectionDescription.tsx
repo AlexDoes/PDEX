@@ -9,6 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import { SlPencil } from "react-icons/sl";
+import { toast } from "react-toastify";
 
 interface ConfirmationDialogProps {
   onConfirm: any;
@@ -65,6 +66,14 @@ export default function UpdateCollectionDescriptionComponent({
     const data = textInputValue.trim();
     if (data === plantDescription) {
       handleClose();
+      toast.error("No changes were made to the description", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        style: { backgroundColor: "#f8d7da" },
+      });
       return;
     }
     onConfirm(data);

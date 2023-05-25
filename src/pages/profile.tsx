@@ -99,7 +99,6 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
     }
   };
 
-  // console.log(upload);
   const EditPhoto = () => {
     console.log("clicked");
     setEditPhoto(true);

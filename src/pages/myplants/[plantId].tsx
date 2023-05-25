@@ -6,7 +6,8 @@ import UpdateDataComponent from "@/components/UpdatePlantDetailsComponent";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { redirect } from "next/dist/server/api-utils";
+import s3 from "lib/aws";
+
 interface User {
   id: string;
   name?: string | null | undefined;
@@ -55,6 +56,10 @@ interface MyObject {
 export default function plantDisplay({ plant, userId }: any) {
   const plantData = plant;
   const router = useRouter();
+  const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [editPhoto, setEditPhoto] = useState<boolean>(false);
+  const [upload, setUpload] = useState<boolean>(false);
 
   useEffect(() => {
     if (userId !== plantData.ownedBy.id) {
@@ -65,6 +70,70 @@ export default function plantDisplay({ plant, userId }: any) {
     }
   }, []);
 
+  const [plantDataDisplay, setPlantData] = useState({
+    id: plantData.id,
+    name: plantData.name,
+    species: plantData.species,
+    species2: plantData.species2,
+    water: plantData.water,
+    light: plantData.light,
+    plantHeight: plantData.plantHeight,
+    plantWidth: plantData.plantWidth,
+    description: plantData.description,
+    image: plantData.image,
+    ownedBy: plantData.ownedBy,
+  });
+
+  const uploadImage = async (file: File): Promise<string> => {
+    const params = {
+      Bucket: process.env.AWS_BUCKET_NAME || "",
+      Key: file.name + Date.now(),
+      Body: file,
+      ContentType: file.type,
+    };
+
+    const { Location } = await s3.upload(params).promise();
+    return Location;
+  };
+
+  const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!image) {
+      console.log("no image selected");
+      return;
+    }
+
+    const url = await uploadImage(image);
+    setImageUrl(url);
+    await updateImage({ plantData, userId }, url, reload);
+    setEditPhoto(false);
+    setUpload(false);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImage(e.target.files[0]);
+      setUpload(true);
+    } else if (e.target.files && e.target.files.length === 0) {
+      setUpload(false);
+    }
+  };
+
+  const EditPhoto = () => {
+    console.log("clicked");
+    setEditPhoto(true);
+  };
+
+  const handleClosePhotoUploadButton = (e: any) => {
+    e.preventDefault();
+    console.log("close photo upload button");
+    setEditPhoto(false);
+  };
+
+  useEffect(() => {
+    setPlantData(plantDataDisplay);
+  }, [plantDataDisplay]);
+
   if (userId !== plantData.ownedBy.id) {
     return (
       <div>
@@ -74,8 +143,10 @@ export default function plantDisplay({ plant, userId }: any) {
     );
   }
 
-  const reload = () => {
-    router.push(router.asPath);
+  const reload = (response: any, field: string) => {
+    setPlantData((prev) => {
+      return { ...prev, [field]: response };
+    });
   };
 
   function onDelete() {
@@ -109,28 +180,73 @@ export default function plantDisplay({ plant, userId }: any) {
   return (
     <div className="bg-orange-100 rounded-xl p-10 py-10 flex flex-col gap-1 w-full">
       <h1 className=" text-[#a0cfa0] flex items-center justify-center mb-2 xs:text-xl sm:text-2xl">
-        {plantData.name}'s information displayed below{" "}
+        {plantDataDisplay.name}'s information displayed below{" "}
       </h1>
       <div className="flex xs:flex-col md:flex-row gap-4 items-center">
-        <img
-          className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-xl cursor-pointer"
-          src={plantData.image}
-          alt={plantData.name}
-          onClick={() => {
-            window.open(plantData.image, "_blank");
-          }}
-        />
+        <div className="relative">
+          <img
+            className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-xl cursor-pointer"
+            src={plantDataDisplay.image}
+            alt={plantDataDisplay.name}
+            onClick={() => {
+              window.open(plantDataDisplay.image, "_blank");
+            }}
+          />
+          <div
+            className="bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1 absolute bottom-0 right-0"
+            onClick={EditPhoto}
+          >
+            Edit
+          </div>
+          {editPhoto && (
+            <div className=" w-[99px]">
+              <form className=" " onSubmit={handleSubmitForm}>
+                <div className="flex flex-row ">
+                  <label className="flex flex-row  ">
+                    <input
+                      type="file"
+                      className=" cursor-pointer"
+                      onChange={handleImageChange}
+                      accept="image/*"
+                      multiple={false}
+                      Data-ButtonText="Select images"
+                    />
+                  </label>
+                </div>
+
+                <div className="flex flex-row gap-2 w-[200px]">
+                  {upload && (
+                    <button
+                      onClick={() => handleClosePhotoUploadButton}
+                      className="bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1  "
+                      type="submit"
+                    >
+                      Upload
+                    </button>
+                  )}
+                  <button
+                    className="bg-red-400 hover:bg-red-500   cursor-pointer shadow-lg font-bold h-[30px] w-[60px] rounded-md  text-white  text-center py-1   "
+                    onClick={handleClosePhotoUploadButton}
+                  >
+                    {" "}
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+        </div>
         <div className="flex flex-col gap-2 border border-cyan-300 rounded-2xl p-3 w-full">
           <div className="flex items-center">
             {showChangeButton("name")}
             <div className="gap-1 flex">
-              Name: <p className="font-light"> {plantData.name}</p>
+              Name: <p className="font-light"> {plantDataDisplay.name}</p>
             </div>
           </div>
           <div className="flex">
             {showChangeButton("species")}
             <div className="gap-1 flex">
-              Species: <p className="font-light"> {plantData.species}</p>
+              Species: <p className="font-light"> {plantDataDisplay.species}</p>
             </div>
           </div>
           <div className="flex">
@@ -139,7 +255,7 @@ export default function plantDisplay({ plant, userId }: any) {
               Secondary Species:{" "}
               <p className="font-light">
                 {" "}
-                {plantData.species2 || "None provided"}
+                {plantDataDisplay.species2 || "None provided"}
               </p>
             </div>
           </div>
@@ -149,7 +265,7 @@ export default function plantDisplay({ plant, userId }: any) {
               Watering schedule:{" "}
               <p className="font-light">
                 {" "}
-                {plantData.water || "None provided"}
+                {plantDataDisplay.water || "None provided"}
               </p>
             </div>
           </div>
@@ -159,7 +275,7 @@ export default function plantDisplay({ plant, userId }: any) {
               Sunlight:{" "}
               <p className="font-light">
                 {" "}
-                {plantData.light || "None provided"}
+                {plantDataDisplay.light || "None provided"}
               </p>
             </div>
           </div>
@@ -169,7 +285,7 @@ export default function plantDisplay({ plant, userId }: any) {
               Height:{" "}
               <p className="font-light">
                 {" "}
-                {plantData.plantHeight || "None provided"}
+                {plantDataDisplay.plantHeight + " cm" || "None provided"}
               </p>
             </div>
           </div>
@@ -179,7 +295,7 @@ export default function plantDisplay({ plant, userId }: any) {
               Width:{" "}
               <p className="font-light">
                 {" "}
-                {plantData.plantWidth || "None provided"}
+                {plantDataDisplay.plantWidth + " cm" || "None provided"}
               </p>
             </div>
           </div>
@@ -190,7 +306,7 @@ export default function plantDisplay({ plant, userId }: any) {
             </div>
             <div className="flex flex-col items-center justify-center pt-2">
               <div className="border-slate-400 border rounded-xl w-[80%] p-2 font-extralight">
-                {plantData.description || "None provided please add one"}
+                {plantDataDisplay.description || "None provided please add one"}
               </div>
             </div>
           </div>
@@ -198,16 +314,16 @@ export default function plantDisplay({ plant, userId }: any) {
             <div className="flex items-center hover:text-blue-600hover:underline">
               {" "}
               <Link
-                href={`/p/${plantData.id}`}
+                href={`/p/${plantDataDisplay.id}`}
                 className="text-blue-400 font-light"
               >
-                Public view of {plantData.name}
+                Public view of {plantDataDisplay.name}
               </Link>
             </div>
             <DeleteUniquePlantButton
-              uniquePlantId={plantData.id}
+              uniquePlantId={plantDataDisplay.id}
               user={userId}
-              objectName={plantData.name}
+              objectName={plantDataDisplay.name}
               onConfirm={onDelete}
               liked={false}
             />
@@ -281,12 +397,31 @@ async function handleUpdate(
     });
     return;
   } else {
-    reload();
+    reload(data, field);
     toast.success("Updated Successfully", {
       position: "top-center",
       autoClose: 5000,
       style: { fontWeight: "bold", backgroundColor: "#C6F6D5" },
     });
+    return await response.json();
+  }
+}
+
+async function updateImage(props: any, data: string, reload2: any) {
+  const response = await fetch(`/api/uniqueplants/updatePlantPicAPI`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      userId: props.userId,
+      plantInfo: props.plantData,
+      image: data,
+    }),
+  });
+
+  if (!response.ok) {
+    console.log(response);
+    return;
+  } else {
+    reload2(data, "image");
     return await response.json();
   }
 }
