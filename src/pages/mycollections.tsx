@@ -12,6 +12,7 @@ import { useTransition } from "react";
 import { FaSeedling } from "react-icons/fa";
 import ImageCarousel from "@/components/ImageCarouselComponent";
 import { RiPlantLine } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 interface Collection {
   id: string;

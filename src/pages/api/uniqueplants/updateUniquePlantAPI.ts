@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import prisma from "lib/prisma";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,8 +9,8 @@ export default async function handler(
   if (req.method !== "PATCH") {
     return res.status(405).json({ message: "Method not allowed" });
   }
-  console.log("reached;");
 
+  const prisma = new PrismaClient();
   const plantData = JSON.parse(req.body);
   const userId = plantData.userId;
   const field = plantData.field;

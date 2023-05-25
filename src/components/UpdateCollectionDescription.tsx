@@ -17,9 +17,6 @@ interface ConfirmationDialogProps {
 }
 
 interface updateProps {
-  field: string;
-  userId: string;
-  plantInfo: any;
   onConfirm: any;
   plantDescription: string;
   collectionName: string;
@@ -60,11 +57,16 @@ export default function UpdateCollectionDescriptionComponent({
   const handleTextInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setTextInputValue(event.target.value);
+    const value = event.target.value;
+    setTextInputValue(value);
   };
 
   const handleSubmit = () => {
-    const data = textInputValue;
+    const data = textInputValue.trim();
+    if (data === plantDescription) {
+      handleClose();
+      return;
+    }
     onConfirm(data);
     handleClose();
   };
@@ -78,8 +80,8 @@ export default function UpdateCollectionDescriptionComponent({
         <SlPencil />
       </button>
       <Dialog className="" fullWidth open={open} onClose={handleClose}>
-        <div className="bg-[#d5ffdd] text-[#e8ded1] font-outline-2">
-          <DialogTitle fontSize={24} className="p-2 mt-2">
+        <div className="bg-[#d5ffdd] font-outline-2">
+          <DialogTitle fontSize={24} className="">
             Update {collectionName}'s description:
           </DialogTitle>
           <DialogContent>
@@ -91,7 +93,10 @@ export default function UpdateCollectionDescriptionComponent({
               label="Input"
               type="text"
               fullWidth
+              minRows={3}
+              multiline
               value={textInputValue}
+              inputProps={{ style: { whiteSpace: "pre-wrap" } }}
               onChange={handleTextInputChange}
             />
           </DialogContent>

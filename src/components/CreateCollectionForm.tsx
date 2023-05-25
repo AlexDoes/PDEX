@@ -84,6 +84,15 @@ export default function CreateCollectionForm(data: any) {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (collectionName.length < 3) {
+      toast.error("Collection name must be at least 3 characters long", {
+        style: {
+          background: "#e0f0e3",
+          color: "red",
+        },
+      });
+      return;
+    }
     try {
       const newCollection = await createCollection({
         ownerId: user,

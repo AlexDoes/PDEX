@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { CSSTransition } from "react-transition-group";
 import { FaSeedling } from "react-icons/fa";
+import { toast } from "react-toastify";
+import UpdateCollectionDescriptionComponent from "@/components/UpdateCollectionDescription";
 
 interface User {
   id: string;
@@ -69,10 +71,6 @@ export default function ThisCollection({
     setShowAddPlant(false);
   };
 
-  const handleEditDescription = (e: any) => {
-    e.preventDefault();
-  };
-
   const plantsToShow = () => {
     return (
       <div className="grid grid-cols-1 gap-2 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3 w-full xl:gap-10">
@@ -108,6 +106,22 @@ export default function ThisCollection({
     );
   };
 
+  const reload = () => {
+    router.push(router.asPath);
+  };
+
+  const showChangeButton = () => {
+    return (
+      <UpdateCollectionDescriptionComponent
+        collectionName={plantContentsData.name}
+        plantDescription={plantContentsData.description}
+        onConfirm={(data: string) =>
+          handleUpdate(data, reload, userId, collectionID)
+        }
+      />
+    );
+  };
+
   //   <div>
   //   <RemoveUniquePlantFromCollectionButton
   //     uniquePlantId={plantContent.id}
@@ -125,10 +139,13 @@ export default function ThisCollection({
           {plantContentsData.name}'s content
         </h1>
         <div className="flex flex-col py-2 w-full">
-          <div className="flex flex-col items-center justify-center">
-            <div className="border-slate-400 border rounded-xl w-[90%] p-2 font-extralight">
+          <div className="flex flex-col items-center justify-center relative border-2">
+            <div className="border-slate-400 border rounded-xl w-[90%] p-2 font-extralight relative">
               {plantContentsData.description ||
                 "You have no description for this collection yet, please add one to tell us about it!"}
+              <div className="absolute -bottom-3 -right-3">
+                {showChangeButton()}
+              </div>
             </div>
           </div>
         </div>
@@ -222,4 +239,42 @@ export async function getServerSideProps(context: any) {
       collectionID: String(collectionID),
     },
   };
+}
+
+async function handleUpdate(
+  data: string,
+  reload: any,
+  userId: string,
+  collectionID: string
+) {
+  const response = await fetch(
+    `/api/collections/updateCollectionDescriptionAPI`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({
+        description: data,
+        collectionId: collectionID,
+        userId: userId,
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.log(error.message);
+    toast.error(error.message, {
+      position: "top-center",
+      autoClose: 5000,
+      style: { fontWeight: "bold", backgroundColor: "#FECACA" },
+    });
+    return;
+  } else {
+    reload();
+    toast.success("Updated Successfully", {
+      position: "top-center",
+      autoClose: 5000,
+      style: { fontWeight: "bold", backgroundColor: "#C6F6D5" },
+    });
+    return await response.json();
+  }
 }
