@@ -90,7 +90,7 @@ export default function NavBarSearchBar({}) {
     let i = 0;
     return (
       <ul
-        className={`w-inherit absolute top-[100%] w-[40vw] z-50 text-ellipsis rounded-lg border-8 border-white bg-white  `}
+        className={`w-inherit absolute top-[100%] w-[36vw] md:w-[39.8vw] z-50 text-ellipsis rounded-lg  border-white bg-white  `}
       >
         <div className="border-slate-500 border-[2px] rounded-md">
           {speciesSuggestions.length > 0 && (
@@ -230,29 +230,33 @@ export default function NavBarSearchBar({}) {
   };
 
   return (
-    <form className="flex flex-row z-50" onSubmit={handleSubmit}>
-      <div className="flex flex-col z-50 border-[12px] items-start relative overflow-visible rounded-full border-white ">
-        <div className="flex flex-row justify-center items-center gap-2">
+    <form
+      className="flex flex-row z-30 items-center justify-center h-[62px] "
+      onSubmit={handleSubmit}
+    >
+      <div className="flex flex-col z-30 items-start relative overflow-visible rounded-full border-white ">
+        <div className="flex flex-row justify-center items-center gap-2 relative">
           <input
             type="text"
             placeholder="Search"
             value={searchText}
             onChange={handleOnChange}
-            className="w-[40vw] bg-[#fffbcc] rounded-full  "
+            className="w-[45vw] bg-[#fffbcc] rounded-full text-black   "
             tabIndex={0}
             ref={(input) => input && input.focus()}
             onBlur={handleBlur}
           />
+           <button
+        type="submit"
+        onClick={onSubmit}
+        className="border-2 flex items-center justify-center absolute  z-30 right-0 h-full rounded-r-full md:w-[12%] w-[20%] border-none hover:bg-green-300 bg-slate-500"
+      >
+        <FaSearch />
+      </button>
         </div>
         {renderSuggestions()}
       </div>
-      {/* <button
-        type="submit"
-        onClick={onSubmit}
-        className="border-2 flex items-center justify-center hover:bg-black"
-      >
-        <FaSearch />
-      </button> */}
+     
     </form>
   );
 }
