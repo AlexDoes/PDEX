@@ -492,6 +492,9 @@ export async function getServerSideProps(context: any) {
         image: true,
         description: true,
         ownedPlants: {
+          orderBy: {
+            createdAt: "asc",
+          },
           select: {
             id: true,
             name: true,
@@ -506,6 +509,9 @@ export async function getServerSideProps(context: any) {
           },
         },
         plantCollection: {
+          orderBy: {
+            updatedAt: "desc",
+          },
           select: {
             id: true,
             name: true,
