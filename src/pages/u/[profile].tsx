@@ -7,7 +7,7 @@ import { toTitleCase } from "lib/generalFunctions";
 import avatarImage from "public/images/avatar.jpg";
 import { GiCarousel } from "react-icons/gi";
 import ImageCarousel from "@/components/ImageCarouselComponent";
-import ScreenChecker from "@/components/ScreenChecker";
+import RedirectComponent from "@/components/RedirectComponent";
 
 interface Props {
   user: any;
@@ -26,8 +26,18 @@ interface User {
 }
 
 export default function UserProfile({ user }: Props) {
+  const router = useRouter();
+  useEffect(() => {
+    if (!user) {
+      const redirectTimeout = setTimeout(() => {
+        router.push("/");
+      }, 5000);
+      return () => clearTimeout(redirectTimeout);
+    }
+  }, []);
+
   if (!user) {
-    return <div>The princess isn't in this castle.</div>;
+    return <RedirectComponent />;
   }
   const {
     id,
