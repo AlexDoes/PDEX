@@ -43,22 +43,6 @@ export default function RemoveUniquePlantFromCollectionButton(props: any) {
     setConfirmDelete(false);
   };
 
-  //   const handleOnClick = async (event: any) => {
-  //     if (confirmDelete) {
-  //       setConfirmDelete(false);
-  //       await handleRemove(event);
-  //       toast.success("Plant removed from collection!", {
-  //         position: toast.POSITION.TOP_CENTER,
-  //         autoClose: 3000,
-  //         closeOnClick: true,
-  //         draggable: false,
-  //         closeButton: true,
-  //         hideProgressBar: true,
-  //         className: "confirm-toast",
-  //       });
-  //     }
-  //   };
-
   async function handleRemove() {
     try {
       const removedUniquePlant = await removeUniquePlant({
@@ -66,8 +50,8 @@ export default function RemoveUniquePlantFromCollectionButton(props: any) {
         userId: user,
         collectionId: collectionId,
       });
-      console.log(`removed unique plant: ${removedUniquePlant}`);
-      handleSubmissionFromParent();
+      console.log(uniquePlantId);
+      handleSubmissionFromParent(uniquePlantId);
     } catch (error) {
       console.log(error);
     }

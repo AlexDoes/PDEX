@@ -133,7 +133,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
             )}
           </div>
           <div className="flex flex-col w-full gap-2 overflow-hidden">
-            <p className="text-xl indent-3 xl:indent-5 w-full overflow-hidden">
+            <p className="text-2xl indent-3 xl:indent-5 w-full overflow-hidden">
               <Link
                 onClick={() => handleClick(collection.id)}
                 href={`/collections/${collection.id}`}
@@ -156,17 +156,22 @@ export default function MyCollections({ items, userId }: CollectionProps) {
               >
                 <div
                   className="              
-                      overflow-auto 
+                      overflow-y-auto 
                       font-light
                       mx-3
                       xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]
-                      h-full bg-[#FFF4BD] 
-                      pl-3 pt-2 pb-2 rounded-md
+                      h-full
+                      backdrop-filter backdrop-blur-sm
+                      bg-opacity-50
+                       g-green-100
+                      bg-[#FFF4BD] 
+                      border border-slate-300
+                      pl-3 rounded-md
                       scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
                       scrollbar-rounded-sm
                       w-full
                       flex flex-col
-                      justify-center
+                      pt-2
                       "
                 >
                   {collection.plantContents.length > 0 && <p> Contents: </p>}
@@ -175,7 +180,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                       return (
                         <p
                           key={plantItemData.id}
-                          className="text-orange-600 flex
+                          className="text-orange-400 flex
                             "
                         >
                           <Link href={`/myplants/${plantItemData.id}`}>
@@ -209,14 +214,14 @@ export default function MyCollections({ items, userId }: CollectionProps) {
 
   return (
     <>
+      <h1 className="text-3xl flex justify-center my-3 items-center gap-1">
+        My Collections
+        <RiPlantLine className="text-3xl text-green-400" />
+      </h1>
       <div
         className=" xs:m-0 sm:m-0 w-full border-slate-300 flex flex-col justify-center items-center border pb-4 gap-2 
     backdrop-filter backdrop-blur-sm bg-opacity-50 rounded-xl bg-orange-100"
       >
-        <h1 className="text-3xl flex justify-center mt-4 items-center gap-1">
-          My Collections
-          <RiPlantLine className="text-3xl text-green-400" />
-        </h1>
         <div
           className="                      
                       xs:text-2xl
@@ -224,7 +229,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                       flex
                       flex-col
                       justify-center items-center
-                      py-1
+                      py-4
                       border-cyan-300
                       w-[100%]
                       gap-2

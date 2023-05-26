@@ -14,7 +14,8 @@ export default function AddUniquePlantToCollection(props: any) {
       userId: props.userId,
     };
     addPlantToCollection(plantData).then((data) => {
-      props.onSubmit();
+      console.log("triggered");
+      props.onSubmit(plantsToBeAdded);
     });
   };
 
@@ -72,10 +73,6 @@ export default function AddUniquePlantToCollection(props: any) {
               className=" bg-[#fffbcc] hover:border-sky-300 border rounded-md py-3  px-5 flex justify-center items-center gap-1 xs:text-2xl text-xl bg-opacity-90 hover:bg-opacity-810 border-red-300 hover:text-white
               ease-in-out duration-300
             hover:bg-green-300  text-[#ec9e69]
-              
-
-
-
         "
               type="submit"
             >

@@ -57,15 +57,24 @@ export default function ThisCollection({
   const [collectionDescription, setCollectionDescription] = useState(
     plantContentsData.description
   );
+
   const plantstoAdd = usersUniquePlants.filter((plant) => {
     return !plantContentsData.plantContents.some(
       (plantContent: any) => plantContent.id === plant.id
     );
   });
 
+  const [plantContents, setPlantContents] = useState(
+    plantContentsData.plantContents
+  );
+
   useEffect(() => {
     setCollectionDescription(plantContentsData.description);
   }, [plantContentsData.description]);
+
+  useEffect(() => {
+    plantstoAdd;
+  }, [plantstoAdd]);
 
   const router = useRouter();
 
@@ -75,14 +84,45 @@ export default function ThisCollection({
   };
 
   const onSubmitFromParent = () => {
-    console.log("clicked");
     setShowAddPlant(false);
+    router.reload();
+    router.push(router.asPath);
+  };
+
+  const onSubmitFromParentRemove = () => {
+    router.reload();
+  };
+
+  const onSubmitFromParentUpdate = (plantsAdded: String[]) => {
+    setAddPlant(false);
+    plantstoAdd.forEach((plant) => {
+      if (plantsAdded.includes(plant.id)) {
+        plantstoAdd.filter((plant) => {
+          return !plantstoAdd.some(
+            (plantContent: any) => plantContent.id === plant.id
+          );
+        });
+      }
+    });
+    console.log(plantstoAdd);
+    usersUniquePlants.forEach((plant) => {
+      if (plantsAdded.includes(plant.id)) {
+        setPlantContents((plantContents: any) => [
+          ...plantContents,
+          {
+            id: plant.id,
+            name: plant.name,
+            image: plant.image,
+          },
+        ]);
+      }
+    });
   };
 
   const plantsToShow = () => {
     return (
       <div className="grid grid-cols-1 gap-2 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3 w-full xl:gap-10">
-        {plantContentsData.plantContents.map((plantContent: any) => (
+        {plantContents.map((plantContent: any) => (
           <div
             key={plantContent.id}
             className="flex-col items-center justify-center bg-opacity-50 bg-green-200 hover:bg-opacity-70 rounded-xl p-4 border gap-2 pt-6
@@ -105,7 +145,7 @@ export default function ThisCollection({
                 plantName={plantContent.name}
                 collectionId={collectionID}
                 userId={userId}
-                onConfirm={onSubmitFromParent}
+                onConfirm={onSubmitFromParentRemove}
               />
             </div>
           </div>
@@ -117,6 +157,8 @@ export default function ThisCollection({
   const reload = (response: String) => {
     setCollectionDescription(response);
   };
+
+  const reloadUponAdd = () => {};
 
   const showChangeButton = () => {
     return (

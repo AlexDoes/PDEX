@@ -4,6 +4,7 @@ import bg2 from "public/BG/BG2-annie-spratt-9DedxUSwLg4-unsplash.jpg";
 import bg3 from "public/BG/BG3-gryffyn-m-fNipzSgk6t4-unsplash.jpg";
 import bg4 from "public/BG/BG4-annie-spratt-HB-Kf9WLy_0-unsplash.jpg";
 import bg5 from "public/BG/BG5-evie-s-uuCjYxJVf4o-unsplash.jpg";
+import bg6 from "public/BG/bg0526.png";
 import LoadingText from "./LoadinText";
 
 type PlantContent = {

@@ -26,7 +26,6 @@ export default async function handle(
   }
 
   const ownerID = collection?.ownerId;
-  console.log(ownerID, userId);
 
   if (ownerID !== userId) {
     res
