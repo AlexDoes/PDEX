@@ -131,7 +131,7 @@ const CommentBox = (props: Props) => {
   return (
     <div className="h-full flex items-center">
       <button
-        className="w-[10%] h-full flex justify-center items-center hover:backdrop-brightness-95 rounded-xl transition duration-300 ease-in-out group"
+        className="w-[10%] h-full flex justify-center items-center hover:backdrop-brightness-95 rounded-r-xl transition duration-300 ease-in-out group"
         onClick={!liked ? onLike : unlike}
       >
         {liked ? (

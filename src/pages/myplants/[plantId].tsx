@@ -108,11 +108,11 @@ export default function plantDisplay({ plant, userId }: any) {
   );
 
   return (
-    <div className="bg-orange-100 rounded-xl p-10 py-10 flex flex-col gap-1 w-full">
+    <div className="flex flex-col w-full gap-1 p-10 py-10 bg-orange-100 rounded-xl">
       <h1 className=" text-[#a0cfa0] flex items-center justify-center mb-2 xs:text-xl sm:text-2xl">
         {plantData.name}'s information displayed below{" "}
       </h1>
-      <div className="flex xs:flex-col md:flex-row gap-4 items-center">
+      <div className="flex items-center gap-4 xs:flex-col md:flex-row">
         <img
           className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-xl cursor-pointer"
           src={plantData.image}
@@ -121,22 +121,22 @@ export default function plantDisplay({ plant, userId }: any) {
             window.open(plantData.image, "_blank");
           }}
         />
-        <div className="flex flex-col gap-2 border border-cyan-300 rounded-2xl p-3 w-full">
+        <div className="flex flex-col w-full gap-2 p-3 border border-cyan-300 rounded-2xl ">
           <div className="flex items-center">
             {showChangeButton("name")}
-            <div className="gap-1 flex">
+            <div className="flex gap-1">
               Name: <p className="font-light"> {plantData.name}</p>
             </div>
           </div>
           <div className="flex">
             {showChangeButton("species")}
-            <div className="gap-1 flex">
+            <div className="flex gap-1">
               Species: <p className="font-light"> {plantData.species}</p>
             </div>
           </div>
           <div className="flex">
             {showChangeButton("species2")}
-            <div className="gap-1 flex">
+            <div className="flex gap-1">
               Secondary Species:{" "}
               <p className="font-light">
                 {" "}
@@ -146,7 +146,7 @@ export default function plantDisplay({ plant, userId }: any) {
           </div>
           <div className="flex">
             <div>{showChangeButton("water")}</div>
-            <div className="gap-1 flex">
+            <div className="flex gap-1">
               Watering schedule:{" "}
               <p className="font-light">
                 {" "}
@@ -156,7 +156,7 @@ export default function plantDisplay({ plant, userId }: any) {
           </div>
           <div className="flex">
             <div>{showChangeButton("light")}</div>
-            <div className="gap-1 flex">
+            <div className="flex gap-1">
               Sunlight:{" "}
               <p className="font-light">
                 {" "}
@@ -166,7 +166,7 @@ export default function plantDisplay({ plant, userId }: any) {
           </div>
           <div className="flex">
             <div>{showChangeButton("plantHeight")}</div>
-            <div className="gap-1 flex">
+            <div className="flex gap-1">
               Height:{" "}
               <p className="font-light">
                 {" "}
@@ -176,7 +176,7 @@ export default function plantDisplay({ plant, userId }: any) {
           </div>
           <div className="flex">
             <div>{showChangeButton("plantWidth")}</div>
-            <div className="gap-1 flex">
+            <div className="flex gap-1">
               Width:{" "}
               <p className="font-light">
                 {" "}
@@ -195,12 +195,12 @@ export default function plantDisplay({ plant, userId }: any) {
               </div>
             </div>
           </div>
-          <div className="w-inherit flex justify-between item-center">
+          <div className="flex justify-between w-inherit item-center">
             <div className="flex items-center hover:text-blue-600hover:underline">
               {" "}
               <Link
                 href={`/p/${plantData.id}`}
-                className="text-blue-400 font-light"
+                className="font-light text-blue-400"
               >
                 Public view of {plantData.name}
               </Link>
