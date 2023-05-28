@@ -19,7 +19,7 @@ export default function NavBar() {
     <>
       {show && (
         <div
-          className="flex   w-full gap-2 h-16 bg-[#c1e1c1] max-h-16 sm:justify-between
+          className="flex   w-full gap-2 h-16 bg-[#c1e1c1] max-h-16 justify-between sm:justify-between
           "
         >
           <Link href={"/"} className="inherit">
@@ -29,7 +29,7 @@ export default function NavBar() {
                 alt="My Image"
                 className="h-full"
               />
-              <div className="sm:text-[50px] text-3xl border font-serif text-[#efe6c1] text-shadow-md">
+              <div className="sm:text-[50px] text-3xl font-serif text-[#efe6c1] text-shadow-md">
                 BAX
               </div>
             </div>
