@@ -115,8 +115,15 @@ export default function SearchResult({
         ${uniquePlants.length > 0 ? `visible` : `hidden`}
       `}
         >
-          <div className="flex flex-col gap-1">
-            <div className="flex gap-1 border-b-2 border-slate-300 pb-2">
+          <div
+            className="w-full flex flex-row sm:gap-4
+          xs:gap-3"
+          >
+            <div className="flex gap-1 border-b-2 border-slate-300 pb-2 items-center">
+              <p>Filter by: </p>
+              {speciesButton(searchTerm)}
+            </div>
+            <div className="flex gap-1 border-b-2 border-slate-300 pb-2 items-center">
               <p>Jump to:</p>
               <div className="flex gap-2">
                 <button
@@ -137,10 +144,6 @@ export default function SearchResult({
                   Users
                 </button>
               </div>
-            </div>
-            <div className="flex gap-1 border-b-2 border-slate-300 pb-2 items-center">
-              <p>Filter by: </p>
-              {speciesButton(searchTerm)}
             </div>
           </div>
         </div>
@@ -165,7 +168,7 @@ export default function SearchResult({
             xs:flex-col sm:flex-row 
             md:flex-row lg:flex-row 
             flex-wrap 
-            xl:flex-row xl:flex-wrap xl:row-3
+            xl:flex-row xl:flex-wrap xl:row-
             backdrop-filter backdrop-blur-md 
             bg-opacity-50 bg-green-200
             xs:relative

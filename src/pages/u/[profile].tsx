@@ -399,7 +399,7 @@ export default function UserProfile({ user }: Props) {
           </div>
         </div>
       </div>
-      <div className="w-[100%]">
+      <div className="w-[100%] flex flex-col gap-3">
         <div
           className="                  
         bg-opacity-80 bg-orange-100

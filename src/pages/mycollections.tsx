@@ -57,7 +57,8 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   };
 
   const handleSubmitCollectionForm = async () => {
-    await router.push(router.asPath);
+    // await router.push(router.asPath);
+    console.log("submitted");
     setShowForm(false);
   };
 
