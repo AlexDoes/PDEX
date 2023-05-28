@@ -128,6 +128,7 @@ export default function CreateUniquePlant(props: any) {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data, e) => {
+    console.log("submitted")
     e?.preventDefault();
     if (!image) {
       toast.error("Please upload an image", {

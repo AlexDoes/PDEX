@@ -73,9 +73,9 @@ export default function plantPublicDisplayPage({
         {commentsToDisplayState.map((comment: any) => (
           <div
             key={comment.id}
-            className="relative flex flex-row gap-4 items-center mr-2 px-2 pb-5 group snap-center"
+            className="relative flex flex-row items-center gap-4 px-2 pb-5 mr-2 group snap-center"
           >
-            <div className="absolute bottom-0 w-full flex justify-center items-center">
+            <div className="absolute bottom-0 flex items-center justify-center w-full">
               <div className="bottom-0 right-[50%] h-[2px] w-[50%] group-hover:bg-gray-200"></div>
             </div>
             <Link
@@ -90,11 +90,11 @@ export default function plantPublicDisplayPage({
                   comment.author.image || defaultAvatars[comment.author.id % 4]
                 }
                 alt={comment.author.image}
-                className="rounded-full w-8 h-8"
+                className="w-8 h-8 rounded-full"
               />
             </Link>
-            <div className="flex flex-col gap-1 w-full border-black">
-              <div className="flex flex-col gap-1 w-full">
+            <div className="flex flex-col w-full gap-1 border-black">
+              <div className="flex flex-col w-full gap-1">
                 <div className="relative w-full">
                   <Link
                     className="flex flex-row gap-1 items-center w-[10%]"
@@ -112,7 +112,7 @@ export default function plantPublicDisplayPage({
                       {comment.author.id === plant.ownerId ? "Author" : ""}
                     </p>
                   </Link>
-                  <div className="absolute right-0 top-0 bottom-0 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                  <div className="absolute top-0 bottom-0 right-0 transition duration-300 ease-in-out opacity-0 group-hover:opacity-100">
                     {comment.author.id === user ? (
                       <DeleteCommentButton
                         commentId={comment.id}
@@ -123,7 +123,7 @@ export default function plantPublicDisplayPage({
                       ""
                     )}
                   </div>
-                  <p className="italic text-xs text-gray-500">
+                  <p className="text-xs italic text-gray-500">
                     {comment.createdAt}
                   </p>
                 </div>
@@ -146,72 +146,66 @@ export default function plantPublicDisplayPage({
 
   return (
     <div
-      className=" border border-[#c1e1c1] bg-orange-100 rounded-xl p-4 pt-6 pb-6 items-center justify-between focus:focus-within hover:relative hover:transition-all focus:transition-all 
-      w-full md:h-min-[492px] h-inherit focus:outline-none overflow-x-hidden flex flex-col md:flex-row gap-2 md:items-stretch
-      h-full"
+      className=" mt-[10px] border-[#c1e1c1] bg-orange-100 rounded-xl p-4   lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
+      w-full   focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-3 lg:gap-20 
+      h-[88vh]"
       tabIndex={0}
     >
-      <div
-        className="relative 
-      inline-block group w-inherit"
-      >
-        <img
-          src={plant.image}
-          alt={plant.name}
-          className="
+      <div className="relative h-full roup w-inherit items-center justify-center flex">
+        <div className="relative">
+          <img
+            src={plant.image}
+            alt={plant.name}
+            className="
             rounded-xl
-            xs:w-[80vw] xs:h-[95vw] sm:w-[50vw] sm:h-[60vw]
-            md:w-[50vw] md:h-[50vw] md:max-w-[50vw] lg:max-h-[80vh] lg:max-w-[80vh] xl:max-w-[80vh] xl:max-h-[80vh]
-            sm:max-w-[80] mb-2
+            xs:w-[80vw] xs:h-[95vw] sm:w-[100vw] sm:h-[80vh]
+            lg:max-h-[80vh] lg:max-w-[80vh] xl:max-w-[80vh] xl:max-h-[80vh]
+            sm:max-w-[80vw] mb-2
             hover:brightness-90
             hover:outline-none
+            lg:w-[45vw]
+        
             "
-        />
-        <div
-          className="absolute bottom-2 left-0 right-0 px-2 py-2 bg-gray-800 opacity-0 transition-opacity ease-in-out duration-100
-          group-hover:opacity-70
-          group-focus:opacity-70
-          mx-auto
-          rounded-b-xl
-          flex flex-col
-        "
-        >
-          <h3 className="text-lg text-white">{plant.name}</h3>
-          <div className="text-sm text-white font-light">
-            <p className="italic">
-              {!plant.species2
-                ? plant.species
-                : plant.species + " / " + plant.species2}
-            </p>
-            <p className="italic">
-              By {plant.ownedBy.name || plant.ownedBy.nickname}{" "}
-            </p>
-            <div className="flex flex-row gap-1">
-              <p>{plant.plantHeight && "H: " + plant.plantHeight + " cm"}</p>
-              <p>{plant.plantWidth && "W: " + plant.plantWidth + " cm"}</p>
+          />
+          <div className="absolute left-0 right-0  flex flex-col px-2 py-2 mx-auto transition-opacity duration-100 ease-in-out bg-gray-800 opacity-0 bottom-2   group-hover:opacity-70 group-focus:opacity-70 rounded-b-xl ">
+            <h3 className="text-lg text-white">{plant.name}</h3>
+            <div className="text-sm font-light text-white">
+              <p className="italic">
+                {!plant.species2
+                  ? plant.species
+                  : plant.species + " / " + plant.species2}
+              </p>
+              <p className="italic">
+                By {plant.ownedBy.name || plant.ownedBy.nickname}{" "}
+              </p>
+              <div className="flex flex-row gap-1">
+                <p>{plant.plantHeight && "H: " + plant.plantHeight + " cm"}</p>
+                <p>{plant.plantWidth && "W: " + plant.plantWidth + " cm"}</p>
+              </div>
+              {plant.light ? <p>Sunlight: {plant.light}</p> : null}
+              {plant.water ? <p>Water: {plant.water}</p> : null}
+              <div>{plant.description} </div>
             </div>
-            {plant.light ? <p>Sunlight: {plant.light}</p> : null}
-            {plant.water ? <p>Water: {plant.water}</p> : null}
-            <div>{plant.description} </div>
           </div>
         </div>
       </div>
+
+      {/* comment section */}
       <div
-        className="relative flex flex-col xs:items-center xs:justify-center md:items-start gap-1 px-2 h-full lg:max-h-[80vh] xl:max-h-[80vh] md:max-h-[50vw]
-        md:h-[50vw]
-        md:justify-evenly
-        lg:justify-start
+        className="relative flex flex-col  xs:items-center xs:justify-center h-[88vh]  gap-2 px-2   lg:max-h-[80vh] xl:max-h-[80vh]  
+        max-w-[800px]
+        rounded-xl
       "
       >
         <div
           className="h-[30%] flex 
-        flex-col items-start justify-evenly relative"
+        flex-col items-start justify-evenly relative  gap-2 "
         >
-          <div className="elipsis top-0 text-xl flex flex-row">
+          <div className=" flex flex-row text-xl elipsis font-bold">
             {plant.name}{" "}
-            <div className="text-sm text-blue-300 font-light rounded-sm">
+            <div className="text-sm font-light text-blue-300 rounded-sm">
               {user === plant.ownerId ? (
-                <div className="ml-1 hover:border hover:backdrop-brightness-90 rounded-sm">
+                <div className="ml-1 rounded-sm hover:border hover:backdrop-brightness-90">
                   <Link href={`/myplants/${plant.id}`}>
                     <SlPencil />
                   </Link>
@@ -221,38 +215,41 @@ export default function plantPublicDisplayPage({
               )}{" "}
             </div>
           </div>
-          <div className="font-light italic">
+          <div className="italic font-light">
             {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
           </div>
-          <div className="flex flex-col justify-center relative">
+          <div className="relative flex flex-col justify-center">
             <div
               className="
-              border-2 border-slate-300
+ 
               rounded-lg font-light
-              overflow-y-auto
               xs:max-h-[92px]
               md:h-full
               lg:h-[90px]
               xl:h-[90px]
               max-h-[92px]
-              ellipsis
+              text-ellipsis
               text-center
               flex
-              p-2
+              pl-2
               xs:text-sm sm:text-sm md:text-md items-center 
               relative
             "
             >
-              <p>
+              <p
+                className=" border-t-2 border-b-2 border-[#C1E1C1]  h-full text-center justify-center flex  font-semibold overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+        scrollbar-rounded-sm snap-y snap-mandatory  "
+              >
                 {plant.description
-                  ? plant.description
-                  : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
+                  ? plant.description +
+                    "lorem ipsum dolor sit amet, consectetur adipiscing elit. Null lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Null"
+                  : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it! lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Null`}
               </p>
             </div>
           </div>
         </div>
         <div className="h-[55%] w-full mb-auto">{commentsToDisplay()}</div>
-        <div className="h-[10%] w-full bottom-0">
+        <div className="h-[12%] w-full bottom-0  justify-center py-3  ">
           <CommentBox
             reference={"UniquePlant"}
             refId={plant.id}

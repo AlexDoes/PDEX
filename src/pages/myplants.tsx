@@ -254,7 +254,7 @@ export default function MyPlants({ items, userId, username, session }: any) {
       >
         <div
           onClick={onSubmitFromParent}
-          className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] right-0"
+          className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] z-40 right-0"
         ></div>
       </CSSTransition>
 

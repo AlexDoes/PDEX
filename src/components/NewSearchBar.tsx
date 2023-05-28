@@ -74,14 +74,14 @@ export default function NewSearchBar({ data, width, onChange }: Props) {
   };
 
   return (
-    <div className="flex flex-col border-8 items-start relative">
-      <div className="flex flex-row justify-center items-center gap-2">
+    <div className="flex flex-col items-start relative">
+      <div className="flex flex-row justify-center items-center gap-2 w-full">
         <input
           type="text"
           placeholder="Plant Species"
           value={searchText}
           onChange={handleOnChange}
-          className={width}
+          className="w-full border-white rounded-r-md bg-[#efe6c1]"
         />
       </div>
       {renderSuggestions()}
