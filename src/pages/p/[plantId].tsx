@@ -193,9 +193,7 @@ export default function plantPublicDisplayPage({
       {/* comment section */}
       <div
         className="relative flex flex-col  xs:items-center xs:justify-center h-[88vh]  gap-2 px-2   lg:max-h-[80vh] xl:max-h-[80vh]  
-       
         max-w-[800px]
-         
         rounded-xl
       "
       >

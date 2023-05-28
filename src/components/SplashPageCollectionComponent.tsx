@@ -41,14 +41,15 @@ export default function Splash(Data: Props) {
 
   return (
     <>
-      <div className="w-full ">
-        <div className="flex flex-row w-full ">
+      <div className="w-full   h-[90vh] flex justify-center mt-[5%] sm:mt-2   ">
+        <div className="flex xl:flex-row flex-col w-full gap-5">
           <div
-            id="leftSplash"
-            className="w-[45%] 
+            // id="leftSplash"
+            className=" 
             font-serif
              border-green-700 
-            flex items-center justify-center"
+             w-full
+            flex items-center  justify-center h-[80vh]  "
             style={
               {
                 // backgroundImage: `url(${bg5.src})`,
@@ -60,10 +61,12 @@ export default function Splash(Data: Props) {
             }
           >
             <div
-              id="splashtextcontainer"
-              className="flex rounded-3xl bg-opacity-20 bg-yellow-400 w-[80%]
+              // id="splashtextcontainer"
+              className="flex rounded-3xl bg-opacity-20 bg-yellow-400  w-[90%]
                h-[40vh] justify-center items-center
-               overflow-hidden
+               overflow-hidden 
+         
+              sm:min-w-[500px]  max-w-[500px]
                "
             >
               <h1 className="text-6xl text-black text-center font-outline-2">
@@ -73,16 +76,18 @@ export default function Splash(Data: Props) {
               </h1>
             </div>
           </div>
+
+          {/* collection data */}
           <div
-            id="rightSplash"
-            className="w-[55%] border-black 
-            rounded-xl px-5 py-5 overflow-auto"
+            // id="rightSplash"
+            className="w-full border-black 
+            rounded-xl px-5 py-5  "
           >
             {displayData.plantContents.map((plant, i) => {
               const reverse =
                 i % 2 === 0
-                  ? "flex-row-reverse gradient-bg-card2"
-                  : "gradient-bg-card2-reverse";
+                  ? "flex-col-reverse sm:flex-row-reverse gradient-bg-card2"
+                  : "gradient-bg-card2-reverse flex-col-reverse sm:flex-row";
               return (
                 <div
                   key={plant.id}
@@ -92,9 +97,12 @@ export default function Splash(Data: Props) {
                   flex flex-row 
                   border border-[#C1E1C1]
                   rounded-xl 
-                  justify-between mb-2 
+                  sm:justify-between mb-2 
                   min-h-[200px] p-4 gap-4
                   overflow-auto
+                  justify-center
+                  items-center
+                  max-w-[1000px]
 
                   `}
                 >

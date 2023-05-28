@@ -186,7 +186,16 @@ export default function MyPlants({ items, userId, username, session }: any) {
         </h1>
         {showPlantsCard()}
         {!showForm && (
-          <button onClick={() => setShowForm(true)}>Add a plant</button>
+          <div className="w-full flex justify-center">
+            <button
+              className="   bg-[#fffbcc] hover:border-sky-300 border rounded-md py-3  px-5 flex justify-center items-center gap-1 xs:text-2xl text-xl bg-opacity-90 hover:bg-opacity-810 border-red-300 hover:text-white
+          ease-in-out duration-300
+        hover:bg-green-300  text-[#ec9e69]"
+              onClick={() => setShowForm(true)}
+            >
+              Add a plant
+            </button>
+          </div>
         )}
         {/* {showForm && (
         <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
@@ -201,7 +210,7 @@ export default function MyPlants({ items, userId, username, session }: any) {
       >
         <div
           onClick={onSubmitFromParent}
-          className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] right-0"
+          className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] z-40 right-0"
         ></div>
       </CSSTransition>
 

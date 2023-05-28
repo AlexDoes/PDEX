@@ -90,7 +90,7 @@ export default function NavBarSearchBar({}) {
     let i = 0;
     return (
       <ul
-        className={`w-inherit absolute top-[100%] w-[36vw] md:w-[39.8vw] z-50 text-ellipsis rounded-lg  border-white bg-white  `}
+        className={`w-inherit absolute top-[100%] w-[36vw] md:w-[39.8vw] z-40 text-ellipsis rounded-lg  border-white bg-white  `}
       >
         <div className="border-slate-500 border-[2px] rounded-md">
           {speciesSuggestions.length > 0 && (
