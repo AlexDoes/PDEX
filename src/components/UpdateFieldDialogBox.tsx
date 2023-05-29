@@ -22,6 +22,17 @@ interface updateProps {
   onConfirm: any;
 }
 
+interface MyObject {
+  [key: string]: string;
+}
+
+const map: MyObject = {
+  name: "Name",
+  description: "Description",
+  email: "Email",
+  nickname: "Username",
+};
+
 export default function UpdateDataComponent({
   field,
   userId,
@@ -57,7 +68,7 @@ export default function UpdateDataComponent({
         className="  w-[200px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-slate-400  font-bold"
         onClick={handleOpen}
       >
-        Update {field}
+        Update {map[field]}
       </button>
       <Dialog className="" open={open} onClose={handleClose}>
         <div className="bg-[#d5ffdd] text-[#a995ed] ">

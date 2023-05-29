@@ -104,6 +104,18 @@ const SignInPage = () => {
     signIn("google", { callbackUrl: "/", redirect: false });
   };
 
+  const handleGithubSignIn = async (e: any) => {
+    e.preventDefault();
+    try {
+      const res = await signIn("github", {
+        callbackUrl: "/",
+        redirect: false,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSignUpandSignInToggle = () => {
     setToggleSignUpAndSignIn(!toggleSignUpAndSignIn);
   };
@@ -113,7 +125,7 @@ const SignInPage = () => {
     <div className={`flex flex-col h-[100vh] items-center justify-center `}>
       <div className=" fixed h-[100vh] w-full -z-20">
         <Image
-          src="/loginPageBg.avif"
+          src="/loginPageBg.jpg"
           alt="Next.js logo"
           fill
           style={{ objectFit: "cover" }}
@@ -123,10 +135,9 @@ const SignInPage = () => {
       <div
         id="loginForm"
         // change rgba to < 1 for opaque and blur
-        className=" flex flex-col 
-        bg-[rgba(255,255,255,1)]
-        backdrop-blur-md 
-        min-w-[400px]  min-h-[693px] rounded-3xl justify-center items-center mt-[1vh]  "
+        className=" flex flex-col border-white 
+        bg-white bg-opacity-20 backdrop-filter backdrop-blur-xs
+        min-w-[400px]  min-h-[650px] rounded-3xl justify-center items-center mt-[1vh]  "
       >
         <div
           id="logo"
@@ -149,17 +160,17 @@ const SignInPage = () => {
 
             {!toggleSignUpAndSignIn && (
               <p className="text-[14px]">
-                Sign Up to Pdex to continue to All Applications.
+                Sign Up for BAX to continue to All Applications.
               </p>
             )}
             {toggleSignUpAndSignIn && (
               <p className="text-[14px]">
-                Log In to Pdex to continue to All Applications.
+                Log In to BAX to continue to All Applications.
               </p>
             )}
           </div>
         </div>
-        <div className="flex flex-col  h-full justify-center items-center w-[80%] min-h-[480px]">
+        <div className="flex flex-col  h-full justify-center items-center w-[80%] min-h-[400px]">
           <form
             className="flex flex-col jusitfy-center items-center w-full h-full  "
             onSubmit={toggleSignUpAndSignIn ? handleSubmit : handleSignUp}
@@ -171,7 +182,7 @@ const SignInPage = () => {
               <input
                 className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace]  min-h-[52px] text-black"
                 type="email"
-                placeholder="Username or email address"
+                placeholder="Email Address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 // required
@@ -237,7 +248,7 @@ const SignInPage = () => {
               </button>
 
               {toggleSignUpAndSignIn && (
-                <span>
+                <span className="my-1">
                   Don't have an account?
                   {toggleSignUpAndSignIn ? (
                     <span
@@ -257,7 +268,7 @@ const SignInPage = () => {
                 </span>
               )}
               {!toggleSignUpAndSignIn && (
-                <span>
+                <span className="my-1">
                   Have an Account?
                   {toggleSignUpAndSignIn ? (
                     <span
@@ -298,17 +309,18 @@ const SignInPage = () => {
                   {toggleSignUpAndSignIn ? "Continue" : "Sign Up"} with Google
                 </button>
               </div>
-              <div className="flex pb-10">
+              {/* <div className="flex pb-10 hidden">
                 <button
                   className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] min-h-[52px] text-black rounded-sm flex  items-center gap-2 shadow-md"
                   // type="submit"
+                  onClick={handleGithubSignIn}
                 >
                   <div className=" ">
                     <AiOutlineGithub size={25} />
                   </div>
                   {toggleSignUpAndSignIn ? "Continue" : "Sign Up"} with Github
                 </button>
-              </div>
+              </div> */}
             </div>
           </form>
         </div>
