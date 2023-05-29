@@ -15,6 +15,9 @@ const nextConfig = {
       "https://lh3.googleusercontent.com",
     ],
   },
+  experimental: {
+    scrollRestoration: true,
+  },
 };
 
 module.exports = nextConfig;

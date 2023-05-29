@@ -121,19 +121,21 @@ export default function ThisCollection({
 
   const plantsToShow = () => {
     return (
-      <div className="grid grid-cols-1 gap-2 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3 w-full xl:gap-10">
+      <div className="grid grid-cols-1 gap-2 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full xl:gap-2">
         {plantContents.map((plantContent: any) => (
           <div
             key={plantContent.id}
             className="flex-col items-center justify-center bg-opacity-50 bg-green-200 hover:bg-opacity-70 rounded-xl p-4 border gap-2 pt-6
-            flex border-slate-300 group"
+            flex border-slate-300 group relative"
           >
-            <img
-              src={plantContent.image}
-              alt={plantContent.name}
-              className="rounded-xl xs:w-[250px] xs:h-[300px] 
-              lg:w-[300px] lg:h-[350px] border-gray-400 border"
-            />
+            <Link href={`/myplants/${plantContent.id}`}>
+              <img
+                src={plantContent.image}
+                alt={plantContent.name}
+                className="rounded-xl xs:w-[250px] xs:h-[300px] 
+              lg:w-[300px] lg:h-[350px] border-gray-400"
+              />
+            </Link>
             <div className="whitespace-nowrap overflow-ellipsis hover:underline hover:text-blue-400 w-90%">
               <Link href={`/myplants/${plantContent.id}`}>
                 <h1>{plantContent.name}</h1>

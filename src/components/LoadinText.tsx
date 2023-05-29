@@ -6,7 +6,6 @@ interface character {
 }
 
 export default function LoadingText(prop: any) {
-  console.log(prop.text);
 
   const displayData = [
     "A new way to:",

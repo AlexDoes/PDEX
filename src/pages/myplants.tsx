@@ -102,7 +102,6 @@ export default function MyPlants({ items, userId, username, session }: any) {
             >
               <div className="relative group flex">
                 <Link
-                  onClick={() => handleClick(plant.id)}
                   href={`/myplants/${plant.id}`}
                   className="focus:outline-none"
                 >
@@ -111,7 +110,6 @@ export default function MyPlants({ items, userId, username, session }: any) {
                     alt={plant.name}
                     className="
                     rounded-xl
-                    border
                     xs:h-[40vh] xs:w-[50vw] 
                     sm:h-[40vh] md:h-[40vh] lg:h-80
                     sm:w-[40vw] md:w-[30vw] md:max-w-70 lg:w-80 xl:w-80
@@ -151,7 +149,12 @@ export default function MyPlants({ items, userId, username, session }: any) {
                   </div>
                 </div>
               </div>
-              <div className="elipsis"> {plant.name} </div>
+              <Link
+                href={`/myplants/${plant.id}`}
+                className="hover:underline hover:text-blue-400"
+              >
+                <div className="elipsis"> {plant.name} </div>
+              </Link>
               <div className="font-light italic">
                 {" "}
                 {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}

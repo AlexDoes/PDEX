@@ -78,7 +78,6 @@ export default function Splash(Data: Props) {
             </div>
           </div>
 
-          {/* collection data */}
           <div
             // id="rightSplash"
             className="w-full border-black 
@@ -132,7 +131,7 @@ export default function Splash(Data: Props) {
                     </p>
                   </div>
                   <div className="w-[20%] min-w-[200px] min-h-[200px] flex justify-center items-center">
-                    <Image
+                    <img
                       src={plant.image}
                       width={200}
                       height={200}

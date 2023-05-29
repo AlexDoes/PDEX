@@ -76,7 +76,17 @@ export default function UserProfile({ user }: Props) {
             flex items-center justify-center
           "
         >
-          Still currating
+          <div
+            className="flex-row flex
+            items-center justify-center w-[98%] h-full
+            rounded-xl p-2
+            bg-opacity-50 bg-green-200
+            md:gap-5
+            lg:gap-4
+            xl:gap-1"
+          >
+            Still currating
+          </div>
         </div>
       );
     }
@@ -188,7 +198,17 @@ export default function UserProfile({ user }: Props) {
         flex items-center justify-center
       "
         >
-          Sprouting soon 🌱{" "}
+          <div
+            className="flex-row flex
+            items-center justify-center w-[98%] h-full
+            rounded-xl p-2
+            bg-opacity-50 bg-green-200
+            md:gap-5
+            lg:gap-4
+            xl:gap-1"
+          >
+            Sprouting soon 🌱{" "}
+          </div>
         </div>
       );
     }
@@ -402,8 +422,7 @@ export default function UserProfile({ user }: Props) {
       <div className="w-[100%] flex flex-col gap-3">
         <div
           className="                  
-        bg-opacity-80 bg-orange-100
-        backdrop-filter backdrop-blur-md
+        bg-opacity-80 bg-orange-100 backdrop-filter backdrop-blur-md
         border border-slate-300
         md:rounded-xl
         xs:rounded-t-xl
@@ -414,11 +433,11 @@ export default function UserProfile({ user }: Props) {
             className="
             xs:text-2xl
             text-xl flex
-            justify-center items-center
-            border-b-2
+            items-center
+            ml-7
             py-1
             border-cyan-300
-            w-[90%]
+            w-full
             mx-auto
           "
           >

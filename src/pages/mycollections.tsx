@@ -47,7 +47,7 @@ interface CollectionProps {
 export default function MyCollections({ items, userId }: CollectionProps) {
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);
-  usePreviousScrollPosition();
+  // usePreviousScrollPosition();
 
   const handleClick = (id: string) => {
     router.push(`/collections/${id}`);

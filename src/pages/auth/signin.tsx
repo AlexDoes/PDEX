@@ -299,7 +299,7 @@ const SignInPage = () => {
             <div className="w-full flex flex-col gap-1 mt-2">
               <div className="flex shadow-md">
                 <button
-                  className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] min-h-[52px] text-black rounded-sm flex  items-center gap-2"
+                  className="pl-[16px] pr-[16px] w-full border-[1px] border-[#c9cace] min-h-[52px] text-black rounded-sm flex  items-center gap-2 bg-white"
                   // type="submit"
                   onClick={handleGoogleSignIn}
                 >
