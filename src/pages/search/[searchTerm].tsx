@@ -56,6 +56,12 @@ export default function SearchResult({
     setImageError(true);
   };
 
+  // useEffect(() => {
+  //   if (searchRef.current) {
+  //     searchRef.current.scrollIntoView({ behavior: "auto", block: "start" });
+  //   }
+  // }, []);
+
   const goToPlant = () => {
     plantRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -108,7 +114,7 @@ export default function SearchResult({
   };
   return (
     <div className="w-full scroll-auto">
-      <div className="flex flex-col mb-2 gap-2 bg-opacity-30">
+      <div className="flex flex-col mb-2 gap-2 bg-opacity-30" ref={searchRef}>
         <p className=" pb-2 pt-2 text-2xl text-white ">
           Search Results for `{searchTerm}`:
         </p>
@@ -175,8 +181,6 @@ export default function SearchResult({
           flex-wrap 
           xl:flex-row xl:flex-wrap
             xs:relative
-            snap-mandatory
-            snap-y snap-center
             ${uniquePlants.length < 1 ? "hidden" : ""}
   `}
           ref={plantRef}
@@ -194,16 +198,17 @@ export default function SearchResult({
                   tabIndex={0}
                 >
                   {plant.image ? (
-                    <div className="flex items-center justify-center rounded-lg snap-proximity">
+                    <div className="flex items-center justify-center rounded-lg ">
                       <img
                         src={plant.image}
                         alt=""
                         className="
-                  border-green-400
                     rounded-xl
                     xs:h-[40vh] xs:w-[50vw] 
-                    sm:h-[40vh] md:h-[40vh] lg:h-80
-                    sm:w-[40vw] md:w-[30vw] md:max-w-70 lg:w-80 xl:w-80
+                    sm:h-[40vh] md:h-[40vh] 
+                    lg:h-64
+                    sm:w-[40vw] md:w-[30vw] 
+                    md:max-w-70 lg:w-60 xl:w-60
                     lg:max-w-80
                     sm:max-w-[80]
                     "
@@ -214,9 +219,7 @@ export default function SearchResult({
                   )}
                   <p className="font">{plant.name}</p>
                   <p className="font-light italic">{plant.species}</p>
-                  <p className="font-thin snap-y">
-                    By {plant.ownedBy.nickname}
-                  </p>
+                  <p className="font-thin">By {plant.ownedBy.nickname}</p>
                   {/* <p>Plant Id: {plant.id}</p> */}
                   {/* <div className="flex items-center justify-center"> */}
                   <p
@@ -318,9 +321,12 @@ export default function SearchResult({
                           className="
                     border-green-400
                     rounded-xl
+                    md:max-w-70 
+                    lg:max-w-80
+                    lg:w-64 xl:w-64
                     xs:h-[40vh] xs:w-[50vw] 
                     sm:h-[40vh] md:h-[40vh] lg:h-80
-                    sm:w-[40vw] md:w-[35vw] md:max-w-80 lg:w-80 xl:w-80
+                    sm:w-[40vw] md:w-[35vw] md:max-w-80
                     sm:max-w-[80]
                     "
                         />
@@ -333,10 +339,10 @@ export default function SearchResult({
                           className="
                     border-green-400
                     rounded-xl
+                    md:max-w-70 lg:w-64 xl:w-64
                     xs:h-[40vh] xs:w-[50vw] 
                     sm:h-[40vh] md:h-[40vh] lg:h-80
-                    sm:w-[40vw] md:w-[30vw] md:max-w-70 lg:w-80 xl:w-80
-                    lg:max-w-80
+                    sm:w-[40vw] md:w-[35vw] md:max-w-80
                     sm:max-w-[80]
                     "
                         />

@@ -98,8 +98,8 @@ export default function UserProfile({ user }: Props) {
           <div
             key={"bts" + boxesToShow}
             className="flex-row flex
-            items-center justify-between w-[98%] h-full
-            border-slate-300 border rounded-xl p-2
+            items-center justify-between w-full h-full
+            border-slate-300 border rounded-xl py-2 px-1
             bg-opacity-50 bg-green-200
             md:gap-5
             lg:gap-4
@@ -110,6 +110,8 @@ export default function UserProfile({ user }: Props) {
               className="
                 flex flex-col
                 w-full
+                justify-evenly
+                h-full
                 gap-1
               "
             >
@@ -117,6 +119,8 @@ export default function UserProfile({ user }: Props) {
                 className="
                   text-xl indent-3
                   xl:indent-5
+                  font-semilight
+                  text-white
                 "
               >
                 {collection.name}
@@ -137,8 +141,11 @@ export default function UserProfile({ user }: Props) {
                       overflow-auto 
                       font-light
                       mx-3
-                      xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]
-                      h-full bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md
+                      xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px]
+                      h-full 
+                      bg-opacity-50 bg-green-200
+                      border
+                      pl-3 pr-3 pt-2 pb-2 rounded-md
                       scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
                       scrollbar-rounded-sm
                       w-[100%]
@@ -260,7 +267,9 @@ export default function UserProfile({ user }: Props) {
                   font-light
                   mx-3
                   xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]
-                  h-full bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md
+                  h-full 
+                  bg-[#FFF4BD] 
+                  pl-3 pr-3 pt-2 pb-2 rounded-md
                   scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
                   scrollbar-rounded-sm
                   w-[100%]
@@ -422,8 +431,6 @@ export default function UserProfile({ user }: Props) {
       <div className="w-[100%] flex flex-col gap-3">
         <div
           className="                  
-        bg-opacity-80 bg-orange-100 backdrop-filter backdrop-blur-md
-        border border-slate-300
         md:rounded-xl
         xs:rounded-t-xl
         xs:w-[100%]
@@ -434,11 +441,10 @@ export default function UserProfile({ user }: Props) {
             xs:text-2xl
             text-xl flex
             items-center
-            ml-7
             py-1
-            border-cyan-300
             w-full
             mx-auto
+            text-white
           "
           >
             Collections
