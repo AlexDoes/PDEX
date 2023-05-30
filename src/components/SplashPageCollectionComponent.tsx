@@ -48,29 +48,18 @@ export default function Splash(Data: Props) {
             // id="leftSplash"
             className=" 
             font-serif
-             border-green-700 
-             w-full
-            flex items-center  justify-center h-[80vh]  "
-            style={
-              {
-                // backgroundImage: `url(${bg5.src})`,
-                // backgroundRepeat: "no-repeat",
-                // backgroundSize: "100%",
-                // backgroundPosition: "center",
-                // border: "2px solid black",
-              }
-            }
+            lg:w-[80%]
+            flex items-center justify-center h-[80vh]"
           >
             <div
               // id="splashtextcontainer"
-              className="flex rounded-3xl bg-opacity-20 bg-yellow-400  w-[90%]
+              className="flex rounded-3xl bg-opacity-40 bg-yellow-200  w-[90%]
                h-[40vh] justify-center items-center
                overflow-hidden 
-         
               sm:min-w-[500px]  max-w-[500px]
                "
             >
-              <h1 className="text-6xl text-black text-center font-outline-2">
+              <h1 className="text-6xl text-black text-center">
                 <div className="">
                   <LoadingText text="Introducing" />
                 </div>
@@ -80,8 +69,8 @@ export default function Splash(Data: Props) {
 
           <div
             // id="rightSplash"
-            className="w-full border-black 
-            rounded-xl px-5 py-5  "
+            className="w-full border-black
+            rounded-xl px-5 py-5"
           >
             {displayData.plantContents.map((plant, i) => {
               const reverse =
@@ -91,11 +80,13 @@ export default function Splash(Data: Props) {
               return (
                 <div
                   key={plant.id}
-                  className={`glass-background 
+                  className={`
+                  bg-opacity-80
+                  glass-background 
                   bg-card
                   ${reverse} 
                   flex flex-row 
-                  border border-[#C1E1C1]
+                   border-[#C1E1C1]
                   rounded-xl 
                   sm:justify-between mb-2 
                   min-h-[200px] p-4 gap-4
@@ -103,27 +94,29 @@ export default function Splash(Data: Props) {
                   justify-center
                   items-center
                   max-w-[1000px]
-
                   `}
                 >
                   <div
                     className="
                     flex
                     flex-col
-                    justify-center
+                    min-h-[200px]
+                    max-h-[200px]
                     gap-2
+                    h-full
                     w-[80%]"
                   >
                     <div>
-                      <h3 className="text-[20px] font-semibold">
+                      <h3 className="text-[20px] lg:text-[26px] text-black">
                         {plant.name}
                       </h3>
-                      <p className="text-slate-500 italic ">{plant.species}</p>
+                      <p className="text-[#FFFDD0] italic ">{plant.species}</p>
                     </div>
                     <p
-                      className="overflow-auto text-[12px] h-[60%] bg-[#FFF4BD] pl-3 pr-3 pt-2 pb-2 rounded-md
+                      className="overflow-auto text-[12px] bg-[#FFF4BD] bg-opacity-50 pl-3 pr-3 pt-2 pb-2 rounded-md
                       scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
                       scrollbar-rounded-sm
+                      h-full
                     "
                       id="plantDescriptionText"
                     >

@@ -70,19 +70,20 @@ export default function UserProfile({ user }: Props) {
           key={Math.random() * 1000000000}
           className="
             text-xl font-light
-            max-w-[800px]
             min-w-[60vw]
-            h-[100px]
+            h-[200px]
             flex items-center justify-center
+            w-full
           "
         >
           <div
             className="flex-row flex
-            items-center justify-center w-[98%] h-full
+            items-center justify-center w-full h-full
             rounded-xl p-2
-            bg-opacity-50 bg-green-200
+            bg-opacity-70 bg-green-200
             md:gap-5
             lg:gap-4
+            text-3xl
             xl:gap-1"
           >
             Still currating
@@ -198,19 +199,20 @@ export default function UserProfile({ user }: Props) {
         <div
           className="
         text-xl font-light
-        max-w-[800px]
+        w-full
         min-w-[60vw]
-        h-[100px]
+        h-[220px]
         flex items-center justify-center
       "
         >
           <div
             className="flex-row flex
-            items-center justify-center w-[98%] h-full
+            items-center justify-center w-full h-full
             rounded-xl p-2
-            bg-opacity-50 bg-green-200
+            bg-opacity-70 bg-green-200
             md:gap-5
             lg:gap-4
+            text-3xl
             xl:gap-1"
           >
             Sprouting soon 🌱{" "}
@@ -225,9 +227,8 @@ export default function UserProfile({ user }: Props) {
           key={plant.name}
           className="flex-row flex
             w-full 
-            border border-slate-300
             justify-between items-center  
-            bg-opacity-80 bg-orange-100
+            bg-opacity-70 bg-yellow-100
             h-full
             rounded-lg p-2
             md:gap-5
@@ -302,10 +303,9 @@ export default function UserProfile({ user }: Props) {
         className="
         md:flex md:flex-col
         gap-2
-        border-2
         h-full
         rounded-xl
-        bg-opacity-60 bg-green-100
+        bg-opacity-70 bg-green-200
         md:p-4
         max-w-[1000px]
         xs:w-[100%]

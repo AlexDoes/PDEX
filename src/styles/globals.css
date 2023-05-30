@@ -82,6 +82,7 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  min-width: 480px;
   overflow-x: hidden;
 }
 
@@ -151,33 +152,33 @@ body {
 }
 
 .gradient-bg-card2 {
-  background: #efefbb; /* fallback for old browsers */
+  background: rgba(239, 239, 187, 1); /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to left,
-    #d4d3dd,
-    #efefbb
+    rgba(212, 211, 221, 0.2),
+    rgba(239, 239, 187, 0.7)
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to left,
-    #d4d3dd,
-    #efefbb
+    rgba(212, 211, 221, 0.2),
+    rgba(239, 239, 187, 0.7)
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0px);
 }
 
 .gradient-bg-card2-reverse {
-  background: #efefbb; /* fallback for old browsers */
+  background: rgba(239, 239, 187, 1); /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #d4d3dd,
-    #efefbb
+    rgba(212, 211, 221, 0.7),
+    rgba(239, 239, 187, 0.2)
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
-    #d4d3dd,
-    #efefbb
+    rgba(212, 211, 221, 0.7),
+    rgba(239, 239, 187, 0.2)
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0px);
 }
 
 .gradient-bg-card3 {

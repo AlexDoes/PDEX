@@ -6,7 +6,6 @@ interface character {
 }
 
 export default function LoadingText(prop: any) {
-
   const displayData = [
     "A new way to:",
 
@@ -48,7 +47,7 @@ export default function LoadingText(prop: any) {
           <div id={word}>{word}</div>
         </Animate>
       ))}
-      <div id="BAX" className="flex flex-row">
+      <div id="BAX" className="flex flex-row mb-1">
         {BAX.map((letter: string, i: number) => (
           <Animate
             key={i}
@@ -64,7 +63,7 @@ export default function LoadingText(prop: any) {
             end={{
               transform: "translateX(0px)",
               opacity: 1,
-              color: "black",
+              color: "#FFFDD0",
             }}
           >
             <div id={letter}>{letter}</div>
@@ -76,7 +75,7 @@ export default function LoadingText(prop: any) {
           key={i}
           play={true}
           duration={1}
-          delay={1 * i}
+          delay={0.5 * i}
           sequenceId={2}
           start={{
             transform: "translatey(10px)",
@@ -87,7 +86,7 @@ export default function LoadingText(prop: any) {
             opacity: 1,
           }}
         >
-          <div className="flex flex-col text-lg font-outline-3">
+          <div className="flex flex-col text-lg">
             <span>{sentence}</span>
           </div>
         </Animate>

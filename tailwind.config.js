@@ -14,6 +14,9 @@ module.exports = {
         xs: "480px",
       },
     },
+    backgroundPosition: {
+      "top-64": "center top 4rem",
+    },
   },
   plugins: [
     require("tailwindcss-textshadow"),

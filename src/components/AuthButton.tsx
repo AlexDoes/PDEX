@@ -67,7 +67,10 @@ export default function AuthButtonComponent() {
           onExited={closeMenu}
         >
           <div
-            className="absolute top-16 w-full right-0 z-20 bg-[#c1e1c1] shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3 "
+            className={`absolute top-16 w-full 
+            right-0 z-20 shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3 bg-[url(/BG/greenbg3.png)]
+            bg-no-repeat bg-cover bg-[]
+            `}
             onClick={openMenu}
           >
             <div
@@ -120,7 +123,7 @@ export default function AuthButtonComponent() {
                   Profile Dashboard
                 </Link>{" "}
               </div>
-              <div className="sm:text-2xl text-slate-500 text-shadow-md">
+              <div className="sm:text-2xl text-red-300 text-shadow-md">
                 <button onClick={() => signOut()}>Sign out</button>
               </div>
             </div>
