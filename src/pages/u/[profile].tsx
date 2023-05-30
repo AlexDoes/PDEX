@@ -99,20 +99,20 @@ export default function UserProfile({ user }: Props) {
             key={"bts" + boxesToShow}
             className="flex-row flex
             items-center justify-between w-full h-full
-            border-slate-300 border rounded-xl py-2 px-1
+            border-slate-300 rounded-xl py-2 px-2
             bg-opacity-50 bg-green-200
             md:gap-5
             lg:gap-4
             xl:gap-1
+            min-h-[225px]
           "
           >
             <div
               className="
                 flex flex-col
                 w-full
-                justify-evenly
-                h-full
                 gap-1
+                lg:-mt-4
               "
             >
               <p
@@ -134,6 +134,8 @@ export default function UserProfile({ user }: Props) {
                   md:w-[95%]
                   lg:w-[95%]
                   sm:w-[95%]
+                  md:h-[120px]
+                  lg:h-[100px]
                   "
                 >
                   <p
@@ -144,7 +146,6 @@ export default function UserProfile({ user }: Props) {
                       xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px]
                       h-full 
                       bg-opacity-50 bg-green-200
-                      border
                       pl-3 pr-3 pt-2 pb-2 rounded-md
                       scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
                       scrollbar-rounded-sm
@@ -154,7 +155,6 @@ export default function UserProfile({ user }: Props) {
                     {collection.description || "Check out this collection."}
                   </p>
                 </div>
-                {/* <div>{collection.plantContents.length} plants</div> */}
               </div>
             </div>
             <div
@@ -168,7 +168,6 @@ export default function UserProfile({ user }: Props) {
                 xl:max-w-[300px] xl:max-h-[300px]
                 flex justify-center items-center
                 bg-opacity-50 bg-yellow-200
-                border border-slate-300
                 "
             >
               {collection.plantContents.length > 0 ? (
@@ -225,7 +224,7 @@ export default function UserProfile({ user }: Props) {
         <div
           key={plant.name}
           className="flex-row flex
-            w-[98%] 
+            w-full 
             border border-slate-300
             justify-between items-center  
             bg-opacity-80 bg-orange-100
@@ -267,8 +266,8 @@ export default function UserProfile({ user }: Props) {
                   font-light
                   mx-3
                   xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]
-                  h-full 
-                  bg-[#FFF4BD] 
+                  h-full                       
+                  bg-opacity-70 bg-orange-200
                   pl-3 pr-3 pt-2 pb-2 rounded-md
                   scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
                   scrollbar-rounded-sm
@@ -445,6 +444,9 @@ export default function UserProfile({ user }: Props) {
             w-full
             mx-auto
             text-white
+            md:border-t
+            justify-center
+            md:justify-start
           "
           >
             Collections
@@ -462,10 +464,7 @@ export default function UserProfile({ user }: Props) {
         <div
           className="
         w-full
-        bg-opacity-60 bg-green-200
-        backdrop-filter backdrop-blur-md
         py-2
-        border border-slate-300
         md:rounded-xl
         xs:rounded-b-xl
         xs:w-[100%]
@@ -475,12 +474,14 @@ export default function UserProfile({ user }: Props) {
             className="
                       xs:text-2xl
                       text-xl flex
-                      justify-center items-center
-                      border-b-2
+                      xs:justify-center 
+                      md:justify-start
+                      items-center
                       py-1
-                      border-cyan-300
-                      w-[90%]
+                      w-full
+                      border-t
                       mx-auto
+                      text-white
                     "
           >
             Plants

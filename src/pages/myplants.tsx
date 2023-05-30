@@ -21,11 +21,7 @@ interface User {
 export default function MyPlants({ items, userId, username, session }: any) {
   const router = useRouter();
 
-  const handleClick = (id: string) => {
-    router.push(`/myplants/${id}`);
-  };
-
-  const [showForm, setShowForm] = useState(false); // change when deployed
+  const [showForm, setShowForm] = useState(false);
 
   usePreviousScrollPosition();
 
@@ -38,7 +34,8 @@ export default function MyPlants({ items, userId, username, session }: any) {
     if (items.length === 0) {
       return (
         <div
-          className={`border-slate-300 border rounded-xl p-2 m-2
+          className={`
+          rounded-xl p-2 m-2
       items-center justify-center
       flex
       xs:flex-col sm:flex-row 
@@ -46,10 +43,7 @@ export default function MyPlants({ items, userId, username, session }: any) {
       flex-wrap 
       xl:flex-row xl:flex-wrap xl:row-3
       
-      backdrop-filter backdrop-blur-md 
-      bg-opacity-50 bg-green-200
       xs:relative
-      min-h-[300px]
       ${showForm ? "-z-20" : "z-0"}
       `}
           tabIndex={0}
@@ -80,15 +74,14 @@ export default function MyPlants({ items, userId, username, session }: any) {
     }
     return (
       <div
-        className={`border-slate-300 border rounded-xl p-2 m-2
+        className={`rounded-xl p-2 m-2
       items-center justify-center
       flex
       xs:flex-col sm:flex-row 
       md:flex-row lg:flex-row 
       flex-wrap 
+      gap-4
       xl:flex-row xl:flex-wrap xl:row-3
-      backdrop-filter backdrop-blur-md 
-      bg-opacity-50 bg-green-200
       xs:relative
       ${showForm ? "-z-20" : "z-0"}
       `}
@@ -97,7 +90,7 @@ export default function MyPlants({ items, userId, username, session }: any) {
         {items.map((plant: any) => {
           return (
             <div
-              className=" border-2 border-[#c1e1c1] bg-orange-100 rounded-xl p-2 m-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[55vw] md:w-[40vw] lg:w-[25vw] focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[492px] focus:outline-none overflow-x-hidden group"
+              className=" border-[#c1e1c1] bg-orange-100 rounded-xl p-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[55vw] md:w-[40vw] lg:w-[25vw] focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[480px] focus:outline-none overflow-x-hidden group"
               tabIndex={0}
             >
               <div className="relative group flex">
@@ -111,8 +104,8 @@ export default function MyPlants({ items, userId, username, session }: any) {
                     className="
                     rounded-xl
                     xs:h-[40vh] xs:w-[50vw] 
-                    sm:h-[40vh] md:h-[40vh] lg:h-80
-                    sm:w-[40vw] md:w-[30vw] md:max-w-70 lg:w-80 xl:w-80
+                    sm:h-[40vh] md:h-[40vh] lg:h-70
+                    sm:w-[40vw] md:w-[30vw] md:max-w-70 lg:w-64 xl:w-64
                     lg:max-w-80
                     sm:max-w-[80] mb-2
                     hover:brightness-90
@@ -193,40 +186,6 @@ export default function MyPlants({ items, userId, username, session }: any) {
   return (
     <>
       <div className="">
-        {/* {!showForm && (
-        <button onClick={() => setShowForm(true)}>Add a plant</button>
-      )} */}
-        {/* {showForm && (
-        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
-      )} */}
-
-        {/* <ul>
-        {items.map((item: any) => (
-          <li key={item.id} className="bg-red-300 border-sky-500 border-2">
-            <div>
-              <p>
-                <Link
-                  onClick={() => handleClick(item.id)}
-                  href={`/myplants/${item.id}`}
-                >
-                  Name: {item.name}
-                </Link>
-              </p>
-              <p>Plant ID: {item.id.toUpperCase()}</p>
-              <p>Owner ID: {item.ownedBy.name}</p>
-              <p>Species: {item.species}</p>
-              <img src={item.image} className="h-[200px] w-[200px]"></img>
-            </div>
-            <div className="flex justify-end">
-              <DeleteUniquePlantButton
-                user={userId}
-                uniquePlantId={item.id}
-                onConfirm={onSubmitFromParent}
-              />
-            </div>
-          </li>
-        ))}
-      </ul> */}
         <h1 className="text-3xl flex justify-center mt-4 items-center gap-1">
           My plants
           <RiPlantLine className="text-3xl text-green-400" />

@@ -186,7 +186,7 @@ export default function ThisCollection({
 
   return (
     <>
-      <div className="bg-orange-100 rounded-xl p-10 py-10 flex flex-col gap-3 w-full min-h-[90vh] justify-center items-center">
+      <div className="bg-orange-100 bg-opacity-100 rounded-xl p-10 py-10 flex flex-col gap-3 w-full min-h-[90vh] justify-center items-center">
         <h1 className=" text-[#a0cfa0] flex items-center justify-center mb-2 xs:text-xl sm:text-2xl">
           {plantContentsData.name}'s content
         </h1>

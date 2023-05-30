@@ -47,7 +47,9 @@ interface CollectionProps {
 export default function MyCollections({ items, userId }: CollectionProps) {
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);
-  // usePreviousScrollPosition();
+  usePreviousScrollPosition();
+
+  //change to state
 
   const handleClick = (id: string) => {
     router.push(`/collections/${id}`);
@@ -57,7 +59,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   };
 
   const handleSubmitCollectionForm = async () => {
-    // await router.push(router.asPath);
+    await router.push(router.asPath);
     console.log("submitted");
     setShowForm(false);
   };
@@ -93,7 +95,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         <div
           className="flex-row flex
             items-center justify-between w-[98%] h-full
-            border-slate-300 border rounded-xl px-6
+            border-slate-300 rounded-xl px-6
             bg-opacity-50 bg-green-200
             md:gap-3
             lg:gap-4
@@ -114,7 +116,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                 xl:max-w-[300px] xl:max-h-[300px]
                 flex justify-center items-center
                 bg-opacity-50 bg-yellow-200
-                border border-slate-300
+                 border-slate-300
                 "
           >
             {collection.plantContents.length > 0 ? (
@@ -166,7 +168,6 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                       bg-opacity-50
                        g-green-100
                       bg-[#FFF4BD] 
-                      border border-slate-300
                       pl-3 rounded-md
                       scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
                       scrollbar-rounded-sm
@@ -220,8 +221,8 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         <RiPlantLine className="text-3xl text-green-400" />
       </h1>
       <div
-        className=" xs:m-0 sm:m-0 w-full border-slate-300 flex flex-col justify-center items-center border pb-4 gap-2 
-    backdrop-filter backdrop-blur-sm bg-opacity-50 rounded-xl bg-orange-100"
+        className=" xs:m-0 sm:m-0 w-full border-slate-300 flex flex-col justify-center items-center pb-4 gap-2 
+    rounded-xl"
       >
         <div
           className="                      
