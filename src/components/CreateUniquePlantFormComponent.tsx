@@ -128,7 +128,7 @@ export default function CreateUniquePlant(props: any) {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data, e) => {
-    console.log("submitted")
+    console.log("submitted");
     e?.preventDefault();
     if (!image) {
       toast.error("Please upload an image", {
@@ -182,7 +182,7 @@ export default function CreateUniquePlant(props: any) {
   const renderButton = (field: string) => {
     return (
       <button
-        className="border-2 w-[160px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  sm:font-bold "
+        className="w-[160px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  sm:font-semibold "
         onClick={() => handleAddFieldClick(field as keyof Fields)}
       >
         Add {field}
@@ -198,14 +198,15 @@ export default function CreateUniquePlant(props: any) {
     <>
       <div
         // onClick={props.onSubmit}
-        className=" z-50  bottom-0 top-0 fixed w-[90vw] flex items-center justify-center  "
+        className=" z-50  bottom-0 top-0 fixed w-[90vw] flex items-center justify-center "
       >
         <form
           onSubmit={handleSubmit((values, e) => {
             onSubmit(values);
           })}
           className=" flex flex-col w-[80vw] sm:w-[60vw] transition-all ease-in-out duration-200 max-w-[1200px] h-[80vh] max-h-[750px] items-center 
-        border-2 border-[#c1e1c1]  pb-7   rounded-lg gradient-bg-card2-reverse z-50  "
+         border-[#c1e1c1]  pb-7   rounded-lg gradient-bg-card2-reverse z-50 backdrop-blur-sm
+          "
         >
           <div className="  h-[100%] w-[80%] flex flex-col justify-center gap-4 ">
             <div
@@ -215,11 +216,11 @@ export default function CreateUniquePlant(props: any) {
               <AiOutlineCloseCircle size={30} color="white" />
             </div>
             <div className="w-full  flex justify-center relative text-center ">
-              <h2 className="text-3xl   top-0  mt-2 font-bold text-slate-500 pt-2">
+              <h2 className="text-3xl   top-0  mt-2 font-semibold text-white pt-2">
                 Add a Plant
               </h2>
             </div>
-            <div className=" border-2 border-white rounded-r-md   ">
+            <div className="  border-white rounded-r-md   ">
               {/* <label className="h-full text-center flex items-center border border-orange-500 px-1">
                 Plant Name
               </label> */}
@@ -238,12 +239,9 @@ export default function CreateUniquePlant(props: any) {
               {errors.plantName?.type &&
                 ({ ...errorsMap.plantName } as any)[errors.plantName.type]}
             </p>
-            <div className="flex gap-5 items-center h-[40px]  border-2 border-white rounded-r-md  text-center bg-[#efe6c1] rounded-md">
-              <label
-                className="pl-5 text-slate-500 font-semibold"
-                htmlFor="plantImage"
-              >
-                Plant Image
+            <div className="flex gap-5 items-center h-[40px]   border-white rounded-r-md  text-center bg-[#efe6c1] ">
+              <label className="pl-4 text-slate-500" htmlFor="plantImage">
+                Image
               </label>
               <input
                 type="file"
@@ -254,7 +252,7 @@ export default function CreateUniquePlant(props: any) {
               />
             </div>
             {/* plant species */}
-            <div className="w-full border border-blue">
+            <div className="w-full border-blue">
               <NewSearchBar
                 data={[
                   "monstera albo",
@@ -281,14 +279,14 @@ export default function CreateUniquePlant(props: any) {
             {fields.subspecies && (
               <input
                 placeholder="Plant Subspecies"
-                className="w-full h-[40px] bg-[#efe6c1]  pl-5 border-2 border-white rounded-r-md  "
+                className="w-full h-[40px] bg-[#efe6c1]  pl-5  border-white rounded-r-md  "
                 {...register("plantSubspecies")}
               />
             )}
             {fields.height && (
               <div className="w-full flex">
                 <input
-                  className="w-full h-[40px] bg-[#efe6c1] pl-5 border-2 border-white rounded-r-md "
+                  className="w-full h-[40px] bg-[#efe6c1] pl-5  border-white rounded-r-md "
                   type="number"
                   placeholder="Plant Height"
                   {...register("plantHeight", {
@@ -297,14 +295,7 @@ export default function CreateUniquePlant(props: any) {
                   })}
                   // defaultValue={Number(18)}
                 />
-                <select
-                  id="unit"
-                  className="border-2 bg-[#efe6c1] border-white "
-                  {...register("unit")}
-                >
-                  <option value="cm">cm</option>
-                  <option value="inches">in</option>
-                </select>
+
                 {errors && (
                   <p className="text-red-500">{errors.plantHeight?.message}</p>
                 )}
@@ -319,7 +310,7 @@ export default function CreateUniquePlant(props: any) {
               {fields.width && (
                 <div className="w-full flex">
                   <input
-                    className="w-full h-[40px] bg-[#efe6c1] rounded-l-md pl-5 border-2 border-white rounded-r-md "
+                    className="w-full h-[40px] bg-[#efe6c1] rounded-l-md pl-5  border-white rounded-r-md "
                     type="number"
                     placeholder="Plant Width"
                     {...register("plantWidth", {
@@ -328,24 +319,16 @@ export default function CreateUniquePlant(props: any) {
                     })}
                     // defaultValue={18}
                   />
-                  <select
-                    id="unit"
-                    className="border-2 bg-[#efe6c1] border-white"
-                    {...register("unit2")}
-                  >
-                    <option value="cm">cm</option>
-                    <option value="inches">in</option>
-                  </select>
                 </div>
               )}
             </div>
             <textarea
               placeholder="Plant Description"
               {...register("plantDescription")}
-              className="border-2 pl-5 border-white h-[20%] rounded-b-md bg-[#efe6c1]"
+              className=" pl-5 border-white h-[20%] rounded-b-md bg-[#efe6c1]"
             />
             <button
-              className=" border h-[40px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  sm:font-bold"
+              className=" h-[40px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  sm:font-semibold"
               type="submit"
             >
               Submit

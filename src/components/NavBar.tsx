@@ -20,6 +20,7 @@ export default function NavBar() {
       {show && (
         <div
           className={`flex w-full gap-2 h-16 bg-[#] max-h-16 justify-between sm:justify-between
+          select-none
       `}
         >
           <Link href={"/"} className="inherit">

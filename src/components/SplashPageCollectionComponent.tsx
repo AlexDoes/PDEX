@@ -57,6 +57,7 @@ export default function Splash(Data: Props) {
                h-[40vh] justify-center items-center
                overflow-hidden 
               sm:min-w-[500px]  max-w-[500px]
+              select-none
                "
             >
               <h1 className="text-6xl text-black text-center">
@@ -107,10 +108,12 @@ export default function Splash(Data: Props) {
                     w-[80%]"
                   >
                     <div>
-                      <h3 className="text-[20px] lg:text-[26px] text-black">
+                      <h3 className="text-[20px] lg:text-[26px] text-black select-none">
                         {plant.name}
                       </h3>
-                      <p className="text-[#FFFDD0] italic ">{plant.species}</p>
+                      <p className="text-[#FFFDD0] italic select-none ">
+                        {plant.species}
+                      </p>
                     </div>
                     <p
                       className="overflow-auto text-[12px] bg-[#FFF4BD] bg-opacity-50 pl-3 pr-3 pt-2 pb-2 rounded-md
@@ -128,7 +131,7 @@ export default function Splash(Data: Props) {
                       src={plant.image}
                       width={200}
                       height={200}
-                      className="w-[200px] h-[200px] rounded-lg"
+                      className="w-[200px] h-[200px] rounded-lg select-none"
                       alt={plant.name}
                     />
                   </div>
