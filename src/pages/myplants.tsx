@@ -110,6 +110,7 @@ export default function MyPlants({ items, userId, username, session }: any) {
                     sm:max-w-[80] mb-2
                     hover:brightness-90
                     hover:outline-none
+                    max-h-[300px]
                     "
                   />
                 </Link>

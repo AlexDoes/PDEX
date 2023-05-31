@@ -66,7 +66,7 @@ export default function AuthButtonComponent() {
           <div
             className={`absolute top-16 w-[100vw] 
             right-0 z-20 shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3
-            bg-black
+            bg-black indent-3 md:indent-0
             bg-opacity-20 backdrop-filter backdrop-blur-[3px] backdrop-brightness-100
             `}
             onClick={openMenu}
@@ -106,14 +106,14 @@ export default function AuthButtonComponent() {
                   Personal plants
                 </Link>{" "}
               </div>
-              <div>
+              {/* <div>
                 <Link
                   className="sm:text-2xl text-[#efe6c1] text-shadow-md "
                   href={"/"}
                 >
                   Liked Content
                 </Link>{" "}
-              </div>
+              </div> */}
               <div className="">
                 <Link
                   className="sm:text-2xl text-[#efe6c1] text-shadow-md"
