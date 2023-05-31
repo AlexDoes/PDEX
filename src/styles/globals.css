@@ -178,6 +178,10 @@ body {
   backdrop-filter: blur(0px);
 }
 
+#createuniqueplantform {
+  backdrop-filter: blur(10px);
+}
+
 .gradient-bg-card3 {
   background: #799f0c; /* fallback for old browsers */
   background: -webkit-linear-gradient(

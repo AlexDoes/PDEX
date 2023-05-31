@@ -205,8 +205,9 @@ export default function CreateUniquePlant(props: any) {
             onSubmit(values);
           })}
           className=" flex flex-col w-[80vw] sm:w-[60vw] transition-all ease-in-out duration-200 max-w-[1200px] h-[80vh] max-h-[750px] items-center 
-         border-[#c1e1c1]  pb-7   rounded-lg gradient-bg-card2-reverse z-50 backdrop-blur-sm
+         border-[#c1e1c1]  pb-7   rounded-lg gradient-bg-card2-reverse z-50
           "
+          id="createuniqueplantform"
         >
           <div className="  h-[100%] w-[80%] flex flex-col justify-center gap-4 ">
             <div
@@ -216,16 +217,13 @@ export default function CreateUniquePlant(props: any) {
               <AiOutlineCloseCircle size={30} color="white" />
             </div>
             <div className="w-full  flex justify-center relative text-center ">
-              <h2 className="text-3xl   top-0  mt-2 font-semibold text-white pt-2">
+              <h2 className="text-3xl   top-0  mt-2 font-semibold text-[#b8f0bbad] pt-2">
                 Add a Plant
               </h2>
             </div>
-            <div className="  border-white rounded-r-md   ">
-              {/* <label className="h-full text-center flex items-center border border-orange-500 px-1">
-                Plant Name
-              </label> */}
+            <div className="  border-white rounded-l-md   ">
               <input
-                className=" w-full h-[40px] bg-[#efe6c1] pl-5"
+                className=" w-full h-[40px] bg-[#efe6c1] pl-5 focus:bg-[#efe6c1d1] rounded-r-md"
                 placeholder="Plant Name (required)"
                 {...register("plantName", {
                   required: true,
@@ -235,10 +233,6 @@ export default function CreateUniquePlant(props: any) {
                 })}
               />
             </div>
-            <p className="text-red-500">
-              {errors.plantName?.type &&
-                ({ ...errorsMap.plantName } as any)[errors.plantName.type]}
-            </p>
             <div className="flex gap-5 items-center h-[40px]   border-white rounded-r-md  text-center bg-[#efe6c1] ">
               <label className="pl-4 text-slate-500" htmlFor="plantImage">
                 Image
@@ -325,7 +319,7 @@ export default function CreateUniquePlant(props: any) {
             <textarea
               placeholder="Plant Description"
               {...register("plantDescription")}
-              className=" pl-5 border-white h-[20%] rounded-b-md bg-[#efe6c1]"
+              className=" pl-5 outline-none border-white h-[20%] rounded-b-md bg-[#efe6c1]"
             />
             <button
               className=" h-[40px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  sm:font-semibold"
