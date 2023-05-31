@@ -145,19 +145,19 @@ export default function plantPublicDisplayPage({
   };
   return (
     <div
-      className=" mt-[10px] border-[#c1e1c1] bg-orange-100 rounded-xl p-4   lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
-      w-full   focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-3 lg:gap-20 
-      h-[88vh]"
+      className=" mt-[10px] border-[#c1e1c1] bg-orange-100 rounded-xl p-4  lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
+      w-full  focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-8 lg:gap-20  h-[88vh] border-8
+       "
       tabIndex={0}
     >
-      <div className="relative h-full group w-inherit items-center justify-center flex">
+      <div className="relative h-full group w-inherit  items-center justify-center flex  ">
         <div className="relative">
           <img
             src={plant.image}
             alt={plant.name}
             className="
             rounded-xl
-            xs:w-[80vw] xs:h-[95vw] sm:w-[100vw] sm:h-[80vh]
+            xs:w-[80vw] xs:h-[95vw] sm:w-[100vw]  
             lg:max-h-[80vh] lg:max-w-[80vh] xl:max-w-[80vh] xl:max-h-[80vh]
             sm:max-w-[80vw] mb-2
             hover:brightness-90
@@ -189,13 +189,13 @@ export default function plantPublicDisplayPage({
       </div>
       {/* comment section */}
       <div
-        className="relative flex flex-col  xs:items-center xs:justify-center h-[88vh]  gap-2 px-2   lg:max-h-[80vh] xl:max-h-[80vh]  
+        className="relative grid   border border-black xs:items-center xs:justify-center  gap-2 px-2 h-full   
         max-w-[800px]
         rounded-xl
       "
       >
         <div
-          className="h-[30%] flex 
+          className="h-[30%] border border-red-500 flex 
         flex-col items-start justify-evenly relative  gap-2 "
         >
           <div className=" flex flex-row text-xl elipsis font-bold">

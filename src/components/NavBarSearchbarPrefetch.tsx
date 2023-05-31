@@ -90,7 +90,7 @@ export default function NavBarSearchBar({}) {
     let i = 0;
     return (
       <ul
-        className={`w-inherit absolute top-[100%] w-[36vw] md:w-[39.8vw] z-40 text-ellipsis rounded-lg  border-white bg-white  `}
+        className={`w-inherit absolute top-[100%] w-full   z-40 text-ellipsis rounded-lg  border-white bg-white  `}
       >
         <div className="border-slate-500 border-[2px] rounded-md">
           {speciesSuggestions.length > 0 && (
@@ -174,7 +174,7 @@ export default function NavBarSearchBar({}) {
                 cursor-pointer
                 hover:bg-gray-200
                 border-2 border-slate-500
-                bg-[#fffbcc]
+                bg-[#f6f5e5]
                 indent-3
                 flex flex-row
                 justify-between
@@ -235,14 +235,14 @@ export default function NavBarSearchBar({}) {
       className="flex flex-row z-30 items-center justify-center h-[62px] "
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col z-30 items-start relative overflow-visible rounded-full border-white ">
+      <div className="flex flex-col z-30 items-start relative overflow-visible rounded-full border-white   ">
         <div className="flex flex-row justify-center items-center gap-2 relative">
           <input
             type="text"
             placeholder="Search"
             value={searchText}
             onChange={handleOnChange}
-            className="w-[45vw] bg-[#fffbcc] rounded-full text-black   "
+            className="w-[45vw] bg-[#f6f5e5] rounded-full text-black outline-none focus:border-none   "
             tabIndex={0}
             ref={(input) => input}
             onBlur={handleBlur}
@@ -250,7 +250,7 @@ export default function NavBarSearchBar({}) {
            <button
         type="submit"
         onClick={onSubmit}
-        className="border-2 flex items-center justify-center absolute  z-30 right-0 h-full rounded-r-full md:w-[12%] w-[20%] border-none hover:bg-green-300 bg-slate-500"
+        className="border-2 flex items-center justify-center absolute  z-30 right-0 h-full rounded-r-full md:w-[12%] w-[20%] border-none hover:backdrop-brightness-90 "
       >
         <FaSearch />
       </button>
