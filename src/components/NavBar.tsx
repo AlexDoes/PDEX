@@ -19,8 +19,8 @@ export default function NavBar() {
     <>
       {show && (
         <div
-          className={`flex w-full gap-2 h-16 bg-[#] max-h-16 justify-between sm:justify-between
-      `}
+          className="flex   w-full gap-2 h-16 bg-[#c1e1c1] max-h-16 justify-between sm:justify-between
+          "
         >
           <Link href={"/"} className="inherit">
             <div className="flex flex-row h-full md:ml-[4vw] items-center  transition-all ease-in-out duration-500">

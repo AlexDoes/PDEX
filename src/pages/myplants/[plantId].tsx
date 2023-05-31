@@ -189,13 +189,13 @@ export default function plantDisplay({ plant, userId }: any) {
   );
 
   return (
-    <div className="m-10">
+    <div className="m-5">
       <div className="bg-orange-100 rounded-xl p-10 py-10 flex flex-col gap-1 w-full my-auto">
         <h1 className=" text-[#a0cfa0] flex items-center justify-center mb-2 xs:text-xl sm:text-2xl">
           {plantDataDisplay.name}'s information displayed below{" "}
         </h1>
-        <div className="flex xs:flex-col md:flex-row gap-4 items-center">
-          <div className="relative">
+        <div className="flex xs:flex-col md:flex-row gap-4  md:items-start items-center    ">
+          <div className="relative  h-full pb-10">
             <img
               className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-xl cursor-pointer"
               src={plantDataDisplay.image}
@@ -205,50 +205,54 @@ export default function plantDisplay({ plant, userId }: any) {
               }}
             />
             <div
-              className="bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1 absolute bottom-0 right-0"
+              className={`bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1 ${
+                !editPhoto ? "opacity-100" : "opacity-0"
+              } `}
               onClick={EditPhoto}
             >
               Edit
             </div>
             {editPhoto && (
-              <div className=" w-[99px]">
-                <form className=" " onSubmit={handleSubmitForm}>
-                  <div className="flex flex-row ">
-                    <label className="flex flex-row  ">
-                      <input
-                        type="file"
-                        className=" cursor-pointer"
-                        onChange={handleImageChange}
-                        accept="image/*"
-                        multiple={false}
-                        Data-ButtonText="Select images"
-                      />
-                    </label>
-                  </div>
+              <div className=" absolute bottom-1">
+                <div className=" w-[99px] absolute bottom-2">
+                  <form className=" " onSubmit={handleSubmitForm}>
+                    <div className="flex flex-row ">
+                      <label className="flex flex-row  ">
+                        <input
+                          type="file"
+                          className=" cursor-pointer truncate"
+                          onChange={handleImageChange}
+                          accept="image/*"
+                          multiple={false}
+                          Data-ButtonText="Select images"
+                        />
+                      </label>
+                    </div>
 
-                  <div className="flex flex-row gap-2 w-[200px]">
-                    {upload && (
+                    <div className="flex flex-row gap-2 w-[200px] ">
+                      {upload && (
+                        <button
+                          onClick={() => handleClosePhotoUploadButton}
+                          className="bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1  "
+                          type="submit"
+                        >
+                          Upload
+                        </button>
+                      )}
                       <button
-                        onClick={() => handleClosePhotoUploadButton}
-                        className="bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1  "
-                        type="submit"
+                        className="bg-red-400 hover:bg-red-500   cursor-pointer shadow-lg font-bold h-[30px] w-[60px] rounded-md  text-white  text-center py-1   "
+                        onClick={handleClosePhotoUploadButton}
                       >
-                        Upload
+                        {" "}
+                        Cancel
                       </button>
-                    )}
-                    <button
-                      className="bg-red-400 hover:bg-red-500   cursor-pointer shadow-lg font-bold h-[30px] w-[60px] rounded-md  text-white  text-center py-1   "
-                      onClick={handleClosePhotoUploadButton}
-                    >
-                      {" "}
-                      Cancel
-                    </button>
-                  </div>
-                </form>
+                    </div>
+                  </form>
+                </div>
               </div>
             )}
           </div>
-          <div className="flex flex-col gap-2 border border-cyan-300 rounded-2xl p-3 w-full">
+          <div className="flex flex-col gap-2  border-cyan-300 rounded-2xl p-3 w-full">
             <div className="flex items-center">
               {showChangeButton("name")}
               <div className="gap-1 flex">

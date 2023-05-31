@@ -113,15 +113,15 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
   console.log(editPhoto);
   return (
     <>
-      <div className=" w-[85vw] md:w-[90vw] h-[7vh] justify-center flex mt-10">
-        <div className="border-4 border-[#c1e1c1]  bg-gradient-to-b from-[#efefbb] to-slate-400 flex flex-col gap-14 items-center h-[1100px] w-[900px] rounded-lg ">
-          <h1 className="text-4xl mt-5 font-bold text-slate-400 ">
+      <div className=" w-[90vw]   h-[7vh] justify-center flex ">
+        <div className="border-4 border-[#c1e1c1] md:ml-10  ml-2 bg-gradient-to-b from-[#efefbb] to-slate-400 flex flex-col gap-4 items-center h-[660px] md:h-[630px] w-[620px] rounded-lg ">
+          <h1 className="text-3xl font-bold text-slate-400 ">
             Profile Dashboard
           </h1>
           <div className="  flex flex-col justify-center items-center">
             <div className="h-full w-full flex flex-col justify-center items-center relative">
               <img
-                className="h-64 w-64 w object-cover rounded-full  "
+                className="h-44 w-44 w object-cover rounded-full  "
                 src={
                   userInfo.image
                     ? userInfo.image
@@ -178,7 +178,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
           </div>
           <div className="flex flex-col  items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
             <label
-              className="bg-[#efe6c1] rounded-md w-[80%] h-[40px] text-center item-center py-2 outline outline-white"
+              className="bg-[#efe6c1]  rounded-md w-[80%] h-[30px] text-center item-center py-1  outline outline-white"
               htmlFor=""
             >
               Username:{" "}
@@ -188,7 +188,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
           </div>
           <div className="flex flex-col items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
             <label
-              className="bg-[#efe6c1] rounded-md w-[80%] h-[40px] text-center item-center py-2 outline outline-white"
+              className="bg-[#efe6c1]  rounded-md w-[80%] h-[30px] text-center item-center py-1  outline outline-white"
               htmlFor=""
             >
               Email: {userInfo.email}
@@ -197,7 +197,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
           </div>
           <div className="flex flex-col  items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
             <label
-              className="bg-[#efe6c1]  rounded-md w-[80%] h-[40px] text-center item-center py-2 outline outline-white"
+              className="bg-[#efe6c1]  rounded-md w-[80%] h-[30px] text-center item-center py-1  outline outline-white"
               htmlFor=""
             >
               Name: {userInfo.name ? userInfo.name : "<No Name Set>"}
@@ -205,7 +205,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
             <div>{showChangeButton("name")}</div>
           </div>
           <div className="flex flex-col  items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
-            <p className="bg-[#efe6c1] rounded-md w-[80%] items-center py-2 outline px-5 outline-white">
+            <p className="bg-[#efe6c1] rounded-md w-[80%] items-center py-2 outline px-5 outline-white overflow-y-auto ">
               Description: {userInfo.description}{" "}
             </p>
             <div>{showChangeButton("description")}</div>
