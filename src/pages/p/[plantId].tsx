@@ -143,7 +143,6 @@ export default function plantPublicDisplayPage({
     const newComments = [...commentsToDisplayState, comment];
     setCommentsToDisplay(newComments);
   };
-
   return (
     <div
       className=" mt-[10px] border-[#c1e1c1] bg-orange-100 rounded-xl p-4   lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
@@ -151,7 +150,7 @@ export default function plantPublicDisplayPage({
       h-[88vh]"
       tabIndex={0}
     >
-      <div className="relative h-full roup w-inherit items-center justify-center flex">
+      <div className="relative h-full group w-inherit items-center justify-center flex">
         <div className="relative">
           <img
             src={plant.image}
@@ -188,7 +187,6 @@ export default function plantPublicDisplayPage({
           </div>
         </div>
       </div>
-
       {/* comment section */}
       <div
         className="relative flex flex-col  xs:items-center xs:justify-center h-[88vh]  gap-2 px-2   lg:max-h-[80vh] xl:max-h-[80vh]  
