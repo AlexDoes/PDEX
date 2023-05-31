@@ -65,7 +65,7 @@ export default function UpdateDataComponent({
   return (
     <div className="mt-2">
       <button
-        className="  w-[200px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-slate-400  font-bold"
+        className="  w-[185px] text-[#ffffffbf] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#9bb59b]  hover:bg-[#c1e1c183]  font-semibold"
         onClick={handleOpen}
       >
         Update {map[field]}

@@ -114,8 +114,8 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
   return (
     <>
       <div className=" w-[90vw]   h-[7vh] justify-center flex ">
-        <div className="border-4 border-[#c1e1c1] md:ml-10  ml-2 bg-gradient-to-b from-[#efefbb] to-slate-400 flex flex-col gap-4 items-center h-[660px] md:h-[630px] w-[620px] rounded-lg ">
-          <h1 className="text-3xl font-bold text-slate-400 ">
+        <div className="bg-[#91b191]   bg-opacity-70 border-[#c1e1c1] md:ml-10  ml-2 flex flex-col gap-4 items-center h-[660px] md:h-[630px] w-[620px] rounded-lg ">
+          <h1 className="text-3xl font-semibold mt-2 text-white ">
             Profile Dashboard
           </h1>
           <div className="  flex flex-col justify-center items-center">
@@ -128,9 +128,9 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
                     : "https://images.unsplash.com/photo-1634926878768-2a5b3c42f139?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=912&q=80"
                 }
               />
-              <div className="absolute bottom-2 mr-32 h-[30px] w-[60px]">
+              <div className="absolute bottom-1 right-0 h-[30px] w-[60px]">
                 <div
-                  className="bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1 "
+                  className="bg-[#9bb59b] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-[#ffffffbf]  text-center py-1 "
                   onClick={EditPhoto}
                 >
                   Edit
@@ -178,7 +178,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
           </div>
           <div className="flex flex-col  items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
             <label
-              className="bg-[#efe6c1]  rounded-md w-[80%] h-[30px] text-center item-center py-1  outline outline-white"
+              className="bg-[#efe6c1]  rounded-md w-[70%] sm:w-[80%] md:w-[60%] h-[30px] text-center item-center py-1  "
               htmlFor=""
             >
               Username:{" "}
@@ -188,7 +188,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
           </div>
           <div className="flex flex-col items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
             <label
-              className="bg-[#efe6c1]  rounded-md w-[80%] h-[30px] text-center item-center py-1  outline outline-white"
+              className="bg-[#efe6c1]  rounded-md w-[70%] sm:w-[80%] md:w-[60%] h-[30px] text-center item-center py-1  "
               htmlFor=""
             >
               Email: {userInfo.email}
@@ -197,7 +197,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
           </div>
           <div className="flex flex-col  items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
             <label
-              className="bg-[#efe6c1]  rounded-md w-[80%] h-[30px] text-center item-center py-1  outline outline-white"
+              className="bg-[#efe6c1]  rounded-md w-[70%] sm:w-[80%] md:w-[60%] h-[30px] text-center item-center py-1  "
               htmlFor=""
             >
               Name: {userInfo.name ? userInfo.name : "<No Name Set>"}
@@ -205,7 +205,7 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
             <div>{showChangeButton("name")}</div>
           </div>
           <div className="flex flex-col  items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
-            <p className="bg-[#efe6c1] rounded-md w-[80%] items-center py-2 outline px-5 outline-white overflow-y-auto ">
+            <p className="bg-[#efe6c1] rounded-md w-[70%] sm:w-[80%] md:w-[60%] items-center py-2   px-5  overflow-y-auto ">
               Description: {userInfo.description}{" "}
             </p>
             <div>{showChangeButton("description")}</div>
