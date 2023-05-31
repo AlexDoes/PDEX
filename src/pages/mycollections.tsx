@@ -76,7 +76,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
             h-[100px]
             items-center justify-between
             border-slate-300 border rounded-xl p-2
-            bg-opacity-50 bg-green-200
+            bg-opacity-80 bg-green-200
             md:gap-5
             lg:gap-4
             xl:gap-1
@@ -242,7 +242,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
 
         <button
           onClick={handleAddCollectionClick}
-          className="bg-green-300 border-sky-300 border rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
+          className="bg-green-300 border-sky-300 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
    ease-in-out duration-300
         hover:bg-[#fffbcc]
         "

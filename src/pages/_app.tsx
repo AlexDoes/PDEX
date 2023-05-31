@@ -15,10 +15,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>TASHI IN DEV</title>
+        <title>BAX</title>
         <meta name="description" content="PlantDex" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/baxlogo.png" />
       </Head>
       <ToastContainer />
       <SessionProvider session={pageProps.session}>

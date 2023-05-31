@@ -136,7 +136,7 @@ const SignInPage = () => {
         id="loginForm"
         // change rgba to < 1 for opaque and blur
         className=" flex flex-col border-white 
-        bg-white bg-opacity-20 backdrop-filter backdrop-blur-xs
+        bg-white bg-opacity-40 backdrop-filter backdrop-blur-xs
         min-w-[400px]  min-h-[650px] rounded-3xl justify-center items-center mt-[1vh]  "
       >
         <div
@@ -146,7 +146,7 @@ const SignInPage = () => {
           <div className="min-h-[149px] flex justify-center flex-col items-center min-w-[400px] w-[80%]">
             <div className="w-[52px] h-[52px] flex justify-center items-center rounded-md   ">
               <Image
-                src="/logotransparent.png"
+                src="/baxlogo.png"
                 alt="Next.js logo"
                 width={52}
                 height={52}
@@ -234,18 +234,17 @@ const SignInPage = () => {
               )}
             </div>
             <div className="w-full flex flex-col gap-4 mt-5">
-              {toggleSignUpAndSignIn && (
-                <span className="text-[#635dff] font-semibold">
-                  Forgot password?
-                </span>
-              )}
-
               <button
                 className="bg-[#635dff] min-h-[52px] w-full text-white rounded-sm shadow-md "
                 type="submit"
               >
                 Continue
               </button>
+              {toggleSignUpAndSignIn && (
+                <span className="text-[#635dff] font-semibold text-md">
+                  Use Google for no password login
+                </span>
+              )}
 
               {toggleSignUpAndSignIn && (
                 <span className="my-1">

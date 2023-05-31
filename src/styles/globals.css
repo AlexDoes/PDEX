@@ -73,10 +73,7 @@
 }
 
 body {
-  /* background-color: #fefae0; */
   background-color: #d5ffdd;
-  /* background-image: url("/BG/BG5-evie-s-uuCjYxJVf4o-unsplash.jpg"); */
-  /* background-image: url("/BG/bg0526.png"); */
   background-image: url("/BG/greenbg3.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -205,12 +202,6 @@ body {
 }
 .bg-card {
   transition: all 0.3s ease-in-out;
-}
-
-#BAX:hover {
-  /* transform: scale(1.03); */
-  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); */
-  /* box-shadow: 0px 0px 20px 5px #fff; */
 }
 
 #splashtextcontainer:hover,

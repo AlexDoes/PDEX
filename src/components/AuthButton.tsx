@@ -33,10 +33,7 @@ export default function AuthButtonComponent() {
   if (session) {
     return (
       <>
-        <div
-          className="h-full w-full  px-2 md:px-4 xl:mr-3 "
-          onClick={openMenu}
-        >
+        <div className="h-full w-full  px-2 md:px-4 xl:mr-3" onClick={openMenu}>
           {/* {"Hello " + session.user.name?.split(" ")[0]} */}
           <div className="h-full w-full flex justify-center items-center cursor-pointer">
             <div>
@@ -67,15 +64,17 @@ export default function AuthButtonComponent() {
           onExited={closeMenu}
         >
           <div
-            className={`absolute top-16 w-full 
-            right-0 z-20 shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3 bg-[url(/BG/greenbg3.png)]
-            bg-no-repeat bg-cover bg-[]
+            className={`absolute top-16 w-[100vw] 
+            right-0 z-20 shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3
+            bg-black
+            bg-opacity-20 backdrop-filter backdrop-blur-[3px] backdrop-brightness-100
             `}
             onClick={openMenu}
+            id="hamburger-menu"
           >
             <div
               id="menu-items"
-              className=" transition-all ease-in-out duration-500   md:ml-[4vw] "
+              className=" transition-all ease-in-out duration-500 md:ml-[4vw]"
             >
               <div
                 className=""

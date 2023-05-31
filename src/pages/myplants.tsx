@@ -90,7 +90,7 @@ export default function MyPlants({ items, userId, username, session }: any) {
         {items.map((plant: any) => {
           return (
             <div
-              className=" border-[#c1e1c1] bg-orange-100 rounded-xl p-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[55vw] md:w-[40vw] lg:w-[25vw] focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[480px] focus:outline-none overflow-x-hidden group"
+              className=" border-[#c1e1c1] bg-orange-100 bg-opacity-70 rounded-xl p-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[55vw] md:w-[40vw] lg:w-[25vw] focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[480px] focus:outline-none overflow-x-hidden group"
               tabIndex={0}
             >
               <div className="relative group flex">

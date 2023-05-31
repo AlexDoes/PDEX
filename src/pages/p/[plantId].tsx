@@ -164,7 +164,6 @@ export default function plantPublicDisplayPage({
             hover:brightness-90
             hover:outline-none
             lg:w-[45vw]
-        
             "
           />
           <div className="absolute left-0 right-0  flex flex-col px-2 py-2 mx-auto transition-opacity duration-100 ease-in-out bg-gray-800 opacity-0 bottom-2   group-hover:opacity-70 group-focus:opacity-70 rounded-b-xl ">
