@@ -10,6 +10,7 @@ interface Props {
 export default function NewSearchBar({ data, width, onChange }: Props) {
   const [searchText, setSearchText] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  console.log(data);
 
   const handleOnChange = (e: any) => {
     onChange(e.target.value);
@@ -44,19 +45,25 @@ export default function NewSearchBar({ data, width, onChange }: Props) {
         className={`w-inherit
       absolute  
       top-[100%]
-      ${width}
+      w-full
+      border-none
+      z-20
       `}
       >
-        {suggestions.slice(0, 6).map((item: string) => (
+        {suggestions.slice(0, 3).map((item: string) => (
           <li
             key={item}
             onClick={handleClickingSuggestion}
             className="
-            bg-white
+            bg-[#d5f3a9]
             cursor-pointer
-            hover:bg-gray-200
-            border-2 border-black
+            hover:bg-gray-100
             indent-3
+            z-index
+            text-lg
+            font-light
+            min-h-[30px]
+            rounded-bl-lg
             "
           >
             {item}
@@ -81,7 +88,9 @@ export default function NewSearchBar({ data, width, onChange }: Props) {
           placeholder="Plant Species"
           value={searchText}
           onChange={handleOnChange}
-          className="w-full border-white rounded-r-md bg-[#efe6c1]"
+          className={`w-full border-none rounded-r-md bg-[#efe6c1] ${
+            suggestions.length > 0 && `rounded-br-none`
+          }`}
         />
       </div>
       {renderSuggestions()}

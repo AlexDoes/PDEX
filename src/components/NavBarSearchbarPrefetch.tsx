@@ -92,7 +92,7 @@ export default function NavBarSearchBar({}) {
       <ul
         className={`w-inherit absolute top-[100%] w-full   z-40 text-ellipsis rounded-lg  border-white bg-white  `}
       >
-        <div className="border-slate-500 border-[2px] rounded-md">
+        <div className={`border-slate-500 border-[1px] rounded-md`}>
           {speciesSuggestions.length > 0 && (
             <div>
               <h1 className="text-lg font-semibold bg-slate-300 border-2 border-black">
@@ -247,17 +247,16 @@ export default function NavBarSearchBar({}) {
             ref={(input) => input}
             onBlur={handleBlur}
           />
-           <button
-        type="submit"
-        onClick={onSubmit}
-        className="border-2 flex items-center justify-center absolute  z-30 right-0 h-full rounded-r-full md:w-[12%] w-[20%] border-none hover:backdrop-brightness-90 "
-      >
-        <FaSearch />
-      </button>
+          <button
+            type="submit"
+            onClick={onSubmit}
+            className="border-2 flex items-center justify-center absolute  z-30 right-0 h-full rounded-r-full md:w-[12%] w-[20%] border-none hover:backdrop-brightness-90 "
+          >
+            <FaSearch />
+          </button>
         </div>
         {renderSuggestions()}
       </div>
-     
     </form>
   );
 }

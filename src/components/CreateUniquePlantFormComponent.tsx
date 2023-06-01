@@ -8,6 +8,7 @@ import { toTitleCase } from "lib/generalFunctions";
 import prisma from "lib/prisma";
 import NewSearchBar from "./NewSearchBar";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { forEach } from "lodash";
 
 interface User {
   id: string;
@@ -71,6 +72,15 @@ const errorsMap = {
 };
 
 export default function CreateUniquePlant(props: any) {
+  console.log(props.data);
+  const speciesSet: Set<string> = new Set();
+  props.data.forEach((plant: any) => {
+    speciesSet.add(plant.species);
+    if (plant.species2 !== null) {
+      speciesSet.add(plant.species2);
+    }
+  });
+  const speciesArray: string[] = Array.from(speciesSet.values());
   const inputRef = useRef<HTMLInputElement>(null);
   const userId = props.userId;
   const onSubmitFunction = props.onSubmit;
@@ -141,9 +151,13 @@ export default function CreateUniquePlant(props: any) {
       return;
     }
     data.plantSpecies = toTitleCase(species);
-    data.plantSubspecies = toTitleCase(data.plantSubspecies);
+    data.plantSubspecies = toTitleCase(species2);
     data.normalized_species = toTitleCase(data.plantSpecies);
-    data.normalized_species2 = toTitleCase(data.plantSubspecies);
+    data.normalized_species2 = toTitleCase(species2);
+    if (data.normalized_species === data.normalized_species2) {
+      data.plantSubspecies = "";
+      data.normalized_species2 = "";
+    }
     data.user = userId;
     const res = await checkValidUser(data.user);
     if (!res) {
@@ -192,6 +206,10 @@ export default function CreateUniquePlant(props: any) {
 
   const handleChangeOnForm = (entry: string) => {
     setSpecies(entry);
+  };
+
+  const handleChangeOnForm2 = (entry: string) => {
+    setSpecies2(entry);
   };
 
   return (
@@ -248,15 +266,7 @@ export default function CreateUniquePlant(props: any) {
             {/* plant species */}
             <div className="w-full border-blue">
               <NewSearchBar
-                data={[
-                  "monstera albo",
-                  "red fern",
-                  "bonsai",
-                  "snake plant",
-                  "red fern",
-                  "red fern",
-                  "red fern",
-                ]}
+                data={speciesArray}
                 width="w-[20vw] "
                 onChange={handleChangeOnForm}
               />
@@ -271,16 +281,27 @@ export default function CreateUniquePlant(props: any) {
               className="border border-red-500 hidden "
             />
             {fields.subspecies && (
-              <input
-                placeholder="Plant Subspecies"
-                className="w-full h-[40px] bg-[#efe6c1]  pl-5  border-white rounded-r-md  "
-                {...register("plantSubspecies")}
-              />
+              <>
+                <input
+                  placeholder="Plant's Secondary Species"
+                  className="w-full h-[40px] bg-[#efe6c1]  pl-5  border-white rounded-r-md  outline-none hidden"
+                  value={species2}
+                  readOnly
+                  {...register("plantSubspecies")}
+                />
+                <div className="w-full border-blue">
+                  <NewSearchBar
+                    data={speciesArray}
+                    width="w-[20vw] "
+                    onChange={handleChangeOnForm2}
+                  />
+                </div>
+              </>
             )}
             {fields.height && (
               <div className="w-full flex">
                 <input
-                  className="w-full h-[40px] bg-[#efe6c1] pl-5  border-white rounded-r-md "
+                  className="w-full h-[40px] bg-[#efe6c1] pl-5  border-white rounded-r-md border-none"
                   type="number"
                   placeholder="Plant Height"
                   {...register("plantHeight", {
@@ -304,7 +325,7 @@ export default function CreateUniquePlant(props: any) {
               {fields.width && (
                 <div className="w-full flex">
                   <input
-                    className="w-full h-[40px] bg-[#efe6c1] rounded-l-md pl-5  border-white rounded-r-md "
+                    className="w-full h-[40px] bg-[#efe6c1] pl-5 outline-none  border-white rounded-r-md border-none"
                     type="number"
                     placeholder="Plant Width"
                     {...register("plantWidth", {

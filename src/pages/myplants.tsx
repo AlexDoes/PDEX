@@ -18,8 +18,15 @@ interface User {
   address: string;
 }
 
-export default function MyPlants({ items, userId, username, session }: any) {
+export default function MyPlants({
+  items,
+  userId,
+  username,
+  session,
+  plantSpecies,
+}: any) {
   const router = useRouter();
+  console.log(plantSpecies);
 
   const [showForm, setShowForm] = useState(false);
 
@@ -228,7 +235,11 @@ export default function MyPlants({ items, userId, username, session }: any) {
         unmountOnExit
         mountOnEnter
       >
-        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
+        <CreateUniquePlant
+          userId={userId}
+          data={plantSpecies}
+          onSubmit={onSubmitFromParent}
+        />
       </CSSTransition>
     </>
   );
@@ -267,11 +278,19 @@ export async function getServerSideProps(context: any) {
     },
   });
 
+  const plantSpecies = await prisma.uniquePlant.findMany({
+    select: {
+      species: true,
+      species2: true,
+    },
+  });
+
   return {
     props: {
       session,
       userId,
       username,
+      plantSpecies,
       items: JSON.parse(JSON.stringify(items)),
     },
   };

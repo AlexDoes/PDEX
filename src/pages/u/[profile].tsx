@@ -8,6 +8,7 @@ import avatarImage from "public/images/avatar.jpg";
 import { GiCarousel } from "react-icons/gi";
 import ImageCarousel from "@/components/ImageCarouselComponent";
 import RedirectComponent from "@/components/RedirectComponent";
+import { profile } from "console";
 
 interface Props {
   user: any;
@@ -275,7 +276,18 @@ export default function UserProfile({ user }: Props) {
                   w-[100%]
                 "
               >
-                {plant.description}
+                {plant.description ? (
+                  plant.description
+                ) : (
+                  <>
+                    Not much is known about
+                    <span className="italic"> {plant.name} </span>
+                  </>
+                )}
+
+                {plant.description
+                  ? null
+                  : ` but it is a wonderful ${plant.species}.`}
               </p>
             </div>
           </div>
