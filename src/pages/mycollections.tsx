@@ -127,16 +127,18 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                 })}
               />
             ) : (
-              <div
-                id="profileCollectionPlantImage"
-                className="flex justify-center items-center h-[200px] w-[200px] text-center
+              <Link href={`/collections/${collection.id}`}>
+                <div
+                  id="profileCollectionPlantImage"
+                  className="flex justify-center items-center h-[200px] w-[200px] text-center
                   "
-              >
-                <div className="flex flex-col items-center justify-center text-[#fffbcc] gap-2">
-                  <FaSeedling size={80} color="#fffbcc" />
-                  Add a plant
+                >
+                  <div className="flex flex-col items-center justify-center text-[#fffbcc] hover:text-green-300 gap-2">
+                    <FaSeedling size={80} />
+                    Add a plant
+                  </div>
                 </div>
-              </div>
+              </Link>
             )}
           </div>
           <div className="flex flex-col w-full gap-2 overflow-hidden">

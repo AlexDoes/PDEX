@@ -115,7 +115,10 @@ export default function CreateCollectionForm(data: any) {
   return (
     <div className="fixed z-50 top-0 left-0 right-0 bottom-0 h-[100vh]  w-[100vw] flex justify-center items-center  ">
       {/* <div className=" absolute w-[100vw] h-[100vh] bg-red-500 "></div> */}
-      <div className="gradient-bg-card2-reverse rounded-md md:w-[50%] w-[80%] h-[50%]  max-w-[600px]  border-2 border-[#c1e1c1] p-2   ">
+      <div
+        id="createuniqueplantform"
+        className="gradient-bg-card2-reverse rounded-md md:w-[50%] w-[80%] h-[50%]  max-w-[600px] border-[#c1e1c1] p-2   "
+      >
         <div
           onClick={closeCollectionForm}
           className="absolute right-2 top-2 shadow-md rounded-full cursor-pointer"
@@ -126,20 +129,20 @@ export default function CreateCollectionForm(data: any) {
           onSubmit={handleSubmit}
           className=" w-full flex flex-col justify-center items-center gap-3 h-full"
         >
-          <h2 className="text-3xl top-0  mt-2 font-bold text-slate-500 pt-2 text-center">
+          <h2 className="text-3xl top-0  mt-2 font-bold text-[#fffbcc] pt-2 text-center">
             What would you like to name your new collection?
           </h2>
           <input
             type="text"
-            placeholder="Collection's Name"
-            className="w-[80%] h-[50px] rounded-md border-2 border-[#c1e1c1] bg-[#efe6c1] "
+            placeholder="Collection's Name (Required)"
+            className="w-[80%] h-[50px] rounded-md border-[#c1e1c1] bg-[#efe6c1] border-none focus:outline-none focus:border-none focus:ring-0 focus:ring-transparent "
             value={collectionName}
             minLength={3}
             onChange={(e) => setCollectionName(e.target.value)}
           />
           <textarea
-            placeholder="Collection's Description"
-            className="w-[80%] h-[100px] rounded-md border-2 border-[#c1e1c1] bg-[#efe6c1] overflow-y-auto"
+            placeholder="Collection's Description (Optional)"
+            className="w-[80%] h-[100px] rounded-md border-[#c1e1c1] bg-[#efe6c1] overflow-y-auto border-none focus:outline-none focus:border-none focus:ring-0 focus:ring-transparent"
             value={collectionDescription}
             minLength={3}
             onChange={(e) => setCollectionDescription(e.target.value)}
@@ -153,9 +156,9 @@ export default function CreateCollectionForm(data: any) {
           </button> */}
           <button
             type="submit"
-            className="bg-green-300 border-sky-300 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
+            className="hover:bg-green-300 border-sky-300 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 text-[#ec9e69] hover:text-green-600 transition-all
             ease-in-out duration-300
-          hover:bg-[#fffbcc]
+          bg-[#fffbcc]
         "
             //#fffbcc
             //#389168

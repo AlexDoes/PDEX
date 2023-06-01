@@ -102,10 +102,10 @@ export default function Splash(Data: Props) {
                     w-[80%]"
                   >
                     <div>
-                      <h3 className="text-[20px] lg:text-[26px] text-black select-none">
+                      <h3 className="text-[20px] lg:text-[26px] text-black select-none transition-all ease-in-out duration-300  hover:text-[#3854d0]">
                         <Link href={`p/${plant.id}`}>{plant.name}</Link>
                       </h3>
-                      <p className="text-[#FFFDD0] italic select-none ">
+                      <p className="text-[#FFFDD0] italic select-none transition-all ease-in-out duration-300  hover:text-[#3854d0] ">
                         <Link href={`search/${plant.species}`}>
                           {plant.species}
                         </Link>

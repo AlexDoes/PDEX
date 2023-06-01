@@ -207,7 +207,8 @@ export default function MyPlants({
           {
             <button
               onClick={() => setShowForm(true)}
-              className="bg-green-300 border-sky-300 border rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69] ease-in-out duration-300
+              id="addPlantButton"
+              className="bg-green-300 border-sky-300 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69] ease-in-out duration-300
           hover:bg-[#fffbcc]
           "
             >

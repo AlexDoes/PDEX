@@ -84,6 +84,11 @@ export default function ThisCollection({
     setShowAddPlant(true);
   };
 
+  const handleCreatePlanClick = (e: any) => {
+    e.preventDefault();
+    router.push("/myplants" + "#addPlantButton");
+  };
+
   const onSubmitFromParent = (data: string[]) => {
     setShowAddPlant(false);
     setPlantContents((plantContents: any) => [...plantContents, ...data]);
@@ -106,7 +111,7 @@ export default function ThisCollection({
         {plantContents.map((plantContent: any) => (
           <div
             key={plantContent.id}
-            className="flex-col items-center justify-center bg-opacity-50 bg-green-200 hover:bg-opacity-70 rounded-xl p-4 border gap-2 pt-6
+            className="flex-col items-center justify-center bg-opacity-50 bg-green-200 hover:bg-opacity-70 rounded-xl p-4 gap-2 pt-6
             flex border-slate-300 group relative"
           >
             <Link href={`/myplants/${plantContent.id}`}>
@@ -152,16 +157,16 @@ export default function ThisCollection({
       />
     );
   };
-
+  // text-[#a0cfa0]
   return (
     <>
-      <div className="bg-orange-100 bg-opacity-100 rounded-xl p-10 py-10 flex flex-col gap-3 w-full min-h-[90vh] justify-center items-center">
-        <h1 className=" text-[#a0cfa0] flex items-center justify-center mb-2 xs:text-xl sm:text-2xl">
+      <div className="bg-orange-100 bg-opacity-70 rounded-xl p-10 py-10 flex flex-col gap-3 w-full min-h-[90vh] justify-center items-center">
+        <h1 className=" text-black flex items-center justify-center mb-2 xs:text-xl sm:text-2xl md:text-3xl backdrop-blur-sm">
           {plantContentsData.name}'s content
         </h1>
         <div className="flex flex-col py-2 w-full">
           <div className="flex flex-col items-center justify-center relative">
-            <div className="border-slate-400 border rounded-xl w-[90%] p-2 font-extralight relative">
+            <div className="border-slate-400 border rounded-xl w-[90%] p-2 font-extralight relative backdrop-blur-md">
               {collectionDescription ||
                 "You have no description for this collection yet, please add one to tell us about it!"}
               <div className="absolute -bottom-3 -right-3">
@@ -178,13 +183,22 @@ export default function ThisCollection({
             <button
               onClick={handleAddPlantClick}
               className="bg-green-300 border-sky-300 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
-              ease-in-out duration-300
+              ease-in-out duration-300 mt-5
             hover:bg-[#fffbcc]"
             >
               Add Plant <FaSeedling />
             </button>
           </div>
-        ) : null}
+        ) : (
+          <div>
+            <button
+              onClick={handleCreatePlanClick}
+              className="hover:bg-green-300 hover:text-green-600 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 text-[#ec9e69] ease-in-out duration-300 bg-[#fffbcc] mt-5"
+            >
+              Create a plant <FaSeedling />
+            </button>
+          </div>
+        )}
       </div>
 
       <CSSTransition

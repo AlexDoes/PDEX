@@ -10,6 +10,7 @@ import ImageCarousel from "@/components/ImageCarouselComponent";
 import RedirectComponent from "@/components/RedirectComponent";
 import { profile } from "console";
 import { FaSeedling } from "react-icons/fa";
+import Link from "next/link";
 
 interface Props {
   user: any;
@@ -126,7 +127,7 @@ export default function UserProfile({ user }: Props) {
                   text-white
                 "
               >
-                {collection.name}
+                <Link href={`/c/${collection.id}`}>{collection.name}</Link>
               </p>
               <div className="w-full h-[100px]">
                 <div
@@ -247,7 +248,7 @@ export default function UserProfile({ user }: Props) {
             xl:indent-5
             "
             >
-              {plant.name}
+              <Link href={`/p/${plant.id}`}>{plant.name}</Link>
             </p>
             <p
               className="text-lg 
@@ -362,7 +363,6 @@ export default function UserProfile({ user }: Props) {
           >
             <img
               src={image ? image : avatarImage.src}
-              alt="User Profile Image"
               className="rounded-full 
                 xs:w-[20vw] xs:h-[20vw]
                 sm:w-[20vw] sm:h-[20vw]
@@ -371,6 +371,7 @@ export default function UserProfile({ user }: Props) {
                 md:max-w-[300px] md:max-h-[300px]
                 lg:w-[300px] lg:h-[300px]
                 xl:w-[300px] xl:h-[300px]
+                backdrop-invert-[10%]
             "
             />
           </div>
