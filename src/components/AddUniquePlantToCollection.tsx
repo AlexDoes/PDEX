@@ -3,8 +3,8 @@ import { GiFallingLeaf } from "react-icons/gi";
 
 export default function AddUniquePlantToCollection(props: any) {
   const usersPlants = props.usersPlants;
-
   let plantsToBeAdded: string[] = [];
+  let plantsAdded: string[] = [];
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -14,8 +14,7 @@ export default function AddUniquePlantToCollection(props: any) {
       userId: props.userId,
     };
     addPlantToCollection(plantData).then((data) => {
-      console.log("triggered");
-      props.onSubmit(plantsToBeAdded);
+      props.onSubmit(plantsAdded);
     });
   };
 
@@ -23,10 +22,12 @@ export default function AddUniquePlantToCollection(props: any) {
     const plantId = e.target.value;
     if (e.target.checked) {
       plantsToBeAdded.push(String(plantId));
+      plantsAdded.push(usersPlants.find((plant: any) => plant.id === plantId));
     } else {
       plantsToBeAdded = plantsToBeAdded.filter(
         (plant: any) => plant !== plantId
       );
+      plantsAdded = plantsAdded.filter((plant: any) => plant.id !== plantId);
     }
   };
 
@@ -39,7 +40,7 @@ export default function AddUniquePlantToCollection(props: any) {
             className="z-50  w-full  flex flex-col justify-center items-center gap-5 h-full "
           >
             <div
-              onClick={props.onSubmit}
+              onClick={props.onClose}
               className="absolute md:right-6 md:top-6 top-2 right-2 shadow-md rounded-full cursor-pointer"
             >
               <AiOutlineCloseCircle size={30} color="white" />

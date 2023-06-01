@@ -106,7 +106,7 @@ export default function CreateCollectionForm(data: any) {
           textShadow: "0 0 0.5rem #000000",
         },
       });
-      handleSubmissionFromParent();
+      handleSubmissionFromParent(newCollection);
     } catch (error) {
       console.log(error);
     }
@@ -153,7 +153,7 @@ export default function CreateCollectionForm(data: any) {
           </button> */}
           <button
             type="submit"
-            className="bg-green-300 border-sky-300 border rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
+            className="bg-green-300 border-sky-300 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
             ease-in-out duration-300
           hover:bg-[#fffbcc]
         "

@@ -13,6 +13,7 @@ import { FaSeedling } from "react-icons/fa";
 import ImageCarousel from "@/components/ImageCarouselComponent";
 import { RiPlantLine } from "react-icons/ri";
 import { toast } from "react-toastify";
+import { set } from "lodash";
 
 interface Collection {
   id: string;
@@ -48,20 +49,20 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);
   usePreviousScrollPosition();
-
-  //change to state
+  const [displayPlants, setDisplayPlants] = useState(items);
 
   const handleClick = (id: string) => {
     router.push(`/collections/${id}`);
   };
+
   const handleAddCollectionClick = () => {
     setShowForm(!showForm);
   };
 
-  const handleSubmitCollectionForm = async () => {
-    await router.push(router.asPath);
-    console.log("submitted");
+  const handleSubmitCollectionForm = async (object: any) => {
     setShowForm(false);
+    object.plantContent = [];
+    setDisplayPlants([...displayPlants, object]);
   };
 
   const collectionsToShow = () => {
@@ -90,7 +91,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
       );
     }
 
-    return items.map((collection: any) => {
+    return displayPlants.map((collection: any) => {
       return (
         <div
           className="flex-row flex
@@ -115,11 +116,11 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                 lg:max-w-[300px] lg:max-h-[300px]
                 xl:max-w-[300px] xl:max-h-[300px]
                 flex justify-center items-center
-                bg-opacity-50 bg-yellow-200
-                 border-slate-300
+                backdrop-invert-[20%]
+              border-slate-300
                 "
           >
-            {collection.plantContents.length > 0 ? (
+            {collection.plantContents && collection.plantContents.length > 0 ? (
               <ImageCarousel
                 images={collection.plantContents.map((plant: any) => {
                   return plant.image;
@@ -128,10 +129,13 @@ export default function MyCollections({ items, userId }: CollectionProps) {
             ) : (
               <div
                 id="profileCollectionPlantImage"
-                className="flex justify-center items-center h-[200px] w-[200px]
+                className="flex justify-center items-center h-[200px] w-[200px] text-center
                   "
               >
-                <div>Coming Soon</div>
+                <div className="flex flex-col items-center justify-center text-[#fffbcc] gap-2">
+                  <FaSeedling size={80} color="#fffbcc" />
+                  Add a plant
+                </div>
               </div>
             )}
           </div>
@@ -176,8 +180,10 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                       pt-2
                       "
                 >
-                  {collection.plantContents.length > 0 && <p> Contents: </p>}
-                  {collection.plantContents.length > 0 ? (
+                  {collection.plantContents &&
+                    collection.plantContents.length > 0 && <p> Contents: </p>}
+                  {collection.plantContents &&
+                  collection.plantContents.length > 0 ? (
                     collection.plantContents.map((plantItemData: any) => {
                       return (
                         <p

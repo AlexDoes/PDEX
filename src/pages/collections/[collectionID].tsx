@@ -9,6 +9,7 @@ import { CSSTransition } from "react-transition-group";
 import { FaSeedling } from "react-icons/fa";
 import { toast } from "react-toastify";
 import UpdateCollectionDescriptionComponent from "@/components/UpdateCollectionDescription";
+import { set } from "lodash";
 
 interface User {
   id: string;
@@ -58,15 +59,15 @@ export default function ThisCollection({
     plantContentsData.description
   );
 
-  const plantstoAdd = usersUniquePlants.filter((plant) => {
-    return !plantContentsData.plantContents.some(
-      (plantContent: any) => plantContent.id === plant.id
-    );
-  });
-
   const [plantContents, setPlantContents] = useState(
     plantContentsData.plantContents
   );
+
+  const plantstoAdd = usersUniquePlants.filter((plant) => {
+    return !plantContents.some(
+      (plantContent: any) => plantContent.id === plant.id
+    );
+  });
 
   useEffect(() => {
     setCollectionDescription(plantContentsData.description);
@@ -83,40 +84,20 @@ export default function ThisCollection({
     setShowAddPlant(true);
   };
 
-  const onSubmitFromParent = () => {
+  const onSubmitFromParent = (data: string[]) => {
     setShowAddPlant(false);
-    router.reload();
-    router.push(router.asPath);
+    setPlantContents((plantContents: any) => [...plantContents, ...data]);
   };
 
-  const onSubmitFromParentRemove = () => {
-    router.reload();
+  const handleOnClose = () => {
+    setShowAddPlant(false);
   };
 
-  const onSubmitFromParentUpdate = (plantsAdded: String[]) => {
-    setAddPlant(false);
-    plantstoAdd.forEach((plant) => {
-      if (plantsAdded.includes(plant.id)) {
-        plantstoAdd.filter((plant) => {
-          return !plantstoAdd.some(
-            (plantContent: any) => plantContent.id === plant.id
-          );
-        });
-      }
-    });
-    console.log(plantstoAdd);
-    usersUniquePlants.forEach((plant) => {
-      if (plantsAdded.includes(plant.id)) {
-        setPlantContents((plantContents: any) => [
-          ...plantContents,
-          {
-            id: plant.id,
-            name: plant.name,
-            image: plant.image,
-          },
-        ]);
-      }
-    });
+  const onSubmitFromParentRemove = (data: string[]) => {
+    setShowAddPlant(false);
+    setPlantContents((plantContents: any) => [
+      ...plantContents.filter((plant: any) => plant.id !== data),
+    ]);
   };
 
   const plantsToShow = () => {
@@ -133,7 +114,7 @@ export default function ThisCollection({
                 src={plantContent.image}
                 alt={plantContent.name}
                 className="rounded-xl xs:w-[250px] xs:h-[300px] 
-              lg:w-[300px] lg:h-[350px] border-gray-400"
+                lg:w-[300px] lg:h-[350px] border-gray-400"
               />
             </Link>
             <div className="whitespace-nowrap overflow-ellipsis hover:underline hover:text-blue-400 w-90%">
@@ -160,8 +141,6 @@ export default function ThisCollection({
     setCollectionDescription(response);
   };
 
-  const reloadUponAdd = () => {};
-
   const showChangeButton = () => {
     return (
       <UpdateCollectionDescriptionComponent
@@ -174,16 +153,6 @@ export default function ThisCollection({
     );
   };
 
-  //   <div>
-  //   <RemoveUniquePlantFromCollectionButton
-  //     uniquePlantId={plantContent.id}
-  //     plantName={plantContent.name}
-  //     collectionId={collectionID}
-  //     userId={userId}
-  //     onConfirm={onSubmitFromParent}
-  //   />
-  // </div>
-
   return (
     <>
       <div className="bg-orange-100 bg-opacity-100 rounded-xl p-10 py-10 flex flex-col gap-3 w-full min-h-[90vh] justify-center items-center">
@@ -191,7 +160,7 @@ export default function ThisCollection({
           {plantContentsData.name}'s content
         </h1>
         <div className="flex flex-col py-2 w-full">
-          <div className="flex flex-col items-center justify-center relative border-2">
+          <div className="flex flex-col items-center justify-center relative">
             <div className="border-slate-400 border rounded-xl w-[90%] p-2 font-extralight relative">
               {collectionDescription ||
                 "You have no description for this collection yet, please add one to tell us about it!"}
@@ -208,7 +177,7 @@ export default function ThisCollection({
           <div>
             <button
               onClick={handleAddPlantClick}
-              className="bg-green-300 border-sky-300 border rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
+              className="bg-green-300 border-sky-300 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 hover:text-[#ec9e69]
               ease-in-out duration-300
             hover:bg-[#fffbcc]"
             >
@@ -240,6 +209,7 @@ export default function ThisCollection({
           collectionId={collectionID}
           userId={userId}
           onSubmit={onSubmitFromParent}
+          onClose={handleOnClose}
         />
       </CSSTransition>
     </>

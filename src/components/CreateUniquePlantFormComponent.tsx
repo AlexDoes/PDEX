@@ -72,7 +72,6 @@ const errorsMap = {
 };
 
 export default function CreateUniquePlant(props: any) {
-  console.log(props.data);
   const speciesSet: Set<string> = new Set();
   props.data.forEach((plant: any) => {
     speciesSet.add(plant.species);
@@ -229,7 +228,7 @@ export default function CreateUniquePlant(props: any) {
         >
           <div className="  h-[100%] w-[80%] flex flex-col justify-center gap-4 ">
             <div
-              onClick={props.onSubmit}
+              onClick={props.onClose}
               className="absolute right-6 top-6 shadow-md rounded-full cursor-pointer"
             >
               <AiOutlineCloseCircle size={30} color="white" />

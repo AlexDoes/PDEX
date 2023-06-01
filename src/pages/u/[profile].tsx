@@ -9,6 +9,7 @@ import { GiCarousel } from "react-icons/gi";
 import ImageCarousel from "@/components/ImageCarouselComponent";
 import RedirectComponent from "@/components/RedirectComponent";
 import { profile } from "console";
+import { FaSeedling } from "react-icons/fa";
 
 interface Props {
   user: any;
@@ -184,7 +185,10 @@ export default function UserProfile({ user }: Props) {
                   className="flex justify-center items-center h-[200px] w-[200px]
                   "
                 >
-                  <div>Coming Soon</div>
+                  <div className=" flex flex-col justify-center items-center text-xl gap-2">
+                    <FaSeedling size={80} color="#fffbcc" />
+                    Coming Soon
+                  </div>
                 </div>
               )}
             </div>

@@ -26,7 +26,6 @@ export default function MyPlants({
   plantSpecies,
 }: any) {
   const router = useRouter();
-  console.log(plantSpecies);
 
   const [showForm, setShowForm] = useState(false);
 
@@ -35,6 +34,10 @@ export default function MyPlants({
   const onSubmitFromParent = () => {
     setShowForm(false);
     router.push(router.asPath);
+  };
+
+  const handleOnClose = () => {
+    setShowForm(false);
   };
 
   const showPlantsCard = () => {
@@ -99,6 +102,7 @@ export default function MyPlants({
             <div
               className=" border-[#c1e1c1] bg-orange-100 bg-opacity-70 rounded-xl p-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[55vw] md:w-[40vw] lg:w-[25vw] focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[480px] focus:outline-none overflow-x-hidden group"
               tabIndex={0}
+              key={plant.id.slice(-4)}
             >
               <div className="relative group flex">
                 <Link
@@ -211,9 +215,6 @@ export default function MyPlants({
             </button>
           }
         </div>
-        {/* {showForm && (
-        <CreateUniquePlant userId={userId} onSubmit={onSubmitFromParent} />
-      )} */}
       </div>
       <CSSTransition
         in={showForm}
@@ -239,6 +240,7 @@ export default function MyPlants({
           userId={userId}
           data={plantSpecies}
           onSubmit={onSubmitFromParent}
+          onClose={handleOnClose}
         />
       </CSSTransition>
     </>
