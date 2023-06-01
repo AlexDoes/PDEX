@@ -1,11 +1,5 @@
-import Image from "next/image";
-import bg1 from "public/BG/BG1-rahul-goyal-3m1Z2S96FuY-unsplash.jpg";
-import bg2 from "public/BG/BG2-annie-spratt-9DedxUSwLg4-unsplash.jpg";
-import bg3 from "public/BG/BG3-gryffyn-m-fNipzSgk6t4-unsplash.jpg";
-import bg4 from "public/BG/BG4-annie-spratt-HB-Kf9WLy_0-unsplash.jpg";
-import bg5 from "public/BG/BG5-evie-s-uuCjYxJVf4o-unsplash.jpg";
-import bg6 from "public/BG/bg0526.png";
 import LoadingText from "./LoadinText";
+import Link from "next/link";
 
 type PlantContent = {
   id: string;
@@ -109,10 +103,12 @@ export default function Splash(Data: Props) {
                   >
                     <div>
                       <h3 className="text-[20px] lg:text-[26px] text-black select-none">
-                        {plant.name}
+                        <Link href={`p/${plant.id}`}>{plant.name}</Link>
                       </h3>
                       <p className="text-[#FFFDD0] italic select-none ">
-                        {plant.species}
+                        <Link href={`search/${plant.species}`}>
+                          {plant.species}
+                        </Link>
                       </p>
                     </div>
                     <p
@@ -127,13 +123,15 @@ export default function Splash(Data: Props) {
                     </p>
                   </div>
                   <div className="w-[20%] min-w-[200px] min-h-[200px] flex justify-center items-center">
-                    <img
-                      src={plant.image}
-                      width={200}
-                      height={200}
-                      className="w-[200px] h-[200px] rounded-lg select-none"
-                      alt={plant.name}
-                    />
+                    <Link href={`p/${plant.id}`}>
+                      <img
+                        src={plant.image}
+                        width={200}
+                        height={200}
+                        className="w-[200px] h-[200px] rounded-lg select-none"
+                        alt={plant.name}
+                      />
+                    </Link>
                   </div>
                 </div>
               );

@@ -102,7 +102,7 @@ export default function UserProfile({ user }: Props) {
             className="flex-row flex
             items-center justify-between w-full h-full
             border-slate-300 rounded-xl py-2 px-2
-            bg-opacity-50 bg-green-200
+            bg-opacity-60 bg-green-200
             md:gap-5
             lg:gap-4
             xl:gap-1
@@ -269,7 +269,7 @@ export default function UserProfile({ user }: Props) {
                   mx-3
                   xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]
                   h-full                       
-                  bg-opacity-70 bg-orange-200
+                  bg-opacity-70 bg-[#e4e4b2]
                   pl-3 pr-3 pt-2 pb-2 rounded-md
                   scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
                   scrollbar-rounded-sm

@@ -96,7 +96,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
           className="flex-row flex
             items-center justify-between w-[98%] h-full
             border-slate-300 rounded-xl px-6
-            bg-opacity-50 bg-green-200
+            bg-opacity-70 bg-green-200
             md:gap-3
             lg:gap-4
             xl:gap-3 group relative

@@ -167,6 +167,7 @@ export default function SearchResult({
           shadow-md
           w-[100%]
           p-2
+          backdrop-invert-[40%]
         `}
         >
           Community plants related to `{searchTerm}`
@@ -267,9 +268,12 @@ export default function SearchResult({
           shadow-md
           w-[100%]
           p-2
+          backdrop-invert-[40%]
           "
         >
-          Users
+          {uniquePlants.length === 0 && users.length === 0
+            ? `Results`
+            : `Users`}
         </h2>
         <div
           className=" 
@@ -366,7 +370,11 @@ export default function SearchResult({
               </Link>
             ))
           ) : (
-            <p>No users found with the name `{searchTerm}`</p>
+            <p className="text-[#ffffff] text-3xl font-semibold backdrop-blur-[3px] p-4 rounded-lg">
+              {uniquePlants.length !== 0
+                ? `No users found with the name ${searchTerm}`
+                : `No results found for searching ${searchTerm}`}
+            </p>
           )}
         </div>
       </div>
