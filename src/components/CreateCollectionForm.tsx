@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import prisma from "lib/prisma";
 import { toast } from "react-toastify";
 import { CSSTransition } from "react-transition-group";
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -148,23 +146,12 @@ export default function CreateCollectionForm(data: any) {
             onChange={(e) => setCollectionDescription(e.target.value)}
           />
           {/* //TODO: add a description field //TODO: add a privacy field */}
-          {/* <button
-            className="border h-[40px] border-green-500 rounded-md px-1 sm:px-5 py-1 shadow-lg bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-black  sm:font-bold"
-            type="submit"
-          >
-            Create{" "}
-          </button> */}
           <button
             type="submit"
             className="hover:bg-green-300 border-sky-300 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 text-[#ec9e69] hover:text-green-600 transition-all
             ease-in-out duration-300
           bg-[#fffbcc]
-        "
-            //#fffbcc
-            //#389168
-            //#389168
-            //#fffbcc
-            //#ec9e69
+          "
           >
             Create <FaSeedling />
           </button>

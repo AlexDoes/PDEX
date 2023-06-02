@@ -2,12 +2,14 @@ import { getSession } from "next-auth/react";
 import prisma from "lib/prisma";
 import DeleteUniquePlantButton from "@/components/DeleteUniquePlantButton";
 import { useRouter } from "next/router";
-import UpdateDataComponent from "@/components/UpdatePlantDetailsComponent";
+import UpdateDataComponent from "@/components/UpdatePlantDetailsComponentNew";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import s3 from "lib/aws";
 import spinner from "public/images/spinner.svg";
+import { SlPencil } from "react-icons/sl";
+import { CSSTransition } from "react-transition-group";
 
 interface User {
   id: string;
@@ -61,6 +63,19 @@ export default function plantDisplay({ plant, userId }: any) {
   const [imageUrl, setImageUrl] = useState<string>("");
   const [editPhoto, setEditPhoto] = useState<boolean>(false);
   const [upload, setUpload] = useState<boolean>(false);
+  const [showForm, setShowForm] = useState<boolean>(false);
+  const [activeField, setActiveField] = useState<string | null>("");
+
+  const onSubmitFromParent = () => {
+    setShowForm(false);
+    setActiveField("");
+    // router.push(router.asPath);
+  };
+
+  const handleOnClose = () => {
+    setShowForm(false);
+    setActiveField("");
+  };
 
   useEffect(() => {
     if (userId !== plantData.ownedBy.id) {
@@ -166,13 +181,21 @@ export default function plantDisplay({ plant, userId }: any) {
 
   const showChangeButton = (field: fieldName) => {
     const props = { field, userId, plantInfo: plantData };
+  };
+
+  const props = { userId, plantInfo: plantData };
+  const showChangeButtonV2 = (field: fieldName) => {
     return (
-      <UpdateDataComponent
-        field={field}
-        userId={userId}
-        plantInfo={plantData}
-        onConfirm={(data: string) => handleUpdate(field, props, data, reload)}
-      />
+      <button
+        className=" border-green-500 rounded-md w-[25px] h-[25px] shadow-md bg-[#c1e1c1]  hover:bg-[#c1e1c183] text-slate-400 font-bold flex mx-auto my-auto justify-center items-center hover:shadow-lg hover:shadow-slate-300
+      "
+        onClick={() => {
+          setShowForm(true);
+          setActiveField(field);
+        }}
+      >
+        <SlPencil />
+      </button>
     );
   };
 
@@ -189,171 +212,201 @@ export default function plantDisplay({ plant, userId }: any) {
   );
 
   return (
-    <div className="m-5">
-      <div className="bg-orange-100 bg-opacity-90 rounded-xl px-10 xs:pb-5 pt-5 flex flex-col md:pb-10 lg:pb-0 gap-1 w-full my-auto  ">
-        <h1 className=" text-[#a0cfa0] flex items-center justify-center mb-2 xs:text-xl sm:text-2xl">
-          {plantDataDisplay.name}'s information displayed below{" "}
-        </h1>
-        <div className="flex xs:flex-col md:flex-row gap-4  md:items-start items-center    ">
-          <div className="relative  h-full pb-10">
-            <img
-              className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-xl cursor-pointer"
-              src={plantDataDisplay.image}
-              alt={plantDataDisplay.name}
-              onClick={() => {
-                window.open(plantDataDisplay.image, "_blank");
-              }}
-            />
-            <div
-              className={`absolute right-0 bottom-5 bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1 ${
-                !editPhoto ? "opacity-100" : "opacity-0"
-              } `}
-              onClick={EditPhoto}
-            >
-              Edit
-            </div>
-            {editPhoto && (
-              <div className=" absolute -bottom-1 w-[300px] ">
-                <div className=" w-full absolute xs:-bottom-3 md:-bottom-3 lg:bottom-2 ">
-                  <form className=" flex items-start xs:flex-col lg:flex-row " onSubmit={handleSubmitForm}>
-                    <div className="flex  ">
-                      <label className="flex ">
-                        <input
-                          type="file"
-                          className=" cursor-pointer truncate"
-                          onChange={handleImageChange}
-                          accept="image/*"
-                          multiple={false}
-                          Data-ButtonText="Select images"
-                        />
-                      </label>
-                    </div>
-
-                    <div className="flex flex-row gap-2 w-full ">
-                      {upload && (
-                        <button
-                          onClick={() => handleClosePhotoUploadButton}
-                          className="bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-white  text-center py-1  "
-                          type="submit"
-                        >
-                          Upload
-                        </button>
-                      )}
-                      <button
-                        className="bg-red-400 hover:bg-red-500   cursor-pointer shadow-lg font-bold h-[30px] w-[60px] rounded-md  text-white  text-center py-1   "
-                        onClick={handleClosePhotoUploadButton}
-                      >
-                        {" "}
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="flex flex-col gap-2 h-full  border-cyan-300 rounded-2xl p-3 w-full">
-            <div className="flex items-center">
-              {showChangeButton("name")}
-              <div className="gap-1 flex">
-                Name: <p className="font-light"> {plantDataDisplay.name}</p>
-              </div>
-            </div>
-            <div className="flex">
-              {showChangeButton("species")}
-              <div className="gap-1 flex">
-                Species:{" "}
-                <p className="font-light"> {plantDataDisplay.species}</p>
-              </div>
-            </div>
-            <div className="flex">
-              {showChangeButton("species2")}
-              <div className="gap-1 flex">
-                Secondary Species:{" "}
-                <p className="font-light">
-                  {" "}
-                  {plantDataDisplay.species2 || "None provided"}
-                </p>
-              </div>
-            </div>
-            <div className="flex">
-              <div>{showChangeButton("water")}</div>
-              <div className="gap-1 flex">
-                Watering schedule:{" "}
-                <p className="font-light">
-                  {" "}
-                  {plantDataDisplay.water || "None provided"}
-                </p>
-              </div>
-            </div>
-            <div className="flex">
-              <div>{showChangeButton("light")}</div>
-              <div className="gap-1 flex">
-                Sunlight:{" "}
-                <p className="font-light">
-                  {" "}
-                  {plantDataDisplay.light || "None provided"}
-                </p>
-              </div>
-            </div>
-            <div className="flex">
-              <div>{showChangeButton("plantHeight")}</div>
-              <div className="gap-1 flex">
-                Height:{" "}
-                <p className="font-light">
-                  {" "}
-                  {(plantDataDisplay.plantHeight &&
-                    plantDataDisplay.plantHeight + " cm") ||
-                    "None provided"}
-                </p>
-              </div>
-            </div>
-            <div className="flex">
-              <div>{showChangeButton("plantWidth")}</div>
-              <div className="gap-1 flex">
-                Width:{" "}
-                <p className="font-light">
-                  {" "}
-                  {(plantDataDisplay.plantWidth &&
-                    plantDataDisplay.plantWidth + " cm") ||
-                    "None provided"}
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex">
-                <div>{showChangeButton("description")}</div>
-                <p className="text-left">Description:</p>
-              </div>
-              <div className="flex flex-col items-center justify-center pt-2">
-                <div className="border-slate-400 border rounded-xl w-[80%] p-2 font-extralight">
-                  {plantDataDisplay.description ||
-                    "None provided please add one"}
-                </div>
-              </div>
-            </div>
-            <div className="w-inherit flex justify-between item-center">
-              <div className="flex items-center hover:text-blue-600hover:underline">
-                {" "}
-                <Link
-                  href={`/p/${plantDataDisplay.id}`}
-                  className="text-blue-400 font-light"
-                >
-                  Public view of {plantDataDisplay.name}
-                </Link>
-              </div>
-              <DeleteUniquePlantButton
-                uniquePlantId={plantDataDisplay.id}
-                user={userId}
-                objectName={plantDataDisplay.name}
-                onConfirm={onDelete}
-                liked={false}
+    <>
+      <div className="m-5">
+        <div className="bg-orange-100 bg-opacity-90 rounded-xl px-10 xs:pb-5 pt-5 flex flex-col md:pb-10 lg:pb-0 gap-1 w-full my-auto  ">
+          <h1 className=" text-[#a0cfa0] flex items-center justify-center mb-2 xs:text-xl sm:text-2xl">
+            {plantDataDisplay.name}'s information displayed below{" "}
+          </h1>
+          <div className="flex xs:flex-col md:flex-row gap-4  md:items-start items-center    ">
+            <div className="relative  h-full pb-10">
+              <img
+                className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-xl cursor-pointer"
+                src={plantDataDisplay.image}
+                alt={plantDataDisplay.name}
+                onClick={() => {
+                  window.open(plantDataDisplay.image, "_blank");
+                }}
               />
+              <div
+                className={`absolute right-0 bottom-5 bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-slate-400  text-center py-1 ${
+                  !editPhoto ? "opacity-100" : "opacity-0"
+                } `}
+                onClick={EditPhoto}
+              >
+                Edit
+              </div>
+              {editPhoto && (
+                <div className=" absolute -bottom-1 w-[300px] ">
+                  <div className=" w-full absolute xs:-bottom-3 md:-bottom-3 lg:bottom-2 ">
+                    <form
+                      className=" flex items-start xs:flex-col lg:flex-row "
+                      onSubmit={handleSubmitForm}
+                    >
+                      <div className="flex  ">
+                        <label className="flex ">
+                          <input
+                            type="file"
+                            className=" cursor-pointer truncate"
+                            onChange={handleImageChange}
+                            accept="image/*"
+                            multiple={false}
+                            Data-ButtonText="Select images"
+                          />
+                        </label>
+                      </div>
+
+                      <div className="flex flex-row gap-2 w-full ">
+                        {upload && (
+                          <button
+                            onClick={() => handleClosePhotoUploadButton}
+                            className="bg-[#c1e1c1] hover:bg-[#c1e1c183] cursor-pointer shadow-lg font-semibold h-[30px] w-[60px] rounded-md  text-white  text-center py-1  "
+                            type="submit"
+                          >
+                            Upload
+                          </button>
+                        )}
+                        <button
+                          className="bg-red-400 hover:bg-red-500   cursor-pointer shadow-lg font-bold h-[30px] w-[60px] rounded-md  text-white  text-center py-1   "
+                          onClick={handleClosePhotoUploadButton}
+                        >
+                          {" "}
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="flex flex-col gap-2 h-full  border-cyan-300 rounded-2xl p-3 w-full">
+              <div className="flex flex-row w-full">
+                <div className="gap-1 flex">
+                  {showChangeButtonV2("name")}
+                  Name: <p className="font-light"> {plantDataDisplay.name}</p>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="gap-1 flex">
+                  {showChangeButtonV2("species")}
+                  Species:{" "}
+                  <p className="font-light"> {plantDataDisplay.species}</p>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="gap-1 flex">
+                  {showChangeButtonV2("species2")}
+                  Secondary Species:{" "}
+                  <p className="font-light">
+                    {" "}
+                    {plantDataDisplay.species2 || "None provided"}
+                  </p>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="gap-1 flex">
+                  <div>{showChangeButtonV2("water")}</div>
+                  Watering schedule:{" "}
+                  <p className="font-light">
+                    {" "}
+                    {plantDataDisplay.water || "None provided"}
+                  </p>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="gap-1 flex">
+                  <div>{showChangeButtonV2("light")}</div>
+                  Sunlight:{" "}
+                  <p className="font-light">
+                    {" "}
+                    {plantDataDisplay.light || "None provided"}
+                  </p>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="gap-1 flex">
+                  <div>{showChangeButtonV2("plantHeight")}</div>
+                  Height:{" "}
+                  <p className="font-light">
+                    {" "}
+                    {(plantDataDisplay.plantHeight &&
+                      plantDataDisplay.plantHeight + " cm") ||
+                      "None provided"}
+                  </p>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="gap-1 flex">
+                  <div>{showChangeButtonV2("plantWidth")}</div>
+                  Width:{" "}
+                  <p className="font-light">
+                    {" "}
+                    {(plantDataDisplay.plantWidth &&
+                      plantDataDisplay.plantWidth + " cm") ||
+                      "None provided"}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex">
+                  <div>{showChangeButtonV2("description")}</div>
+                  <p className="text-left">Description:</p>
+                </div>
+                <div className="flex flex-col items-center justify-center pt-2">
+                  <div className="border-slate-400 border rounded-xl w-[80%] p-2 font-extralight">
+                    {plantDataDisplay.description ||
+                      "None provided please add one"}
+                  </div>
+                </div>
+              </div>
+              <div className="w-inherit flex justify-between item-center">
+                <div className="flex items-center hover:text-blue-600hover:underline">
+                  {" "}
+                  <Link
+                    href={`/p/${plantDataDisplay.id}`}
+                    className="text-blue-400 font-light"
+                  >
+                    Public view of {plantDataDisplay.name}
+                  </Link>
+                </div>
+                <DeleteUniquePlantButton
+                  uniquePlantId={plantDataDisplay.id}
+                  user={userId}
+                  objectName={plantDataDisplay.name}
+                  onConfirm={onDelete}
+                  liked={false}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <CSSTransition
+        in={showForm}
+        timeout={1000}
+        classNames="fade"
+        unmountOnExit
+        mountOnEnter
+      >
+        <div className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] z-40 right-0"></div>
+      </CSSTransition>
+
+      <CSSTransition
+        in={showForm}
+        timeout={600}
+        classNames="page"
+        unmountOnExit
+        mountOnEnter
+      >
+        <UpdateDataComponent
+          field={activeField || ""}
+          userId={userId}
+          plantInfo={plantData}
+          onSubmit={onSubmitFromParent}
+          onClose={handleOnClose}
+        />
+      </CSSTransition>
+    </>
   );
 }
 

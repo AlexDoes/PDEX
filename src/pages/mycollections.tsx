@@ -1,14 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import prisma from "lib/prisma";
 import CreateCollectionForm from "@/components/CreateCollectionForm";
 import DeleteCollectionButton from "@/components/DeleteCollectionButton";
 import { usePreviousScrollPosition } from "@/components/PreviousScrollPosition";
 import { CSSTransition } from "react-transition-group";
-import { Transition } from "react-transition-group";
-import { useTransition } from "react";
 import { FaSeedling } from "react-icons/fa";
 import ImageCarousel from "@/components/ImageCarouselComponent";
 import { RiPlantLine } from "react-icons/ri";
@@ -48,8 +46,22 @@ interface CollectionProps {
 export default function MyCollections({ items, userId }: CollectionProps) {
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);
-  usePreviousScrollPosition();
   const [displayPlants, setDisplayPlants] = useState(items);
+  const [scroll, setScroll] = useState(false);
+  const latestCollection = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scroll) {
+      if (latestCollection.current) {
+        latestCollection.current.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+          inline: "nearest",
+        });
+      }
+    }
+    scroll && setScroll(false);
+  }, [displayPlants]);
 
   const handleClick = (id: string) => {
     router.push(`/collections/${id}`);
@@ -61,6 +73,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
 
   const handleSubmitCollectionForm = async (object: any) => {
     setShowForm(false);
+    setScroll(true);
     object.plantContent = [];
     setDisplayPlants([...displayPlants, object]);
   };
@@ -223,7 +236,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   };
 
   return (
-    <>
+    <div>
       <h1 className="text-3xl flex justify-center my-3 items-center gap-1">
         My Collections
         <RiPlantLine className="text-3xl text-green-400" />
@@ -242,8 +255,9 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                       py-4
                       border-cyan-300
                       w-[100%]
-                      gap-2
+                      gap-2 h-full
                       "
+          ref={latestCollection}
         >
           {collectionsToShow()}
         </div>
@@ -289,7 +303,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
           closeCollectionForm={handleAddCollectionClick}
         />
       </CSSTransition>
-    </>
+    </div>
   );
 }
 

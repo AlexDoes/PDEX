@@ -29,8 +29,6 @@ export default function MyPlants({
 
   const [showForm, setShowForm] = useState(false);
 
-  usePreviousScrollPosition();
-
   const onSubmitFromParent = () => {
     setShowForm(false);
     router.push(router.asPath);
