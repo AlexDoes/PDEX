@@ -64,18 +64,7 @@ export default function plantDisplay({ plant, userId }: any) {
   const [editPhoto, setEditPhoto] = useState<boolean>(false);
   const [upload, setUpload] = useState<boolean>(false);
   const [showForm, setShowForm] = useState<boolean>(false);
-  const [activeField, setActiveField] = useState<string | null>("");
-
-  const onSubmitFromParent = () => {
-    setShowForm(false);
-    setActiveField("");
-    // router.push(router.asPath);
-  };
-
-  const handleOnClose = () => {
-    setShowForm(false);
-    setActiveField("");
-  };
+  const [activeField, setActiveField] = useState<string>("");
 
   useEffect(() => {
     if (userId !== plantData.ownedBy.id) {
@@ -99,6 +88,18 @@ export default function plantDisplay({ plant, userId }: any) {
     image: plantData.image,
     ownedBy: plantData.ownedBy,
   });
+
+  const onSubmitFromParent = (data: string) => {
+    const props = { activeField, userId, plantInfo: plantData };
+    setShowForm(false);
+    handleUpdate(activeField, props, data, reload);
+    setActiveField("");
+  };
+
+  const handleOnClose = () => {
+    setShowForm(false);
+    setActiveField("");
+  };
 
   const uploadImage = async (file: File): Promise<string> => {
     const params = {
@@ -183,7 +184,6 @@ export default function plantDisplay({ plant, userId }: any) {
     const props = { field, userId, plantInfo: plantData };
   };
 
-  const props = { userId, plantInfo: plantData };
   const showChangeButtonV2 = (field: fieldName) => {
     return (
       <button
@@ -448,7 +448,7 @@ export async function getServerSideProps(context: any) {
 }
 
 async function handleUpdate(
-  field: fieldName,
+  field: string,
   props: plantInfoProps,
   data: string,
   reload: any

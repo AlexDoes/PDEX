@@ -46,9 +46,10 @@ export default function UpdateDataComponent({
     setTextInputValue(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
     const data = textInputValue;
-    onSubmit(data);
+    handleSubmissionFromParent(data);
   };
 
   return (
