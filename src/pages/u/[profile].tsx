@@ -552,9 +552,16 @@ export async function getServerSideProps(context: any) {
           },
         },
         plantCollection: {
-          orderBy: {
-            updatedAt: "desc",
-          },
+          orderBy: [
+            {
+              plantContents: {
+                _count: "desc",
+              },
+            },
+            {
+              updatedAt: "desc",
+            },
+          ],
           select: {
             id: true,
             name: true,
@@ -604,6 +611,16 @@ export async function getServerSideProps(context: any) {
           },
         },
         plantCollection: {
+          orderBy: [
+            {
+              plantContents: {
+                _count: "desc",
+              },
+            },
+            {
+              updatedAt: "desc",
+            },
+          ],
           select: {
             id: true,
             name: true,

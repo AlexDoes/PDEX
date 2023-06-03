@@ -78,6 +78,13 @@ export default function MyCollections({ items, userId }: CollectionProps) {
     setDisplayPlants([...displayPlants, object]);
   };
 
+  const handleDelete = async (id: string) => {
+    const updatedCollection = displayPlants.filter(
+      (collection) => collection.id !== id
+    );
+    setDisplayPlants(updatedCollection);
+  };
+
   const collectionsToShow = () => {
     if (items.length === 0) {
       return (
@@ -226,7 +233,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                 user={userId}
                 collectionId={collection.id}
                 objectName={collection.name}
-                onConfirm={handleSubmitCollectionForm}
+                onConfirm={handleDelete}
               />
             </div>
           </div>
@@ -268,11 +275,6 @@ export default function MyCollections({ items, userId }: CollectionProps) {
    ease-in-out duration-300
         hover:bg-[#fffbcc]
         "
-          //#fffbcc
-          //#389168
-          //#389168
-          //#fffbcc
-          //#ec9e69
         >
           Create a collection <FaSeedling />
         </button>

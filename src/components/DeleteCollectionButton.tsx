@@ -41,8 +41,12 @@ export default function DeleteCollectionButton(props: any) {
         closeButton: true,
         hideProgressBar: false,
         className: "confirm-toast",
+        style: {
+          background: "#c1e1c1",
+          color: "#000000",
+        },
       });
-      handleSubmissionFromParent();
+      handleSubmissionFromParent(collectionId);
     } catch (error) {
       console.log(error);
     }

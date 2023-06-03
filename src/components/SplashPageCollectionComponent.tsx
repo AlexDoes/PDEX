@@ -68,6 +68,9 @@ export default function Splash(Data: Props) {
             rounded-xl px-5 py-5"
           >
             {displayData.plantContents.map((plant, i) => {
+              if (i > 6) {
+                return null;
+              }
               const reverse =
                 i % 2 === 0
                   ? "flex-col-reverse sm:flex-row-reverse gradient-bg-card2"

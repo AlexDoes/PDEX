@@ -28,10 +28,14 @@ export default function MyPlants({
   const router = useRouter();
 
   const [showForm, setShowForm] = useState(false);
+  const [plantsToDisplay, setPlantsToDisplay] = useState(items);
 
-  const onSubmitFromParent = () => {
+  const onSubmitFromParent = (newPlant: any) => {
+    console.log("newPlant", newPlant);
     setShowForm(false);
-    router.push(router.asPath);
+    setPlantsToDisplay([...plantsToDisplay, newPlant]);
+
+    // router.push(router.asPath, undefined, { scroll: false, shallow: false });
   };
 
   const handleOnClose = () => {
@@ -39,7 +43,7 @@ export default function MyPlants({
   };
 
   const showPlantsCard = () => {
-    if (items.length === 0) {
+    if (plantsToDisplay.length === 0) {
       return (
         <div
           className={`
@@ -95,7 +99,7 @@ export default function MyPlants({
       `}
         tabIndex={0}
       >
-        {items.map((plant: any) => {
+        {plantsToDisplay.map((plant: any) => {
           return (
             <div
               className=" border-[#c1e1c1] bg-orange-100 bg-opacity-70 rounded-xl p-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[55vw] md:w-[40vw] lg:w-[25vw] focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[480px] focus:outline-none overflow-x-hidden group"
@@ -127,7 +131,7 @@ export default function MyPlants({
                   className="absolute bottom-2 left-0 right-0 px-2 py-2 bg-gray-800 opacity-0 transition-opacity ease-in-out duration-100
                   group-hover:opacity-70
                   group-focus:opacity-70
-                  w-[99%]
+                  w-[100%]
                   mx-auto
                   rounded-b-xl
                   flex flex-col
@@ -137,7 +141,7 @@ export default function MyPlants({
                   <div className="text-sm text-white font-light">
                     <p>
                       {!plant.species2
-                        ? plant.species
+                        ? plant.species || "No species listed"
                         : plant.species + " / " + plant.species2}
                     </p>
                     <div className="flex flex-row gap-1">
@@ -160,7 +164,8 @@ export default function MyPlants({
               </Link>
               <div className="font-light italic">
                 {" "}
-                {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
+                {plant.species || "No species listed"}{" "}
+                {plant.species2 ? "x " + plant.species2 : null}{" "}
               </div>
               <p
                 className="
@@ -184,7 +189,7 @@ export default function MyPlants({
               >
                 {plant.description
                   ? plant.description
-                  : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
+                  : `There's not much known about ${plant.name} yet but check back later when ${username} tells us more about it!`}
               </p>
             </div>
           );

@@ -57,8 +57,11 @@ export default function UpdateDataComponent({
       <div className="fixed z-50 top-0 left-0 right-0 bottom-0 h-[100vh]  w-[100vw] flex justify-center items-center  ">
         <div
           id="createuniqueplantform"
-          className="gradient-bg-card2-reverse rounded-md md:w-[50%]   w-[80%] h-[50%]  max-w-[600px] border-[#c1e1c1] p-2   "
+          className="gradient-bg-card2-reverse rounded-md md:w-[50%]   w-[80%] h-[50%]  max-w-[600px] border-[#c1e1c1] p-2  relative "
         >
+          <div className={`absolute bottom-2 right-1 text-[#fffbcc] font-extralight text-xs ${field === 'name' || field === 'species' ? 'hidden' : ''}`}>
+            Update with an empty field to delete a value.
+          </div>
           <div
             onClick={closeCollectionForm}
             className="absolute right-2 top-2 shadow-md rounded-full cursor-pointer"
@@ -88,12 +91,20 @@ export default function UpdateDataComponent({
               minLength={3}
               onChange={handleTextInputChange}
             />
-            <button
-              type="submit"
-              className="hover:bg-green-300 border-sky-300 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 text-[#ec9e69] hover:text-green-600 transition-all ease-in-out duration-300 bg-[#fffbcc]"
-            >
-              Update {map[field]}
-            </button>
+            <div className="w-full flex flex-row justify-center items-center gap-1">
+              <button
+                type="submit"
+                className="hover:bg-green-300 border-sky-300 rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 hover:border-red-300 text-[#ec9e69] hover:text-green-600 transition-all ease-in-out duration-300 bg-[#fffbcc]"
+              >
+                Update
+              </button>
+              <button
+                onClick={closeCollectionForm}
+                className="rounded-md p-1 flex justify-center items-center gap-1 xs:text-2xl text-xl py-2 px-2 bg-opacity-90 hover:bg-opacity-810 text-[#ec8369] hover:text-[#e28a74] transition-all ease-in-out duration-300 bg-[#fccfb8] hover:bg-[#fcaeaa]"
+              >
+                Cancel
+              </button>
+            </div>
           </form>
         </div>
       </div>

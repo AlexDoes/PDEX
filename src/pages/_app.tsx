@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>BAX</title>
-        <meta name="description" content="PlantDex" />
+        <meta name="description" content="BAX plant based social media" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/baxlogo.png" />
       </Head>

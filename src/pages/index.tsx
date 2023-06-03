@@ -32,7 +32,6 @@ export default function Home(props: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/baxlogo.png" />
       </Head>
-      {/* <div>Hello {dynamicContent} </div> */}
       <Splash collection={props.collection} />
     </>
   );

@@ -143,7 +143,8 @@ export default function plantDisplay({ plant, userId }: any) {
 
   const handleClosePhotoUploadButton = (e: any) => {
     e.preventDefault();
-    console.log("close photo upload button");
+    setUpload(false);
+    setImage(null);
     setEditPhoto(false);
   };
 
@@ -348,9 +349,9 @@ export default function plantDisplay({ plant, userId }: any) {
                 </div>
               </div>
               <div className="flex flex-col">
-                <div className="flex">
+                <div className="flex gap-1">
                   <div>{showChangeButtonV2("description")}</div>
-                  <p className="text-left">Description:</p>
+                  <p className="text-left"> Description:</p>
                 </div>
                 <div className="flex flex-col items-center justify-center pt-2">
                   <div className="border-slate-400 border rounded-xl w-[80%] p-2 font-extralight">
@@ -401,7 +402,7 @@ export default function plantDisplay({ plant, userId }: any) {
         <UpdateDataComponent
           field={activeField || ""}
           userId={userId}
-          plantInfo={plantData}
+          plantInfo={plantDataDisplay}
           onSubmit={onSubmitFromParent}
           onClose={handleOnClose}
         />

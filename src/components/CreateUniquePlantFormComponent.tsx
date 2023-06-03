@@ -181,6 +181,7 @@ export default function CreateUniquePlant(props: any) {
     // const url = "https://pdex.s3.amazonaws.com/0_3.png1682803498914";
     data.plantImage = url;
     await createTheUniquePlant(data).then((res) => {
+      console.log(res);
       toast.success(`${data.plantName} created successfully!`, {
         style: {
           background: "#e0f0e3",
@@ -188,7 +189,7 @@ export default function CreateUniquePlant(props: any) {
           textShadow: "0 0 0.5rem #000000",
         },
       });
-      onSubmitFunction();
+      onSubmitFunction({ ...data, plantImage: url, id: res.id });
     });
   };
 

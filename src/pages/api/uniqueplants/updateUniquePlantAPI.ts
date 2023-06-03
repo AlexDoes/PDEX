@@ -2,6 +2,14 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { Prisma, PrismaClient } from "@prisma/client";
 
+const map: map = {
+  name: "Name",
+  species: "Species",
+};
+interface map {
+  [key: string]: string;
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -28,6 +36,9 @@ export default async function handler(
     res.status(403).json({ message: "Unauthorized" });
   } else if (plant.ownerId !== userId) {
     res.status(403).json({ message: "Unauthorized" });
+  }
+  if ((field === "species" || field === "name") && data === "") {
+    res.status(402).json({ message: `${map[field]} cannot be empty` });
   }
 
   if (field === "species") {
@@ -76,7 +87,7 @@ export default async function handler(
         id: plantId,
       },
       data: {
-        [field]: data + " cm",
+        [field]: data,
       },
     });
     prisma.$disconnect();
