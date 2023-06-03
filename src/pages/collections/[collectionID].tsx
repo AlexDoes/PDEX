@@ -83,14 +83,16 @@ export default function ThisCollection({
     setShowAddPlant(true);
   };
 
-  const onSubmitFromParent = () => {
+  const onSubmitFromParent = (Plants: String[]) => {
+    console.log(Plants);
     setShowAddPlant(false);
-    router.reload();
+    // router.reload();
+
     router.push(router.asPath);
   };
 
   const onSubmitFromParentRemove = () => {
-    router.reload();
+    // router.reload();
   };
 
   const onSubmitFromParentUpdate = (plantsAdded: String[]) => {

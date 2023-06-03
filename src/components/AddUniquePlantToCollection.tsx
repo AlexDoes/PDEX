@@ -15,6 +15,7 @@ export default function AddUniquePlantToCollection(props: any) {
     };
     addPlantToCollection(plantData).then((data) => {
       console.log("triggered");
+      console.log(plantsToBeAdded);
       props.onSubmit(plantsToBeAdded);
     });
   };

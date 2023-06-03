@@ -17,17 +17,19 @@ interface User {
   description: string | null | undefined;
 }
 
-export default function AuthButtonComponent() {
+export default function AuthButtonComponent({ setBlur, closeBlur }: any) {
   const { data: session } = useSession();
 
   const [showmenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
     setShowMenu(!showmenu);
+    setBlur();
   };
 
   const closeMenu = () => {
     setShowMenu(false);
+    closeBlur();
   };
 
   if (session) {
@@ -39,7 +41,7 @@ export default function AuthButtonComponent() {
             <div>
               {!showmenu && <GiHamburgerMenu size={30} color="#efe6c1" />}
             </div>
-            <div className="border border-[#efe6c1] rounded-md shadow-sm hover:shadow-md">
+            <div onClick={closeBlur} className="border border-[#efe6c1] rounded-md shadow-sm hover:shadow-md">
               {showmenu && <AiOutlineClose size={30} color="#efe6c1" />}
             </div>
             {/* <div className={`${!showmenu ? "opacity-100 visible" : "opacity-0 invisible"}`}>
@@ -58,10 +60,11 @@ export default function AuthButtonComponent() {
         )}
         <CSSTransition
           in={showmenu}
-          timeout={400}
+          timeout={200}
           classNames="dropdown"
           unmountOnExit
           onExited={closeMenu}
+        
         >
           <div
             className={`absolute top-16 w-[100vw] 

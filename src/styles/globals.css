@@ -53,8 +53,8 @@
   max-height: 1000px;
   opacity: 1;
   transform: scaleY(1);
-  transition: max-height 300ms ease-in, opacity 300ms ease-in,
-    transform 300ms ease-in;
+  transition: max-height 200ms ease-in, opacity 200ms ease-in,
+    transform 200ms ease-in;
 }
 
 .dropdown-exit {
