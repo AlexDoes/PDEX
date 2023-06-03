@@ -157,8 +157,10 @@ export default function plantPublicDisplayPage({
             alt={plant.name}
             className="
             rounded-xl
-            xs:w-[80vw] xs:h-[95vw] sm:w-[100vw]  
-            lg:max-h-[80vh] lg:max-w-[80vh] xl:max-w-[80vh] xl:max-h-[80vh]
+            xs:w-[80vw] xs:h-[95vw] 
+            sm:w-[100vw]  
+            lg:max-h-[80vh] lg:max-w-[80vh] 
+            xl:max-w-[80vh] xl:max-h-[80vh]
             sm:max-w-[80vw] mb-2
             hover:brightness-90
             hover:outline-none
@@ -218,7 +220,6 @@ export default function plantPublicDisplayPage({
           <div className="relative flex flex-col justify-center">
             <div
               className="
- 
               rounded-lg font-light
               xs:max-h-[92px]
               md:h-full

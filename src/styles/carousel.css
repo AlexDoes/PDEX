@@ -219,7 +219,7 @@
   padding: 10px;
   font-size: 12px;
   text-align: center;
-  opacity: 0.25;
+  opacity: 0;
   -webkit-transition: opacity 0.35s ease-in-out;
   -moz-transition: opacity 0.35s ease-in-out;
   -ms-transition: opacity 0.35s ease-in-out;
@@ -273,4 +273,8 @@
 }
 .carousel:hover .slide .legend {
   opacity: 1;
+}
+
+.carousel:hover .slide .legend {
+  opacity: 0.8;
 }

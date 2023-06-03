@@ -31,11 +31,18 @@ export default function MyPlants({
   const [plantsToDisplay, setPlantsToDisplay] = useState(items);
 
   const onSubmitFromParent = (newPlant: any) => {
-    console.log("newPlant", newPlant);
+    const newPlantData = {
+      id: newPlant.id,
+      name: newPlant.plantName,
+      image: newPlant.plantImage,
+      description: newPlant.plantDescription,
+      species: newPlant.plantSpecies,
+      species2: newPlant.plantSubspecies,
+      plantHeight: newPlant.plantHeight,
+      plantWidth: newPlant.plantWidth,
+    };
     setShowForm(false);
-    setPlantsToDisplay([...plantsToDisplay, newPlant]);
-
-    // router.push(router.asPath, undefined, { scroll: false, shallow: false });
+    setPlantsToDisplay([...plantsToDisplay, newPlantData]);
   };
 
   const handleOnClose = () => {
