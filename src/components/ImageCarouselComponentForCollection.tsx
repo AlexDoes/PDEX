@@ -11,6 +11,8 @@ type Plant = {
   id: string;
   name: string;
   index: number;
+  species: string;
+  species2: string;
 };
 
 export default function CollectionImageCarousel({
@@ -31,13 +33,14 @@ export default function CollectionImageCarousel({
             alt={`Image ${index}`}
             className="w-[full] h-[full] object-cover"
           />
-          <div className="legend flex items-center justify-center">
+          <div className="legend flex flex-col items-center justify-center">
             <Link href={`/p/${names[index].id}`}>
-              <p className="flex items-center justifer-center gap-1 hover:text-blue-300">
+              <div className="flex items-center justifer-center gap-1 hover:text-blue-300">
                 {names[index].name}
-                <BsBoxArrowUpRight className="" />
-              </p>
+                {/* <BsBoxArrowUpRight className="" /> */}
+              </div>
             </Link>
+            {names[index].species ? names[index].species : null}
           </div>
         </div>
       ))}
