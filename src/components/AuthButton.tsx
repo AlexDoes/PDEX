@@ -6,6 +6,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { CSSTransition } from "react-transition-group";
 import { FaBars } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { useRef } from "react";
 
 interface User {
   id: string;
@@ -19,7 +20,7 @@ interface User {
 
 export default function AuthButtonComponent({ setBlur, closeBlur }: any) {
   const { data: session } = useSession();
-
+  const tansitionRef = useRef(null);
   const [showmenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -64,9 +65,11 @@ export default function AuthButtonComponent({ setBlur, closeBlur }: any) {
           classNames="dropdown"
           unmountOnExit
           onExited={closeMenu}
+          nodeRef={tansitionRef}
         
         >
           <div
+            ref={tansitionRef}  
             className={`absolute top-16 w-[100vw] 
             right-0 z-20 shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3
             bg-black indent-3 md:indent-0

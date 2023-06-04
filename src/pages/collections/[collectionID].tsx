@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import prisma from "lib/prisma";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import AddUniquePlantToCollection from "@/components/AddUniquePlantToCollection";
 import RemoveUniquePlantFromCollectionButton from "@/components/RemoveUniquePlantFromCollectionButton";
 import { useRouter } from "next/router";
@@ -58,6 +58,8 @@ export default function ThisCollection({
     plantContentsData.description
   );
 
+  const transitionRef = useRef(null);
+  const transitionRef2 = useRef(null);
   const plantstoAdd = usersUniquePlants.filter((plant) => {
     return !plantContentsData.plantContents.some(
       (plantContent: any) => plantContent.id === plant.id
@@ -226,8 +228,9 @@ export default function ThisCollection({
         classNames="fade"
         unmountOnExit
         mountOnEnter
+        nodeRef={transitionRef}
       >
-        <div className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "></div>
+        <div ref={transitionRef} className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "></div>
       </CSSTransition>
 
       <CSSTransition
@@ -236,12 +239,15 @@ export default function ThisCollection({
         classNames="page"
         unmountOnExit
         mountOnEnter
+        nodeRef={transitionRef2}
+        
       >
         <AddUniquePlantToCollection
           usersPlants={plantstoAdd}
           collectionId={collectionID}
           userId={userId}
           onSubmit={onSubmitFromParent}
+          forwardRef={transitionRef2}
         />
       </CSSTransition>
     </>

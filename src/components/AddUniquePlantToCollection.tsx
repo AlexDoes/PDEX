@@ -33,7 +33,7 @@ export default function AddUniquePlantToCollection(props: any) {
 
   return (
     <>
-      <div className="fixed z-50 top-0 left-0 right-0 bottom-0 h-[100vh]  w-[100vw] flex justify-center items-center  ">
+      <div ref={props.forwardRef} className="fixed z-50 top-0 left-0 right-0 bottom-0 h-[100vh]  w-[100vw] flex justify-center items-center  ">
         <div className="gradient-bg-card2-reverse rounded-md md:w-[50%]   w-[80%] h-[50%]  max-w-[600px]  border-2 border-[#c1e1c1] p-2   ">
           <form
             onSubmit={handleSubmit}

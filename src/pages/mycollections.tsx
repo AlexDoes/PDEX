@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import prisma from "lib/prisma";
 import CreateCollectionForm from "@/components/CreateCollectionForm";
 import DeleteCollectionButton from "@/components/DeleteCollectionButton";
@@ -48,6 +48,8 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);
   usePreviousScrollPosition();
+  const transitionRef = useRef(null);
+  const transitionRef2 = useRef(null);
 
   //change to state
 
@@ -261,8 +263,10 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         classNames="fade"
         unmountOnExit
         mountOnEnter
+        nodeRef={transitionRef}
       >
         <div
+        ref={transitionRef}
           // onClick={handleAddCollectionClick}
           className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "
         ></div>
@@ -274,11 +278,13 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         classNames="page"
         unmountOnExit
         mountOnEnter
+        nodeRef={transitionRef2}
       >
         <CreateCollectionForm
           user={userId}
           onSubmit={handleSubmitCollectionForm}
           closeCollectionForm={handleAddCollectionClick}
+          forwaredRef={transitionRef2}
         />
       </CSSTransition>
     </>
