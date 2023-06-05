@@ -126,7 +126,7 @@
 }
 .carousel.carousel-slider .control-arrow {
   top: 0;
-  color: #eefab3;
+  /* color: #eefab3; */
   font-size: 26px;
   bottom: 0;
   margin-top: 0;

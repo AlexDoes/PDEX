@@ -166,7 +166,7 @@ export default function publicDisplayCollection({
       <div className="relative h-full group w-inherit  items-center justify-center flex  ">
         <div className="relative flex">
           <div
-            className="overflow-hidden outline-8 outline-red-900
+            className=" outlie outline-8 outline-red-900
             xs:w-[80vw] xs:h-[80vw]
             lg:max-h-[80vh] lg:max-w-[80vh] 
             xl:max-w-[80vh] xl:max-h-[80vh]

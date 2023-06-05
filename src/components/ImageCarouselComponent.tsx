@@ -6,7 +6,12 @@ type CarouselProps = {
 
 export default function ImageCarousel({ images }: CarouselProps) {
   return (
-    <Carousel showThumbs={false} showStatus={false} infiniteLoop>
+    <Carousel
+      showThumbs={false}
+      showIndicators={false}
+      showStatus={true}
+      infiniteLoop
+    >
       {images.map((image, index) => (
         <div key={{ image } + String(Math.random() * 1000000000)}>
           <img
