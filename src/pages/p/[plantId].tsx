@@ -146,12 +146,12 @@ export default function plantPublicDisplayPage({
   return (
     <div
       className=" mt-[10px] border-[#c1e1c1] bg-orange-100 rounded-xl p-4  lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
-        focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-6 lg:gap-20  h-[88vh] 
+        focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-6 lg:gap-10   h-[88vh] 
        "
       tabIndex={0}
     >
       <div className="relative lg:max-w-[600px] h-full w-full group w-inherit  items-center justify-center flex  ">
-        <div className="relative  h-full w-full lg:min-w-[500px] md:max-w-[600px] lg:max-w-[600px] ">
+        <div className="relative  h-full w-full lg:min-w-[500px] md:max-w-[500px] lg:max-w-[600px] ">
           {/* <img
             src={plant.image}
             alt={plant.name}
