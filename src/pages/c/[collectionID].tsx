@@ -291,26 +291,24 @@ export default function publicDisplayCollection({
       <div
         className="relative flex 
         flex-col   xs:items-center xs:justify-center  gap-2 px-2    
-        lg:max-w-[600px]
+        
         min-w-[30vw]
+        w-full
+        border-8
         h-full
         rounded-xl
       "
       >
         <div
           className="h-[30%]  flex 
-          flex-col  items-start justify-evenly relative   gap-1"
+          flex-col  items-start justify-evenly relative w-full gap-1"
         >
           <div>
             <div className=" flex flex-row text-xl elipsis font-semibold">
               {collection.name}{" "}
               <div className="text-sm font-light text-blue-300 rounded-sm">
                 {user === collection.ownerId ? (
-                  <div className="ml-1 rounded-sm hover:border hover:backdrop-brightness-90">
-                    <Link href={`/myplants/${collection.id}`}>
-                      <SlPencil />
-                    </Link>
-                  </div>
+                  <div className="ml-1 rounded-sm hover:border hover:backdrop-brightness-90"></div>
                 ) : (
                   ""
                 )}{" "}
@@ -324,7 +322,7 @@ export default function publicDisplayCollection({
               </Link>
             </div>
           </div>
-          <div className="relative flex flex-col  justify-center">
+          <div className="relative flex flex-col  justify-center w-full ">
             <div
               className="
               rounded-lg font-light
@@ -339,15 +337,22 @@ export default function publicDisplayCollection({
               pl-2
               xs:text-sm sm:text-sm md:text-md items-center 
               relative
+              w-full
             "
             >
               <p
-                className=" border-t-2 border-b-2 p-2 border-[#FFF4BD]  h-full text-center justify-center flex  font-light overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+                className=" border-t-2 items-center border-b-2 p-2 border-[#FFF4BD]  h-full 
+                w-full min-w-full text-center justify-center flex  font-light overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
         scrollbar-rounded-sm snap-y snap-mandatory  "
               >
                 {collection.description
                   ? collection.description
-                  : `There's not much known about ${collection.name} yet but check back later when ${collection.owner.nickname} tells us more about it!`}
+                  : `There's not much known about ${
+                      collection.name
+                    } yet but check back later when ${
+                      collection.owner.nickname ||
+                      collection.owner.name.split(" ")[0]
+                    } tells us more about it!`}
               </p>
             </div>
           </div>
