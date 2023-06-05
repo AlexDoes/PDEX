@@ -57,11 +57,11 @@ const CommentBox = (props: Props) => {
           setLikeId(newlikeId);
         });
       } else {
-        toast.error("Error liking comment!", {
+        toast.error("Error liking content!", {
           style: {
-            background: "#e0f0e3",
+            //crimson hexcode color : #DC143C
+            background: "#ff6699",
             color: "#ffffff",
-            textShadow: "0 0 0.5rem #000000",
           },
         });
       }

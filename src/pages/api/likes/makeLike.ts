@@ -25,7 +25,7 @@ export default async function handler(
     type = "plants";
     typeId = "plantId";
   } else if (reference === "Collection") {
-    type = "collections";
+    type = "collection";
     typeId = "collectionId";
   }
   try {

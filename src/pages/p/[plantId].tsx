@@ -254,9 +254,8 @@ export default function plantPublicDisplayPage({
         scrollbar-rounded-sm snap-y snap-mandatory  "
               >
                 {plant.description
-                  ? plant.description +
-                    "lorem ipsum dolor sit amet, consectetur adipiscing elit. Null lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Null"
-                  : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it! lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Null`}
+                  ? plant.description
+                  : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
               </p>
             </div>
           </div>

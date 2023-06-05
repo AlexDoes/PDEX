@@ -53,14 +53,14 @@ export default function publicDisplayCollection({
   const commentsToDisplay = () => {
     if (commentsToDisplayState.length === 0) {
       return (
-        <div className="border-y border-black h-full xs:h-[90px] text-center justify-center items-center flex">
+        <div className="border-y-2 border-[#bceac2] h-full xs:h-[90px] text-center justify-center items-center flex">
           Be the first to comment!
         </div>
       );
     }
     return (
       <div
-        className="flex flex-col gap-3 border-y border-black px-4 h-full overflow-y-auto p-2 transition-all duration-500 ease-in-out scroll-smooth pt-4 scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+        className="flex flex-col gap-3 border-y border-[#FFF4BD]px-4 h-full overflow-y-auto p-2 transition-all duration-500 ease-in-out scroll-smooth pt-4 scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
         scrollbar-rounded-sm snap-y snap-mandatory"
         ref={latestComment}
       >
@@ -159,7 +159,7 @@ export default function publicDisplayCollection({
     <div
       className=" mt-[10px] border-[#c1e1c1] bg-green-100 bg-opacity-80
       rounded-xl p-4  lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
-        w-full  focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-8 lg:gap-20  min-h-[88vh] h-full
+        w-full focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-8 lg:gap-5  min-h-[88vh] h-[88vh]
          "
       tabIndex={0}
     >
@@ -216,7 +216,7 @@ export default function publicDisplayCollection({
         </div>
       </div>
       {/* comment section */}
-      <div
+      {/* <div
         className="relative grid border border-black xs:items-center xs:justify-center  gap-2 px-2 h-full   
           max-w-[800px]
           rounded-xl
@@ -279,6 +279,83 @@ export default function publicDisplayCollection({
         </div>
         <div className="h-[55%] w-full mb-auto">{commentsToDisplay()}</div>
         <div className="h-[12%] w-full bottom-0  justify-center py-3  ">
+          <CommentBox
+            reference={"Collection"}
+            refId={collection.id}
+            userId={user}
+            onAction={handleCommentSubmit}
+            likedId={likedId}
+          />
+        </div>
+      </div> */}
+      <div
+        className="relative flex 
+        flex-col   xs:items-center xs:justify-center  gap-2 px-2    
+        lg:max-w-[600px]
+        min-w-[30vw]
+        h-full
+        rounded-xl
+      "
+      >
+        <div
+          className="h-[30%]  flex 
+          flex-col  items-start justify-evenly relative   gap-1"
+        >
+          <div>
+            <div className=" flex flex-row text-xl elipsis font-semibold">
+              {collection.name}{" "}
+              <div className="text-sm font-light text-blue-300 rounded-sm">
+                {user === collection.ownerId ? (
+                  <div className="ml-1 rounded-sm hover:border hover:backdrop-brightness-90">
+                    <Link href={`/myplants/${collection.id}`}>
+                      <SlPencil />
+                    </Link>
+                  </div>
+                ) : (
+                  ""
+                )}{" "}
+              </div>
+            </div>
+            <div className=" font-extralight text-sm hover:text-blue-400">
+              <Link
+                href={`/u/${collection.owner.nickname || collection.ownerId}`}
+              >
+                By {collection.owner.name || collection.owner.nickname}
+              </Link>
+            </div>
+          </div>
+          <div className="relative flex flex-col  justify-center">
+            <div
+              className="
+              rounded-lg font-light
+              xs:max-h-[92px]
+              md:h-full
+              lg:h-[90px]
+              xl:h-[90px]
+              max-h-[92px]
+              text-ellipsis
+              text-center
+              flex
+              pl-2
+              xs:text-sm sm:text-sm md:text-md items-center 
+              relative
+            "
+            >
+              <p
+                className=" border-t-2 border-b-2 p-2 border-[#FFF4BD]  h-full text-center justify-center flex  font-light overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+        scrollbar-rounded-sm snap-y snap-mandatory  "
+              >
+                {collection.description
+                  ? collection.description
+                  : `There's not much known about ${collection.name} yet but check back later when ${collection.owner.nickname} tells us more about it!`}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className=" h-[55%] min-h-[300px] max-h-[300px] w-full   first-letter: overflow-y-auto  justify-center items-center mt-2 mb-auto">
+          {commentsToDisplay()}
+        </div>
+        <div className="h-[12%] w-full first-letter: justify-center py-3  ">
           <CommentBox
             reference={"Collection"}
             refId={collection.id}
