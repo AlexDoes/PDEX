@@ -301,7 +301,7 @@ export default function CreateUniquePlant(props: any) {
             {fields.height && (
               <div className="w-full flex">
                 <input
-                  className="w-full h-[40px] bg-[#efe6c1] pl-5  border-white rounded-r-md border-none"
+                  className="w-full h-[40px] bg-[#efe6c1]  border-white rounded-r-md border-none"
                   type="number"
                   placeholder="Plant Height"
                   {...register("plantHeight", {
@@ -325,7 +325,7 @@ export default function CreateUniquePlant(props: any) {
               {fields.width && (
                 <div className="w-full flex">
                   <input
-                    className="w-full h-[40px] bg-[#efe6c1] pl-5 outline-none  border-white rounded-r-md border-none"
+                    className="w-full h-[40px] bg-[#efe6c1] outline-none  border-white rounded-r-md border-none"
                     type="number"
                     placeholder="Plant Width"
                     {...register("plantWidth", {

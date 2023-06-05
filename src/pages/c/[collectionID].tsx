@@ -240,7 +240,14 @@ export default function publicDisplayCollection({
               )}{" "}
             </div>
           </div>
-          <div className="italic font-light">Placeholder text</div>
+          <div className="italic font-light">
+            Collection by -{" "}
+            <Link
+              href={`/u/${collection.owner.nickname || collection.ownerId}`}
+            >
+              {collection.owner.nickname || collection.owner.name}
+            </Link>
+          </div>
           <div className="relative flex flex-col justify-center">
             <div
               className="
@@ -357,7 +364,6 @@ export async function getServerSideProps(context: any) {
     const formattedString = `${dateString}, ${timeString}`;
     return { ...comment, createdAt: formattedString };
   });
-  console.log(plantsWithFormattedTime);
 
   return {
     props: {
