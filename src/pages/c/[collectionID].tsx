@@ -159,7 +159,7 @@ export default function publicDisplayCollection({
     <div
       className=" mt-[10px] border-[#c1e1c1] bg-green-100 bg-opacity-80
       rounded-xl p-4  lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
-        w-full focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-8 lg:gap-5  min-h-[88vh] h-[88vh]
+        w-full focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-8 lg:gap-10 xl:gap-14  min-h-[88vh] h-[88vh]
          "
       tabIndex={0}
     >
