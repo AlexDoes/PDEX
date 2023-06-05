@@ -215,6 +215,7 @@ export default function CreateUniquePlant(props: any) {
   return (
     <>
       <div
+      ref={props.forwaredRef}
         // onClick={props.onSubmit}
         className=" z-50  bottom-0 top-0 fixed w-[90vw] flex items-center justify-center "
       >

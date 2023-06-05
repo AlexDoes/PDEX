@@ -59,7 +59,7 @@ export default function plantPublicDisplayPage({
   const commentsToDisplay = () => {
     if (commentsToDisplayState.length === 0) {
       return (
-        <div className="border-y border-black h-full xs:h-[90px] text-center justify-center items-center flex">
+        <div className="border-y border-black h-full xs:h-[90px]  text-center justify-center items-center flex">
           Be the first to comment!
         </div>
       );
@@ -146,28 +146,39 @@ export default function plantPublicDisplayPage({
   return (
     <div
       className=" mt-[10px] border-[#c1e1c1] bg-orange-100 rounded-xl p-4  lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
-      w-full  focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-8 lg:gap-20  h-[88vh] border-8
+        focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-6 lg:gap-10   h-[88vh] 
        "
       tabIndex={0}
     >
-      <div className="relative h-full group w-inherit  items-center justify-center flex  ">
-        <div className="relative">
-          <img
+      <div className="relative lg:max-w-[600px] h-full w-full group w-inherit  items-center justify-center flex  ">
+        <div className="relative  h-full w-full lg:min-w-[500px] md:max-w-[500px] lg:max-w-[600px] ">
+          {/* <img
             src={plant.image}
             alt={plant.name}
             className="
             rounded-xl
+<<<<<<< HEAD
             xs:w-[80vw] xs:h-[95vw] 
             sm:w-[100vw]  
             lg:max-h-[80vh] lg:max-w-[80vh] 
             xl:max-w-[80vh] xl:max-h-[80vh]
+=======
+            xs:w-[80vw] xs:h-[40vh] md:h-[70vh] md:w-[60vw] sm:w-[100vw]  
+            lg:max-h-[80vh] lg:max-w-[80vh] xl:max-w-[80vh] xl:max-h-[80vh]
+>>>>>>> steven5/31
             sm:max-w-[80vw] mb-2
             hover:brightness-90
             hover:outline-none
             lg:w-[45vw]
+            border border-red-500
             "
+          /> */}
+          <img
+            src={plant.image}
+            alt={plant.name}
+            className="h-full w-full rounded-xl object-cover"
           />
-          <div className="absolute left-0 right-0  flex flex-col px-2 py-2 mx-auto transition-opacity duration-100 ease-in-out bg-gray-800 opacity-0 bottom-2   group-hover:opacity-70 group-focus:opacity-70 rounded-b-xl ">
+          <div className="absolute left-0 right-0  flex flex-col px-2 py-2 mx-auto transition-opacity duration-100 ease-in-out bg-gray-800 opacity-0 bottom-0  group-hover:opacity-70 group-focus:opacity-70 rounded-b-xl ">
             <h3 className="text-lg text-white">{plant.name}</h3>
             <div className="text-sm font-light text-white">
               <p className="italic">
@@ -191,16 +202,20 @@ export default function plantPublicDisplayPage({
       </div>
       {/* comment section */}
       <div
-        className="relative grid   border border-black xs:items-center xs:justify-center  gap-2 px-2 h-full   
-        max-w-[800px]
+        className="relative flex 
+        flex-col   xs:items-center xs:justify-center  gap-2 px-2    
+        lg:max-w-[600px]
+        min-w-[30vw]
+        lg:max-h-[500px]
         rounded-xl
+ 
       "
       >
         <div
-          className="h-[30%] border border-red-500 flex 
-        flex-col items-start justify-evenly relative  gap-2 "
+          className="h-[30%]  flex 
+          flex-col  items-start justify-evenly relative   gap-2 "
         >
-          <div className=" flex flex-row text-xl elipsis font-bold">
+          <div className=" flex flex-row text-xl   elipsis font-bold">
             {plant.name}{" "}
             <div className="text-sm font-light text-blue-300 rounded-sm">
               {user === plant.ownerId ? (
@@ -217,7 +232,7 @@ export default function plantPublicDisplayPage({
           <div className="italic font-light">
             {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
           </div>
-          <div className="relative flex flex-col justify-center">
+          <div className="relative flex flex-col  justify-center">
             <div
               className="
               rounded-lg font-light
@@ -246,8 +261,8 @@ export default function plantPublicDisplayPage({
             </div>
           </div>
         </div>
-        <div className="h-[55%] w-full mb-auto">{commentsToDisplay()}</div>
-        <div className="h-[12%] w-full bottom-0  justify-center py-3  ">
+        <div className=" h-[55%] min-h-[300px] max-h-[300px] w-full   first-letter: overflow-y-auto  justify-center items-center mt-2 mb-auto">{commentsToDisplay()}</div>
+        <div className="h-[12%] w-full   first-letter: justify-center py-3  ">
           <CommentBox
             reference={"UniquePlant"}
             refId={plant.id}

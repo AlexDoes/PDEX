@@ -9,6 +9,7 @@ import { usePreviousScrollPosition } from "@/components/PreviousScrollPosition";
 import { CSSTransition } from "react-transition-group";
 import { RiPlantLine } from "react-icons/ri";
 import { FaSeedling } from "react-icons/fa";
+import { useRef } from "react";
 
 interface User {
   id: string;
@@ -26,7 +27,8 @@ export default function MyPlants({
   plantSpecies,
 }: any) {
   const router = useRouter();
-
+  const transitionRef = useRef(null);
+  const transitionRef2 = useRef(null);
   const [showForm, setShowForm] = useState(false);
   const [plantsToDisplay, setPlantsToDisplay] = useState(items);
 
@@ -233,8 +235,10 @@ export default function MyPlants({
         classNames="fade"
         unmountOnExit
         mountOnEnter
+        nodeRef={transitionRef}
       >
         <div
+          ref={transitionRef}
           onClick={onSubmitFromParent}
           className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] z-40 right-0"
         ></div>
@@ -246,9 +250,10 @@ export default function MyPlants({
         classNames="page"
         unmountOnExit
         mountOnEnter
+        nodeRef={transitionRef2}
       >
         <CreateUniquePlant
-          userId={userId}
+          forwaredRef={transitionRef2} userId={userId}
           data={plantSpecies}
           onSubmit={onSubmitFromParent}
           onClose={handleOnClose}

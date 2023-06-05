@@ -49,6 +49,8 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   const [displayPlants, setDisplayPlants] = useState(items);
   const [scroll, setScroll] = useState(false);
   const latestCollection = useRef<HTMLDivElement>(null);
+  const transitionRef = useRef(null);
+  const transitionRef2 = useRef(null);
 
   useEffect(() => {
     if (scroll) {
@@ -285,8 +287,10 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         classNames="fade"
         unmountOnExit
         mountOnEnter
+        nodeRef={transitionRef}
       >
         <div
+        ref={transitionRef}
           // onClick={handleAddCollectionClick}
           className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "
         ></div>
@@ -298,11 +302,13 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         classNames="page"
         unmountOnExit
         mountOnEnter
+        nodeRef={transitionRef2}
       >
         <CreateCollectionForm
           user={userId}
           onSubmit={handleSubmitCollectionForm}
           closeCollectionForm={handleAddCollectionClick}
+          forwaredRef={transitionRef2}
         />
       </CSSTransition>
     </div>
