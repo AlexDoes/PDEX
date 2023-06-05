@@ -4,7 +4,7 @@ import DeleteUniquePlantButton from "@/components/DeleteUniquePlantButton";
 import { useRouter } from "next/router";
 import UpdateDataComponent from "@/components/UpdatePlantDetailsComponentNew";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import s3 from "lib/aws";
 import spinner from "public/images/spinner.svg";
@@ -58,6 +58,8 @@ interface MyObject {
 
 export default function plantDisplay({ plant, userId }: any) {
   const plantData = plant;
+  const transitionRef = useRef(null);
+  const transitionRef2 = useRef(null);
   const router = useRouter();
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string>("");
@@ -388,8 +390,12 @@ export default function plantDisplay({ plant, userId }: any) {
         classNames="fade"
         unmountOnExit
         mountOnEnter
+        nodeRef={transitionRef}
       >
-        <div className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] z-40 right-0"></div>
+        <div
+          ref={transitionRef}
+          className="fixed top-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] z-40 right-0"
+        ></div>
       </CSSTransition>
 
       <CSSTransition
@@ -398,8 +404,10 @@ export default function plantDisplay({ plant, userId }: any) {
         classNames="page"
         unmountOnExit
         mountOnEnter
+        nodeRef={transitionRef2}
       >
         <UpdateDataComponent
+          ref2={transitionRef2}
           field={activeField || ""}
           userId={userId}
           plantInfo={plantDataDisplay}

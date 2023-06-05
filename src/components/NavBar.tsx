@@ -15,12 +15,10 @@ export default function NavBar() {
 
   const handleBlur = () => {
     setIsBlur(true);
-    console.log("isBlur: ", isBlur);
   };
 
   const closeBlur = () => {
     setIsBlur(false);
-    console.log("isBlur: ", isBlur);
   };
 
   // Home

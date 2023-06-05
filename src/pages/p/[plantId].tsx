@@ -1,4 +1,3 @@
-
 import { useRouter } from "next/router";
 import prisma from "lib/prisma";
 import { useState, useEffect, useRef } from "react";
@@ -59,7 +58,7 @@ export default function plantPublicDisplayPage({
   const commentsToDisplay = () => {
     if (commentsToDisplayState.length === 0) {
       return (
-        <div className="border-y border-black h-full xs:h-[90px]  text-center justify-center items-center flex">
+        <div className="border-y border-green-200 h-full xs:h-[90px]  text-center justify-center items-center flex">
           Be the first to comment!
         </div>
       );
@@ -145,7 +144,7 @@ export default function plantPublicDisplayPage({
   };
   return (
     <div
-      className=" mt-[10px] border-[#c1e1c1] bg-orange-100 rounded-xl p-4  lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
+      className=" mt-[10px] border-[#c1e1c1] bg-[#efe6c1] bg-opacity-90 rounded-xl p-4  lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
         focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-6 lg:gap-10   h-[88vh] 
        "
       tabIndex={0}
@@ -157,15 +156,10 @@ export default function plantPublicDisplayPage({
             alt={plant.name}
             className="
             rounded-xl
-<<<<<<< HEAD
             xs:w-[80vw] xs:h-[95vw] 
             sm:w-[100vw]  
             lg:max-h-[80vh] lg:max-w-[80vh] 
             xl:max-w-[80vh] xl:max-h-[80vh]
-=======
-            xs:w-[80vw] xs:h-[40vh] md:h-[70vh] md:w-[60vw] sm:w-[100vw]  
-            lg:max-h-[80vh] lg:max-w-[80vh] xl:max-w-[80vh] xl:max-h-[80vh]
->>>>>>> steven5/31
             sm:max-w-[80vw] mb-2
             hover:brightness-90
             hover:outline-none
@@ -189,8 +183,8 @@ export default function plantPublicDisplayPage({
               <p className="italic">
                 By {plant.ownedBy.name || plant.ownedBy.nickname}{" "}
               </p>
-              <div className="flex flex-row gap-1">
-                <p>{plant.plantHeight && "H: " + plant.plantHeight + " cm"}</p>
+              <div className="flex flex-row">
+                <p>{plant.plantHeight && "H: " + plant.plantHeight + " cm "}</p>
                 <p>{plant.plantWidth && "W: " + plant.plantWidth + " cm"}</p>
               </div>
               {plant.light ? <p>Sunlight: {plant.light}</p> : null}
@@ -206,31 +200,37 @@ export default function plantPublicDisplayPage({
         flex-col   xs:items-center xs:justify-center  gap-2 px-2    
         lg:max-w-[600px]
         min-w-[30vw]
-        lg:max-h-[500px]
+        h-full
         rounded-xl
- 
       "
       >
         <div
           className="h-[30%]  flex 
-          flex-col  items-start justify-evenly relative   gap-2 "
+          flex-col  items-start justify-evenly relative   gap-1"
         >
-          <div className=" flex flex-row text-xl   elipsis font-bold">
-            {plant.name}{" "}
-            <div className="text-sm font-light text-blue-300 rounded-sm">
-              {user === plant.ownerId ? (
-                <div className="ml-1 rounded-sm hover:border hover:backdrop-brightness-90">
-                  <Link href={`/myplants/${plant.id}`}>
-                    <SlPencil />
-                  </Link>
-                </div>
-              ) : (
-                ""
-              )}{" "}
+          <div>
+            <div className=" flex flex-row text-xl elipsis font-semibold">
+              {plant.name}{" "}
+              <div className="text-sm font-light text-blue-300 rounded-sm">
+                {user === plant.ownerId ? (
+                  <div className="ml-1 rounded-sm hover:border hover:backdrop-brightness-90">
+                    <Link href={`/myplants/${plant.id}`}>
+                      <SlPencil />
+                    </Link>
+                  </div>
+                ) : (
+                  ""
+                )}{" "}
+              </div>
             </div>
-          </div>
-          <div className="italic font-light">
-            {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
+            <div className="italic font-extralight text-gray-500">
+              {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
+            </div>
+            <div className=" font-extralight text-sm hover:text-blue-400">
+              <Link href={`/u/${plant.ownedBy.nickname || plant.ownerId}`}>
+                By {plant.ownedBy.name || plant.ownedBy.nickname}
+              </Link>
+            </div>
           </div>
           <div className="relative flex flex-col  justify-center">
             <div
@@ -250,7 +250,7 @@ export default function plantPublicDisplayPage({
             "
             >
               <p
-                className=" border-t-2 border-b-2 border-[#C1E1C1]  h-full text-center justify-center flex  font-semibold overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+                className=" border-t-2 border-b-2 p-2 border-[#C1E1C1]  h-full text-center justify-center flex  font-light overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
         scrollbar-rounded-sm snap-y snap-mandatory  "
               >
                 {plant.description
@@ -261,7 +261,9 @@ export default function plantPublicDisplayPage({
             </div>
           </div>
         </div>
-        <div className=" h-[55%] min-h-[300px] max-h-[300px] w-full   first-letter: overflow-y-auto  justify-center items-center mt-2 mb-auto">{commentsToDisplay()}</div>
+        <div className=" h-[55%] min-h-[300px] max-h-[300px] w-full   first-letter: overflow-y-auto  justify-center items-center mt-2 mb-auto">
+          {commentsToDisplay()}
+        </div>
         <div className="h-[12%] w-full   first-letter: justify-center py-3  ">
           <CommentBox
             reference={"UniquePlant"}

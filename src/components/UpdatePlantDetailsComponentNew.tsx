@@ -8,6 +8,7 @@ interface updateProps {
   plantInfo: any;
   onSubmit: any;
   onClose: any;
+  ref2: any;
 }
 
 const map: Myobject = {
@@ -32,6 +33,7 @@ export default function UpdateDataComponent({
   plantInfo,
   onSubmit,
   onClose,
+  ref2,
 }: updateProps) {
   const handleSubmissionFromParent = onSubmit;
   const closeCollectionForm = onClose;
@@ -54,12 +56,19 @@ export default function UpdateDataComponent({
 
   return (
     <>
-      <div className="fixed z-50 top-0 left-0 right-0 bottom-0 h-[100vh]  w-[100vw] flex justify-center items-center  ">
+      <div
+        ref={ref2}
+        className="fixed z-50 top-0 left-0 right-0 bottom-0 h-[100vh]  w-[100vw] flex justify-center items-center  "
+      >
         <div
           id="createuniqueplantform"
           className="gradient-bg-card2-reverse rounded-md md:w-[50%]   w-[80%] h-[50%]  max-w-[600px] border-[#c1e1c1] p-2  relative "
         >
-          <div className={`absolute bottom-2 right-1 text-[#fffbcc] font-extralight text-xs ${field === 'name' || field === 'species' ? 'hidden' : ''}`}>
+          <div
+            className={`absolute bottom-2 right-1 text-[#fffbcc] font-extralight text-xs ${
+              field === "name" || field === "species" ? "hidden" : ""
+            }`}
+          >
             Update with an empty field to delete a value.
           </div>
           <div
