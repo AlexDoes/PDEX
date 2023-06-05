@@ -42,7 +42,10 @@ export default function AuthButtonComponent({ setBlur, closeBlur }: any) {
             <div>
               {!showmenu && <GiHamburgerMenu size={30} color="#efe6c1" />}
             </div>
-            <div onClick={closeBlur} className="border border-[#efe6c1] rounded-md shadow-sm hover:shadow-md">
+            <div
+              onClick={closeBlur}
+              className="border border-[#efe6c1] rounded-md shadow-sm hover:shadow-md"
+            >
               {showmenu && <AiOutlineClose size={30} color="#efe6c1" />}
             </div>
             {/* <div className={`${!showmenu ? "opacity-100 visible" : "opacity-0 invisible"}`}>
@@ -66,14 +69,13 @@ export default function AuthButtonComponent({ setBlur, closeBlur }: any) {
           unmountOnExit
           onExited={closeMenu}
           nodeRef={tansitionRef}
-        
         >
           <div
-            ref={tansitionRef}  
+            ref={tansitionRef}
             className={`absolute top-16 w-[100vw] 
             right-0 z-20 shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3
             bg-black indent-3 md:indent-0
-            bg-opacity-20 backdrop-filter backdrop-blur-[3px] backdrop-brightness-100
+            bg-opacity-30 backdrop-filter backdrop-blur-[2px] backdrop-brightness-100
             `}
             onClick={openMenu}
             id="hamburger-menu"

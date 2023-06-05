@@ -32,13 +32,9 @@ export default function NavBar() {
     <>
       {show && (
         <div
-          className={`flex w-full gap-2 h-16 bg-[#] max-h-16 justify-between sm:justify-between
+          className={`flex w-full gap-2 h-16 max-h-16 justify-between sm:justify-between
           select-none
-          ${
-            isBlur
-              ? "bg-opacity-20 backdrop-filter bg-black  backdrop-blur-[3px] backdrop-brightness-100"
-              : " bg-none"
-          }} transition-all ease-in-out duration-200`}
+          ${isBlur ? `bg-opacity-30 bg-black` : ""}`}
         >
           <Link href={"/"} className="inherit">
             <div className="flex flex-row h-full md:ml-[4vw] items-center  transition-all ease-in-out duration-500">
