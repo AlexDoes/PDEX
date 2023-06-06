@@ -12,6 +12,7 @@ interface Props {
   searchTerm: string;
   uniquePlants: uniquePlant[];
   users: users[];
+  collections: any;
 }
 
 interface uniquePlant {
@@ -46,21 +47,18 @@ export default function SearchResult({
   searchTerm,
   uniquePlants,
   users,
+  collections,
 }: Props) {
   const plantRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
+  const collectionRef = useRef<HTMLDivElement>(null);
   usePreviousScrollPosition();
   const [imageError, setImageError] = useState(false);
   const handleImageError = () => {
     setImageError(true);
   };
-
-  // useEffect(() => {
-  //   if (searchRef.current) {
-  //     searchRef.current.scrollIntoView({ behavior: "auto", block: "start" });
-  //   }
-  // }, []);
+  console.log(collections);
 
   const goToPlant = () => {
     plantRef.current?.scrollIntoView({
@@ -71,6 +69,13 @@ export default function SearchResult({
 
   const goToUser = () => {
     userRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const goToCollection = () => {
+    collectionRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
@@ -108,10 +113,6 @@ export default function SearchResult({
     }
   };
 
-  const showUsers = () => {
-    if (users.length) {
-    }
-  };
   return (
     <div className="w-full scroll-auto">
       <div className="flex flex-col mb-2 gap-2 bg-opacity-30" ref={searchRef}>
@@ -144,6 +145,14 @@ export default function SearchResult({
                   Plants
                 </button>
                 <button
+                  className={`bg-[#c4d78b] hover:bg-[#92ad43] text-white font-light py-1 px-4 rounded
+          ${collections.length > 0 ? `visible` : `hidden`}
+          `}
+                  onClick={goToCollection}
+                >
+                  Collections
+                </button>
+                <button
                   className={`bg-blue-400 hover:bg-blue-500 text-white font-light py-1 px-4 rounded
           ${users.length > 0 ? `visible` : `hidden`}
           `}
@@ -156,6 +165,7 @@ export default function SearchResult({
           </div>
         </div>
       </div>
+
       <div className="">
         <p
           className={`${uniquePlants.length < 1 ? "hidden" : ""} 
@@ -221,8 +231,6 @@ export default function SearchResult({
                   <p className="font">{plant.name}</p>
                   <p className="font-light italic">{plant.species}</p>
                   <p className="font-thin">By {plant.ownedBy.nickname}</p>
-                  {/* <p>Plant Id: {plant.id}</p> */}
-                  {/* <div className="flex items-center justify-center"> */}
                   <p
                     className="
                 border
@@ -244,7 +252,7 @@ export default function SearchResult({
                 p-1
                 xs:text-sm sm:text-sm md:text-md
                 scrollbar-thin scrollbar-thumb-[#C1E1C1]
-                scrollbar-rounded-lg
+                scrollbar-rounded-lg justify-center
               "
                   >
                     {plant.description
@@ -258,6 +266,107 @@ export default function SearchResult({
             <p>No plants found related to `{searchTerm}`</p>
           )}
         </div>
+        {collections.length > 0 && (
+          <div>
+            <div className="">
+              <p
+                className={`${collections.length < 1 ? "hidden" : ""}
+                text-xl text-white text-center
+              bg-yellow-100
+                bg-opacity-30
+                rounded-lg
+                text-shadow-sm
+                shadow-md
+                w-[100%]
+                p-2
+                backdrop-invert-[40%]
+                `}
+              >
+                Collections related to `{searchTerm}`
+              </p>
+              <div
+                className="rounded-xl p-2 m-2 items-center justify-center flex xs:flex-col sm:flex-row md:flex-row lg:flex-row flex-wrap xl:flex-row xl:flex-wrap xl:row-3"
+                ref={collectionRef}
+              >
+                {collections.map((plantCollection: any) => (
+                  <Link
+                    href={`/c/${plantCollection.id}`}
+                    key={plantCollection.id}
+                    className=""
+                  >
+                    <div
+                      id="glassBackCollection"
+                      key={plantCollection.id}
+                      className="border[#c1e1c1] rounded-xl p-2 m-2 pt-4 pb-6 bg-[#c1e1c1] bg-opacity-80 flex gap-4 items-center justify-center flex-col xs:w-[80vw] sm:w-[40vw] md:w-[40vw] lg:w-[25vw] xl:w-[22vw] focus:focus-within hover:relative hover:transition-all focus:transition-all focus:outline-none w-full "
+                    >
+                      {plantCollection.plantContents[0]?.image && (
+                        <div className="flex items-center justify-center rounded-lg ">
+                          <img
+                            src={plantCollection.plantContents[0].image}
+                            alt=""
+                            className="                             rounded-xl
+                            xs:h-[40vh] xs:w-[50vw] 
+                            sm:h-[40vh] md:h-[40vh] 
+                            lg:h-64
+                            sm:w-[40vw] md:w-[30vw] 
+                            md:max-w-70 lg:w-60 xl:w-60
+                            lg:max-w-80
+                            sm:max-w-[80]"
+                          />
+                        </div>
+                      )}
+                      <div className="flex flex-col items-center justify-cente w-full">
+                        <div>{plantCollection.name}</div>
+                        <div>
+                          Collection by -{" "}
+                          <span className="italic">
+                            {plantCollection.owner.nickname ||
+                              plantCollection.owner.name.split(" ")[0]}
+                          </span>
+                        </div>
+                        <div
+                          className="font-extralight italic
+                        "
+                        >
+                          Contains {plantCollection.plantContents.length}{" "}
+                          {plantCollection.length > 1 ? "plants" : "plant"}
+                        </div>
+                        <p
+                          className="
+                border
+                bg:backdrop-blur-sm
+                group-hover:bg-opacity-50
+                group-hover:border-slate-400
+                rounded-lg
+                w-[80%]
+                overflow-x-hidden
+                xs:max-h-[92px]
+                md:h-[92px]
+                lg:h-[90px]
+                xl:h-[90px]
+                max-h-[80px]
+                overflow-y-auto
+                ellipsis
+                text-center
+                flex
+                p-1
+                xs:text-sm sm:text-sm md:text-md
+                scrollbar-thin scrollbar-thumb-[#C1E1C1]
+                scrollbar-rounded-lg justify-center
+              "
+                        >
+                          {plantCollection.description
+                            ? plantCollection.description
+                            : `There's not much known about ${plantCollection.name} yet but check back later when ${plantCollection.ownedBy.nickname} tells us more about it!`}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
         <h2
           ref={userRef}
           className="          text-3xl text-white text-center
@@ -284,7 +393,7 @@ export default function SearchResult({
           md:flex-row lg:flex-row 
           flex-wrap 
           xl:flex-row xl:flex-wrap xl:row-3
-      "
+          "
           ref={userRef}
         >
           {users.length ? (
@@ -293,28 +402,7 @@ export default function SearchResult({
                 <div key={user.nickname} className="">
                   <div
                     id="glassBackCard"
-                    className="
-                            border-4 
-                            border-[#c1e1c1]
-                            rounded-xl p-2 m-2
-                            pt-4
-                            pb-6
-                            bg-blue-200
-                            flex 
-                            gap-4
-                            items-center justify-center
-                            flex-col
-                            xs:w-[80vw]
-                            sm:w-[40vw]
-                            md:w-[40vw]
-                            lg:w-[25vw]
-                            xl:w-[22vw]
-                            focus:focus-within:
-                            hover:relative
-                            hover:transition-all
-                            focus:transition-all
-                            focus:outline-none
-                            "
+                    className="border-4 border-[#c1e1c1] rounded-xl p-2 m-2 pt-4 pb-6 bg-blue-200 flex gap-4 items-center justify-center flex-col xs:w-[80vw] sm:w-[40vw] md:w-[40vw] lg:w-[25vw] xl:w-[22vw] focus:focus-within hover:relative hover:transition-all focus:transition-all focus:outline-none"
                     tabIndex={0}
                   >
                     {user.image ? (
@@ -330,7 +418,7 @@ export default function SearchResult({
                     lg:w-64 xl:w-64
                     xs:h-[40vh] xs:w-[50vw] 
                     sm:h-[40vh] md:h-[40vh] lg:h-80
-                    sm:w-[40vw] md:w-[35vw] md:max-w-80
+                    sm:w-[40vw] md:w-[35vw] md:max-w-[30vw]
                     sm:max-w-[80]
                     "
                         />
@@ -341,13 +429,15 @@ export default function SearchResult({
                           src={avatarImage.src}
                           alt=""
                           className="
-                    border-green-400
-                    rounded-xl
-                    md:max-w-70 lg:w-64 xl:w-64
-                    xs:h-[40vh] xs:w-[50vw] 
-                    sm:h-[40vh] md:h-[40vh] lg:h-80
-                    sm:w-[40vw] md:w-[35vw] md:max-w-80
-                    sm:max-w-[80]
+                          border-green-400
+                          rounded-xl
+                          md:max-w-70 
+                          lg:max-w-80
+                          lg:w-64 xl:w-64
+                          xs:h-[40vh] xs:w-[50vw] 
+                          sm:h-[40vh] md:h-[40vh] lg:h-80
+                          sm:w-[40vw] md:w-[35vw] md:max-w-[30vw]
+                          sm:max-w-[80]
                     "
                         />
                       </div>
@@ -371,7 +461,7 @@ export default function SearchResult({
             ))
           ) : (
             <p className="text-[#ffffff] text-3xl font-semibold backdrop-blur-[3px] p-4 rounded-lg">
-              {uniquePlants.length !== 0
+              {uniquePlants.length !== 0 && collections.length !== 0
                 ? `No users found with the name ${searchTerm}`
                 : `No results found for searching ${searchTerm}`}
             </p>
@@ -444,11 +534,50 @@ export async function getServerSideProps(context: any) {
     take: 10,
   });
 
+  const collections = await prisma.plantCollection.findMany({
+    where: {
+      name: {
+        contains: searchTerm as string,
+        mode: "insensitive",
+      },
+      public: true,
+      plantContents: {
+        some: {},
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      ownerId: true,
+      owner: {
+        select: {
+          nickname: true,
+          name: true,
+        },
+      },
+      description: true,
+      _count: {
+        select: {
+          plantContents: true,
+        },
+      },
+      plantContents: {
+        take: 1,
+        select: {
+          image: true,
+          species: true,
+        },
+      },
+    },
+    take: 10,
+  });
+
   return {
     props: {
       searchTerm,
       uniquePlants: JSON.parse(JSON.stringify(uniquePlants)),
       users,
+      collections,
     },
   };
 }
