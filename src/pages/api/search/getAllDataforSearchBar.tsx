@@ -11,7 +11,7 @@ export default async function handler(
     select: {
       name: true,
     },
-    take: 100,
+    take: 25,
   });
 
   const species = await prisma.uniquePlant.findMany({
@@ -29,7 +29,7 @@ export default async function handler(
     select: {
       nickname: true,
     },
-    take: 100,
+    take: 25,
   });
 
   const plantSet = new Set<string>();

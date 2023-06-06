@@ -95,7 +95,7 @@ export default function NavBarSearchBar({}) {
         <div className={`border-slate-500 border-[1px] rounded-md`}>
           {speciesSuggestions.length > 0 && (
             <div>
-              <h1 className="text-lg font-semibold bg-slate-300 border-2 border-black">
+              <h1 className="text-lg font-semibold bg-slate-300 border-2 border-black pl-1">
                 Species suggested:{" "}
               </h1>
             </div>
@@ -120,13 +120,18 @@ export default function NavBarSearchBar({}) {
                 "
                 tabIndex={0}
               >
-                {item}
-                <FaLeaf />
+                <Link
+                  className="flex justify-between w-full items-center"
+                  href={`/search/${item}`}
+                >
+                  {item}
+                  <FaLeaf />
+                </Link>
               </li>
             ))}
           {plantSuggestions.length > 0 && (
             <div>
-              <h1 className="text-lg font-thin bg-slate-300 border-2 border-black">
+              <h1 className="text-lg font-thin bg-slate-300 border-2 border-black pl-1">
                 Plants suggested:{" "}
               </h1>
             </div>
@@ -138,7 +143,7 @@ export default function NavBarSearchBar({}) {
                 onClick={handleClickingSuggestion}
                 className="
                 truncate ...
-                bg-white
+                bg-[#c7fcff]
                 cursor-pointer
                 hover:bg-gray-200
                 border-2 border-black
@@ -152,13 +157,18 @@ export default function NavBarSearchBar({}) {
                 tabIndex={0}
                 onKeyDown={handleKeyDown}
               >
-                {item}
-                <HiSparkles />
+                <Link
+                  className="flex justify-between w-full items-center"
+                  href={`/p/${item.id}`}
+                >
+                  {item}
+                  <HiSparkles />
+                </Link>
               </li>
             ))}
           {usersSuggestions.length > 0 && (
             <div>
-              <h1 className="text-lg font-semibold bg-slate-300 border-2 border-slate-500">
+              <h1 className="text-lg font-semibold bg-slate-300 border-2 border-slate-500 pl-1">
                 Users suggested:{" "}
               </h1>
             </div>

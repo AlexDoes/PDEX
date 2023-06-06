@@ -215,7 +215,7 @@ export default function CreateUniquePlant(props: any) {
   return (
     <>
       <div
-      ref={props.forwaredRef}
+        ref={props.forwaredRef}
         // onClick={props.onSubmit}
         className=" z-50  bottom-0 top-0 fixed w-[90vw] flex items-center justify-center "
       >
@@ -270,6 +270,7 @@ export default function CreateUniquePlant(props: any) {
                 data={speciesArray}
                 width="w-[20vw] "
                 onChange={handleChangeOnForm}
+                placeHolder="Plant Species (required)"
               />
             </div>
 
@@ -295,6 +296,7 @@ export default function CreateUniquePlant(props: any) {
                     data={speciesArray}
                     width="w-[20vw] "
                     onChange={handleChangeOnForm2}
+                    placeHolder="Plant's Secondary Species"
                   />
                 </div>
               </>

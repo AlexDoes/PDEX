@@ -4,10 +4,16 @@ import { FaSearch } from "react-icons/fa";
 interface Props {
   data: string[];
   width: string;
+  placeHolder: string;
   onChange: (entry: string) => void;
 }
 
-export default function NewSearchBar({ data, width, onChange }: Props) {
+export default function NewSearchBar({
+  data,
+  width,
+  onChange,
+  placeHolder,
+}: Props) {
   const [searchText, setSearchText] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
@@ -29,6 +35,9 @@ export default function NewSearchBar({ data, width, onChange }: Props) {
       const res = item.toLowerCase().includes(input.toLowerCase());
       return res;
     });
+    if (suggestions[0] === input) {
+      return [];
+    }
     return suggestions || [];
   };
 
@@ -84,9 +93,10 @@ export default function NewSearchBar({ data, width, onChange }: Props) {
       <div className="flex flex-row justify-center items-center gap-2 w-full">
         <input
           type="text"
-          placeholder="Plant Species"
+          placeholder={placeHolder}
           value={searchText}
           onChange={handleOnChange}
+          onBlur={() => setSuggestions([])}
           className={`w-full border-none rounded-r-md bg-[#efe6c1] ${
             suggestions.length > 0 && `rounded-br-none`
           }`}
