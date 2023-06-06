@@ -150,7 +150,7 @@ export default function plantPublicDisplayPage({
       tabIndex={0}
     >
       <div className="relative lg:max-w-[600px] h-full w-full group w-inherit  items-center justify-center flex  ">
-        <div className="relative  h-full w-full lg:min-w-[500px] md:max-w-[500px] lg:max-w-[600px] ">
+        <div className="relative  h-full w-full lg:min-w-[500px] md:max-w-[500px] lg:max-w-[600px] select-none ">
           {/* <img
             src={plant.image}
             alt={plant.name}
@@ -205,7 +205,7 @@ export default function plantPublicDisplayPage({
       "
       >
         <div
-          className="h-[30%]  flex 
+          className="h-[30%]  flex  select-none 
           flex-col  items-start justify-evenly relative w-full  gap-1"
         >
           <div className="w-full">
@@ -224,7 +224,23 @@ export default function plantPublicDisplayPage({
               </div>
             </div>
             <div className="italic font-extralight text-gray-500">
-              {plant.species} {plant.species2 ? "x " + plant.species2 : null}{" "}
+              <Link
+                className="hover:text-[#818fcd]"
+                href={`/search/${plant.species}`}
+              >
+                {plant.species}
+              </Link>
+              {plant.species2 ? (
+                <>
+                  <span> x </span>
+                  <Link
+                    className="hover:text-[#818fcd]"
+                    href={`/search/${plant.species2}`}
+                  >
+                    {plant.species2}
+                  </Link>
+                </>
+              ) : null}{" "}
             </div>
             <div className=" font-extralight text-sm hover:text-blue-400">
               <Link href={`/u/${plant.ownedBy.nickname || plant.ownerId}`}>
@@ -252,7 +268,7 @@ export default function plantPublicDisplayPage({
             >
               <p
                 className=" border-t-2 border-b-2 p-2 border-[#afd4af]  h-full text-center justify-center flex  font-light overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1] w-full
-        scrollbar-rounded-sm snap-y snap-mandatory backdrop-blur-sm "
+        scrollbar-rounded-sm snap-y snap-mandatory backdrop-blur-sm select-text"
               >
                 {plant.description
                   ? plant.description

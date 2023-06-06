@@ -189,6 +189,7 @@ export default function MyPlants({
                 flex
                 p-2
                 xs:text-sm sm:text-sm md:text-md
+                justify-center
               "
               >
                 {plant.description

@@ -304,7 +304,7 @@ export default function publicDisplayCollection({
       "
       >
         <div
-          className="h-[30%]  flex 
+          className="h-[30%]  flex select-none
           flex-col  items-start justify-evenly relative w-full gap-1"
         >
           <div>
@@ -347,7 +347,7 @@ export default function publicDisplayCollection({
               <p
                 className=" border-t-2 items-center border-b-2 p-2 border-[#FFF4BD]  h-full 
                 w-full min-w-full text-center justify-center flex  font-light overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
-        scrollbar-rounded-sm snap-y snap-mandatory  "
+        scrollbar-rounded-sm snap-y snap-mandatory select-text  "
               >
                 {collection.description
                   ? collection.description
