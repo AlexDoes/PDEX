@@ -72,6 +72,7 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
+    "postcss-nesting": "^11.2.2",
     "prisma": "^4.11.0",
     "tailwind-scrollbar": "^3.0.0"
   }

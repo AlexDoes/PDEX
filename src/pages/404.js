@@ -8,7 +8,7 @@ export default function undefined() {
   useEffect(() => {
     const redirectTimeout = setTimeout(() => {
       router.push("/");
-    }, 5000);
+    }, 50000);
     return () => clearTimeout(redirectTimeout);
   });
 
