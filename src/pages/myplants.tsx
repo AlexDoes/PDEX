@@ -154,14 +154,9 @@ export default function MyPlants({
                         : plant.species + " / " + plant.species2}
                     </p>
                     <div className="flex flex-row gap-1">
-                      <p>
-                        {plant.plantHeight && "H: " + plant.plantHeight + " cm"}
-                      </p>
-                      <p>
-                        {plant.plantWidth && "W: " + plant.plantWidth + " cm"}
-                      </p>
+                      {plant.plantHeight && "H: " + plant.plantHeight + " cm "}
+                      {plant.plantWidth && "W: " + plant.plantWidth + " cm"}
                     </div>
-                    {/* <p>{plant.plantWeight && plant.plantWeight}</p> */}
                   </div>
                 </div>
               </div>
@@ -253,7 +248,8 @@ export default function MyPlants({
         nodeRef={transitionRef2}
       >
         <CreateUniquePlant
-          forwaredRef={transitionRef2} userId={userId}
+          forwaredRef={transitionRef2}
+          userId={userId}
           data={plantSpecies}
           onSubmit={onSubmitFromParent}
           onClose={handleOnClose}

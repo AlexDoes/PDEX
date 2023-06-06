@@ -164,15 +164,25 @@ export default function MyCollections({ items, userId }: CollectionProps) {
             )}
           </div>
           <div className="flex flex-col w-full gap-2 overflow-hidden">
-            <p className="text-2xl indent-3 xl:indent-5 w-full overflow-hidden">
+            <div className="text-2xl indent-3 xl:indent-3 overflow-hidden text-[#fffbcc] flex justify-between items-center w-[98%]">
               <Link
                 onClick={() => handleClick(collection.id)}
                 href={`/collections/${collection.id}`}
-                className="whitespace-nowrap overflow-ellipsis hover:underline hover:text-blue-400 w-90%"
+                className="whitespace-nowrap overflow-ellipsis hover:text-blue-400 w-full "
               >
-                {collection.name}
+                <span className="hover:underline">{collection.name}</span>
+                <span className="text-[10px] hover:text-blue-400">
+                  {" "}
+                  (Edit){" "}
+                </span>
               </Link>
-            </p>
+              <Link
+                href={`/c/${collection.id}`}
+                className="whitespace-nowrap overflow-ellipsis text-sm hover:text-green-700 rounded-lg flex items-center justify-center text-center underline underline-offset-8"
+              >
+                Public view
+              </Link>
+            </div>
             <div className="w-full border-black">
               <div
                 className="
@@ -290,7 +300,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         nodeRef={transitionRef}
       >
         <div
-        ref={transitionRef}
+          ref={transitionRef}
           // onClick={handleAddCollectionClick}
           className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "
         ></div>

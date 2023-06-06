@@ -127,7 +127,19 @@ export default function UserProfile({ user }: Props) {
                   text-white
                 "
               >
-                <Link href={`/c/${collection.id}`}>{collection.name}</Link>
+                {collection.plantContents.length > 0 ? (
+                  <Link
+                    className="
+                hover:text-[#fffbcc]
+                  hover:underline
+                  hover:underline-offset-2"
+                    href={`/c/${collection.id}`}
+                  >
+                    {collection.name}
+                  </Link>
+                ) : (
+                  collection.name
+                )}
               </p>
               <div className="w-full h-[100px]">
                 <div

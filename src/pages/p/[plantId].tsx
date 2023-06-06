@@ -145,7 +145,7 @@ export default function plantPublicDisplayPage({
   return (
     <div
       className=" mt-[10px] border-[#c1e1c1] bg-[#efe6c1] bg-opacity-90 rounded-xl p-4  lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
-        focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-6 lg:gap-10   h-[88vh] 
+        focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-6  h-[88vh] 
        "
       tabIndex={0}
     >
@@ -198,7 +198,7 @@ export default function plantPublicDisplayPage({
       <div
         className="relative flex 
         flex-col   xs:items-center xs:justify-center  gap-2 px-2    
-        lg:max-w-[600px]
+        w-full
         min-w-[30vw]
         h-full
         rounded-xl
@@ -206,10 +206,10 @@ export default function plantPublicDisplayPage({
       >
         <div
           className="h-[30%]  flex 
-          flex-col  items-start justify-evenly relative   gap-1"
+          flex-col  items-start justify-evenly relative w-full  gap-1"
         >
-          <div>
-            <div className=" flex flex-row text-xl elipsis font-semibold">
+          <div className="w-full">
+            <div className="w-full flex flex-row text-xl elipsis font-semibold">
               {plant.name}{" "}
               <div className="text-sm font-light text-blue-300 rounded-sm">
                 {user === plant.ownerId ? (
@@ -232,7 +232,7 @@ export default function plantPublicDisplayPage({
               </Link>
             </div>
           </div>
-          <div className="relative flex flex-col  justify-center">
+          <div className="relative flex flex-col  justify-center w-full">
             <div
               className="
               rounded-lg font-light
@@ -247,15 +247,20 @@ export default function plantPublicDisplayPage({
               pl-2
               xs:text-sm sm:text-sm md:text-md items-center 
               relative
+              w-full
             "
             >
               <p
-                className=" border-t-2 border-b-2 p-2 border-[#C1E1C1]  h-full text-center justify-center flex  font-light overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
-        scrollbar-rounded-sm snap-y snap-mandatory  "
+                className=" border-t-2 border-b-2 p-2 border-[#afd4af]  h-full text-center justify-center flex  font-light overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1] w-full
+        scrollbar-rounded-sm snap-y snap-mandatory backdrop-blur-sm "
               >
                 {plant.description
                   ? plant.description
-                  : `There's not much known about ${plant.name} yet but check back later when ${plant.ownedBy.nickname} tells us more about it!`}
+                  : `There's not much known about ${
+                      plant.name
+                    } yet but check back later when ${
+                      plant.ownedBy.nickname || plant.ownedBy.name.split(" ")[0]
+                    } tells us more about it!`}
               </p>
             </div>
           </div>

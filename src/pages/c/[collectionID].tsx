@@ -7,6 +7,7 @@ import Link from "next/link";
 import DeleteCommentButton from "@/components/DeleteCommentButton";
 import { SlPencil } from "react-icons/sl";
 import CollectionImageCarousel from "@/components/ImageCarouselComponentForCollection";
+import { FaSeedling } from "react-icons/fa";
 
 interface User {
   id: string;
@@ -159,7 +160,7 @@ export default function publicDisplayCollection({
     <div
       className=" mt-[10px] border-[#c1e1c1] bg-green-100 bg-opacity-80
       rounded-xl p-4  lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
-        w-full focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-8 lg:gap-10 xl:gap-14  min-h-[88vh] h-[88vh]
+        w-full focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-8 lg:gap-4 min-h-[88vh] h-[88vh]
          "
       tabIndex={0}
     >
@@ -168,10 +169,11 @@ export default function publicDisplayCollection({
           <div
             className=" outlie outline-8 outline-red-900
             xs:w-[80vw] xs:h-[80vw]
+            md:w-[55vw] md:h-[55vw]
             lg:max-h-[80vh] lg:max-w-[80vh] 
             xl:max-w-[80vh] xl:max-h-[80vh]
             sm:max-w-[80vw]
-            lg:w-[45vw] lg:h-[45vw]
+            lg:w-[50vw] lg:h-[50vw]
             select-none
            "
           >
@@ -190,7 +192,11 @@ export default function publicDisplayCollection({
                 })}
               />
             ) : (
-              "No images"
+              <div className=" flex flex-col justify-center text-center items-center text-xl gap-2 w-full h-full backdrop-invert-[20%] rounded-xl text-[#fffbcc] ">
+                <FaSeedling size={80} color="#fffbcc" />
+                The collection is empty. <br />
+                Plants can be added from the collection (/c/) page.
+              </div>
             )}
           </div>
           {/* <div className="absolute left-0 right-0  flex flex-col px-2 py-2 mx-auto transition-opacity duration-100 ease-in-out bg-gray-800 opacity-0 bottom-2   group-hover:opacity-70 group-focus:opacity-70 rounded-b-xl ">
@@ -291,10 +297,8 @@ export default function publicDisplayCollection({
       <div
         className="relative flex 
         flex-col   xs:items-center xs:justify-center  gap-2 px-2    
-        
         min-w-[30vw]
         w-full
-        border-8
         h-full
         rounded-xl
       "

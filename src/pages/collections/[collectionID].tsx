@@ -166,15 +166,24 @@ export default function ThisCollection({
         <h1 className=" text-black flex items-center justify-center mb-2 xs:text-xl sm:text-2xl md:text-3xl backdrop-blur-sm">
           {plantContentsData.name}'s content
         </h1>
-        <div className="flex flex-col py-2 w-full">
+        <div className="flex flex-col pt-2 pb-1 w-full gap-3">
           <div className="flex flex-col items-center justify-center relative">
-            <div className="border-slate-400 border rounded-xl w-[90%] p-2 font-extralight relative backdrop-blur-md">
+            <div className="border-slate-500 border rounded-xl w-[90%] p-2 font-extralight relative backdrop-blur-md">
               {collectionDescription ||
                 "You have no description for this collection yet, please add one to tell us about it!"}
               <div className="absolute -bottom-3 -right-3">
                 {showChangeButton()}
               </div>
             </div>
+          </div>
+          <div className="ml-1">
+            {plantContents.length > 0 && (
+              <div className="flex text-blue-500 underline-offset-2 hover:underline text-sm backdrop-blur-sm hover:text-blue-600">
+                <Link href={`/c/${collectionID}/`}>
+                  View public collection page of {plantContentsData.name}
+                </Link>
+              </div>
+            )}
           </div>
         </div>
 
@@ -211,7 +220,10 @@ export default function ThisCollection({
         mountOnEnter
         nodeRef={transitionRef}
       >
-        <div ref={transitionRef} className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "></div>
+        <div
+          ref={transitionRef}
+          className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] "
+        ></div>
       </CSSTransition>
 
       <CSSTransition
@@ -221,7 +233,6 @@ export default function ThisCollection({
         unmountOnExit
         mountOnEnter
         nodeRef={transitionRef2}
-        
       >
         <AddUniquePlantToCollection
           usersPlants={plantstoAdd}
