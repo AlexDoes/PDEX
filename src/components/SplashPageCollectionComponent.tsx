@@ -1,5 +1,6 @@
 import LoadingText from "./LoadinText";
 import Link from "next/link";
+import Footer from "./Footer";
 
 type PlantContent = {
   id: string;
@@ -36,7 +37,7 @@ export default function Splash(Data: Props) {
 
   return (
     <>
-      <div className="w-full   h-[90vh] flex justify-center mt-[5%] sm:mt-2   ">
+      <div className="w-full   flex justify-center mt-[5%] sm:mt-2 ">
         <div className="flex xl:flex-row flex-col w-full gap-5">
           <div
             // id="leftSplash"
@@ -64,7 +65,7 @@ export default function Splash(Data: Props) {
 
           <div
             // id="rightSplash"
-            className="w-full border-black
+            className="w-full border-black  
             rounded-xl px-5 py-5"
           >
             {displayData.plantContents.map((plant, i) => {
@@ -142,6 +143,7 @@ export default function Splash(Data: Props) {
           </div>
         </div>
       </div>
+
     </>
   );
 }

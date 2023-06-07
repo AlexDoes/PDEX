@@ -8,6 +8,8 @@ import { Inter, Lato } from "@next/font/google";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScreenChecker from "@/components/ScreenChecker";
+import InfoModal from "@/components/InfoModal";
+import Footer from "@/components/Footer";
 // import DontLookHere from "@/pages/DontLookHere";
 
 const lato = Lato({ subsets: ["latin"], weight: ["300", "400", "700", "900"] });
@@ -29,6 +31,8 @@ export default function App({ Component, pageProps }: AppProps) {
           </div>
         </div>
         <ScreenChecker />
+        <InfoModal />
+        <Footer />
       </SessionProvider>
     </>
   );

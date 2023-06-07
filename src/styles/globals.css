@@ -71,7 +71,20 @@
   transition: max-height 200ms ease-out, opacity 200ms ease-out,
     transform 200ms ease-out;
 }
-
+.flip-enter {
+  transform: rotateY(0deg);
+}
+.flip-enter-active {
+  transform: rotateY(180deg);
+  transition: transform 700ms;
+}
+.flip-exit {
+  transform: rotateY(180deg);
+}
+.flip-exit-active {
+  transform: rotateY(0deg);
+  transition: transform 700ms;
+}
 body {
   background-color: #d5ffdd;
   background-image: url("/BG/greenbg3.png");
