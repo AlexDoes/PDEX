@@ -159,7 +159,7 @@ export default function NavBarSearchBar({}) {
               >
                 <Link
                   className="flex justify-between w-full items-center"
-                  href={`/p/${item.id}`}
+                  href={`/search/${item}`}
                 >
                   {item}
                   <HiSparkles />

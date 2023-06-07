@@ -328,8 +328,10 @@ export default function SearchResult({
                           className="font-extralight italic
                         "
                         >
-                          Contains {plantCollection.plantContents.length}{" "}
-                          {plantCollection.length > 1 ? "plants" : "plant"}
+                          Contains {plantCollection._count.plantContents}{" "}
+                          {plantCollection._count.plantContents !== 1
+                            ? "plants"
+                            : "plant"}
                         </div>
                         <p
                           className="
@@ -357,7 +359,12 @@ export default function SearchResult({
                         >
                           {plantCollection.description
                             ? plantCollection.description
-                            : `There's not much known about ${plantCollection.name} yet but check back later when ${plantCollection.ownedBy.nickname} tells us more about it!`}
+                            : `There's not much known about ${
+                                plantCollection.name
+                              } yet but check back later when ${
+                                plantCollection.owner.nickname ||
+                                plantCollection.owner.name.split(" ")[0]
+                              } tells us more about it!`}
                         </p>
                       </div>
                     </div>
