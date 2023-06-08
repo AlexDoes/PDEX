@@ -37,8 +37,8 @@ export default function Splash(Data: Props) {
 
   return (
     <>
-      <div className="w-full   flex justify-center mt-[5%] sm:mt-2 ">
-        <div className="flex xl:flex-row flex-col w-full gap-5">
+      <div className="w-fullflex justify-center mt-[5%] sm:mt-2 ">
+        <div className="flex lg:flex-row flex-col w-full gap-5">
           <div
             // id="leftSplash"
             className=" 
@@ -143,7 +143,6 @@ export default function Splash(Data: Props) {
           </div>
         </div>
       </div>
-
     </>
   );
 }

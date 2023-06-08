@@ -9,11 +9,10 @@ export default function LoadingText(prop: any) {
   const displayData = [
     "A new way to:",
 
-    "Keep track of your plants",
-
     "Show off your plants",
 
-    "Find new plants",
+    "Keep track of your plants",
+    "Explore other people's plants",
   ];
 
   const BAX = ["B", "A", "X"];

@@ -17,6 +17,9 @@ module.exports = {
     backgroundPosition: {
       "top-64": "center top 4rem",
     },
+    animation: {
+      "pulse-slow": "pulse 3s linear 3",
+    },
   },
   plugins: [
     require("tailwindcss-textshadow"),

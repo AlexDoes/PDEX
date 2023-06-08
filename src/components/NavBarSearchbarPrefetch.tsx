@@ -10,6 +10,9 @@ interface Data {
   speciesSuggestions: any;
   usersSuggestions: any;
 }
+interface ArrayOfSuggestions {
+  suggestions: string[];
+}
 
 export default function NavBarSearchBar({}) {
   const [searchText, setSearchText] = useState<string>("");

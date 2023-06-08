@@ -41,6 +41,11 @@
   }
 }
 
+.modalbg {
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background-image: url("/BG/modalBg.png");
+}
+
 .dropdown-enter {
   max-height: 0;
   opacity: 0;
