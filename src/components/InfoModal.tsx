@@ -16,7 +16,6 @@ const InfoModal = () => {
   };
 
   const handleOutsideClick = (e: any) => {
-    console.log("clicked");
     if (e.target.id === "modalbackdrop") {
       setShowModal(false);
     }
@@ -26,14 +25,15 @@ const InfoModal = () => {
     <div
       className={`fixed bottom-12 z-50 left-[4%] cursor-pointer 
     font-lato
-    ${!showModal ? `animate-pulse-slow` : `animate-none`}
     `}
     >
       {!showModal && (
         <div onClick={handleModal}>
           <BsInfoCircle
             size={32}
-            className="text-[#c1e1c1] hover:text-[#ebf6c4] transition duration-300 ease-in-out"
+            className={`text-[#c1e1c1] hover:text-[#ebf6c4] transition duration-300 ease-in-out ${
+              showModal ? `animate-pulse-slow` : `animate-none`
+            }`}
           />{" "}
         </div>
       )}

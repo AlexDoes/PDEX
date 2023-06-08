@@ -93,7 +93,7 @@ export default function NavBarSearchBar({}) {
     let i = 0;
     return (
       <ul
-        className={`w-inherit absolute top-[100%] w-[100%] z-40 text-ellipsis rounded-b-lg bg-white  `}
+        className={`w-inherit absolute top-[100%] w-[100%] z-40 text-ellipsis overflow-hidden bg-[#f6f5e5] rounded-b-lg  `}
       >
         <div className={`border-slate-500 rounded-md`}>
           {speciesSuggestions.length > 0 && (
@@ -124,7 +124,7 @@ export default function NavBarSearchBar({}) {
                 tabIndex={0}
               >
                 <Link
-                  className="flex justify-between w-full items-center"
+                  className="flex justify-between w-full items-center xl:pr-4 lg:pr-2 md:pr-1 sm:pr-3 pr-2"
                   href={`/search/${item}`}
                 >
                   {item}
@@ -161,7 +161,7 @@ export default function NavBarSearchBar({}) {
                 onKeyDown={handleKeyDown}
               >
                 <Link
-                  className="flex justify-between w-full items-center"
+                  className="flex justify-between w-full items-center xl:pr-4 lg:pr-2 md:pr-1 sm:pr-3 pr-2"
                   href={`/search/${item}`}
                 >
                   {item}
@@ -205,6 +205,7 @@ export default function NavBarSearchBar({}) {
                     justify-between
                     w-full
                     items-center
+                    xl:pr-4 lg:pr-2 md:pr-1 sm:pr-3 pr-2
               "
                 >
                   {item}
