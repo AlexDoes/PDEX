@@ -58,7 +58,6 @@ export default function SearchResult({
   const handleImageError = () => {
     setImageError(true);
   };
-  console.log(collections);
 
   const goToPlant = () => {
     plantRef.current?.scrollIntoView({
@@ -116,8 +115,9 @@ export default function SearchResult({
   return (
     <div className="w-full scroll-auto">
       <div className="flex flex-col mb-2 gap-2 bg-opacity-30" ref={searchRef}>
-        <p className=" pb-2 pt-2 text-2xl text-white ">
-          Search Results for `{searchTerm}`:
+        <p className=" pb-2 pt-2 text-2xl text-white flex flex-row gap-1 ">
+          Search Results for
+          <div className="text-green-200">'{searchTerm}'</div>:
         </p>
         <div
           className={`flex gap-4 items-center
@@ -169,7 +169,7 @@ export default function SearchResult({
       <div className="">
         <p
           className={`${uniquePlants.length < 1 ? "hidden" : ""} 
-          text-xl text-white text-center
+          text-2xl text-white text-center
           bg-yellow-100
           bg-opacity-30
           rounded-lg
