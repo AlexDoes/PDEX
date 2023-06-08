@@ -31,7 +31,7 @@ export default function NavBar() {
       {show && (
         <div
           className={`flex w-full gap-2 h-16 max-h-16 justify-between sm:justify-between
-          select-none
+          select-none font-inter font-light
           ${
             isBlur ? `bg-opacity-30 bg-black` : ""
           } ease-in-out transition-colors duration-300`}
@@ -39,7 +39,7 @@ export default function NavBar() {
           <Link href={"/"} className="inherit">
             <div className="flex flex-row h-full md:ml-[4vw] items-center  transition-all ease-in-out duration-500">
               <img src="/baxlogo.png" alt="My Image" className="h-[75%]" />
-              <div className="sm:text-[50px] text-3xl font-serif text-[#efe6c1] text-shadow-md">
+              <div className="sm:text-[50px] text-3xl font-playfair text-[#efe6c1] text-shadow-md">
                 BAX
               </div>
             </div>

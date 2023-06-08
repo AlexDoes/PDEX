@@ -74,7 +74,7 @@ export default function AuthButtonComponent({ setBlur, closeBlur }: any) {
             ref={tansitionRef}
             className={`absolute top-16 w-[100vw] 
             right-0 z-20 shadow-md text-green-400 rounded-b-md p-2 flex flex-col gap-3
-            bg-black indent-3 md:indent-0
+            bg-black indent-3 md:indent-3
             bg-opacity-30 backdrop-filter backdrop-blur-[2px] backdrop-brightness-100
             `}
             onClick={openMenu}

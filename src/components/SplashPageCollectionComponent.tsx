@@ -44,18 +44,19 @@ export default function Splash(Data: Props) {
             className=" 
             font-serif
             lg:w-[80%]
-            flex items-center justify-center h-[80vh]"
+            flex items-center justify-center lg:h-[80vh] xs:h-[60vh]"
           >
             <div
               // id="splashtextcontainer"
-              className="flex rounded-3xl bg-opacity-40 bg-yellow-200  w-[90%]
+              className="flex rounded-3xl bg-opacity-[40%] w-[90%]
                h-[40vh] justify-center items-center
-               overflow-hidden 
+               overflow-hidden lg:min-w-[350px]
               sm:min-w-[500px]  max-w-[500px]
               select-none
+              backdrop-invert-[30%] bg-[#9bab6e]
                "
             >
-              <h1 className="text-6xl text-black text-center">
+              <h1 className="text-6xl font-extralight text-[#92f789] text-center">
                 <div className="">
                   <LoadingText text="Introducing" />
                 </div>
@@ -106,9 +107,9 @@ export default function Splash(Data: Props) {
                     w-[80%]"
                   >
                     <div>
-                      <h3 className="text-[20px] lg:text-[26px] text-black select-none transition-all ease-in-out duration-300  hover:text-[#657ce0]">
+                      <p className=" font-light text-[20px] lg:text-[26px] text-black select-none transition-all ease-in-out duration-300  hover:text-[#657ce0]">
                         <Link href={`p/${plant.id}`}>{plant.name}</Link>
-                      </h3>
+                      </p>
                       <p className="text-[#FFFDD0] italic select-none transition-all ease-in-out duration-300  hover:text-[#818fcd] ">
                         <Link href={`search/${plant.species}`}>
                           {plant.species}
@@ -116,10 +117,10 @@ export default function Splash(Data: Props) {
                       </p>
                     </div>
                     <p
-                      className="overflow-auto text-[12px] bg-[#FFF4BD] bg-opacity-50 pl-3 pr-3 pt-2 pb-2 rounded-md
+                      className="overflow-auto text-[12px] bg-[#FFF4BD] bg-opacity-50 pl-3 pr-3 pt-1 pb-2 rounded-md
                       scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
                       scrollbar-rounded-sm
-                      h-full
+                      h-full font-[400] font-inter
                     "
                       id="plantDescriptionText"
                     >

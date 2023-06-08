@@ -85,7 +85,7 @@ export default function LoadingText(prop: any) {
             opacity: 1,
           }}
         >
-          <div className="flex flex-col text-lg">
+          <div className="flex flex-col text-[#ffffff] text-xl font-light indent-1 items-start">
             <span>{sentence}</span>
           </div>
         </Animate>

@@ -13,12 +13,21 @@ module.exports = {
       screens: {
         xs: "480px",
       },
+      fontFamily: {
+        inter: ["Inter", "Lato", "Playfair", "sans-serif"],
+        lato: ["Lato", "Inter", "sans-serif"],
+        playfair: ["Playfair", "Lato", "Inter", "sans-serif"],
+        heading: ["Playfair", "Lato", "Inter", "sans-serif"],
+      },
     },
     backgroundPosition: {
       "top-64": "center top 4rem",
     },
     animation: {
       "pulse-slow": "pulse 3s linear 3",
+    },
+    fontFamily: {
+      // sans: ["Sofia Pro", "Arial", "sans-s erif"],
     },
   },
   plugins: [

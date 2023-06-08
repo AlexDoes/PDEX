@@ -93,12 +93,12 @@ export default function NavBarSearchBar({}) {
     let i = 0;
     return (
       <ul
-        className={`w-inherit absolute top-[100%] w-full   z-40 text-ellipsis rounded-lg  border-white bg-white  `}
+        className={`w-inherit absolute top-[100%] w-[100%] z-40 text-ellipsis rounded-b-lg bg-white  `}
       >
-        <div className={`border-slate-500 border-[1px] rounded-md`}>
+        <div className={`border-slate-500 rounded-md`}>
           {speciesSuggestions.length > 0 && (
             <div>
-              <h1 className="text-lg font-semibold bg-slate-300 border-2 border-black pl-1">
+              <h1 className="text-lg bg-slate-300 border-black pl-1">
                 Species suggested:{" "}
               </h1>
             </div>
@@ -114,7 +114,7 @@ export default function NavBarSearchBar({}) {
                 bg-green-300
                 cursor-pointer
                 hover:bg-gray-200
-                border-2 border-slate-500
+                 border-slate-500
                 indent-3
                 flex flex-row
                 justify-between
@@ -134,7 +134,7 @@ export default function NavBarSearchBar({}) {
             ))}
           {plantSuggestions.length > 0 && (
             <div>
-              <h1 className="text-lg font-thin bg-slate-300 border-2 border-black pl-1">
+              <h1 className="text-lg font-thin bg-slate-300 border-black pl-1">
                 Plants suggested:{" "}
               </h1>
             </div>
@@ -149,7 +149,7 @@ export default function NavBarSearchBar({}) {
                 bg-[#c7fcff]
                 cursor-pointer
                 hover:bg-gray-200
-                border-2 border-black
+                 border-black
                 indent-3
                 flex flex-row
                 justify-between
@@ -171,7 +171,7 @@ export default function NavBarSearchBar({}) {
             ))}
           {usersSuggestions.length > 0 && (
             <div>
-              <h1 className="text-lg font-semibold bg-slate-300 border-2 border-slate-500 pl-1">
+              <h1 className="text-lg bg-slate-300  border-slate-500 pl-1">
                 Users suggested:{" "}
               </h1>
             </div>
@@ -186,7 +186,7 @@ export default function NavBarSearchBar({}) {
                 rounded-
                 cursor-pointer
                 hover:bg-gray-200
-                border-2 border-slate-500
+                 border-slate-500
                 bg-[#f6f5e5]
                 indent-3
                 flex flex-row
@@ -248,14 +248,16 @@ export default function NavBarSearchBar({}) {
       className="flex flex-row z-30 items-center justify-center h-[62px] "
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col z-30 items-start relative overflow-visible rounded-full border-white   ">
-        <div className="flex flex-row justify-center items-center gap-2 relative">
+      <div className="flex flex-col z-30 items-start relative overflow-visible rounded-full border-none outline-none border-transparent focus:border-transparent focus:ring-0 active:ring-0">
+        <div className="flex flex-row justify-center items-center gap-2 relative focus:border-none active:border-none focus:outline-none active:outline-none">
           <input
             type="text"
             placeholder="Search"
             value={searchText}
             onChange={handleOnChange}
-            className="w-[45vw] bg-[#f6f5e5] rounded-full text-black outline-none focus:border-none   "
+            className={`w-[45vw] bg-[#f6f5e5] 
+              ${suggestions.length > 0 ? `rounded-t-xl` : `rounded-full`}
+             text-black focus:outline-none outline-none active:outline-none border-none focus:border-none active:border-none`}
             tabIndex={0}
             ref={(input) => input}
             onBlur={handleBlur}

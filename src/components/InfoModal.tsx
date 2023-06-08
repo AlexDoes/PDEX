@@ -15,8 +15,20 @@ const InfoModal = () => {
     setShowModal(!showModal);
   };
 
+  const handleOutsideClick = (e: any) => {
+    console.log("clicked");
+    if (e.target.id === "modalbackdrop") {
+      setShowModal(false);
+    }
+  };
+
   return (
-    <div className=" fixed bottom-12 z-50 left-[4%] cursor-pointer animate-pulse-slow">
+    <div
+      className={`fixed bottom-12 z-50 left-[4%] cursor-pointer 
+    font-lato
+    ${!showModal ? `animate-pulse-slow` : `animate-none`}
+    `}
+    >
       {!showModal && (
         <div onClick={handleModal}>
           <BsInfoCircle
@@ -37,7 +49,7 @@ const InfoModal = () => {
         <div
           ref={transitionRef}
           // onClick={handleAddCollectionClick}
-          className="fixed z-50 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] backdrop-blur-sm "
+          className="fixed z-30 top-0 right-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-[rgb(0,0,0,.5)] backdrop-blur-sm "
         ></div>
       </CSSTransition>
 
@@ -51,11 +63,13 @@ const InfoModal = () => {
       >
         <div
           ref={transitionRef2}
-          className="fixed z-50 top-0 left-0 right-0 bottom-0 h-[100vh]  w-[100vw] flex justify-center items-center "
+          onClick={handleOutsideClick}
+          id="modalbackdrop"
+          className="fixed z-40 top-0 left-0 right-0 bottom-0 h-[100vh]  w-[100vw] flex justify-center items-center"
         >
           <div
             id="modalbg"
-            className=" modalbg rounded-md md:w-[80%] w-[80%] h-[85%]   max-w-[1000px] border-[#c1e1c1] p-2 flex flex-col py-5 items-center overflow-y-hidden auto bg-[#9bab6e] relative bg-opacity-90 cursor-auto"
+            className=" z-50 modalbg rounded-md md:w-[80%] w-[80%] h-[85%]   max-w-[900px] border-[#c1e1c1] p-2 flex flex-col py-5 items-center overflow-y-hidden auto bg-[#9bab6e] relative bg-opacity-90 cursor-auto select-none"
           >
             <div
               onClick={handleModal}
@@ -70,7 +84,10 @@ const InfoModal = () => {
               <div className=" xl:mt-2 md:text-md lg:text-lg">
                 <LoadingPlantImage />
               </div>
-              <div className="text-2xl text-center items-center mb-1 font-semibold text-[#fffbcc]">
+              <div
+                className="text-3xl hover:text-green-100 ease-in-out   text-center items-center mb-1  text-[#fffbcc] 
+              transition duration-300"
+              >
                 Welcome BAX
               </div>
               <div className="md:text-lg lg:text-lg w-[95%] text-[#097d81e7]">

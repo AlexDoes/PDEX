@@ -11,6 +11,10 @@ import ScreenChecker from "@/components/ScreenChecker";
 import InfoModal from "@/components/InfoModal";
 import Footer from "@/components/Footer";
 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+});
 const lato = Lato({ subsets: ["latin"], weight: ["300", "400", "700", "900"] });
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -24,7 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ToastContainer />
       <SessionProvider session={pageProps.session}>
         <NavBar />
-        <div className="" id="center">
+        <div className="font-lato" id="center">
           <div className="w-[90%] xs:w-[100%] sm:w-[100%] md:w-[90%] xs:px-3 md:px-0">
             <Component {...pageProps} />
           </div>
