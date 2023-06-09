@@ -110,8 +110,8 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
 
   return (
     <>
-      <div className=" w-[90vw]   h-[7vh] justify-center flex ">
-        <div className="bg-[#91b191] bg-opacity-70 border-[#c1e1c1] md:ml-10  ml-2 flex flex-col gap-4 items-center h-[660px] md:h-[630px] w-[620px] rounded-lg ">
+      <div className=" w-[90vw]  h-full justify-center flex ">
+        <div className="bg-[#91b191] bg-opacity-70 border-[#c1e1c1]  flex flex-col gap-4 items-center h-[660px] md:h-[630px] ml-3 w-[650px] rounded-lg ">
           <h1 className="text-3xl font-semibold mt-2 text-white ">
             Profile Dashboard
           </h1>

@@ -31,7 +31,7 @@ export default function NavBar() {
       {show && (
         <div
           className={`flex w-full gap-2 h-16 max-h-16 justify-between sm:justify-between
-          select-none font-inter font-light
+          select-none font-lato font-light
           ${
             isBlur ? `bg-opacity-30 bg-black` : ""
           } ease-in-out transition-colors duration-300`}

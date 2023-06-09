@@ -246,7 +246,7 @@ export default function NavBarSearchBar({}) {
 
   return (
     <form
-      className="flex flex-row z-30 items-center justify-center h-[62px] "
+      className="flex flex-row z-30 items-center justify-center h-[62px] outline-none focus:border-none active:border-none focus:outline-none active:outline-none "
       onSubmit={handleSubmit}
     >
       <div className="flex flex-col z-30 items-start relative overflow-visible rounded-full border-none outline-none border-transparent focus:border-transparent focus:ring-0 active:ring-0">

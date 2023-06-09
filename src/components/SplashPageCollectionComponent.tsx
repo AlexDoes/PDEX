@@ -1,6 +1,7 @@
 import LoadingText from "./LoadinText";
 import Link from "next/link";
 import Footer from "./Footer";
+import InfoModal from "./InfoModal";
 
 type PlantContent = {
   id: string;
@@ -144,6 +145,7 @@ export default function Splash(Data: Props) {
           </div>
         </div>
       </div>
+      <InfoModal />
     </>
   );
 }

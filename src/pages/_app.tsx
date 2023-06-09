@@ -33,8 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </div>
         </div>
-        <ScreenChecker />
-        <InfoModal />
+        {/* <ScreenChecker /> */}
         <Footer />
       </SessionProvider>
     </>

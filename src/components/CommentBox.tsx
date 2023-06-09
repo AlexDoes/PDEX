@@ -129,7 +129,7 @@ const CommentBox = (props: Props) => {
   return (
     <div className="h-full flex items-center">
       <button
-        className="w-[10%] h-full flex justify-center items-center hover:backdrop-brightness-95 rounded-r-xl transition duration-300 ease-in-out group"
+        className="w-[10%] h-full flex justify-center items-center hover:backdrop-brightness-95 rounded-xl transition duration-300 ease-in-out group"
         onClick={!liked ? onLike : unlike}
       >
         {liked ? (
@@ -156,12 +156,21 @@ const CommentBox = (props: Props) => {
           />
           <button
             className="w-[10%] min-w-[50px] h-[100%] flex justify-center items-center border-t border-b border-r hover:backdrop-brightness-90 rounded-r-xl 
-            hover:text-green-300 transition duration-300 ease-in-out
+            hover:text-green-300 transition duration-300 ease-in-out border-none
             "
             type="submit"
             disabled={!userId || comment.length < 3}
           >
-            <div className="text-center flex justify-center items-center h-full w-full text-blue-300 hover:text-green-100">
+            <div
+              className={`text-center flex justify-center items-center h-full w-full text-blue-300 hover:text-green-100
+            ${
+              reference === "Collection"
+                ? "bg-green-100 hover:text-orange-200"
+                : "bg-green-100 hover:text-green-400"
+            }
+            rounded-r-xl transition duration-300 ease-in-out border-none
+          `}
+            >
               Post
             </div>
           </button>
