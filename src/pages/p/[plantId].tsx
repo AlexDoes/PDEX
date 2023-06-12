@@ -6,6 +6,7 @@ import { getSession } from "next-auth/react";
 import Link from "next/link";
 import DeleteCommentButton from "@/components/DeleteCommentButton";
 import { SlPencil } from "react-icons/sl";
+import RedirectComponent from "@/components/RedirectComponent";
 
 const defaultAvatars = [
   "https://pdex.s3.amazonaws.com/defaultavatar-1.jpg",
@@ -42,8 +43,14 @@ export default function plantPublicDisplayPage({
   };
 
   if (!plant) {
-    return <div> Weird, you shouldn't be here</div>;
+    return (
+      <RedirectComponent
+        prompt="We'll get you BAX on the right track."
+        error="There seems to be no plant associated with this id."
+      />
+    );
   }
+
   const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
@@ -127,7 +134,7 @@ export default function plantPublicDisplayPage({
                   </p>
                 </div>
               </div>
-              <p className="text-sm font-light">{comment.text}</p>
+              <p className="text-sm lg:text-md font-light">{comment.text}</p>
             </div>
           </div>
         ))}
@@ -223,7 +230,7 @@ export default function plantPublicDisplayPage({
                 )}{" "}
               </div>
             </div>
-            <div className="italic font-extralight text-gray-500">
+            <div className="italic font-light text-gray-500">
               <Link
                 className="hover:text-[#818fcd]"
                 href={`/search/${plant.species}`}
@@ -242,7 +249,7 @@ export default function plantPublicDisplayPage({
                 </>
               ) : null}{" "}
             </div>
-            <div className=" font-extralight text-sm hover:text-blue-400">
+            <div className=" font-light text-sm hover:text-blue-400">
               <Link href={`/u/${plant.ownedBy.nickname || plant.ownerId}`}>
                 By {plant.ownedBy.name || plant.ownedBy.nickname}
               </Link>
@@ -355,20 +362,23 @@ export async function getServerSideProps(context: any) {
 
   const likerId = plant?.likes[0]?.userId || null;
   const likedId = plant?.likes[0]?.id || null;
+  let plantsWithFormattedTime = {};
 
-  const plantsWithFormattedTime = plant?.Comments.map((comment: any) => {
-    const date = new Date(comment.createdAt);
-    const dateString = date.toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-    });
-    const timeString = date.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-    });
-    const formattedString = `${dateString}, ${timeString}`;
-    return { ...comment, createdAt: formattedString };
-  });
+  plant
+    ? (plantsWithFormattedTime = plant?.Comments?.map((comment: any) => {
+        const date = new Date(comment.createdAt);
+        const dateString = date.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+        });
+        const timeString = date.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+        });
+        const formattedString = `${dateString}, ${timeString}`;
+        return { ...comment, createdAt: formattedString };
+      }))
+    : null;
 
   return {
     props: {

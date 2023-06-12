@@ -47,6 +47,10 @@
   background-image: url("/BG/modalBg.png");
 }
 
+#errorbg {
+  background-image: url("/BG/errorbg2.png");
+}
+
 .dropdown-enter {
   max-height: 0;
   opacity: 0;

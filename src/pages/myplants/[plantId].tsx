@@ -10,6 +10,7 @@ import s3 from "lib/aws";
 import spinner from "public/images/spinner.svg";
 import { SlPencil } from "react-icons/sl";
 import { CSSTransition } from "react-transition-group";
+import RedirectComponent from "@/components/RedirectComponent";
 
 interface User {
   id: string;
@@ -68,14 +69,15 @@ export default function plantDisplay({ plant, userId }: any) {
   const [showForm, setShowForm] = useState<boolean>(false);
   const [activeField, setActiveField] = useState<string>("");
 
-  useEffect(() => {
-    if (userId !== plantData.ownedBy.id) {
-      const redirectTimeout = setTimeout(() => {
-        router.push("/myplants");
-      }, 5000);
-      return () => clearTimeout(redirectTimeout);
-    }
-  }, []);
+  if (userId !== plantData.ownedBy.id) {
+    return (
+      <RedirectComponent
+        error={`This doesn't seem like the link to your plant.`}
+        location={`myplants`}
+        prompt="We'll get you back to your plants."
+      />
+    );
+  }
 
   const [plantDataDisplay, setPlantData] = useState({
     id: plantData.id,

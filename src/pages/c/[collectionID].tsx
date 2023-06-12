@@ -8,6 +8,7 @@ import DeleteCommentButton from "@/components/DeleteCommentButton";
 import { SlPencil } from "react-icons/sl";
 import CollectionImageCarousel from "@/components/ImageCarouselComponentForCollection";
 import { FaSeedling } from "react-icons/fa";
+import RedirectComponent from "@/components/RedirectComponent";
 
 interface User {
   id: string;
@@ -35,6 +36,16 @@ export default function publicDisplayCollection({
   const latestComment = useRef<HTMLDivElement>(null);
   const [commentsToDisplayState, setCommentsToDisplay] = useState(comments);
   const [scroll, setScroll] = useState(false);
+
+  if (!collection) {
+    return (
+      <RedirectComponent
+        prompt="We'll get you BAX on the right track."
+        error="There seems to be no collection here."
+        location="explore"
+      />
+    );
+  }
 
   const handleDeleteFromParent = (deletedId: string) => {
     const newComments = commentsToDisplayState.filter(
@@ -139,23 +150,6 @@ export default function publicDisplayCollection({
     setCommentsToDisplay(newComments);
   };
 
-  // <div className="w-full h-full">
-  //   <div
-  //     className="xs:w-[80vw] xs:h-[95vw] sm:w-[100vw]
-  //         lg:max-h-[80vh] lg:max-w-[80vh] xl:max-w-[80vh] xl:max-h-[80vh]
-  //         sm:max-w-[80vw]"
-  //   >
-  //     {collection.plantContents && collection.plantContents.length > 0 ? (
-  //       <CollectionImageCarousel
-  //         images={collection.plantContents.map((plant: any) => {
-  //           return plant.image;
-  //         })}
-  //       />
-  //     ) : (
-  //       "No images"
-  //     )}
-  //   </div>
-  // </div>
   return (
     <div
       className=" mt-[10px] border-[#c1e1c1] bg-green-100 bg-opacity-80
@@ -433,23 +427,28 @@ export async function getServerSideProps(context: any) {
       },
     },
   });
+  console.log(collection);
 
   const likerId = collection?.likes[0]?.userId || null;
   const likedId = collection?.likes[0]?.id || null;
 
-  const plantsWithFormattedTime = collection?.Comments.map((comment: any) => {
-    const date = new Date(comment.createdAt);
-    const dateString = date.toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-    });
-    const timeString = date.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-    });
-    const formattedString = `${dateString}, ${timeString}`;
-    return { ...comment, createdAt: formattedString };
-  });
+  let plantsWithFormattedTime = {};
+
+  collection
+    ? (plantsWithFormattedTime = collection?.Comments.map((comment: any) => {
+        const date = new Date(comment.createdAt);
+        const dateString = date.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+        });
+        const timeString = date.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+        });
+        const formattedString = `${dateString}, ${timeString}`;
+        return { ...comment, createdAt: formattedString };
+      }))
+    : null;
 
   return {
     props: {

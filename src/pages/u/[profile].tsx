@@ -30,18 +30,19 @@ interface User {
 
 export default function UserProfile({ user }: Props) {
   const router = useRouter();
-  useEffect(() => {
-    if (!user) {
-      const redirectTimeout = setTimeout(() => {
-        router.push("/");
-      }, 5000);
-      return () => clearTimeout(redirectTimeout);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!user) {
+  //     const redirectTimeout = setTimeout(() => {
+  //       router.push("/");
+  //     }, 5000);
+  //     return () => clearTimeout(redirectTimeout);
+  //   }
+  // }, []);
 
   if (!user) {
-    return <RedirectComponent />;
+    return <RedirectComponent error="Seems like there's no user here." />;
   }
+
   const {
     id,
     username,
@@ -427,6 +428,7 @@ export default function UserProfile({ user }: Props) {
             xs:text-xl
             sm:text-2xl
             md:text-xl
+            backdrop-blur-[5px]
         "
         >
           {description ? description : "No description"}
