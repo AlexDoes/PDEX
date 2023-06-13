@@ -76,15 +76,17 @@
 }
 .flip-enter-active {
   transform: rotateY(180deg);
-  transition: transform 700ms;
+  transition: transform 500ms;
 }
 .flip-exit {
   transform: rotateY(180deg);
 }
 .flip-exit-active {
   transform: rotateY(0deg);
-  transition: transform 700ms;
+  transition: transform 500ms;
 }
+
+ 
 body {
   background-color: #d5ffdd;
   background-image: url("/BG/greenbg3.png");
