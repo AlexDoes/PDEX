@@ -11,6 +11,8 @@ import RedirectComponent from "@/components/RedirectComponent";
 import { profile } from "console";
 import { FaSeedling } from "react-icons/fa";
 import Link from "next/link";
+import { TbPlant } from "react-icons/tb";
+import { GiTrowel } from "react-icons/gi";
 
 interface Props {
   user: any;
@@ -84,13 +86,16 @@ export default function UserProfile({ user }: Props) {
             className="flex-row flex
             items-center justify-center w-full h-full
             rounded-xl p-2
-            bg-opacity-70 bg-green-200
+            bg-opacity-80 bg-green-200
             md:gap-5
             lg:gap-4
             text-3xl
+            font-normal
             xl:gap-1"
           >
-            Still currating
+            <p className="flex flex-row gap-1 items-center">
+              Still currating <GiTrowel />
+            </p>
           </div>
         </div>
       );
@@ -228,10 +233,11 @@ export default function UserProfile({ user }: Props) {
             className="flex-row flex
             items-center justify-center w-full h-full
             rounded-xl p-2
-            bg-opacity-70 bg-green-200
+            bg-opacity-80 bg-green-200
             md:gap-5
             lg:gap-4
             text-3xl
+            font-normal
             xl:gap-1"
           >
             Sprouting soon 🌱{" "}
@@ -243,7 +249,7 @@ export default function UserProfile({ user }: Props) {
     return ownedPlants.map((plant: any) => {
       return (
         <div
-          key={plant.name}
+          key={plant.name + Math.random() * 1000000000}
           className="flex-row flex
             w-full 
             justify-between items-center  
@@ -265,7 +271,7 @@ export default function UserProfile({ user }: Props) {
             </p>
             <p
               className="text-lg 
-              indent-3 font-extralight italic
+              indent-3 font-light italic
               xl:indent-5
             "
             >
@@ -335,9 +341,9 @@ export default function UserProfile({ user }: Props) {
         gap-2
         h-full
         rounded-xl
-        bg-opacity-70 bg-green-200
+        bg-opacity-80 bg-green-200
         md:p-4
-        max-w-[1000px]
+        md:max-w-[400px]
         xs:w-[100%]
         w-[75%]
         lg:w-[40%]
@@ -411,7 +417,8 @@ export default function UserProfile({ user }: Props) {
               </h1>
               <h2
                 className="
-              text-lg font-extralight
+              text-lg font-light
+              text-gray-600
               xs:text-xl
               "
               >
@@ -439,22 +446,22 @@ export default function UserProfile({ user }: Props) {
           md:mt-2
           flex flex-row gap-1
           xs:text-lg
-          font-extralight
+          font-light
           w-full
           xs:mb-2
           "
         >
-          <div>
-            🪴{" "}
+          <div className="flex flex-row gap-1 items-center">
+            <TbPlant />{" "}
             {ownedPlants.length === 1
               ? `1 plant`
               : `${ownedPlants.length}` + " plants"}
-          </div>
-          <p> • </p>
-          <div>
-            {plantCollection.length === 1
-              ? `1 collection`
-              : `${plantCollection.length}` + " collections"}
+            <p> • </p>
+            <div>
+              {plantCollection.length === 1
+                ? `1 collection`
+                : `${plantCollection.length}` + " collections"}
+            </div>
           </div>
         </div>
       </div>

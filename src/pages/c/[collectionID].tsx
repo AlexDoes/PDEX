@@ -334,7 +334,6 @@ export async function getServerSideProps(context: any) {
       },
     },
   });
-  console.log(collection);
 
   const likerId = collection?.likes[0]?.userId || null;
   const likedId = collection?.likes[0]?.id || null;

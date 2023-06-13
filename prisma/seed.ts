@@ -132,7 +132,8 @@ async function main() {
     create: {
       name: "Alex's Aloe Vera",
       description: "Aloe Vera is a succulent plant species of the genus Aloe.",
-      image: "https://i.imgur.com/1ZQ1Z1K.jpg",
+      image:
+        "https://images.unsplash.com/photo-1589893432683-529de88655a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=664&q=80",
       water: "once a week",
       light: "direct sunlight",
       species: "Aloe Vera",

@@ -124,7 +124,7 @@ export default function NavBarSearchBar({}) {
                 tabIndex={0}
               >
                 <Link
-                  className="flex justify-between w-full items-center xl:pr-4 lg:pr-2 md:pr-1 sm:pr-3 pr-2"
+                  className="flex justify-between w-full items-center                     xl:pr-3 lg:pr-2 md:pr-1 sm:pr-3 pr-2"
                   href={`/search/${item}`}
                 >
                   {item}
@@ -161,7 +161,7 @@ export default function NavBarSearchBar({}) {
                 onKeyDown={handleKeyDown}
               >
                 <Link
-                  className="flex justify-between w-full items-center xl:pr-4 lg:pr-2 md:pr-1 sm:pr-3 pr-2"
+                  className="flex justify-between w-full items-center                     xl:pr-3 lg:pr-2 md:pr-1 sm:pr-3 pr-2"
                   href={`/search/${item}`}
                 >
                   {item}
@@ -205,7 +205,7 @@ export default function NavBarSearchBar({}) {
                     justify-between
                     w-full
                     items-center
-                    xl:pr-4 lg:pr-2 md:pr-1 sm:pr-3 pr-2
+                    xl:pr-3 lg:pr-2 md:pr-1 sm:pr-3 pr-2
               "
                 >
                   {item}
@@ -261,12 +261,12 @@ export default function NavBarSearchBar({}) {
              text-black focus:outline-none outline-none active:outline-none border-none focus:border-none active:border-none`}
             tabIndex={0}
             ref={(input) => input}
-            onBlur={handleBlur}
+            // onBlur={handleBlur}
           />
           <button
             type="submit"
             onClick={onSubmit}
-            className="border-2 flex items-center justify-center absolute  z-30 right-0 h-full rounded-r-full md:w-[12%] w-[20%] border-none hover:backdrop-brightness-90 "
+            className="border-2 flex items-center justify-center absolute  z-30 right-0 h-full rounded-tr-lg md:w-[12%] w-[20%] border-none hover:backdrop-brightness-90 max-w-[60px]"
           >
             <FaSearch />
           </button>

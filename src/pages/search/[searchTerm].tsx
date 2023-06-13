@@ -53,10 +53,6 @@ export default function SearchResult({
   const userRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const collectionRef = useRef<HTMLDivElement>(null);
-  const [imageError, setImageError] = useState(false);
-  const handleImageError = () => {
-    setImageError(true);
-  };
 
   const goToPlant = () => {
     plantRef.current?.scrollIntoView({
@@ -114,10 +110,10 @@ export default function SearchResult({
   return (
     <div className="w-full scroll-auto">
       <div className="flex flex-col mb-2 gap-2 bg-opacity-30" ref={searchRef}>
-        <p className=" pb-2 pt-2 text-2xl text-white flex flex-row gap-1 ">
+        <div className=" pb-2 pt-2 text-2xl text-white flex flex-row gap-1 xs:backdrop-blur-[2px] sm:backdrop-blur-none ">
           Search Results for
-          <div className="text-green-200">'{searchTerm}'</div>:
-        </p>
+          <div className="text-green-200">'{searchTerm}':</div>
+        </div>
         <div
           className={`flex gap-4 items-center
         ${uniquePlants.length > 0 ? `visible` : `hidden`}
@@ -202,7 +198,7 @@ export default function SearchResult({
                   id="glassBackPlant"
                   key={plant.id}
                   className={`border-2 border-[#c1e1c1] rounded-xl p-2 m-2 pt-4 pb-6 items-center justify-center flex flex-col xs:w-[80vw] sm:w-[40vw] md:w-[40vw] lg:w-[25vw] group
-                focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[492px] focus:outline-none bg-orange-100
+                focus:focus-within hover:relative hover:transition-all focus:transition-all md:h-min-[492px] focus:outline-none bg-orange-100 max-w-[325px]
                 ${filter(searchTerm, plant.species)}
             `}
                   tabIndex={0}
@@ -215,12 +211,14 @@ export default function SearchResult({
                         className="
                     rounded-xl
                     xs:h-[40vh] xs:w-[50vw] 
-                    sm:h-[40vh] md:h-[40vh] 
-                    lg:h-64
-                    sm:w-[40vw] md:w-[30vw] 
-                    md:max-w-70 lg:w-60 xl:w-60
-                    lg:max-w-80
-                    sm:max-w-[80]
+                    sm:h-[40vh] sm:w-[40vw] 
+                    md:h-[40vh] md:w-[30vw] 
+                    sm:max-w-[240px]
+                    md:max-w-[300px]
+                    sm:max-h-[300px]
+                    md:max-w-70 
+                    lg:max-w-80 lg:w-60 
+                    xl:w-60
                     "
                       />
                     </div>
@@ -228,8 +226,12 @@ export default function SearchResult({
                     ""
                   )}
                   <p className="font">{plant.name}</p>
-                  <p className="font-light italic">{plant.species}</p>
-                  <p className="font-thin">By {plant.ownedBy.nickname}</p>
+                  <p className="font-light italic text-gray-600">
+                    {plant.species || `Unlisted Species`}
+                  </p>
+                  <p className="font-light">
+                    By {plant.ownedBy.nickname || `Anonymous User`}
+                  </p>
                   <p
                     className="
                 border
@@ -243,7 +245,7 @@ export default function SearchResult({
                 md:h-[92px]
                 lg:h-[90px]
                 xl:h-[90px]
-                max-h-[80px]
+                min-h-[90px]
                 overflow-y-auto
                 ellipsis
                 text-center
@@ -296,19 +298,19 @@ export default function SearchResult({
                     <div
                       id="glassBackCollection"
                       key={plantCollection.id}
-                      className="border[#c1e1c1] rounded-xl p-2 m-2 pt-4 pb-6 bg-[#c1e1c1] bg-opacity-80 flex gap-4 items-center justify-center flex-col xs:w-[80vw] sm:w-[40vw] md:w-[40vw] lg:w-[25vw] xl:w-[22vw] focus:focus-within hover:relative hover:transition-all focus:transition-all focus:outline-none w-full "
+                      className="border[#c1e1c1] xs:max-w-[325px] rounded-xl p-2 m-2 pt-4 pb-6 bg-[#c1e1c1] bg-opacity-80 flex gap-4 items-center justify-center flex-col xs:w-[80vw] sm:w-[40vw] md:w-[40vw] lg:w-[25vw] xl:w-[22vw] focus:focus-within hover:relative hover:transition-all focus:transition-all focus:outline-none w-full "
                     >
                       {plantCollection.plantContents[0]?.image && (
                         <div className="flex items-center justify-center rounded-lg ">
                           <img
                             src={plantCollection.plantContents[0].image}
                             alt=""
-                            className="                             rounded-xl
+                            className="rounded-xl
                             xs:h-[40vh] xs:w-[50vw] 
                             sm:h-[40vh] md:h-[40vh] 
-                            lg:h-64
                             sm:w-[40vw] md:w-[30vw] 
                             md:max-w-70 lg:w-60 xl:w-60
+                            max-h-[300px]
                             lg:max-w-80
                             sm:max-w-[80]"
                           />
@@ -324,7 +326,7 @@ export default function SearchResult({
                           </span>
                         </div>
                         <div
-                          className="font-extralight italic
+                          className="font-light italic
                         "
                         >
                           Contains {plantCollection._count.plantContents}{" "}
@@ -346,6 +348,7 @@ export default function SearchResult({
                 lg:h-[90px]
                 xl:h-[90px]
                 max-h-[80px]
+                min-h-[92px]
                 overflow-y-auto
                 ellipsis
                 text-center
@@ -408,46 +411,28 @@ export default function SearchResult({
                 <div key={user.nickname} className="">
                   <div
                     id="glassBackCard"
-                    className="border-4 border-[#c1e1c1] rounded-xl p-2 m-2 pt-4 pb-6 bg-blue-200 flex gap-4 items-center justify-center flex-col xs:w-[80vw] sm:w-[40vw] md:w-[40vw] lg:w-[25vw] xl:w-[22vw] focus:focus-within hover:relative hover:transition-all focus:transition-all focus:outline-none"
+                    className="border-4 border-[#c1e1c1] rounded-xl p-4 m-2 pt-4 pb-6 bg-blue-200 flex gap-4 items-center justify-center flex-col xs:w-[80vw] sm:w-[40vw] md:w-[40vw] lg:w-[25vw] xl:w-[22vw] focus:focus-within hover:relative hover:transition-all focus:transition-all focus:outline-none max-w-[325px]
+                    max-h-[450px]"
                     tabIndex={0}
                   >
-                    {user.image ? (
-                      <div className="flex items-center justify-center rounded-lg">
-                        <img
-                          src={user.image}
-                          alt=""
-                          className="
+                    <div className="flex items-center justify-center rounded-lg">
+                      <img
+                        src={user.image || avatarImage.src}
+                        alt=""
+                        className="
                     border-green-400
                     rounded-xl
                     md:max-w-70 
                     lg:max-w-80
-                    lg:w-64 xl:w-64
+                    lg:w-64
                     xs:h-[40vh] xs:w-[50vw] 
-                    sm:h-[40vh] md:h-[40vh] lg:h-80
+                    sm:h-[30vh] md:h-[40vh] lg:h-80
                     sm:w-[40vw] md:w-[35vw] md:max-w-[30vw]
                     sm:max-w-[80]
+                    md:max-h-[300px]
                     "
-                        />
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-center rounded-lg">
-                        <img
-                          src={avatarImage.src}
-                          alt=""
-                          className="
-                          border-green-400
-                          rounded-xl
-                          md:max-w-70 
-                          lg:max-w-80
-                          lg:w-64 xl:w-64
-                          xs:h-[40vh] xs:w-[50vw] 
-                          sm:h-[40vh] md:h-[40vh] lg:h-80
-                          sm:w-[40vw] md:w-[35vw] md:max-w-[30vw]
-                          sm:max-w-[80]
-                    "
-                        />
-                      </div>
-                    )}
+                      />
+                    </div>
                     <p>{user.nickname}</p>
                     <p>
                       {user._count?.ownedPlants ? (
@@ -474,7 +459,6 @@ export default function SearchResult({
           )}
         </div>
       </div>
-      {ScrollToTopButton()}
     </div>
   );
 }

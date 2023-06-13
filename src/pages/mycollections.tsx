@@ -164,21 +164,23 @@ export default function MyCollections({ items, userId }: CollectionProps) {
             )}
           </div>
           <div className="flex flex-col w-full gap-2 overflow-hidden">
-            <div className="text-2xl indent-3 xl:indent-3 overflow-hidden text-[#fffbcc] flex justify-between items-center w-[98%]">
+            <div className="text-lg indent-3 xl:indent-3 overflow-hidden md:text-[#fffbcc] flex justify-between items-center w-[98%] xs:text-black">
               <Link
                 onClick={() => handleClick(collection.id)}
                 href={`/collections/${collection.id}`}
-                className="whitespace-nowrap overflow-ellipsis hover:text-blue-400 w-full "
+                className="whitespace-nowrap overflow-ellipsis hover:text-blue-400 w-[90%]"
               >
-                <span className="hover:underline">{collection.name}</span>
-                <span className="text-[10px] hover:text-blue-400">
+                <span className="hover:underline xs:text-sm lg:text-xl">
+                  {collection.name}
+                </span>
+                <span className="text-[10px] hover:text-blue-400 ">
                   {" "}
                   (Edit){" "}
                 </span>
               </Link>
               <Link
                 href={`/c/${collection.id}`}
-                className="whitespace-nowrap overflow-ellipsis text-sm hover:text-green-700 rounded-lg flex items-center justify-center text-center underline underline-offset-8"
+                className="whitespace-nowrap text-sm hover:text-blue-600 rounded-lg flex underline underline-offset-6 items-start text-[#fffbcc]"
               >
                 Public view
               </Link>
@@ -240,7 +242,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                 </div>
               </div>
             </div>
-            <div className="px-3 transition duration-500 ease-in-out hidden absolute right-0 bottom-0  group-hover:inline-block group-hover:opacity-100 opacity-0 ">
+            <div className="px-3 transition duration-500 ease-in-out hidden absolute sm:right-0 xs:-right-2 xs:-bottom-1 bottom-0  group-hover:inline-block group-hover:opacity-100 opacity-0 ">
               <DeleteCollectionButton
                 user={userId}
                 collectionId={collection.id}
