@@ -220,7 +220,7 @@ export default function publicDisplayCollection({
                 )}{" "}
               </div>
             </div>
-            <div className=" font-extralight text-md hover:text-blue-400">
+            <div className=" font-light text-md hover:text-blue-400">
               <Link
                 href={`/u/${collection.owner.nickname || collection.ownerId}`}
               >

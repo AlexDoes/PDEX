@@ -23,16 +23,16 @@ export default function LoadingText(prop: any) {
       play={true}
       sequences={[
         { sequenceId: 0 },
-        { sequenceId: 1, delay: 1 },
-        { sequenceId: 2, delay: 1 },
+        { sequenceId: 1 },
+        { sequenceId: 2, delay: 0.5 },
       ]}
     >
       {displayText.map((word: string, i: number) => (
         <Animate
           key={i}
           play={true}
-          duration={0.5}
-          delay={0.5 * i}
+          duration={1}
+          delay={0}
           sequenceId={0}
           start={{
             transform: "translateX(-10px)",
@@ -51,13 +51,12 @@ export default function LoadingText(prop: any) {
           <Animate
             key={i}
             play={true}
-            duration={0.25}
+            duration={1.5}
             delay={0.5 * i}
             sequenceId={1}
             start={{
               transform: "translateX(-10px)",
               opacity: 0,
-              color: "white",
             }}
             end={{
               transform: "translateX(0px)",
@@ -73,7 +72,7 @@ export default function LoadingText(prop: any) {
         <Animate
           key={i}
           play={true}
-          duration={1}
+          duration={1.5}
           delay={0.5 * i}
           sequenceId={2}
           start={{

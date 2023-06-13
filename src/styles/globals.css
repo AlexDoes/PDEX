@@ -601,5 +601,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #splashButton {
   opacity: 0;
-  animation: smooth-appear 1.5s 3s forwards;
+  animation: smooth-appear 2.5s 1.5s forwards;
 }

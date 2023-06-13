@@ -156,8 +156,8 @@ export default function plantPublicDisplayPage({
        "
       tabIndex={0}
     >
-      <div className="relative lg:max-w-[600px] h-full w-full group w-inherit  items-center justify-center flex  ">
-        <div className="relative  h-full w-full lg:min-w-[500px] md:max-w-[500px] lg:max-w-[600px] select-none ">
+      <div className="relative lg:max-w-[600px] xl:max-w-[900px] h-full w-full group w-inherit  items-center justify-center flex  ">
+        <div className="relative  h-full w-full lg:min-w-[500px] md:max-w-[500px] lg:max-w-[600px] xl:max-w-[900px] select-none ">
           {/* <img
             src={plant.image}
             alt={plant.name}

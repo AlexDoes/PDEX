@@ -53,7 +53,6 @@ export default function SearchResult({
   const userRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const collectionRef = useRef<HTMLDivElement>(null);
-  usePreviousScrollPosition();
   const [imageError, setImageError] = useState(false);
   const handleImageError = () => {
     setImageError(true);
