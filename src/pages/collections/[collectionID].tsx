@@ -159,13 +159,71 @@ export default function ThisCollection({
       />
     );
   };
-  // text-[#a0cfa0]
+
+  const [visibility, setVisibility] = useState(plantContentsData.public);
+  const handleVisibility = () => {
+    setVisibility(!visibility);
+    handleUpdateVisibility(!visibility, userId, collectionID);
+  };
+
+  const map: mapObject = {
+    true: "Collection is now public",
+    false: "Collection is now private",
+  };
+
+  interface mapObject {
+    [key: string]: string;
+  }
+
+  const handleUpdateVisibility = async (
+    visibility: boolean,
+    userId: string,
+    collectionID: string
+  ) => {
+    const response = await fetch("/api/collections/updatePublicAPI", {
+      method: "PATCH",
+      body: JSON.stringify({ visibility, userId, collectionID }),
+    });
+    const data = await response.json().then((data) => {
+      toast.success(`${map[String(visibility)]}`, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+        closeOnClick: true,
+        draggable: false,
+        closeButton: true,
+        hideProgressBar: false,
+        style: { backgroundColor: "#c1e1c1", color: "#000000" },
+      });
+    });
+  };
+
   return (
     <>
-      <div className="bg-orange-100 bg-opacity-70 rounded-xl p-10 py-10 flex flex-col gap-3 w-full min-h-[90vh] justify-center items-center">
+      <div className="bg-orange-100 bg-opacity-70 rounded-xl p-10 py-10 flex flex-col gap-3 w-full min-h-[90vh] justify-center items-center relative">
         <h1 className=" text-black flex items-center justify-center mb-2 xs:text-xl sm:text-2xl md:text-3xl backdrop-blur-sm">
           {plantContentsData.name}'s content
         </h1>
+        <label className="inline-flex items-center p-2 rounded-md cursor-pointer dark:text-gray-800 text-xs absolute right-3 top-3">
+          <input
+            id="Toggle3"
+            type="checkbox"
+            className="hidden peer"
+            checked={!visibility}
+            onChange={handleVisibility}
+          />
+          <div
+            className={`px-2 py-1 rounded-l-md dark:bg-green-300 peer-checked:dark:bg-yellow-50 transition-all duration-300 ease-in-out
+            `}
+          >
+            Public
+          </div>
+          <div
+            className={`px-2 py-1 rounded-r-md dark:bg-yellow-50 peer-checked:dark:bg-red-200 transition-all duration-300 ease-in-out
+            `}
+          >
+            Private
+          </div>
+        </label>
         <div className="flex flex-col pt-2 pb-1 w-full gap-3">
           <div className="flex flex-col items-center justify-center relative">
             <div className="border-slate-500 border rounded-xl w-[90%] p-2 font-extralight relative backdrop-blur-md">
@@ -326,7 +384,7 @@ async function handleUpdate(
     toast.success("Updated Successfully", {
       position: "top-center",
       autoClose: 5000,
-      style: { fontWeight: "bold", backgroundColor: "#C6F6D5" },
+      style: { fontWeight: "bold", backgroundColor: "#C6F6D5", color: "black" },
     });
     return await response.json();
   }

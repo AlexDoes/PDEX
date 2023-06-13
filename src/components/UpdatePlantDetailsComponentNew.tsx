@@ -98,6 +98,7 @@ export default function UpdateDataComponent({
               className="w-[80%] h-[50px] rounded-md text-md border-[#c1e1c1] bg-[#efe6c1] border-none focus:outline-none focus:border-none focus:ring-0 focus:ring-transparent "
               value={textInputValue}
               minLength={3}
+              maxLength={32}
               onChange={handleTextInputChange}
             />
             <div className="w-full flex flex-row justify-center items-center gap-1">

@@ -592,3 +592,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: rotateZ(0deg) translateZ(-1px);
   }
 }
+
+@keyframes smooth-appear {
+  to {
+    opacity: 1;
+  }
+}
+
+#splashButton {
+  opacity: 0;
+  animation: smooth-appear 1.5s 3s forwards;
+}

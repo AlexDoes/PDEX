@@ -65,15 +65,15 @@ export default function publicDisplayCollection({
   const commentsToDisplay = () => {
     if (commentsToDisplayState.length === 0) {
       return (
-        <div className="border-y-2 border-[#bceac2] h-full xs:h-[90px] text-center justify-center items-center flex">
+        <div className="border rounded-lg border-[#ffffff] h-full xs:h-[90px] lg:h-[180px] text-center justify-center items-center flex font-light text-3xl backdrop-blur-sm">
           Be the first to comment!
         </div>
       );
     }
     return (
       <div
-        className="flex flex-col gap-3 border-y border-[#FFF4BD]px-4 h-full overflow-y-auto p-2 transition-all duration-500 ease-in-out scroll-smooth pt-4 scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
-        scrollbar-rounded-sm snap-y snap-mandatory"
+        className="flex flex-col gap-3 border-y border-[#FFF4BD] px-4 h-full overflow-y-auto p-2 transition-all duration-500 ease-in-out scroll-smooth pt-4 scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
+        scrollbar-rounded-sm snap-y snap-mandatory backdrop-blur-sm"
         ref={latestComment}
       >
         {commentsToDisplayState.map((comment: any) => (
@@ -134,7 +134,7 @@ export default function publicDisplayCollection({
                   </p>
                 </div>
               </div>
-              <p className="text-sm font-light">{comment.text}</p>
+              <p className="text-md font-light">{comment.text}</p>
             </div>
           </div>
         ))}
@@ -193,101 +193,9 @@ export default function publicDisplayCollection({
               </div>
             )}
           </div>
-          {/* <div className="absolute left-0 right-0  flex flex-col px-2 py-2 mx-auto transition-opacity duration-100 ease-in-out bg-gray-800 opacity-0 bottom-2   group-hover:opacity-70 group-focus:opacity-70 rounded-b-xl ">
-            <h3 className="text-lg text-white">{plant.name}</h3>
-            <div className="text-sm font-light text-white">
-              <p className="italic">
-                {!plant.species2
-                  ? plant.species
-                  : plant.species + " / " + plant.species2}
-              </p>
-              <p className="italic">
-                By {plant.ownedBy.name || plant.ownedBy.nickname}{" "}
-              </p>
-              <div className="flex flex-row gap-1">
-                <p>{plant.plantHeight && "H: " + plant.plantHeight + " cm"}</p>
-                <p>{plant.plantWidth && "W: " + plant.plantWidth + " cm"}</p>
-              </div>
-              {plant.light ? <p>Sunlight: {plant.light}</p> : null}
-              {plant.water ? <p>Water: {plant.water}</p> : null}
-              <div>{plant.description} </div>
-            </div>
-          </div> */}
         </div>
       </div>
-      {/* comment section */}
-      {/* <div
-        className="relative grid border border-black xs:items-center xs:justify-center  gap-2 px-2 h-full   
-          max-w-[800px]
-          rounded-xl
-        "
-      >
-        <div
-          className="h-[30%] border border-red-500 flex 
-          flex-col items-start justify-evenly relative  gap-2 "
-        >
-          <div className=" flex flex-row text-xl elipsis font-bold">
-            {collection.name}{" "}
-            <div className="text-sm font-light text-blue-300 rounded-sm">
-              {user === collection.ownerId ? (
-                <div className="ml-1 rounded-sm hover:border hover:backdrop-brightness-90">
-                  <Link href={`/mycollections/${collection.id}`}>
-                    <SlPencil />
-                  </Link>
-                </div>
-              ) : (
-                ""
-              )}{" "}
-            </div>
-          </div>
-          <div className="italic font-light">
-            Collection by -{" "}
-            <Link
-              href={`/u/${collection.owner.nickname || collection.ownerId}`}
-            >
-              {collection.owner.nickname || collection.owner.name}
-            </Link>
-          </div>
-          <div className="relative flex flex-col justify-center">
-            <div
-              className="
-                rounded-lg font-light
-                xs:max-h-[92px]
-                md:h-full
-                lg:h-[90px]
-                xl:h-[90px]
-                max-h-[92px]
-                text-ellipsis
-                text-center
-                flex
-                pl-2
-                xs:text-sm sm:text-sm md:text-md items-center 
-                relative
-              "
-            >
-              <p
-                className=" border-t-2 border-b-2 border-[#C1E1C1]  h-full text-center justify-center flex  font-semibold overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
-          scrollbar-rounded-sm snap-y snap-mandatory  "
-              >
-                {collection.description
-                  ? collection.description +
-                    "lorem ipsum dolor sit amet, consectetur adipiscing elit. Null lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Null"
-                  : `There's not much known about ${collection.name} yet but check back later when ${collection.owner.nickname} tells us more about it! lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Nulllorem ipsum dolor sit amet, consectetur adipiscing elit. Null`}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="h-[55%] w-full mb-auto">{commentsToDisplay()}</div>
-        <div className="h-[12%] w-full bottom-0  justify-center py-3  ">
-          <CommentBox
-            reference={"Collection"}
-            refId={collection.id}
-            userId={user}
-            onAction={handleCommentSubmit}
-            likedId={likedId}
-          />
-        </div>
-      </div> */}
+
       <div
         className="relative flex 
         flex-col   xs:items-center xs:justify-center  gap-2 px-2    
@@ -312,7 +220,7 @@ export default function publicDisplayCollection({
                 )}{" "}
               </div>
             </div>
-            <div className=" font-extralight text-sm hover:text-blue-400">
+            <div className=" font-extralight text-md hover:text-blue-400">
               <Link
                 href={`/u/${collection.owner.nickname || collection.ownerId}`}
               >
@@ -332,8 +240,7 @@ export default function publicDisplayCollection({
               text-ellipsis
               text-center
               flex
-              pl-2
-              xs:text-sm sm:text-sm md:text-md items-center 
+              pl-2 items-center 
               relative
               w-full
             "
@@ -341,7 +248,7 @@ export default function publicDisplayCollection({
               <p
                 className=" border-t-2 items-center border-b-2 p-2 border-[#FFF4BD]  h-full 
                 w-full min-w-full text-center justify-center flex  font-light overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1]
-        scrollbar-rounded-sm snap-y snap-mandatory select-text  "
+        scrollbar-rounded-sm snap-y snap-mandatory select-text backdrop-blur-sm text-sm"
               >
                 {collection.description
                   ? collection.description

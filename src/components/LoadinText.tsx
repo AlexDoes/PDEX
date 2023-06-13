@@ -51,7 +51,7 @@ export default function LoadingText(prop: any) {
           <Animate
             key={i}
             play={true}
-            duration={0.5}
+            duration={0.25}
             delay={0.5 * i}
             sequenceId={1}
             start={{

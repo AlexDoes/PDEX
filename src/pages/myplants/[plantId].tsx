@@ -68,6 +68,7 @@ export default function plantDisplay({ plant, userId }: any) {
   const [upload, setUpload] = useState<boolean>(false);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [activeField, setActiveField] = useState<string>("");
+  const [publicCollection, setPublicCollection] = useState<boolean>(true);
 
   if (userId !== plantData.ownedBy.id) {
     return (
@@ -100,7 +101,8 @@ export default function plantDisplay({ plant, userId }: any) {
     setActiveField("");
   };
 
-  const handleOnClose = () => {
+  const handleOnClose = (e: any) => {
+    e.preventDefault();
     setShowForm(false);
     setActiveField("");
   };
@@ -141,7 +143,6 @@ export default function plantDisplay({ plant, userId }: any) {
   };
 
   const EditPhoto = () => {
-    console.log("clicked");
     setEditPhoto(true);
   };
 
@@ -185,10 +186,6 @@ export default function plantDisplay({ plant, userId }: any) {
     router.back();
   }
 
-  const showChangeButton = (field: fieldName) => {
-    const props = { field, userId, plantInfo: plantData };
-  };
-
   const showChangeButtonV2 = (field: fieldName) => {
     return (
       <button
@@ -204,26 +201,14 @@ export default function plantDisplay({ plant, userId }: any) {
     );
   };
 
-  const updatedDate = new Date(plantData.updatedAt).toLocaleDateString(
-    "en-US",
-    {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    }
-  );
-
   return (
     <>
-      <div className="m-5">
+      <div className="m-5 h-full">
         <div className="bg-orange-100 bg-opacity-90 rounded-xl px-10 xs:pb-5 pt-5 flex flex-col md:pb-10 lg:pb-0 gap-1 w-full my-auto  ">
           <h1 className=" text-[#a0cfa0] flex items-center justify-center mb-2 xs:text-xl sm:text-2xl">
             {plantDataDisplay.name}'s information displayed below{" "}
           </h1>
-          <div className="flex xs:flex-col md:flex-row gap-4  md:items-start items-center    ">
+          <div className="flex xs:flex-col md:flex-row gap-4  md:items-start items-center">
             <div className="relative  h-full pb-10">
               <img
                 className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-xl cursor-pointer"
@@ -284,7 +269,7 @@ export default function plantDisplay({ plant, userId }: any) {
                 </div>
               )}
             </div>
-            <div className="flex flex-col gap-2 h-full  border-cyan-300 rounded-2xl p-3 w-full">
+            <div className="flex flex-col gap-2 h-full relative border-cyan-300 rounded-2xl p-3 w-full">
               <div className="flex flex-row w-full">
                 <div className="gap-1 flex">
                   {showChangeButtonV2("name")}
@@ -446,7 +431,6 @@ export async function getServerSideProps(context: any) {
           nickname: true,
         },
       },
-      collectionsPartOf: true,
     },
   });
 
@@ -488,7 +472,7 @@ async function handleUpdate(
     toast.success("Updated Successfully", {
       position: "top-center",
       autoClose: 5000,
-      style: { fontWeight: "bold", backgroundColor: "#C6F6D5" },
+      style: { backgroundColor: "#C6F6D5", color: "black" },
     });
     return await response.json();
   }

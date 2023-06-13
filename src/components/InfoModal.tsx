@@ -23,7 +23,7 @@ const InfoModal = () => {
 
   return (
     <div
-      className={`fixed bottom-12 z-50 left-[4%] cursor-pointer 
+      className={`fixed bottom-10 z-50 left-[4%] cursor-pointer 
     font-lato
     `}
     >

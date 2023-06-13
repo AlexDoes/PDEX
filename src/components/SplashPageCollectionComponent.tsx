@@ -2,6 +2,7 @@ import LoadingText from "./LoadinText";
 import Link from "next/link";
 import Footer from "./Footer";
 import InfoModal from "./InfoModal";
+import { FaSearch, FaSeedling } from "react-icons/fa";
 
 type PlantContent = {
   id: string;
@@ -33,6 +34,9 @@ type Props = {
   collection: Collection;
 };
 
+const primary = "#c1e1c1";
+const secondary = "#fffbcc";
+
 export default function Splash(Data: Props) {
   const displayData = Data.collection;
 
@@ -45,21 +49,46 @@ export default function Splash(Data: Props) {
             className=" 
             font-serif
             lg:w-[80%]
-            flex items-center justify-center lg:h-[80vh] xs:h-[60vh]"
+            flex items-center justify-center lg:h-[80vh] xs:h-[60vh]
+            flex-col"
           >
             <div
               // id="splashtextcontainer"
               className="flex rounded-3xl bg-opacity-[40%] w-[90%]
-               h-[40vh] justify-center items-center
-               overflow-hidden lg:min-w-[350px]
+               min-h-[40vh] justify-center items-center
+              lg:min-w-[350px]
               sm:min-w-[500px]  max-w-[500px]
               select-none
-              backdrop-invert-[30%] bg-[#9bab6e]
+              backdrop-invert-[15%] g-[#9bab6e]
+              backdrop-blur-[3px]
+              lg:backdrop-blur-0
+              lg:backdrop-invert-[10%]
+              flex-col py-4
                "
             >
-              <h1 className="text-6xl font-extralight text-[#92f789] text-center">
+              <h1 className="text-6xl font-light text-[#cafbd7] w-90% borde">
                 <div className="">
                   <LoadingText text="Introducing" />
+                  <div className="flex-row flex text-sm font-light text-black my-3 gap-4 pl-1">
+                    <Link href={"/explore"}>
+                      <button
+                        id="splashButton"
+                        className={`bg-[${primary}] hover:text-[#c07a4b] flex items-center px-2 py-2 rounded-md ease-in-out duration-500 transition-all hover:bg-[${secondary}]`}
+                      >
+                        Explore collections
+                        <FaSearch className="inline ml-1" />
+                      </button>
+                    </Link>
+                    <Link href={"/c/KatiesCollection"}>
+                      <button
+                        id="splashButton"
+                        className={`bg-[${primary}] hover:text-[#c07a4b] flex items-center p-2 py-2 rounded-md ease-in-out duration-500 transition-all hover:bg-[${secondary}]`}
+                      >
+                        Check out Katie's collection
+                        <FaSeedling className="inline ml-1" />
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </h1>
             </div>

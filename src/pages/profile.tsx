@@ -274,7 +274,7 @@ async function handleUpdate(
     toast.success("Updated Successfully", {
       position: "top-center",
       autoClose: 5000,
-      style: { fontWeight: "bold", backgroundColor: "#C6F6D5" },
+      style: { fontWeight: "bold", backgroundColor: "#C6F6D5", color: "black" },
     });
     return await response.json();
   }

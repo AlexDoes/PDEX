@@ -50,7 +50,6 @@ export default function RemoveUniquePlantFromCollectionButton(props: any) {
         userId: user,
         collectionId: collectionId,
       });
-      console.log(uniquePlantId);
       handleSubmissionFromParent(uniquePlantId);
     } catch (error) {
       console.log(error);

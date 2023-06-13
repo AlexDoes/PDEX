@@ -100,8 +100,7 @@ export default function CreateCollectionForm(data: any) {
       toast.success(`${newCollection.name} created!`, {
         style: {
           background: "#e0f0e3",
-          color: "#ffffff",
-          textShadow: "0 0 0.5rem #000000",
+          color: "black",
         },
       });
       handleSubmissionFromParent(newCollection);
@@ -111,7 +110,10 @@ export default function CreateCollectionForm(data: any) {
   }
 
   return (
-    <div ref={data.forwaredRef} className="fixed z-50 top-0 left-0 right-0 bottom-0 h-[100vh]  w-[100vw] flex justify-center items-center  ">
+    <div
+      ref={data.forwaredRef}
+      className="fixed z-50 top-0 left-0 right-0 bottom-0 h-[100vh]  w-[100vw] flex justify-center items-center  "
+    >
       {/* <div className=" absolute w-[100vw] h-[100vh] bg-red-500 "></div> */}
       <div
         id="createuniqueplantform"

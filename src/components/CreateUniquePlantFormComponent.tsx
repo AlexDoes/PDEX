@@ -185,8 +185,7 @@ export default function CreateUniquePlant(props: any) {
       toast.success(`${data.plantName} created successfully!`, {
         style: {
           background: "#e0f0e3",
-          color: "#ffffff",
-          textShadow: "0 0 0.5rem #000000",
+          color: "black",
         },
       });
       onSubmitFunction({ ...data, plantImage: url, id: res.id });

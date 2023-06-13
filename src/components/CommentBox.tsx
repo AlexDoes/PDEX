@@ -28,9 +28,15 @@ const CommentBox = (props: Props) => {
   };
 
   const map: MyObject = {
-    UniquePlant: "unique plant",
+    UniquePlant: "plant",
     Comment: "comment",
     Collection: "plant collection",
+  };
+
+  const map2: MyObject = {
+    UniquePlant: "Unique plant",
+    Comment: "Comment",
+    Collection: "Plant collection",
   };
 
   const onLike = async (e: any) => {
@@ -45,11 +51,10 @@ const CommentBox = (props: Props) => {
     }).then((res) => {
       if (res.ok) {
         setLiked(true);
-        toast.success(`You've liked the ${map[reference]}.`, {
+        toast.success(`You've liked this ${map[reference]} ❤️`, {
           style: {
             background: "#e0f0e3",
-            color: "#ffffff",
-            textShadow: "0 0 0.5rem #000000",
+            color: "black",
           },
         });
         res.json().then((data) => {
@@ -61,7 +66,7 @@ const CommentBox = (props: Props) => {
           style: {
             //crimson hexcode color : #DC143C
             background: "#ff6699",
-            color: "#ffffff",
+            color: "black",
           },
         });
       }
@@ -78,11 +83,10 @@ const CommentBox = (props: Props) => {
     }).then((res) => {
       setLikeId("");
       setLiked(false);
-      toast.success(`${reference} unliked.`, {
+      toast.success(`${map2[reference]} unliked 💔`, {
         style: {
           background: "#e0f0e3",
-          color: "#ffffff",
-          textShadow: "0 0 0.5rem #000000",
+          color: "black",
         },
       });
     });
@@ -105,8 +109,7 @@ const CommentBox = (props: Props) => {
             toast.success("Comment posted!", {
               style: {
                 background: "#e0f0e3",
-                color: "#ffffff",
-                textShadow: "0 0 0.5rem #000000",
+                color: "black",
               },
             });
             res.json().then((data) => {

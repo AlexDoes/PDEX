@@ -15,15 +15,6 @@ interface Props {
 export default function Home(props: Props) {
   const { data: session, status } = useSession();
 
-  let dynamicContent = <h1>Not signed in</h1>;
-  if (status === "authenticated") {
-    dynamicContent = (
-      <h1>
-        Signed in as {session.user.email} <br />
-      </h1>
-    );
-  }
-
   return (
     <>
       <Head>
@@ -43,7 +34,11 @@ export async function getStaticProps() {
       id: "KatiesCollection",
     },
     include: {
-      plantContents: {},
+      plantContents: {
+        orderBy: {
+          updatedAt: "asc",
+        },
+      },
     },
   });
 

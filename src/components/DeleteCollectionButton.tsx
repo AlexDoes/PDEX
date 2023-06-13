@@ -43,7 +43,7 @@ export default function DeleteCollectionButton(props: any) {
         className: "confirm-toast",
         style: {
           background: "#c1e1c1",
-          color: "#000000",
+          color: "black",
         },
       });
       handleSubmissionFromParent(collectionId);

@@ -177,7 +177,7 @@ export default function plantPublicDisplayPage({
           <img
             src={plant.image}
             alt={plant.name}
-            className="h-full w-full rounded-xl object-cover"
+            className="h-full w-full rounded-xl"
           />
           <div className="absolute left-0 right-0  flex flex-col px-2 py-2 mx-auto transition-opacity duration-100 ease-in-out bg-gray-800 opacity-0 bottom-0  group-hover:opacity-70 group-focus:opacity-70 rounded-b-xl ">
             <h3 className="text-lg text-white">{plant.name}</h3>
@@ -274,7 +274,7 @@ export default function plantPublicDisplayPage({
             "
             >
               <p
-                className=" border-t-2 border-b-2 p-2 border-[#afd4af]  h-full text-center justify-center flex  font-light overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1] w-full
+                className=" border-t-2 border-b-2 p-1 border-[#afd4af]  h-full text-center justify-center flex  font-light overflow-y-auto scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1] w-full
         scrollbar-rounded-sm snap-y snap-mandatory backdrop-blur-sm select-text"
               >
                 {plant.description
