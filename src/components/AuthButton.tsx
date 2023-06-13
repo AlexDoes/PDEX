@@ -39,7 +39,7 @@ export default function AuthButtonComponent({ setBlur, closeBlur }: any) {
         <div className="h-full w-full  px-2 md:px-4 xl:mr-3" onClick={openMenu}>
           {/* {"Hello " + session.user.name?.split(" ")[0]} */}
           <div className="h-full w-full flex justify-center items-center cursor-pointer">
-            <div>
+            <div className="">
               {!showmenu && <GiHamburgerMenu size={30} color="#efe6c1" />}
             </div>
             <div
@@ -148,15 +148,15 @@ export default function AuthButtonComponent({ setBlur, closeBlur }: any) {
       >
         <AccountCircleOutlinedIcon />
       </button> */}
-      <div className="relative group">
+      <div className="group">
         <button
           onClick={() => signIn()}
-          className="w-12 h-12 rounded-lg shadow-2xl text-[#33af9b] border-[#4bcdb7] border-2 flex items-center justify-center group hover:bg-[#4ed9c2] hover:text-[#2ca08d] transition-all ease-in-out duration-500 hover:bg-opacity-60"
+          className="w-10 lg:mr-11 md:mr-6 sm:mr-3 xs:mr-2 h-10 relative rounded-lg shadow-2xl text-[#33af9b] border-[#4bcdb7] border flex items-center justify-center group hover:bg-[#4ed9c2] hover:text-[#2ca08d] transition-all ease-in-out duration-500 hover:bg-opacity-60"
         >
           <AccountCircleOutlinedIcon style={{ fontSize: "200%" }} />
+          <div className="absolute top-0 right-0 -mr-1.5 -mt-1.5 w-3 h-3 rounded-full bg-blue-400 animate-ping-short overflow-hidden group-hover:hidden "></div>
+          <div className="absolute top-0 right-0 -mr-1.5 -mt-1.5 w-3 h-3 rounded-full bg-blue-400 "></div>
         </button>
-        <div className="absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-blue-400 animate-ping-short overflow-hidden group-hover:hidden "></div>
-        <div className="absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-blue-400 "></div>
       </div>
     </>
   );
