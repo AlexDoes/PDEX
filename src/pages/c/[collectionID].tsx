@@ -152,7 +152,7 @@ export default function publicDisplayCollection({
 
   return (
     <div
-      className=" mt-[10px] border-[#c1e1c1] bg-green-100 bg-opacity-80
+      className=" mt-[10px] border-[#c1e1c1] bg-gradient-to-br from-green-100 to-yellow-100 bg-opacity-80
       rounded-xl p-4  lg:justify-center  pb-6  lg:items-center  focus:focus-within hover:relative hover:transition-all focus:transition-all 
         w-full focus:outline-none overflow-x-hidden flex flex-col lg:flex-row gap-8 lg:gap-4 min-h-[88vh] h-[88vh]
          "
@@ -210,7 +210,7 @@ export default function publicDisplayCollection({
           flex-col  items-start justify-evenly relative w-full gap-1"
         >
           <div>
-            <div className=" flex flex-row text-xl elipsis font-semibold">
+            <div className="text-[#7aa57a] flex flex-row text-xl elipsis font-semibold">
               {collection.name}{" "}
               <div className="text-sm font-light text-blue-300 rounded-sm">
                 {user === collection.ownerId ? (

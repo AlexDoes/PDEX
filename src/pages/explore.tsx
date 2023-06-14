@@ -17,18 +17,24 @@ const explore = ({ collections, pagination }: Props) => {
 
   return (
     <div className="w-full h-full items-center ">
-      <div className=" flex flex-wrap justify-center  gap-4 ">
-        {collections.map((collection: any) => (
-          // collection.plantContents.length > 0 && (
-          <ExploreCollectionCard collection={collection} />
+      <div className="flex items-center justify-center w-full text-center text-2xl p-2 mb-2 rounded-xl text-[#fffbcc]">
+        <div className="backdrop-blur-[2px] backdrop-invert-[20%] xs:w-[80%] md:w-full rounded-xl">
+          Explore other people's collections:
+        </div>
+      </div>
+      <div className=" flex flex-wrap justify-center gap-4 ">
+        {collections.map((collection: any, i: number) => (
+          <div key={i}>
+            <ExploreCollectionCard collection={collection} />
+          </div>
         ))}
       </div>
-      <div className=" w-full  text-3xl text-white flex gap-2 font-semibold justify-center items-center mt-5">
+      <div className=" w-full  text-3xl text-white flex gap-2 justify-center items-center mt-5">
         {pagination.page > 1 && (
           <Link href={`/explore?page=${pagination.page - 1}`}>Previous</Link>
         )}
 
-        <span>Page {pagination.page}</span>
+        <span className="text-lg">Page {pagination.page}</span>
 
         {pagination.page < pagination.totalPages && (
           <Link href={`/explore?page=${pagination.page + 1}`}>Next</Link>
@@ -65,11 +71,11 @@ export const getServerSideProps = async (params: any) => {
     },
   });
 
-  const totalCollections = await prisma.plantCollection.count({
-    where: {
-      public: true,
-    },
-  });
+  // const totalCollections = await prisma.plantCollection.count({
+  //   where: {
+  //     public: true,
+  //   },
+  // });
 
   return {
     props: {
@@ -77,7 +83,7 @@ export const getServerSideProps = async (params: any) => {
       pagination: {
         page: page,
         limit: limit,
-        totalPages: Math.ceil(totalCollections / limit),
+        // totalPages: Math.ceil(totalCollections / limit),
       },
     },
   };

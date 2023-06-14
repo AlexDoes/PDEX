@@ -179,7 +179,7 @@ export default function plantPublicDisplayPage({
             alt={plant.name}
             className="h-full w-full rounded-xl"
           />
-          <div className="absolute left-0 right-0  flex flex-col px-2 py-2 mx-auto transition-opacity duration-100 ease-in-out bg-gray-800 opacity-0 bottom-0  group-hover:opacity-70 group-focus:opacity-70 rounded-b-xl ">
+          <div className="absolute left-0 right-0  flex flex-col px-2 py-2 mx-auto transition-opacity duration-300 ease-in-out bg-gray-800 opacity-0 bottom-0  group-hover:opacity-70 group-focus:opacity-70 rounded-b-xl ">
             <h3 className="text-lg text-white">{plant.name}</h3>
             <div className="text-sm font-light text-white">
               <p className="italic">
