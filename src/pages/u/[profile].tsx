@@ -330,7 +330,7 @@ export default function UserProfile({ user }: Props) {
   return (
     <div
       className="
-      xs:mt-2
+      xs:mt-0
       md:flex md:flex-row md:justify-center mt-5
       md:gap-2 xs:flex xs:flex-col
     "
@@ -338,7 +338,6 @@ export default function UserProfile({ user }: Props) {
       <div
         className="
         md:flex md:flex-col
-        gap-2
         h-full
         rounded-xl
         bg-opacity-80 bg-green-200
@@ -350,6 +349,7 @@ export default function UserProfile({ user }: Props) {
         md:w-[40%]
         md:w-max-[50%]
         md:min-w-[320px]
+        p-2
         "
       >
         <div
