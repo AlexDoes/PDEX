@@ -33,7 +33,7 @@ const ExploreCollectionCard = ({ collection }: any) => {
     <div className="w-[300px] max-h-[500px] h-[462px] rounded-lg relative shadow-xl transition-all duration-400 ease-in-out ">
       <div className="group [perspective:1000px] h-full w-full">
         <div
-          className={`relative h-full w-full rounded-xl bg-opacity-80 bg-[#c1e1c1] transition-all duration-500 [transform-style:preserve-3d] ${
+          className={`relative h-full w-full rounded-xl bg-opacity-80 bg-gradient-to-br from-[#c5fec3] to-[#eaeac7] transition-all duration-500 [transform-style:preserve-3d] ${
             isFlipped ? " [transform:rotateY(180deg)]" : ""
           }`}
         >
@@ -63,14 +63,14 @@ const ExploreCollectionCard = ({ collection }: any) => {
                   />
                 </Link>
               </div>
-              <div className="text-white text-xl flex flex-col">
+              <div className="text-[#0a494375] text-xl flex flex-col">
                 <Link
                   href={`/c/${collection.id}`}
                   className="hover:text-[#7788f7] transition-all duration-200 ease-in-out"
                 >
                   <div className="">{collection.name}</div>
                 </Link>
-                <h2 className="text-[#fcf9f9ed] text-lg font-light italic">
+                <h2 className="text-[#ed9595ed] text-lg font-light italic">
                   By{" "}
                   {collection.owner.nickname ? (
                     <Link
@@ -98,9 +98,9 @@ const ExploreCollectionCard = ({ collection }: any) => {
 
           {/* /// BACK ///////////////////////////////////////////////// */}
 
-          <div className="absolute inset-0 h-full bg-opacity-50 rounded-xl bg-[#c1e1c1] p-2 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]  overflow-y-auto scrollbar-none scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1] scrollbar-rounded-sm">
+          <div className="absolute inset-0 h-full bg-opacity-50 rounded-xl border-[#c1e1c1] bg-gradient-to-br from-[#c5fec3] tto-[#eaeac7] p-2 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]  overflow-y-auto scrollbar-none scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1] scrollbar-rounded-sm">
             <div className=" h-full w-full flex rounded-lg flex-col ">
-              <div className="text-[#ffffff] text-2xl text-center font-semibold text-shadow-sm border-b w-full border-white top-0">
+              <div className="text-[#47c35e] text-2xl text-center font border-b w-full border-white top-0">
                 Plants
               </div>
               <div className=" w-full">
@@ -108,7 +108,7 @@ const ExploreCollectionCard = ({ collection }: any) => {
                   {collection.plantContents.map((plant: any, i: number) => (
                     <li
                       key={collection.id + collection.owner.id + i}
-                      className="text-[#ffffff] flex flex-col w-full font-light text-shadow-md text-center text-xl truncate"
+                      className="text-[#0a494375] flex flex-col w-full font-light text-center text-xl truncate"
                     >
                       <Link href={`/p/${plant.id}`} className="">
                         <p className="hover:text-[#7788f7] transition-all duration-200 ease-in-out">
