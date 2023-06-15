@@ -51,7 +51,7 @@ const Footer = () => {
             {" "}
             Github
           </a>
-          <a className=" underline" href=" ">
+          <a className=" underline" href=" "></a>
             Portfolio
           </a>
           <a className=" underline" href=" ">
