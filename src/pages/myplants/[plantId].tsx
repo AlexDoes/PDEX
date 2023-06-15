@@ -70,16 +70,6 @@ export default function PlantDisplay({ plant, userId }: any) {
   const [activeField, setActiveField] = useState<string>("");
   const [publicCollection, setPublicCollection] = useState<boolean>(true);
 
-  if (userId !== plantData.ownedBy.id) {
-    return (
-      <RedirectComponent
-        error={`This doesn't seem like the link to your plant.`}
-        location={`myplants`}
-        prompt="We'll get you back to your plants."
-      />
-    );
-  }
-
   const [plantDataDisplay, setPlantData] = useState({
     id: plantData.id,
     name: plantData.name,
@@ -93,6 +83,20 @@ export default function PlantDisplay({ plant, userId }: any) {
     image: plantData.image,
     ownedBy: plantData.ownedBy,
   });
+
+  useEffect(() => {
+    setPlantData(plantDataDisplay);
+  }, [plantDataDisplay]);
+
+  if (userId !== plantData.ownedBy.id) {
+    return (
+      <RedirectComponent
+        error={`This doesn't seem like the link to your plant.`}
+        location={`myplants`}
+        prompt="We'll get you back to your plants."
+      />
+    );
+  }
 
   const onSubmitFromParent = (data: string) => {
     const props = { activeField, userId, plantInfo: plantData };
@@ -152,10 +156,6 @@ export default function PlantDisplay({ plant, userId }: any) {
     setImage(null);
     setEditPhoto(false);
   };
-
-  useEffect(() => {
-    setPlantData(plantDataDisplay);
-  }, [plantDataDisplay]);
 
   if (userId !== plantData.ownedBy.id) {
     return (

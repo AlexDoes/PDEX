@@ -37,6 +37,15 @@ export default function PublicDisplayCollection({
   const [commentsToDisplayState, setCommentsToDisplay] = useState(comments);
   const [scroll, setScroll] = useState(false);
 
+  useEffect(() => {
+    if (scroll) {
+      if (latestComment.current) {
+        latestComment.current.scrollTop = latestComment.current.scrollHeight;
+      }
+    }
+    setScroll(false);
+  }, [commentsToDisplayState, scroll]);
+
   if (!collection) {
     return (
       <RedirectComponent
@@ -53,14 +62,6 @@ export default function PublicDisplayCollection({
     );
     setCommentsToDisplay(newComments);
   };
-  useEffect(() => {
-    if (scroll) {
-      if (latestComment.current) {
-        latestComment.current.scrollTop = latestComment.current.scrollHeight;
-      }
-    }
-    setScroll(false);
-  }, [commentsToDisplayState, scroll]);
 
   const commentsToDisplay = () => {
     if (commentsToDisplayState.length === 0) {

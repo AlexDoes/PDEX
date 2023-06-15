@@ -41,16 +41,6 @@ export default function PlantPublicDisplayPage({
     );
     setCommentsToDisplay(newComments);
   };
-
-  if (!plant) {
-    return (
-      <RedirectComponent
-        prompt="We'll get you BAX on the right track."
-        error="There seems to be no plant associated with this id."
-      />
-    );
-  }
-
   const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
@@ -61,6 +51,15 @@ export default function PlantPublicDisplayPage({
     }
     setScroll(false);
   }, [commentsToDisplayState, scroll]);
+
+  if (!plant) {
+    return (
+      <RedirectComponent
+        prompt="We'll get you BAX on the right track."
+        error="There seems to be no plant associated with this id."
+      />
+    );
+  }
 
   const commentsToDisplay = () => {
     if (commentsToDisplayState.length === 0) {
