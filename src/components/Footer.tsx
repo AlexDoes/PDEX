@@ -26,6 +26,11 @@ const Footer = () => {
       setShowModal(false);
     }
   };
+
+  if (!show) {
+    return <></>;
+  }
+
   return (
     <>
       <div className="w-[100vw] h-[100px] text-2xl md:gap-28 gap-4 flex  backdrop-blur-[3px] justify-center  text-shadow-lg  flex-wrap items-center absolute p-6  ">

@@ -44,13 +44,15 @@
 
 .modalbg {
   /* background-color: rgba(0, 0, 0, 0.5); */
-  background-image: url("/BG/modalBg.png");
+  background-image: url("/BG/modalbg.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 #errorbg {
   background-image: url("/BG/errorbg2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .dropdown-enter {
@@ -98,7 +100,6 @@
   transition: transform 500ms;
 }
 
- 
 body {
   background-color: #d5ffdd;
   background-image: url("/BG/greenbg3.png");
@@ -106,7 +107,7 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  min-width: 480px;
+  min-width: 390px;
   overflow-x: hidden;
 }
 

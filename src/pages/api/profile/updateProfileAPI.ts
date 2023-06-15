@@ -15,7 +15,6 @@ export default async function handler(
   const field = profileData.field;
   const userInfo = profileData.userInfo;
   const data = profileData.data;
-  console.log(userInfo.field);
 
   const user = await prisma.user.findUnique({
     where: {

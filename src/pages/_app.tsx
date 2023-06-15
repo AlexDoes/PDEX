@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ScreenChecker from "@/components/ScreenChecker";
 import InfoModal from "@/components/InfoModal";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,13 +30,14 @@ export default function App({ Component, pageProps }: AppProps) {
       <SessionProvider session={pageProps.session}>
         <NavBar />
         <div className="font-lato" id="center">
-          <div className="w-[90%] xs:w-[100%] sm:w-[100%] md:w-[90%] xs:px-3 md:px-0">
+          <div className="w-[100%] xs:w-[100%] sm:w-[100%] md:w-[90%] xs:px-3 md:px-0">
             <Component {...pageProps} />
           </div>
         </div>
         {/* <ScreenChecker /> */}
         <Footer />
       </SessionProvider>
+      <Analytics />
     </>
   );
 }
