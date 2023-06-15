@@ -343,7 +343,7 @@ export default function plantDisplay({ plant, userId }: any) {
                   <p className="text-left"> Description:</p>
                 </div>
                 <div className="flex flex-col items-center justify-center pt-2">
-                  <div className="border-slate-400 border rounded-xl w-[80%] p-2 font-extralight">
+                  <div className="border-slate-400 border rounded-xl w-[80%] p-2 font-light">
                     {plantDataDisplay.description ||
                       "None provided please add one"}
                   </div>
