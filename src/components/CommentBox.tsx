@@ -132,13 +132,13 @@ const CommentBox = (props: Props) => {
   return (
     <div className="h-full flex items-center">
       <button
-        className="w-[10%] h-full flex justify-center items-center hover:backdrop-brightness-95 rounded-xl transition duration-300 ease-in-out group"
+        className="w-[10%] h-full flex justify-center items-center rounded-xl transition duration-300 ease-in-out group backdrop-brightness-[98%]"
         onClick={!liked ? onLike : unlike}
       >
         {liked ? (
-          <IoHeart className="text-red-500 h-full w-full" />
+          <IoHeart className="text-red-500 h-3/4 w-full" />
         ) : (
-          <IoHeartOutline className="text-red-500 h-full w-full group-hover:animate-pulse" />
+          <IoHeartOutline className="text-red-500 h-3/4 w-full animate group-hover:animate-pulse-slow" />
         )}
       </button>
       <form

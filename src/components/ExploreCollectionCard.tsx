@@ -27,7 +27,7 @@ const ExploreCollectionCard = ({ collection }: any) => {
     );
     const randomPlantImage = collection?.plantContents[randomIndex]?.image;
     setRandomPlantImage(randomPlantImage);
-  }, []);
+  });
 
   return (
     <div className="w-[300px] max-h-[500px] h-[462px] rounded-lg relative shadow-xl transition-all duration-400 ease-in-out ">
