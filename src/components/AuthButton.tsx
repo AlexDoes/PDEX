@@ -91,9 +91,7 @@ export default function AuthButtonComponent({ setBlur, closeBlur }: any) {
               >
                 <Link
                   className="sm:text-2xl text-lg text-[#efe6c1] text-shadow-md "
-                  href={`/u/${
-                    (session.user as User).nickname || (session.user as User).id
-                  }`}
+                  href={`/u/${(session.user as User).id}`}
                 >
                   Profile
                 </Link>{" "}

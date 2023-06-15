@@ -27,7 +27,7 @@ export default function RedirectComponent(
       } else {
         router.push("/");
       }
-    }, 500000);
+    }, 5000);
   }, []);
 
   return (
