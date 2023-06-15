@@ -156,3 +156,6 @@
 // }
 
 // export default plantdex;
+export default function PDEX() {
+  return <>{/* nothing */}</>;
+}
