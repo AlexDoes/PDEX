@@ -62,7 +62,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
         });
       }
     }
-    scroll && setScroll(false);
+    setScroll(false);
   }, [displayPlants, scroll]);
 
   const handleClick = (id: string) => {

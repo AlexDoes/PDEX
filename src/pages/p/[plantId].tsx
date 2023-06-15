@@ -59,7 +59,7 @@ export default function PlantPublicDisplayPage({
         latestComment.current.scrollTop = latestComment.current.scrollHeight;
       }
     }
-    scroll && setScroll(false);
+    setScroll(false);
   }, [commentsToDisplayState, scroll]);
 
   const commentsToDisplay = () => {

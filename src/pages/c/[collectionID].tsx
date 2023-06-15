@@ -59,8 +59,7 @@ export default function PublicDisplayCollection({
         latestComment.current.scrollTop = latestComment.current.scrollHeight;
       }
     }
-    console.log("scrolling");
-    scroll && setScroll(false);
+    setScroll(false);
   }, [commentsToDisplayState, scroll]);
 
   const commentsToDisplay = () => {
