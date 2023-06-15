@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 import { BsPhoneFlip } from "react-icons/bs";
+import Link from "next/link";
 
 interface collection {
   id: string;
@@ -52,19 +53,39 @@ const ExploreCollectionCard = ({ collection }: any) => {
           >
             <div className="p-4  h-full w-full flex flex-col gap-1 ">
               <div className=" min-h-[250px] w-inherit min-w-full max-h-[250px] w-full">
-                <img
-                  className=" max-h-[250px] h-full w-full object-cover rounded-lg"
-                  src={randomPlantImage ? randomPlantImage : "/BG/greenbg2.png"}
-                  alt=""
-                />
+                <Link href={`/c/${collection.id}`}>
+                  <img
+                    className=" max-h-[250px] h-full w-full object-cover rounded-lg"
+                    src={
+                      randomPlantImage ? randomPlantImage : "/BG/greenbg2.png"
+                    }
+                    alt="collection image"
+                  />
+                </Link>
               </div>
               <div className="text-white text-xl flex flex-col">
-                <div className="">{collection.name}</div>
+                <Link
+                  href={`/c/${collection.id}`}
+                  className="hover:text-[#7788f7] transition-all duration-200 ease-in-out"
+                >
+                  <div className="">{collection.name}</div>
+                </Link>
                 <h2 className="text-[#fcf9f9ed] text-lg font-light italic">
                   By{" "}
-                  {collection.owner.nickname
-                    ? collection.owner.nickname
-                    : "A Plant Lover"}
+                  {collection.owner.nickname ? (
+                    <Link
+                      className="hover:text-[#7788f7] transition-all duration-200 ease-in-out"
+                      href={`/u/${
+                        collection.owner.nickname || collection.owner.id
+                      }`}
+                    >
+                      {collection.owner.nickname
+                        ? collection.owner.nickname
+                        : "A Plant Lover"}
+                    </Link>
+                  ) : (
+                    "A Plant Lover"
+                  )}
                 </h2>
               </div>
               <div className="text-black font-light backdrop-blur-md h-full bg-opacity-30 bg-[#e4fde9] rounded-l-lg px-1 overflow-auto min-h-[80px] scrollbar-thin scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1] scrollbar-rounded-sm ">
@@ -79,7 +100,7 @@ const ExploreCollectionCard = ({ collection }: any) => {
 
           <div className="absolute inset-0 h-full bg-opacity-50 rounded-xl bg-[#c1e1c1] p-2 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]  overflow-y-auto scrollbar-none scrollbar-track-[#FFF4BD] scrollbar-thumb-[#C1E1C1] scrollbar-rounded-sm">
             <div className=" h-full w-full flex rounded-lg flex-col ">
-              <div className="text-white text-2xl text-center font-semibold text-shadow-sm border-b w-full border-white top-0">
+              <div className="text-[#ffffff] text-2xl text-center font-semibold text-shadow-sm border-b w-full border-white top-0">
                 Plants
               </div>
               <div className=" w-full">
@@ -87,9 +108,13 @@ const ExploreCollectionCard = ({ collection }: any) => {
                   {collection.plantContents.map((plant: any, i: number) => (
                     <li
                       key={collection.id + collection.owner.id + i}
-                      className="flex flex-col w-full font-light text-shadow-md text-center text-xl truncate"
+                      className="text-[#ffffff] flex flex-col w-full font-light text-shadow-md text-center text-xl truncate"
                     >
-                      <p className="text-white">{plant.name}</p>
+                      <Link href={`/p/${plant.id}`} className="">
+                        <p className="hover:text-[#7788f7] transition-all duration-200 ease-in-out">
+                          {plant.name}
+                        </p>
+                      </Link>
                     </li>
                   ))}
                 </ul>

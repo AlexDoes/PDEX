@@ -51,7 +51,18 @@ export const getServerSideProps = async (params: any) => {
   const collections = await prisma.plantCollection.findMany({
     where: {
       public: true,
+      plantContents: {
+        some: {},
+      },
     },
+    orderBy: [
+      {
+        weight: "desc",
+      },
+      {
+        updatedAt: "desc",
+      },
+    ],
     take: limit,
     skip: (page - 1) * limit,
     include: {

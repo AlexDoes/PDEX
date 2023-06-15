@@ -43,6 +43,7 @@ export default async function handle(
           id: plantId,
         },
       },
+      updatedAt: new Date(),
     },
   });
 

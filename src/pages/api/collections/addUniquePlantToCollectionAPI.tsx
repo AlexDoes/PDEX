@@ -41,6 +41,7 @@ export default async function handle(
       plantContents: {
         connect: plants.map((id) => ({ id })),
       },
+      updatedAt: new Date(),
     },
   });
 
