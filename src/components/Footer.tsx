@@ -67,6 +67,7 @@ const Footer = () => {
                 className="hover:underline hover:text-[#62d6f6] "
                 href="https://www.linkedin.com/in/alwong191/"
                 target="_blank"
+                rel="noreferrer"
               >
                 Linkedin
               </a>
@@ -74,6 +75,7 @@ const Footer = () => {
                 className=" hover:underline   hover:text-[#62d6f6] "
                 href="https://github.com/AlexDoes  "
                 target="_blank"
+                rel="noreferrer"
               >
                 {" "}
                 Github
@@ -82,6 +84,7 @@ const Footer = () => {
                 className="hover:underline hover:text-[#62d6f6] "
                 href="https://alexswe.com/ "
                 target="_blank"
+                rel="noreferrer"
               >
                 Portfolio
               </a>
@@ -98,6 +101,7 @@ const Footer = () => {
                 className="hover:underline hover:text-[#62d6f6] "
                 href="https://www.linkedin.com/in/steven-sookhai-37192a22a/"
                 target="_blank"
+                rel="noreferrer"
               >
                 Linkedin
               </a>
@@ -105,6 +109,7 @@ const Footer = () => {
                 className="hover:underline hover:text-[#62d6f6] "
                 href="https://github.com/StevenSookhai"
                 target="_blank"
+                rel="noreferrer"
               >
                 {" "}
                 Github
@@ -113,6 +118,7 @@ const Footer = () => {
                 className="hover:underline hover:text-[#62d6f6] "
                 href=""
                 target="_blank"
+                rel="noreferrer"
               >
                 Portfolio
               </a>
