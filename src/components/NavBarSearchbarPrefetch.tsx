@@ -16,7 +16,7 @@ interface ArrayOfSuggestions {
 
 export default function NavBarSearchBar({}) {
   const [searchText, setSearchText] = useState<string>("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestions, setSuggestions] = useState<any[]>([]);
   const [show, setShow] = useState<boolean>(false);
   const router = useRouter();
   let fetched = false;
@@ -78,12 +78,12 @@ export default function NavBarSearchBar({}) {
     if (searchText.length < 3) {
       setSuggestions([]);
     }
-    const plant = suggestions[0];
-    const species = suggestions[1];
-    const users = suggestions[2];
-    const plantSuggestions: string[] | string = suggestions[0].slice(1);
-    const speciesSuggestions: string[] | string = suggestions[1].slice(1);
-    const usersSuggestions: string[] | string = suggestions[2].slice(1);
+    const plant: string[] = suggestions[0];
+    const species: string[] = suggestions[1];
+    const users: string = suggestions[2];
+    const plantSuggestions: string[] = suggestions[0].slice(1);
+    const speciesSuggestions: string[] = suggestions[1].slice(1);
+    const usersSuggestions: string[] = suggestions[2].slice(1);
     if (!plant && !species && !users) {
       return null;
     }
