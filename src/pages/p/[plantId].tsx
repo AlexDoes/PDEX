@@ -23,7 +23,7 @@ interface User {
   address: string;
 }
 
-export default function plantPublicDisplayPage({
+export default function PlantPublicDisplayPage({
   plant,
   comments,
   user,
@@ -60,7 +60,7 @@ export default function plantPublicDisplayPage({
       }
     }
     scroll && setScroll(false);
-  }, [commentsToDisplayState]);
+  }, [commentsToDisplayState, scroll]);
 
   const commentsToDisplay = () => {
     if (commentsToDisplayState.length === 0) {

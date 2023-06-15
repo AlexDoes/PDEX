@@ -2,7 +2,7 @@ import RedirectComponent from "@/components/RedirectComponent";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-export default function undefined() {
+export default function Undefined() {
   const router = useRouter();
 
   useEffect(() => {

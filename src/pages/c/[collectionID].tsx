@@ -24,7 +24,7 @@ const defaultAvatars = [
   "https://pdex.s3.amazonaws.com/defaultavatar-4.jpg",
 ];
 
-export default function publicDisplayCollection({
+export default function PublicDisplayCollection({
   collection,
   comments,
   user,
@@ -59,8 +59,9 @@ export default function publicDisplayCollection({
         latestComment.current.scrollTop = latestComment.current.scrollHeight;
       }
     }
+    console.log("scrolling");
     scroll && setScroll(false);
-  }, [commentsToDisplayState]);
+  }, [commentsToDisplayState, scroll]);
 
   const commentsToDisplay = () => {
     if (commentsToDisplayState.length === 0) {
@@ -158,7 +159,7 @@ export default function publicDisplayCollection({
          "
       tabIndex={0}
     >
-      <div className="relative h-full group w-inherit  items-center justify-center flex  ">
+      <div className="relative h-full group w-inherit  items-center justify-center flex md:mb-2 lg:mb-0 ">
         <div className="relative flex">
           <div
             className=" outlie outline-8 outline-red-900

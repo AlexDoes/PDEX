@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const dontlookhere = () => {
+function Dontlookhere() {
   const [data, setData] = useState(null);
   const [counter, setCounter] = useState(0);
 
@@ -9,7 +9,7 @@ const dontlookhere = () => {
     // Function to fetch data from the database
     const fetchData = async () => {
       try {
-        setCounter(prevCount => prevCount + 1);
+        setCounter((prevCount) => prevCount + 1);
         // Make the database fetch request here
         const response = await fetch("https://endflixv2.onrender.com/");
         const result = await response.json();
@@ -36,6 +36,6 @@ const dontlookhere = () => {
       <p> {counter} fetches</p>
     </div>
   );
-};
+}
 
-export default dontlookhere;
+export default Dontlookhere;

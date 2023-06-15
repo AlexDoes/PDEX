@@ -10,7 +10,7 @@ interface Props {
   pagination: any;
 }
 
-const explore = ({ collections, pagination }: Props) => {
+const Explore = ({ collections, pagination }: Props) => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [pagination.page]);
@@ -100,4 +100,4 @@ export const getServerSideProps = async (params: any) => {
   };
 };
 
-export default explore;
+export default Explore;

@@ -57,7 +57,7 @@ interface MyObject {
   [key: string]: any;
 }
 
-export default function plantDisplay({ plant, userId }: any) {
+export default function PlantDisplay({ plant, userId }: any) {
   const plantData = plant;
   const transitionRef = useRef(null);
   const transitionRef2 = useRef(null);

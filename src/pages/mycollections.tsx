@@ -63,7 +63,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
       }
     }
     scroll && setScroll(false);
-  }, [displayPlants]);
+  }, [displayPlants, scroll]);
 
   const handleClick = (id: string) => {
     router.push(`/collections/${id}`);
