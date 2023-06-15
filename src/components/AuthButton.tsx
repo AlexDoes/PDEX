@@ -114,20 +114,20 @@ export default function AuthButtonComponent({ setBlur, closeBlur }: any) {
                   Personal plants
                 </Link>{" "}
               </div>
-              {/* <div>
-                <Link
-                  className="sm:text-2xl text-[#efe6c1] text-shadow-md "
-                  href={"/"}
-                >
-                  Liked Content
-                </Link>{" "}
-              </div> */}
               <div className="">
                 <Link
                   className="sm:text-2xl text-[#efe6c1] text-shadow-md"
                   href={"/profile"}
                 >
                   Profile Dashboard
+                </Link>{" "}
+              </div>
+              <div>
+                <Link
+                  className="sm:text-2xl text-[#efe6c1] text-shadow-md"
+                  href={"/explore"}
+                >
+                  Explore Collections
                 </Link>{" "}
               </div>
               <div className="sm:text-2xl text-red-300 text-shadow-md">
