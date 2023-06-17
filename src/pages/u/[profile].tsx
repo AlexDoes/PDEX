@@ -32,14 +32,6 @@ interface User {
 
 export default function UserProfile({ user }: Props) {
   const router = useRouter();
-  // useEffect(() => {
-  //   if (!user) {
-  //     const redirectTimeout = setTimeout(() => {
-  //       router.push("/");
-  //     }, 5000);
-  //     return () => clearTimeout(redirectTimeout);
-  //   }
-  // }, []);
 
   if (!user) {
     return <RedirectComponent error="Seems like there's no user here." />;

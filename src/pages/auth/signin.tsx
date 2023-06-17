@@ -151,7 +151,7 @@ const SignInPage = () => {
                 width={52}
                 height={52}
                 style={{ objectFit: "cover" }}
-                priority={true}
+                priority={true} 
               />
             </div>
             <h1 className="text-[1.5rem] w-full min-h-[36px] flex justify-center items-center mt-[24px] mb-[16px]">
