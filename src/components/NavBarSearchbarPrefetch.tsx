@@ -23,6 +23,9 @@ export default function NavBarSearchBar({}) {
   let data: Data;
   const onSubmit = (e: any) => {
     e.preventDefault();
+    if (searchText.length === 0) {
+      return;
+    }
     setSearchText("");
     setSuggestions([]);
     fetched = false;
@@ -221,7 +224,11 @@ export default function NavBarSearchBar({}) {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const input = searchText;
-    router.push(`/search/${input}`);
+    console.log(input);
+    if (input.length === 0) {
+    } else {
+      router.push(`/search/${input}`);
+    }
   };
 
   const handleBlur = (e: any) => {

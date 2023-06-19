@@ -33,10 +33,10 @@ const Footer = () => {
 
   return (
     <>
-      <div className="w-[100vw] h-[100px] text-2xl md:gap-28 gap-4 flex  backdrop-blur-[3px] justify-center  text-shadow-lg  flex-wrap items-center absolute p-6  ">
+      <div className="w-[100vw] h-[100px] xs:text-2xl xsss:text-xl  md:gap-28 gap-4 flex  backdrop-blur-[3px] justify-center  text-shadow-lg  flex-wrap items-center absolute p-6  ">
         {/* <h1 className="text-white">Social Links</h1> */}
-        <div className=" text-lg text-[#efe6c1] ">
-          <div className="flex flex-wrap gap-2 text-shadow-lg justify-center md:flex-row">
+        <div className=" xs:text-lg xsss:text-sm text-[#efe6c1] ">
+          <div className="flex flex-wrap gap-1 text-shadow-lg justify-center md:flex-row">
             <Link
               className=" hover:underline text-shadow-md   hover:text-[#62d6f6] "
               href={"/"}
@@ -51,23 +51,22 @@ const Footer = () => {
               Explore
             </Link>
             |
-            <Link
-              className=" hover:underline hover:text-[#62d6f6] relative "
-              href={""}
+            <div
+              className=" hover:underline hover:text-[#62d6f6] relative cursor-pointer"
               onClick={() => setShowModal(!showModal)}
             >
               About
-            </Link>
+            </div>
             |
             <Link
               className=" hover:underline hover:text-[#62d6f6] "
               href={"/c/KatiesCollection"}
             >
-              Katie's Collection
+              Katie's Collection |
             </Link>
             <Link className=" underline" href={"/"}></Link>
-            <div className="flex flex-row gap-2 text-lg   justify-center items-center">
-              | Alex Wong:
+            <div className="flex flex-row gap-1 xs:text-lg   justify-center items-center">
+              Alex Wong:
               <a
                 className="hover:underline hover:text-[#62d6f6] "
                 href="https://www.linkedin.com/in/alwong191/"
@@ -91,7 +90,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                Portfolio
+                Portfolio |{" "}
               </a>
               {/* <a
               className="hover:underline hover:text-[#62d6f6] "
@@ -100,8 +99,8 @@ const Footer = () => {
               WellFound
             </a> */}
             </div>
-            <div className="flex flex-row gap-2 text-lg   justify-center items-center">
-              | Steven Sookhai:
+            <div className="flex flex-row gap-2 xs:text-lg   justify-center items-center">
+              Steven Sookhai:
               <a
                 className="hover:underline hover:text-[#62d6f6] "
                 href="https://www.linkedin.com/in/steven-sookhai-37192a22a/"
@@ -135,74 +134,24 @@ const Footer = () => {
             </a> */}
               |
             </div>
-            <a
-              className="hover:underline hover:text-[#62d6f6] "
-              href="mailto:contact@example.com?subject=BAX&body=I%20would%20like%20to%20get%20in%20touch%20with%20you."
-            >
-              Contact Us
-            </a>
-            |
-            <a
-              className="hover:underline hover:text-[#62d6f6] "
-              href="mailto:contact@example.com?subject=BAX&body=I%20would%20like%20to%20get%20in%20touch%20with%20you."
-            >
-              Report a Bug
-            </a>
-            |
+            <div className="flex flex-row gap-2 xs:text-lg   justify-center items-center">
+              <a
+                className="hover:underline hover:text-[#62d6f6] "
+                href="mailto:contact@BaxReport@Gmail.com?subject=BAX&body=I%20would%20like%20to%20get%20in%20touch%20with%20you."
+              >
+                Contact Us
+              </a>
+              |
+              <a
+                className="hover:underline hover:text-[#62d6f6] "
+                href="mailto:BaxReport@Gmail.comsubject=BAX&body=I%20would%20like%20to%20report%20a%20bug%20or%20problem."
+              >
+                Report a Bug
+              </a>
+              |
+            </div>
           </div>
         </div>
-        {/* Social Links*/}
-        <div className="flex flex-col justify-center items-start h-[60%] ">
-          {/* <div className="flex flex-row gap-2 text-lg text-white justify-center items-center">
-          Alex Wong:
-          <a
-            className=" underline"
-            href="https://www.linkedin.com/in/alwong191/"
-          >
-            Linkedin
-          </a>
-          <a className=" underline" href="https://github.com/AlexDoes  ">
-            {" "}
-            Github
-          </a>
-          <a className=" underline" href="https://alexswe.com/ ">
-            Portfolio
-          </a>
-          <a className=" underline" href=" https://wellfound.com/u/awong191">
-            WellFound
-          </a>
-        </div> */}
-
-          {/* <div className="flex flex-row gap-2 text-lg text-white justify-center items-center">
-          Steven Sookhai:
-          <a
-            className=" underline"
-            href="https://www.linkedin.com/in/steven-sookhai-37192a22a/"
-          >
-            Linkedin
-          </a>
-          <a className=" underline" href="https://github.com/StevenSookhai">
-            {" "}
-            Github
-          </a>
-          <a className=" underline" href="">
-          <a className=" underline" href=" "></a>
-            Portfolio
-          </a>
-          <a
-            className=" underline"
-            href=" https://wellfound.com/u/steven-sookhai"
-          >
-            WellFound
-          </a>
-        </div> */}
-        </div>
-
-        {/* <div className="text-white">
-        <a href="mailto:contact@example.com?subject=BAX&body=I%20would%20like%20to%20get%20in%20touch%20with%20you.">
-          Contact Us
-        </a>
-      </div> */}
       </div>
       <CSSTransition
         in={showModal}

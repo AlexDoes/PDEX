@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }: AppProps) {
         {/* <ScreenChecker /> */}
         <Footer />
       </SessionProvider>
-      <Analytics />
+      {/* <Analytics /> */}
     </>
   );
 }
