@@ -417,7 +417,13 @@ export default function SearchResult({
                   >
                     <div className="flex items-center justify-center rounded-lg">
                       <img
-                        src={user.image || avatarImage.src}
+                        src={
+                          user.image ||
+                          `https://pdex.s3.amazonaws.com/Avatars/DefaultAvatar${Math.floor(
+                            Math.random() * 26 + 1
+                          )}.png`
+                        }
+                        loading="lazy"
                         alt=""
                         className="
                     border-green-400
@@ -524,7 +530,7 @@ export async function getServerSideProps(context: any) {
         },
       },
     },
-    take: 10,
+    take: 16,
   });
 
   const collections = await prisma.plantCollection.findMany({
@@ -562,7 +568,7 @@ export async function getServerSideProps(context: any) {
         },
       },
     },
-    take: 10,
+    take: 15,
   });
 
   return {

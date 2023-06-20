@@ -2,7 +2,13 @@ import { PrismaClient } from "@prisma/client";
 import { hash } from "bcrypt";
 import { de, faker } from "@faker-js/faker";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  // datasources: {
+  //   db: {
+  //     url: process.env.POSTGRES_PRISMA_URL,
+  //   },
+  // },
+});
 
 const descriptions = [
   "Embracing the green vibes with my lush indoor garden. 🌿🌱 #PlantLove",
@@ -63,23 +69,75 @@ const descriptive_words = [
 async function main() {
   console.log("Start seeding ...");
   const password = await hash("StevenAndAlex", 12);
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 50; i++) {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
     const nickname = `${firstName}`;
     const username = `${firstName.toLowerCase()}`;
     const email = `${firstName.toLowerCase() + lastName.toLowerCase()}@bax.gg`;
     const description = `${faker.person.bio()}`;
-    const image = `https://pdex.s3.amazonaws.com/DefaultAvatar${Math.floor(
-      Math.random() * 26
+    const image = `https://pdex.s3.amazonaws.com/Avatars/DefaultAvatar${Math.floor(
+      Math.random() * 26 + 1
     )}.png`;
     const d1 = Math.floor(Math.random() * descriptions.length);
     const d2 = Math.floor(Math.random() * descriptions.length);
     const d3 = Math.floor(Math.random() * descriptions.length);
     const d4 = Math.floor(Math.random() * descriptions.length);
-
-    await prisma.user.create({
-      data: {
+    console.log("Creating user:", username);
+    // await prisma.user.create({
+    //   data: {
+    //     username: `${username}`,
+    //     nickname: `${nickname}`,
+    //     name: `${firstName} ${faker.person.lastName()}`,
+    //     email: `${email}`,
+    //     password: password,
+    //     image: `${image}`,
+    //     description: `${description}`,
+    //     role: "USER",
+    //     plantCollection: {
+    //       createMany: {
+    //         data: [
+    //           {
+    //             name: `${firstName}'s ${
+    //               descriptive_words[
+    //                 Math.floor(Math.random() * descriptive_words.length)
+    //               ]
+    //             } Collection`,
+    //             description: `${descriptions[d1]}`,
+    //           },
+    //           {
+    //             name: `${firstName}'s ${
+    //               descriptive_words[
+    //                 Math.floor(Math.random() * descriptive_words.length)
+    //               ]
+    //             } Extragavanza`,
+    //             description: `${descriptions[d2]}`,
+    //           },
+    //           {
+    //             name: `${firstName}'s ${
+    //               descriptive_words[
+    //                 Math.floor(Math.random() * descriptive_words.length)
+    //               ]
+    //             } Paradise'`,
+    //             description: `${descriptions[d3]}`,
+    //           },
+    //           {
+    //             name: `${firstName}'s ${
+    //               descriptive_words[
+    //                 Math.floor(Math.random() * descriptive_words.length)
+    //               ]
+    //             } Lovely's`,
+    //             description: `${descriptions[d4]}`,
+    //           },
+    //         ],
+    //       },
+    //     },
+    //   },
+    // });
+    await prisma.user.upsert({
+      where: { username: `${username}` },
+      update: {},
+      create: {
         username: `${username}`,
         nickname: `${nickname}`,
         name: `${firstName} ${faker.person.lastName()}`,
@@ -128,6 +186,7 @@ async function main() {
         },
       },
     });
+
     console.log(`Created user with username: ${username}`);
   }
 }
