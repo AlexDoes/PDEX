@@ -11,6 +11,7 @@ import ScreenChecker from "@/components/ScreenChecker";
 import InfoModal from "@/components/InfoModal";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/react";
+import NextNProgress from "nextjs-progressbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/baxlogo.png" />
       </Head>
+      <NextNProgress color="#A3EBB1" />
       <ToastContainer />
       <SessionProvider session={pageProps.session}>
         <NavBar />

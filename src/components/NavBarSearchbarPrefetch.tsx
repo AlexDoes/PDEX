@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { FaSearch, FaLeaf, FaUser, FaStar } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
 import Link from "next/link";
+import filter from "./Filter";
 
 interface Data {
   plantsSuggestions: any;
@@ -29,7 +30,7 @@ export default function NavBarSearchBar({}) {
     setSearchText("");
     setSuggestions([]);
     fetched = false;
-    router.push(`/search/${searchText}`);
+    router.push(`/search/${filter.clean(searchText)}`);
   };
 
   const fetchData = async () => {

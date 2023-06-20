@@ -163,7 +163,7 @@ export default function PublicDisplayCollection({
         <div className="relative flex">
           <div
             className=" outlie outline-8 outline-red-900
-            xs:w-[80vw] xs:h-[80vw]
+            xsss:w-[80vw] xsss:h-[50vh]
             md:w-[55vw] md:h-[55vw]
             lg:max-h-[80vh] lg:max-w-[80vh] 
             xl:max-w-[80vh] xl:max-h-[80vh]

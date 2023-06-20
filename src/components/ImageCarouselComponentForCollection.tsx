@@ -32,6 +32,7 @@ export default function CollectionImageCarousel({
                 src={image}
                 alt={`Image ${index}`}
                 className="
+                xsss:w-[80vw] xsss:h-[50vh]
                 xs:w-[80vw] xs:h-[80vw]
                 md:w-[60vw] md:h-[60vw]
                 lg:max-h-[80vh] lg:max-w-[80vh] 

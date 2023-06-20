@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { IoHeartOutline, IoHeart } from "react-icons/io5";
+import filter from "./Filter";
 
 interface Props {
   reference: string;
@@ -101,7 +102,7 @@ const CommentBox = (props: Props) => {
           body: JSON.stringify({
             reference: reference,
             refId: refId,
-            comment: comment,
+            comment: filter.clean(comment),
             userId: userId,
           }),
         }).then((res) => {

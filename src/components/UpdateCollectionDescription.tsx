@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { SlPencil } from "react-icons/sl";
 import { toast } from "react-toastify";
+import filter from "./Filter";
 
 interface ConfirmationDialogProps {
   onConfirm: any;
@@ -76,7 +77,7 @@ export default function UpdateCollectionDescriptionComponent({
       });
       return;
     }
-    onConfirm(data);
+    onConfirm(data.length === 0 ? "" : filter.clean(data));
     handleClose();
   };
 

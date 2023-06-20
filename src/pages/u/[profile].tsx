@@ -174,9 +174,11 @@ export default function UserProfile({ user }: Props) {
             <div
               id="profileCollectionImage"
               className="
-                min-w-[200px] min-h-[200px]
+                min-w-[125px] min-h-[150px]
+                xs:min-w-[200px] xs:min-h-[200px]
                 rounded-lg
                 w-[200px] h-[200px]
+                xsss:w-[100px] xsss:h-[150px]
                 sm:max-w-[300px] sm:max-h-[300px]
                 lg:max-w-[300px] lg:max-h-[300px]
                 xl:max-w-[300px] xl:max-h-[300px]
@@ -256,7 +258,7 @@ export default function UserProfile({ user }: Props) {
           <div className="flex flex-col justify-center w-full">
             <p
               className="text-xl indent-3
-            xl:indent-5
+            xl:indent-5 w-full truncate
             "
             >
               <Link href={`/p/${plant.id}`}>{plant.name}</Link>
@@ -307,9 +309,13 @@ export default function UserProfile({ user }: Props) {
               </p>
             </div>
           </div>
-          <div className="w-[200px] h-[200px]">
+          <div className="w-[200px] h-[200px] flex justify-center items-center">
             <img
-              className="min-w-[200px] min-h-[200px] max-w-[200px] max-h-[200px] rounded-lg"
+              className="  
+              min-w-[125px] min-h-[150px]
+              xsss:w-[100px] xsss:h-[150px]
+              xs:min-w-[200px] xs:min-h-[200px]
+              max-w-[200px] max-h-[200px] rounded-lg"
               src={plant.image}
               alt="Plant Image"
             />
@@ -335,7 +341,7 @@ export default function UserProfile({ user }: Props) {
         bg-opacity-80 bg-green-200
         md:p-4
         md:max-w-[400px]
-        xs:w-[100%]
+        xsss:w-[100%]
         w-[75%]
         lg:w-[40%]
         md:w-[40%]
@@ -374,7 +380,8 @@ export default function UserProfile({ user }: Props) {
           >
             <img
               src={image ? image : avatarImage.src}
-              className="rounded-full 
+              className="rounded-full
+              xsss:w-[40vw] xsss:h-[40vw] 
                 xs:w-[20vw] xs:h-[20vw]
                 sm:w-[20vw] sm:h-[20vw]
                 md:w-[50vw] md:h-[50vw]

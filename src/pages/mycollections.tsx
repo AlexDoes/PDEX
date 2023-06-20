@@ -131,9 +131,11 @@ export default function MyCollections({ items, userId }: CollectionProps) {
           <div
             id="profileCollectionImage"
             className="
-                min-w-[200px] min-h-[200px]
+                xs:min-w-[200px] xs:min-h-[200px]
+                xsss:min-w-[150px] xsss:min-h-[150px]
+                xsss:w-[150px] xsss:h-[150px]
                 rounded-lg
-                w-[200px] h-[200px]
+                xs:w-[200px] xs:h-[200px]
                 sm:max-w-[300px] sm:max-h-[300px]
                 lg:max-w-[300px] lg:max-h-[300px]
                 xl:max-w-[300px] xl:max-h-[300px]
@@ -164,7 +166,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
             )}
           </div>
           <div className="flex flex-col w-full gap-2 overflow-hidden">
-            <div className="text-lg indent-3 xl:indent-3 overflow-hidden md:text-[#fffbcc] flex justify-between items-center w-[98%] xs:text-black">
+            <div className="text-lg xs:indent-3 xl:indent-3 overflow-hidden md:text-[#fffbcc] flex xs:justify-between xsss:items-start xs:items-center w-[98%] xsss:text-black xsss:indent-3 xsss:flex-col xs:flex-row">
               <Link
                 onClick={() => handleClick(collection.id)}
                 href={`/collections/${collection.id}`}
@@ -180,7 +182,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
               </Link>
               <Link
                 href={`/c/${collection.id}`}
-                className="whitespace-nowrap text-sm hover:text-blue-600 rounded-lg flex underline underline-offset-6 items-start text-[#fffbcc]"
+                className="whitespace-nowrap text-sm hover:text-blue-600 rounded-lg flex underline underline-offset-6 items-start xs:text-[#fffbcc] xsss:text-[#094c71]"
               >
                 Public view
               </Link>
@@ -202,7 +204,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                       overflow-y-auto 
                       font-light
                       mx-3
-                      xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]
+                      xsss:text-[10px] xs: text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]
                       h-full
                       backdrop-filter backdrop-blur-sm
                       bg-opacity-50
@@ -242,7 +244,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
                 </div>
               </div>
             </div>
-            <div className="px-3 transition duration-500 ease-in-out hidden absolute sm:right-0 xs:-right-2 xs:-bottom-1 bottom-0  group-hover:inline-block group-hover:opacity-100 opacity-0 ">
+            <div className="px-3 transition duration-500 ease-in-out hidden absolute sm:right-0 xs:-right-2 xs:-bottom-1 bottom-0  group-hover:inline-block group-hover:opacity-100 opacity-0 xsss:-right-1 xsss:-bottom-1">
               <DeleteCollectionButton
                 user={userId}
                 collectionId={collection.id}

@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { CSSTransition } from "react-transition-group";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaSeedling } from "react-icons/fa";
+import filter from "./Filter";
 const colors = {
   //ansi color codes for console.log
   black: "\u001b[38;5;0m",
@@ -94,8 +95,11 @@ export default function CreateCollectionForm(data: any) {
     try {
       const newCollection = await createCollection({
         ownerId: user,
-        name: collectionName,
-        description: collectionDescription,
+        name: filter.clean(collectionName),
+        description:
+          collectionDescription.length > 0
+            ? filter.clean(collectionDescription)
+            : "",
       });
       toast.success(`${newCollection.name} created!`, {
         style: {

@@ -9,6 +9,7 @@ import prisma from "lib/prisma";
 import NewSearchBar from "./NewSearchBar";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { forEach } from "lodash";
+import filter from "./Filter";
 
 interface User {
   id: string;
@@ -137,7 +138,6 @@ export default function CreateUniquePlant(props: any) {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data, e) => {
-    console.log("submitted");
     e?.preventDefault();
     if (!image) {
       toast.error("Please upload an image", {
@@ -149,10 +149,14 @@ export default function CreateUniquePlant(props: any) {
       });
       return;
     }
-    data.plantSpecies = toTitleCase(species);
-    data.plantSubspecies = toTitleCase(species2);
+    data.plantName = filter.clean(data.plantName);
+    data.plantSpecies = toTitleCase(filter.clean(species));
+    data.plantSubspecies = toTitleCase(species2 ? filter.clean(species2) : "");
     data.normalized_species = toTitleCase(data.plantSpecies);
     data.normalized_species2 = toTitleCase(species2);
+    data.plantDescription = data.plantDescription
+      ? filter.clean(data.plantDescription)
+      : "";
     if (data.normalized_species === data.normalized_species2) {
       data.plantSubspecies = "";
       data.normalized_species2 = "";
@@ -181,7 +185,6 @@ export default function CreateUniquePlant(props: any) {
     // const url = "https://pdex.s3.amazonaws.com/0_3.png1682803498914";
     data.plantImage = url;
     await createTheUniquePlant(data).then((res) => {
-      console.log(res);
       toast.success(`${data.plantName} created successfully!`, {
         style: {
           background: "#e0f0e3",
@@ -252,9 +255,7 @@ export default function CreateUniquePlant(props: any) {
               />
             </div>
             <div className="flex gap-5 items-center h-[40px]   border-white rounded-r-md  text-center bg-[#efe6c1] ">
-              <label className="pl-4 text-slate-500" htmlFor="plantImage">
-                Image
-              </label>
+              <label className="pl-4 text-slate-500">Image</label>
               <input
                 type="file"
                 placeholder="Plant Image (URL required)"

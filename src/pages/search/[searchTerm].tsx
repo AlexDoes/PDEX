@@ -120,7 +120,7 @@ export default function SearchResult({
       `}
         >
           <div
-            className="w-full flex flex-row sm:gap-4
+            className="w-full flex xs:flex-row sm:gap-4 xsss:flex-col
           xs:gap-3"
           >
             <div className="flex gap-1 border-slate-300 pb-2 items-center">
@@ -412,7 +412,7 @@ export default function SearchResult({
                   <div
                     id="glassBackCard"
                     className="border-4 border-[#c1e1c1] rounded-xl p-4 m-2 pt-4 pb-6 bg-blue-200 flex gap-4 items-center justify-center flex-col xs:w-[80vw] sm:w-[40vw] md:w-[40vw] lg:w-[25vw] xl:w-[22vw] focus:focus-within hover:relative hover:transition-all focus:transition-all focus:outline-none max-w-[325px]
-                    max-h-[450px]"
+                    max-h-[450px] xsss:w-[100vw]"
                     tabIndex={0}
                   >
                     <div className="flex items-center justify-center rounded-lg">
@@ -430,6 +430,9 @@ export default function SearchResult({
                     sm:w-[40vw] md:w-[35vw] md:max-w-[30vw]
                     sm:max-w-[80]
                     md:max-h-[300px]
+                    xsss:max-h-[40vh]
+                    xsss:max-w-[400px]
+                    xsss:w-[75vw]
                     "
                       />
                     </div>

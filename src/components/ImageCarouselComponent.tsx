@@ -17,7 +17,7 @@ export default function ImageCarousel({ images }: CarouselProps) {
           <img
             src={image}
             alt={`Image ${index}`}
-            className="w-[200px] h-[200px] object-cover"
+            className="xs:w-[200px] xs:h-[200px] xsss:w-[150px] xsss:h-[150px] object-cover"
           />
         </div>
       ))}

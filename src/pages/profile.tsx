@@ -110,8 +110,8 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
 
   return (
     <>
-      <div className=" w-[90vw]  h-full justify-center flex ">
-        <div className="bg-[#91b191] bg-opacity-70 border-[#c1e1c1]  flex flex-col gap-4 items-center h-[660px] md:h-[630px] ml-3 w-[650px] rounded-lg ">
+      <div className=" xs:w-[90vw] h-full justify-center flex xsss:w-[100vw] ">
+        <div className="bg-[#91b191] bg-opacity-70 border-[#c1e1c1]  flex flex-col gap-4 items-center h-[660px] md:h-[630px] xs:ml-3 xs:w-[650px] xsss:w-[100vw] rounded-lg overflow-x-hidden">
           <h1 className="text-3xl font-semibold mt-2 text-white ">
             Profile Dashboard
           </h1>
@@ -134,21 +134,22 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
                 </div>
 
                 {editPhoto && (
-                  <div className=" w-[99px]">
-                    <form className=" " onSubmit={handleSubmitForm}>
-                      <div className="flex flex-row ">
+                  <div className=" w-[40vw] overflow-x-hidden backdrop-blur-sm backdrop-invert-[5%] gap-1 pb-3 rounded-lg">
+                    <form className="w-full" onSubmit={handleSubmitForm}>
+                      <div className="flex flex-row">
                         <label className="flex flex-row  ">
                           <input
                             type="file"
-                            className=" cursor-pointer"
+                            className=" cursor-pointer w-full"
                             onChange={handleImageChange}
                             accept="image/*"
                             multiple={false}
-                            Data-ButtonText="Select images"
+                            style={{
+                              backdropFilter: "blur(10px)",
+                            }}
                           />
                         </label>
                       </div>
-
                       <div className="flex flex-row gap-2 w-[200px]">
                         {upload && (
                           <button
@@ -174,29 +175,20 @@ export default function ProfileDashboard({ userInfo, userId }: userInfoProps) {
             </div>
           </div>
           <div className="flex flex-col  items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
-            <label
-              className="bg-[#efe6c1]  rounded-md w-[70%] sm:w-[80%] md:w-[60%] h-[30px] text-center item-center py-1  "
-              htmlFor=""
-            >
+            <label className="bg-[#efe6c1]  rounded-md w-[70%] sm:w-[80%] md:w-[60%] h-[30px] text-center item-center py-1  ">
               Username:{" "}
               {userInfo.nickname ? userInfo.nickname : "<No Username Set>"}
             </label>
             <div>{showChangeButton("nickname")}</div>
           </div>
           <div className="flex flex-col items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
-            <label
-              className="bg-[#efe6c1]  rounded-md w-[70%] sm:w-[80%] md:w-[60%] h-[30px] text-center item-center py-1  "
-              htmlFor=""
-            >
+            <label className="bg-[#efe6c1]  rounded-md w-[70%] sm:w-[80%] md:w-[60%] h-[30px] text-center item-center py-1  ">
               Email: {userInfo.email}
             </label>
             <div>{showChangeButton("email")}</div>
           </div>
           <div className="flex flex-col  items-center w-[400px] md:w-[700px] flex-shrink transition-all duration-200 ease-in-out ">
-            <label
-              className="bg-[#efe6c1]  rounded-md w-[70%] sm:w-[80%] md:w-[60%] h-[30px] text-center item-center py-1  "
-              htmlFor=""
-            >
+            <label className="bg-[#efe6c1]  rounded-md w-[70%] sm:w-[80%] md:w-[60%] h-[30px] text-center item-center py-1  ">
               Name: {userInfo.name ? userInfo.name : "<No Name Set>"}
             </label>
             <div>{showChangeButton("name")}</div>
