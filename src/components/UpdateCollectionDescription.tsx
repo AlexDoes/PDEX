@@ -22,6 +22,7 @@ interface updateProps {
   onConfirm: any;
   plantDescription: string;
   collectionName: string;
+  name: boolean;
 }
 
 const map: Myobject = {
@@ -44,6 +45,7 @@ export default function UpdateCollectionDescriptionComponent({
   plantDescription,
   onConfirm,
   collectionName,
+  name,
 }: updateProps) {
   const [open, setOpen] = useState(false);
   const [textInputValue, setTextInputValue] = useState(plantDescription || "");
@@ -92,7 +94,7 @@ export default function UpdateCollectionDescriptionComponent({
       <Dialog className="" fullWidth open={open} onClose={handleClose}>
         <div className="bg-[#d5ffdd] font-outline-2">
           <DialogTitle fontSize={24} className="">
-            Update {collectionName}'s description:
+            Update {collectionName}'s {name ? `name` : `description`}:
           </DialogTitle>
           <DialogContent>
             <TextField
@@ -103,7 +105,7 @@ export default function UpdateCollectionDescriptionComponent({
               label="Input"
               type="text"
               fullWidth
-              minRows={3}
+              minRows={name ? "1" : "3"}
               multiline
               value={textInputValue}
               inputProps={{ style: { whiteSpace: "pre-wrap" } }}

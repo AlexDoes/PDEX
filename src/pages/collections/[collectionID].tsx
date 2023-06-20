@@ -58,6 +58,7 @@ export default function ThisCollection({
   const [collectionDescription, setCollectionDescription] = useState(
     plantContentsData.description
   );
+  const [collectionName, setCollectionName] = useState(plantContentsData.name);
 
   const transitionRef = useRef(null);
   const transitionRef2 = useRef(null);
@@ -74,6 +75,10 @@ export default function ThisCollection({
   useEffect(() => {
     setCollectionDescription(plantContentsData.description);
   }, [plantContentsData.description]);
+
+  useEffect(() => {
+    setCollectionName(plantContentsData.name);
+  }, [plantContentsData.name]);
 
   useEffect(() => {
     plantstoAdd;
@@ -148,13 +153,31 @@ export default function ThisCollection({
     setCollectionDescription(response);
   };
 
+  const reloadName = (response: String) => {
+    setCollectionName(response);
+  };
+
   const showChangeButton = () => {
     return (
       <UpdateCollectionDescriptionComponent
         collectionName={plantContentsData.name}
         plantDescription={collectionDescription}
+        name={false}
         onConfirm={(data: string) =>
           handleUpdate(data, reload, userId, collectionID)
+        }
+      />
+    );
+  };
+
+  const editCollectionNameButton = () => {
+    return (
+      <UpdateCollectionDescriptionComponent
+        collectionName={collectionName}
+        plantDescription={collectionName}
+        name={true}
+        onConfirm={(data: string) =>
+          handleUpdateName(data, reloadName, userId, collectionID)
         }
       />
     );
@@ -200,9 +223,14 @@ export default function ThisCollection({
   return (
     <>
       <div className="bg-orange-100 bg-opacity-70 rounded-xl p-10 py-10 flex flex-col gap-3 w-full min-h-[90vh] justify-center items-center relative">
-        <h1 className=" text-black flex items-center justify-center mb-2 xs:text-xl sm:text-2xl md:text-3xl backdrop-blur-sm">
-          {plantContentsData.name}'s content
-        </h1>
+        <div className="flex flex-row items-center justify-center relative">
+          <h1 className=" text-black flex justify-center mb-2 xs:text-xl sm:text-2xl md:text-3xl backdrop-blur-sm w-full">
+            {collectionName}'s content{" "}
+          </h1>
+          <div className="absolute -right-7 -bottom-0.5">
+            {editCollectionNameButton()}
+          </div>
+        </div>
         <label className="inline-flex items-center p-2 rounded-md cursor-pointer dark:text-gray-800 text-xs absolute right-3 top-3">
           <input
             id="Toggle3"
@@ -382,6 +410,41 @@ async function handleUpdate(
   } else {
     reload(data);
     toast.success("Updated Successfully", {
+      position: "top-center",
+      autoClose: 5000,
+      style: { fontWeight: "bold", backgroundColor: "#C6F6D5", color: "black" },
+    });
+    return await response.json();
+  }
+}
+
+async function handleUpdateName(
+  data: string,
+  reload: any,
+  userId: string,
+  collectionID: string
+) {
+  const response = await fetch(`/api/collections/updateCollectionNameAPI`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      name: data,
+      collectionId: collectionID,
+      userId: userId,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.log(error.message);
+    toast.error(error.message, {
+      position: "top-center",
+      autoClose: 5000,
+      style: { fontWeight: "bold", backgroundColor: "#FECACA" },
+    });
+    return;
+  } else {
+    reload(data);
+    toast.success("Collection Name Updated Successfully", {
       position: "top-center",
       autoClose: 5000,
       style: { fontWeight: "bold", backgroundColor: "#C6F6D5", color: "black" },
