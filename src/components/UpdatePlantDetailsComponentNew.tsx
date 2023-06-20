@@ -51,8 +51,8 @@ export default function UpdateDataComponent({
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const data = textInputValue;
-    handleSubmissionFromParent(data);
+    const data = textInputValue.trim();
+    handleSubmissionFromParent(filter.clean(data));
   };
 
   return (

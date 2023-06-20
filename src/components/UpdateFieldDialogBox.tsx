@@ -1,4 +1,5 @@
 import { useState } from "react";
+import filter from "./Filter";
 import {
   Button,
   Dialog,
@@ -57,8 +58,8 @@ export default function UpdateDataComponent({
   };
 
   const handleSubmit = () => {
-    const data = textInputValue;
-    onConfirm(data);
+    const data = textInputValue.trim();
+    onConfirm(data.length > 0 ? filter.clean(data) : "");
     handleClose();
   };
 
