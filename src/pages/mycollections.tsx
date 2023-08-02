@@ -74,6 +74,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   };
 
   const handleSubmitCollectionForm = async (object: any) => {
+    console.log(object);
     setShowForm(false);
     setScroll(true);
     object.plantContent = [];
@@ -88,7 +89,7 @@ export default function MyCollections({ items, userId }: CollectionProps) {
   };
 
   const collectionsToShow = () => {
-    if (items.length === 0) {
+    if (items.length === 0 && displayPlants.length === 0) {
       return (
         <div
           className="
@@ -260,10 +261,10 @@ export default function MyCollections({ items, userId }: CollectionProps) {
 
   return (
     <div>
-      <h1 className="text-3xl flex justify-center my-3 items-center gap-1">
-        My Collections
+      <div className="text-3xl flex justify-center my-3 items-center gap-1">
+        <h2 className="backdrop-blur-[4px]"> My Collections </h2>
         <RiPlantLine className="text-3xl text-green-400" />
-      </h1>
+      </div>
       <div
         className=" xs:m-0 sm:m-0 w-full border-slate-300 flex flex-col justify-center items-center pb-4 gap-2 
     rounded-xl"

@@ -30,14 +30,18 @@ export default function App({ Component, pageProps }: AppProps) {
       <NextNProgress color="#A3EBB1" />
       <ToastContainer />
       <SessionProvider session={pageProps.session}>
-        <NavBar />
-        <div className="font-lato" id="center">
-          <div className="w-[100%] xs:w-[100%] sm:w-[100%] md:w-[90%] xs:px-3 md:px-0">
-            <Component {...pageProps} />
+        <div className="min-h-[100vh] border-yellow-300 flex flex-col">
+          <NavBar />
+          <div className="font-lato flex-grow" id="center">
+            <div className="w-[100%] xs:w-[100%] sm:w-[100%] md:w-[90%] xs:px-3 md:px-0">
+              <Component {...pageProps} />
+            </div>
+          </div>
+          {/* <ScreenChecker /> */}
+          <div className="flex-shrink-0">
+            <Footer />
           </div>
         </div>
-        {/* <ScreenChecker /> */}
-        <Footer />
       </SessionProvider>
       <Analytics />
     </>

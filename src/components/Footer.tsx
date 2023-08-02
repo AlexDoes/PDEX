@@ -33,7 +33,13 @@ const Footer = () => {
 
   return (
     <>
-      <div className="w-[100vw] h-[100px] xs:text-2xl xsss:text-xl  md:gap-28 gap-4 flex  backdrop-blur-[3px] justify-center  text-shadow-lg  flex-wrap items-center absolute p-6  ">
+      <div
+        className="
+        border-t-2 border-[#efe6c1]
+        w-[100vw] h-[100px] xs:text-2xl xsss:text-xl 
+        md:gap-28 gap-4 flex backdrop-blur-[3px] justify-center text-shadow-lg flex-wrap items-center p-6
+       "
+      >
         {/* <h1 className="text-white">Social Links</h1> */}
         <div className=" xs:text-lg xsss:text-sm text-[#efe6c1] ">
           <div className="flex flex-wrap gap-1 text-shadow-lg justify-center md:flex-row">
