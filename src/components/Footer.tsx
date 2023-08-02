@@ -120,7 +120,7 @@ const Footer = () => {
               </a>
               <a
                 className="hover:underline hover:text-[#62d6f6] "
-                href=""
+                href="https://www.stevensookhai.com/"
                 target="_blank"
                 rel="noreferrer"
               >
