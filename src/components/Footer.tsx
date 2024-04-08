@@ -154,7 +154,6 @@ const Footer = () => {
               >
                 Report a Bug
               </a>
-              |
             </div>
           </div>
         </div>
