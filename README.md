@@ -1,8 +1,16 @@
 # BAX (PDEX) - Web Application
 
+<!-- ![Bax Logo](/public/baxlogo.png){width=350, height=400, align:center} -->
+
+<p align="center">
+  <img src="/public/baxlogo.png" width="350" height="400">
+</p>
+
 ## [Check out BAX live here or at Bax.gg!](https://bax.gg)
 
 BAX is a web application designed to create a community for like-minded individuals who share an interest in plants. The application is created using Next.js, Prisma, TypeScript, TailwindCSS, AWS and PostgresQL.
+
+![Bax Screenshot](/public/images/baxSS.png)
 
 ## Features
 
@@ -14,6 +22,8 @@ Some key features of BAX (PDEX) web application include:
 - Plant collection / wishlist and favorites functionality
 - Community forums for plant enthusiasts to connect and share knowledge through comments and more
 - Social media-esque submission of personal plants utilizing AWS.
+
+![Bax Search](/public/images/baxSearch.png)
 
 ## Technologies Used
 
