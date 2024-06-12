@@ -35,6 +35,13 @@ The BAX (PDEX) web application is built using the following technologies:
 - TailwindCSS: A utility-first CSS framework
 - PostgresQL: A powerful, open-source relational database management system
 
+## Highlight
+
+Regarding the two search bar components:
+
+1. `NavBarSearchbarMemoize` memoizes each input into the search bar to fetch data from backend as its being typed in. It caches the data in a map to reduce the need to fetch the same result multiple times, however this is expensive if there's no debounce and if the user chooses prefers to type out the whole search term or choose to delete certain chars. Duplicating results as the user types a more specific term.
+2. `NavBarSearchbarPrefetch` is a fix to the initial problem by only fetching and making sure the results are related to the search bar's content. This decreases the unnecessary calls which would occur if the user typed in more specific terms/more keys. It also reduces the calls if the user were to choose to delete characters but the results are already fetched. This has a limit on the return and can be compounded with loss of suggestions but this can be improved on in the future. This approach to fetching relevant search data as suggestions is prefered and cost-saving.
+
 ## Installation
 
 To get started with the BAX (PDEX) web application, follow these steps:
