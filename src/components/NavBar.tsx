@@ -1,9 +1,5 @@
-import { toTitleCase } from "lib/generalFunctions";
 import Link from "next/link";
-import { useSession, signIn, signOut } from "next-auth/react";
-import Image from "next/image";
 import AuthButtonComponent from "@/components/AuthButton";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useRouter } from "next/router";
 import NavBarSearchBar from "./NavBarSearchbarPrefetch";
 import { useState } from "react";
@@ -47,7 +43,7 @@ export default function NavBar() {
           <div className=" md:mr-[4vw]  ">
             <NavBarSearchBar />
           </div>
-          {/* <button onClick={() => signOut()}>Sign out</button> */}
+
           <div className="flex items-center justify-center h-[100%] md:mr-[3vw] transition-all ease-in-out duration-500">
             <AuthButtonComponent setBlur={handleBlur} closeBlur={closeBlur} />
           </div>
