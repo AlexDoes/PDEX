@@ -57,22 +57,21 @@ const SAMPLEDATA = [
   "Zantedeschia",
 ];
 
-function memoize(func: any) {
-  const [cache, setCache] = useState(new Map());
-  return (...args: any) => {
-    const key = JSON.stringify(args);
-    if (cache.has(key)) {
-      return cache.get(key);
-    }
-    const result = func(...args);
-    setCache(new Map(cache.set(key, result)));
-    return result;
-  };
-}
-
 export default function NavBarSearchBar({}) {
   const [searchText, setSearchText] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  function memoize(func: any) {
+    const [cache, setCache] = useState(new Map());
+    return (...args: any) => {
+      const key = JSON.stringify(args);
+      if (cache.has(key)) {
+        return cache.get(key);
+      }
+      const result = func(...args);
+      setCache(new Map(cache.set(key, result)));
+      return result;
+    };
+  }
   const router = useRouter();
 
   const onSubmit = (e: any) => {
