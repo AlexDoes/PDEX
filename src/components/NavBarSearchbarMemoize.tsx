@@ -92,9 +92,7 @@ export default function NavBarSearchBar({}) {
     const data = await fetch(
       `/api/search/getSearchBarData?searchTerm=${searchText}`
     );
-    console.log("searchTerm", searchText);
     const response = await data.json();
-    console.log(response);
     response.filter((item: any) => {
       const res = item.toLowerCase().includes(input.toLowerCase());
       return res;
